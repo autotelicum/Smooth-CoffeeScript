@@ -1,4 +1,4 @@
-![Smooth CoffeeScript](https://github.com/autotelicum/Smooth-CoffeeScript/blob/master/img/WebHeader.png)
+![Smooth CoffeeScript](https://github.com/autotelicum/Smooth-CoffeeScript/raw/master/img/WebHeader.png)
 
 Smooth CoffeeScript is a free book about CoffeeScript and programming. Over 200 pages to guide you and 35 exercises to solve. Go from scratch through functional programming in Underscore over object orientation to a client and server web application with HTML5 Canvas and WebSockets. Download includes book and full source code with and without solutions.
 
