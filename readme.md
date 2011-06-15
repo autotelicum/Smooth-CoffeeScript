@@ -44,14 +44,21 @@ No previous programming knowledge is required. If you already know a scripting l
     * src/
         * Instructor edition - inline solutions for all exercises.
 
-    * Smooth CoffeeScript Web Optimized.pdf
-        * Web fast view, attached archive contains no-solutions.
-          Use to email a self contained version (Acrobat Reader is required)
-
     * Smooth CoffeeScript.lyx
         * Source for the book. Only needed if you want to create
           your own *improved* book. Requires LyX 2.0 and up-to-date
           installation of TeX. May require font substitutes.
+
+* Other free resources
+
+    * [CoffeeScript](http://coffeescript.org/) by Jeremy Ashkenas. [Source](https://github.com/jashkenas/coffee-script)
+        * The definitive reference. Interactive environment to try CoffeeScript. Annotated reference of the CoffeeScript compiler internals.
+    * [CoffeeScript Cookbook](http://coffeescriptcookbook.com/) by [various](http://coffeescriptcookbook.com/authors). [Source](https://github.com/coffeescript-cookbook/coffeescript-cookbook.github.com)
+        * Collection of useful snippets with descriptions. You can contribute your own solutions to common problems.
+    * [The Little Book on CoffeeScript](http://arcturo.com/library/coffeescript/) by Alex MacCaw. [Source](https://github.com/arcturo/library)
+        * To-the-point introduction of CoffeeScript for JavaScript developers. Covers the CoffeeScript tools eco-system.
+
+
 
 This work is licensed under a [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
 
