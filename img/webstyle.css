@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+/* The template can be used and edited without any restrictions or limitations.
+   Original design from http://www.pvmgarage.com */
+
+body, div, h1, h2, h3, p, ul, ol, li, img, header, section, aside, footer, button {
+	/*  Reset for some default browser CSS - General */
+	margin: 0; padding: 0; border: 0; list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #961b25;
+}
+
+a:hover {
+	color: #6f92a7;
+}
+
+:focus {
+	outline: 0;
+}
+
+h1, h2, h3 {
+	font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif; 
+	font-weight: normal;
+} 
+
+h2 {
+	font-size: 22px;
+	line-height: 28px;
+}
+
+.float {
+	float:left;
+}
+	
+body {
+	background: #f6f6ee url(webbackground.jpg);
+	font-family : "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	font-size: 12px;
+}	
+
+
+/* Header */
+	
+header#site_head {
+	background: url(webheaderbar.jpg);
+	-moz-box-shadow: inset 0px -2px 3px #480508;
+	-khtml-box-shadow: inset 0px -2px 3px #480508;				
+	-webkit-box-shadow: inset 0px -2px 3px #480508;
+	box-shadow: inset 0px -2px 3px #480508;
+	border-bottom: 1px solid #fffffb;
+	height: 70px;
+	width: 100%;
+	display: block;
+}
+
+	.header_cont {
+		width: 960px;
+		margin: 0 auto;
+		padding-top: 15px;
+	}
+	
+	.header_cont h1 {
+		text-indent:-9999px;
+		float: left;
+	}
+	
+	.header_cont h1 a {
+		background: url(weblogo.png) no-repeat;
+		width: 227px;
+		height: 45px;
+		display: block;
+	}
+	
+	.header_cont h1 a:hover {
+		background-position: 0px -45px;
+	}
+
+/* Main container */	
+
+#main_content {	
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 15px;
+}
+
+	.section_tit {
+		clear: both;
+	}
+	
+	.section_tit h3 {
+		background: url(webline.png) no-repeat center center; 
+		text-align: center;
+		font-size: 34px;
+		margin: 10px 0 25px 0;
+		color: #c9c9c0;
+		text-shadow: 1px 1px 0px #fff;
+	}
+	
+	div.single_post {
+		float: left;
+		width: 447px;
+		height: 400px;
+		margin: 0 16px 35px 16px;
+	}
+	
+	img {
+		border: 5px solid rgb(255,255,255); /*rgba ie fix*/
+		border: 5px solid rgba(255,255,255,0.75);
+		-moz-border-radius: 5px;
+		-khtml-border-radius: 5px;
+		-webkit-box-border-radius: 5px;
+		border-radius: 5px;
+		-moz-box-shadow: 0px 0px 5px #c6c6bf;
+		-khtml-box-shadow: 0px 0px 5px #c6c6bf;
+		-webkit-box-shadow: 0px 0px 5px #c6c6bf;
+		box-shadow: 0px 0px 5px #c6c6bf;
+	}
+
+	div.single_post footer {
+		color: #2b2b28;
+		text-align:right;
+		font-size: 10px;
+	}
+
+	div.single_post ul  {
+		margin-top: 10px;
+		border-right: 3px solid #dbdbd4;
+	}
+	
+	div.single_post ul  li {
+		padding: 1px 13px 1px 0px;
+	}
+	
+	div.single_post ul  li a {
+		font-weight: bold;
+	}
+
+	div.mainart {
+		width: 445px;
+		display: block;
+		background: rgb(255,255,255); /*rgba ie fix*/
+		background: rgba(255,255,255,0.75);
+		border: 1px solid rgb(255,255,255); /*rgba ie fix*/
+		-moz-border-radius: 10px;
+		-khtml-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		border-radius: 10px;
+		-moz-box-shadow: 0px 0px 5px #c6c6bf;
+		-khtml-box-shadow: 0px 0px 5px #c6c6bf;
+		-webkit-box-shadow: 0px 0px 5px #c6c6bf;
+		box-shadow: 0px 0px 5px #c6c6bf;
+		margin-left: 0px;
+		overflow: auto;
+		float:left;
+	}
+		
+	div.art {
+		width: 250px;
+		display: block;
+		background: rgb(255,255,255); /*rgba ie fix*/
+		background: rgba(255,255,255,0.75);
+		border: 1px solid rgb(255,255,255); /*rgba ie fix*/
+		-moz-border-radius: 10px;
+		-khtml-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		border-radius: 10px;
+		-moz-box-shadow: 0px 0px 5px #c6c6bf;
+		-khtml-box-shadow: 0px 0px 5px #c6c6bf;
+		-webkit-box-shadow: 0px 0px 5px #c6c6bf;
+		box-shadow: 0px 0px 5px #c6c6bf;
+		margin-left: 15px;
+		overflow: auto;
+		float:left;
+	}
+		
+	div.art:hover {
+		background: rgb(255,255,255); /*rgba ie fix*/
+	}
+		
+	div.single_post header h2 {
+		border-bottom: 1px solid #dbdbd4;			
+		margin: 20px;
+		padding-bottom: 20px;
+		text-align: center;
+	}
+		
+	div.single_post p, section#archive p {
+		padding: 0 20px;
+		font-size: 12px;
+		line-height: 20px;
+	}
+		
+	span.more, span.more_arch {
+		float: right;
+		margin: 30px 20px 30px 0px;
+	}
+		
+	span.more a, span.more_arch a, .about_left ul li a {
+		background: #8badc2;
+		-moz-border-radius: 15px;			
+		-khtml-border-radius: 15px;	
+		-webkit-border-radius: 15px;	
+		border-radius: 15px;	
+		padding: 8px 12px;
+		color: #fff;
+		text-shadow: 1px 1px 1px #546d7c;
+		-moz-box-shadow: inset 0px 0px 2px #3f5867;
+		-khtml-box-shadow: inset 0px 0px 2px #3f5867;	
+		-webkit-box-shadow: -1px -1px 2px #3f5867; /*-webkit- inset fix*/
+		box-shadow: inset 0px 0px 2px #3f5867;				
+	}
+	
+	span.more a:hover, span.more_arch a:hover, .about_left ul li a:hover {
+		background: #b8ccd7;
+		text-shadow: none;
+		-moz-box-shadow: none;			
+		-khtml-box-shadow: none;			
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		-webkit-box-shadow: -1px -1px 0px #8badc2; /*-webkit- inset fix*/
+	}
+
+/* Footer */
+	
+footer.bottom  {
+	clear: both;
+	display:block;
+	margin: 30px 15px;
+	border-top: 1px solid #c9c9c0;
+	padding-top: 20px;
+}
+
+footer.bottom p {
+text-align: center;
+color: #b6b6ab;
+}
