@@ -127,6 +127,21 @@ Hoigaard
 \size large
 \begin_inset CommandInset href
 LatexCommand href
+target "http://autotelicum.github.com/Smooth-CoffeeScript"
+
+\end_inset
+
+
+\size normal
+
+\begin_inset Newline newline
+\end_inset
+
+
+\size large
+
+\begin_inset CommandInset href
+LatexCommand href
 name "Based on Eloquent JavaScript by Marijn Haverbeke"
 target "http://eloquentjavascript.net/"
 
@@ -186,7 +201,29 @@ Arcitectura
 \begin_inset Newline newline
 \end_inset
 
-Initial edition & illustrations © 2554 
+1
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+
+\size normal
+st
+\end_layout
+
+\end_inset
+
+ edition, 1
+\begin_inset script superscript
+
+\begin_layout Plain Layout
+
+\size normal
+st
+\end_layout
+
+\end_inset
+
+ revision & illustrations © 2554 
 \begin_inset CommandInset href
 LatexCommand href
 name "BE"
@@ -1032,21 +1069,7 @@ target "http://jashkenas.github.com/coffee-script/#installation"
 
  for more information on the Coffee\SpecialChar \-
 Script compiler.
-\begin_inset Branch Solutions
-status open
-
-\begin_layout Standard
-\paragraph_spacing other 0.5
-\noindent
-\align center
-\begin_inset Formula $\circ\bullet\circ$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-You can run samples with 
+ You can run samples with 
 \begin_inset listings
 lstparams "language=bash"
 inline true
@@ -1060,8 +1083,36 @@ coffee filename.coffee
 \end_inset
 
 .
- By chapter source code files are in the src directory.
+ 
 \end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.5
+\noindent
+\align center
+\begin_inset Formula $\circ\bullet\circ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+Smooth Coffee\SpecialChar \-
+Script
+\family default
+ comes in two editions; with and without solutions.
+ Complete by chapter source code files are in the src directory.
+ A copy of all files are in src-no-solutions, these files have stops where
+ you can insert your own solutions.
+\end_layout
+
+\begin_layout Standard
+Both editions and accompanying source files can be downloaded from: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://autotelicum.github.com/Smooth-CoffeeScript/"
 
 \end_inset
 
@@ -12347,13 +12398,9 @@ status open
 \end_inset
 
 .
- So which is correct? None of them: 
-\begin_inset Formula $9^{18}=150094635296999121$
-\end_inset
-
-
+ So which is correct? None of them
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The LyX authoring environment used to create this book integrates with Maxima,
@@ -12363,6 +12410,10 @@ The LyX authoring environment used to create this book integrates with Maxima,
  
 \end_layout
 
+\end_inset
+
+: 
+\begin_inset Formula $9^{18}=150094635296999121$
 \end_inset
 
 .
@@ -29005,7 +29056,31 @@ splitParagraph
 \end_inset
 
  which, given a paragraph string, returns an array of paragraph fragments.
- Think of a good way to represent the fragments.
+ Think of a good way to represent the fragments, they need 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+type
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+content
+\end_layout
+
+\end_inset
+
+ properties.
 \end_layout
 
 \begin_layout Plain Layout
@@ -31904,19 +31979,19 @@ show 'isDefined Math.PIE = ' + isDefined Math.PIE
 \end_layout
 
 \begin_layout Standard
-Here we are defining new functions without using the 
+In 
 \begin_inset listings
 inline true
 status open
 
 \begin_layout Plain Layout
 
-function
+isDefined
 \end_layout
 
 \end_inset
 
- keyword at all.
+ we are defining a new function without naming it.
  This can be useful when you need to create a simple function to give to,
  for example, 
 \begin_inset listings
@@ -31943,21 +32018,8 @@ reduce
 \end_inset
 
 .
- However, when a function becomes more complex than these examples, it is
- usually shorter (not to mention more efficient) to just write it out with
- 
-\begin_inset listings
-inline true
-status open
-
-\begin_layout Plain Layout
-
-function
-\end_layout
-
-\end_inset
-
-.
+ However, when a function becomes more complex than this example, it is
+ usually shorter and clearer to define it by itself and name it.
 \end_layout
 
 \begin_layout Chapter
@@ -36311,7 +36373,7 @@ chain
 
 \begin_layout Standard
 Where the blue circles are the relevant objects, and the lines represent
- properties — the end points at the value of the property.
+ properties — the end points are the values of the property.
  Object 
 \begin_inset listings
 inline true
@@ -36847,7 +36909,7 @@ status open
 
 \begin_layout Plain Layout
 
-makeReachedList = () -> {}
+makeReachedList = -> {}
 \end_layout
 
 \begin_layout Plain Layout
@@ -43341,7 +43403,7 @@ The first element in the returned array is always the part of the string
  that matched the pattern.
  As the last example shows, when there are parenthesized parts in the pattern,
  the parts they match are also added to the array.
- Often, this makes extracting pieces of string very easy.
+ Often, this makes extracting pieces of a string very easy.
 \end_layout
 
 \begin_layout Standard
@@ -45570,7 +45632,7 @@ console.log
 
 \end_inset
 
- directly, defining it as an alias for 
+ directly, defining 
 \begin_inset listings
 lstparams "showstringspaces=false,tabsize=2"
 inline true
@@ -45583,8 +45645,8 @@ show
 
 \end_inset
 
- makes it easy to copy such code into another environment, the browser were
- 
+ as an alias for it makes it easy to copy such code into another environment,
+ the browser were 
 \begin_inset listings
 lstparams "showstringspaces=false,tabsize=2"
 inline true
@@ -47336,7 +47398,7 @@ not
  the way to read a file in a server.
  The prelude uses a synchronous function, that means that everything stops
  until the file has been read.
- In the world of servers hard disks are slow, and one response should never
+ In the world of servers hard disks are slow, and one request should not
  stop other requests.
  Using 
 \begin_inset listings
@@ -48569,6 +48631,35 @@ Through the examples, exercises and explanations you have a foundation for
 \end_layout
 
 \begin_layout Standard
+First choose what your project is going to be about, then look to 
+\begin_inset CommandInset href
+LatexCommand href
+name "github"
+target "https://github.com/languages/CoffeeScript"
+
+\end_inset
+
+ for supporting code and libraries.
+ A couple of interesting ones for web applications are 
+\begin_inset CommandInset href
+LatexCommand href
+name "Zappa"
+target "https://github.com/mauricemach/zappa"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset href
+LatexCommand href
+name "SocketStream"
+target "https://github.com/socketstream/socketstream"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 If you would like a broader foundation in computer science then read: 
 \begin_inset CommandInset href
 LatexCommand href
@@ -49185,9 +49276,10 @@ decorate name
 
 \begin_layout Standard
 Unicode can be used in identifiers.
- Letter forms that are very similar to characters in the latin This can
- be difficult in internationally shared projects, but useful in teaching
- math or in a local language.
+ Letter forms that are very similar to characters in the western alphabets
+ should be avoided.
+ It can be difficult in internationally shared projects due to different
+ keyboard layouts, but useful in teaching math or in a local language.
 \end_layout
 
 \begin_layout Standard
@@ -53896,7 +53988,7 @@ status open
 
 \begin_layout Plain Layout
 
-@attr 'title', type: 'text'
+@inheritedMethodName()
 \end_layout
 
 \end_inset
