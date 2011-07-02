@@ -39203,7 +39203,7 @@ fragile base class
  methods and properties can normally be changed quite freely — as long as
  the published methods and properties stay the same.
  When a class derives from it, then the child class may depend on the internal
- behaviour of the parent and it becomes problematic to change base classes.
+ behaviour of the parent and it becomes problematic to change the base class.
 \end_layout
 
 \begin_layout Standard
@@ -49322,6 +49322,503 @@ show sphereSurfaceArea radius
 \noindent
 \align center
 \begin_inset Formula $\circ\bullet\circ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qualifying a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+for
+\end_layout
+
+\end_inset
+
+ statement with a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+when
+\end_layout
+
+\end_inset
+
+ clause can be used to filter array or object elements on a logical condition.
+ Great for one-liners.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+evens = (n) -> i for i in [0..n] when i % 2 is 0
+\end_layout
+
+\begin_layout Plain Layout
+
+show evens 6
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+steppenwolf = 
+\end_layout
+
+\begin_layout Plain Layout
+
+  title:   'Tonight at the Magic Theater'
+\end_layout
+
+\begin_layout Plain Layout
+
+  warning: 'For Madmen only'
+\end_layout
+
+\begin_layout Plain Layout
+
+  caveat:  'Price of Admittance: Your Mind.'
+\end_layout
+
+\begin_layout Plain Layout
+
+  caution: 'Not for Everybody.'
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+stipulations = (text for key, text of steppenwolf 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  when key in ['warning', 'caveat'])
+\end_layout
+
+\begin_layout Plain Layout
+
+show stipulations
+\end_layout
+
+\begin_layout Plain Layout
+
+show ultimatum for ultimatum in stipulations 
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  when ultimatum.match /Price/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.5
+\noindent
+\align center
+\begin_inset Formula $\circ\bullet\circ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Destructuring assignment can be used to swap or reassign variables.
+ It is also handy for extracting values or returning multiple values from
+ a function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "string={[b]\&quot;}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+tautounlogical = "the reason is because I say so"
+\end_layout
+
+\begin_layout Plain Layout
+
+splitStringAt = (str, n) ->
+\end_layout
+
+\begin_layout Plain Layout
+
+  [str.substring(0,n), str.substring(n)]
+\end_layout
+
+\begin_layout Plain Layout
+
+[pre, post] = splitStringAt tautounlogical, 14
+\end_layout
+
+\begin_layout Plain Layout
+
+[pre, post] = [post, pre] # swap
+\end_layout
+
+\begin_layout Plain Layout
+
+show "#{pre} #{post}"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "string={[b]\&quot;}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[re,mi,fa,sol,la,ti] = [1..6]
+\end_layout
+
+\begin_layout Plain Layout
+
+[dal,ra...,mim] = [ti,re,fa,sol,la,mi]
+\end_layout
+
+\begin_layout Plain Layout
+
+show "#{dal}, #{ra} and #{mim}"
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+[key, word] = if re > ti then [mi, fa] else [fa, mi]
+\end_layout
+
+\begin_layout Plain Layout
+
+show "#{key} and #{word}"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.5
+\noindent
+\align center
+\begin_inset Formula $\circ\bullet\circ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A function can be bound to the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this
+\end_layout
+
+\end_inset
+
+ value that is in effect when it is defined.
+ This can be needed when you are using event handlers or callback based
+ libraries e.g.
+ jQuery.
+ Instead of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+->
+\end_layout
+
+\end_inset
+
+ use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+=>
+\end_layout
+
+\end_inset
+
+ to bind 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the following example the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+a.display
+\end_layout
+
+\end_inset
+
+ would show 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+undefined
+\end_layout
+
+\end_inset
+
+ when called in the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Container
+\end_layout
+
+\end_inset
+
+ if 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+display
+\end_layout
+
+\end_inset
+
+ was defined with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+->
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+class Widget
+\end_layout
+
+\begin_layout Plain Layout
+
+  id: 'I am a widget'
+\end_layout
+
+\begin_layout Plain Layout
+
+  display: => show @id
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+class Container
+\end_layout
+
+\begin_layout Plain Layout
+
+  id: 'I am a container'
+\end_layout
+
+\begin_layout Plain Layout
+
+  callback: (f) ->
+\end_layout
+
+\begin_layout Plain Layout
+
+    show @id
+\end_layout
+
+\begin_layout Plain Layout
+
+    f()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+a = new Widget
+\end_layout
+
+\begin_layout Plain Layout
+
+a.display()
+\end_layout
+
+\begin_layout Plain Layout
+
+b = new Container
+\end_layout
+
+\begin_layout Plain Layout
+
+b.callback a.display
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\paragraph_spacing other 0.5
+\noindent
+\align center
+\begin_inset Formula $\circ\bullet\circ$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+do
+\end_layout
+
+\end_inset
+
+ statement you can call a named or an anonymous function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "string={[b]\&quot;}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+n = 3
+\end_layout
+
+\begin_layout Plain Layout
+
+f = -> show "Say: 'Yes!'"
+\end_layout
+
+\begin_layout Plain Layout
+
+do f
+\end_layout
+
+\begin_layout Plain Layout
+
+(do -> show "Yes!") while n-- > 0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Which is reminiscent of the syntax for a function that takes a function
+ as its parameter.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "string={[b]\&quot;}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+echoEchoEcho = (msg) -> msg() + msg() + msg()
+\end_layout
+
+\begin_layout Plain Layout
+
+show echoEchoEcho -> "No"
+\end_layout
+
 \end_inset
 
 

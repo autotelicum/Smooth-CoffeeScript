@@ -38,7 +38,59 @@
 <span class="nv">sphereSurfaceArea = </span><span class="nf">(r) -&gt;</span> <span class="mi">4</span> <span class="o">*</span> <span class="err">π</span> <span class="o">*</span> <span class="nx">r</span> <span class="o">*</span> <span class="nx">r</span>
 <span class="nv">radius = </span><span class="mi">1</span>
 <span class="nx">show</span> <span class="s1">&#39;4 * π * r * r when r = &#39;</span> <span class="o">+</span> <span class="nx">radius</span>
-<span class="nx">show</span> <span class="nx">sphereSurfaceArea</span> <span class="nx">radius</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;---  ---&#39;</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;---  ---&#39;</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Do statement</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;--- Do statement ---&#39;</span>
+<span class="nx">show</span> <span class="nx">sphereSurfaceArea</span> <span class="nx">radius</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>When filter</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;--- When filter ---&#39;</span>
+<span class="nv">evens = </span><span class="nf">(n) -&gt;</span> <span class="nx">i</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="nx">n</span><span class="p">]</span> <span class="k">when</span> <span class="nx">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">is</span> <span class="mi">0</span>
+<span class="nx">show</span> <span class="nx">evens</span> <span class="mi">6</span>
+
+<span class="nv">steppenwolf = </span>
+  <span class="nv">title: </span>  <span class="s1">&#39;Tonight at the Magic Theater&#39;</span>
+  <span class="nv">warning: </span><span class="s1">&#39;For Madmen only&#39;</span>
+  <span class="nv">caveat: </span> <span class="s1">&#39;Price of Admittance: Your Mind.&#39;</span>
+  <span class="nv">caution: </span><span class="s1">&#39;Not for Everybody.&#39;</span>
+
+<span class="nv">stipulations = </span><span class="p">(</span><span class="nx">text</span> <span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span> <span class="k">of</span> <span class="nx">steppenwolf</span> <span class="o">\</span>
+  <span class="k">when</span> <span class="nx">key</span> <span class="k">in</span> <span class="p">[</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="s1">&#39;caveat&#39;</span><span class="p">])</span>
+<span class="nx">show</span> <span class="nx">stipulations</span>
+<span class="nx">show</span> <span class="nx">ultimatum</span> <span class="k">for</span> <span class="nx">ultimatum</span> <span class="k">in</span> <span class="nx">stipulations</span> <span class="o">\</span>
+  <span class="k">when</span> <span class="nx">ultimatum</span><span class="p">.</span><span class="nx">match</span> <span class="sr">/Price/</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Destructuring assignment</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;--- Destructuring assignment ---&#39;</span>
+<span class="nv">tautounlogical = </span><span class="s2">&quot;the reason is because I say so&quot;</span>
+<span class="nv">splitStringAt = </span><span class="nf">(str, n) -&gt;</span>
+  <span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">n</span><span class="p">),</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">n</span><span class="p">)]</span>
+<span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">post</span><span class="p">]</span> <span class="o">=</span> <span class="nx">splitStringAt</span> <span class="nx">tautounlogical</span><span class="p">,</span> <span class="mi">14</span>
+<span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">post</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">pre</span><span class="p">]</span> <span class="c1"># swap</span>
+<span class="nx">show</span> <span class="s2">&quot;#{pre} #{post}&quot;</span>
+
+<span class="p">[</span><span class="nx">re</span><span class="p">,</span><span class="nx">mi</span><span class="p">,</span><span class="nx">fa</span><span class="p">,</span><span class="nx">sol</span><span class="p">,</span><span class="nx">la</span><span class="p">,</span><span class="nx">ti</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">..</span><span class="mi">6</span><span class="p">]</span>
+<span class="p">[</span><span class="nx">dal</span><span class="p">,</span><span class="nx">ra</span><span class="p">...,</span><span class="nx">mim</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">ti</span><span class="p">,</span><span class="nx">re</span><span class="p">,</span><span class="nx">fa</span><span class="p">,</span><span class="nx">sol</span><span class="p">,</span><span class="nx">la</span><span class="p">,</span><span class="nx">mi</span><span class="p">]</span>
+<span class="nx">show</span> <span class="s2">&quot;#{dal}, #{ra} and #{mim}&quot;</span>
+
+<span class="p">[</span><span class="nx">key</span><span class="p">,</span> <span class="nx">word</span><span class="p">]</span> <span class="o">=</span> <span class="k">if</span> <span class="nx">re</span> <span class="o">&gt;</span> <span class="nx">ti</span> <span class="k">then</span> <span class="p">[</span><span class="nx">mi</span><span class="p">,</span> <span class="nx">fa</span><span class="p">]</span> <span class="k">else</span> <span class="p">[</span><span class="nx">fa</span><span class="p">,</span> <span class="nx">mi</span><span class="p">]</span>
+<span class="nx">show</span> <span class="s2">&quot;#{key} and #{word}&quot;</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Bound function</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;--- Bound function ---&#39;</span>
+<span class="k">class</span> <span class="nx">Widget</span>
+  <span class="nv">id: </span><span class="s1">&#39;I am a widget&#39;</span>
+  <span class="nv">display: </span><span class="o">=&gt;</span> <span class="nx">show</span> <span class="nx">@id</span>
+
+<span class="k">class</span> <span class="nx">Container</span>
+  <span class="nv">id: </span><span class="s1">&#39;I am a container&#39;</span>
+  <span class="nv">callback: </span><span class="nf">(f) -&gt;</span>
+    <span class="nx">show</span> <span class="nx">@id</span>
+    <span class="nx">f</span><span class="p">()</span>
+
+<span class="nv">a = </span><span class="k">new</span> <span class="nx">Widget</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">display</span><span class="p">()</span>
+<span class="nv">b = </span><span class="k">new</span> <span class="nx">Container</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">callback</span> <span class="nx">a</span><span class="p">.</span><span class="nx">display</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Do statement</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">show</span> <span class="s1">&#39;--- Do statement ---&#39;</span>
+<span class="nv">n = </span><span class="mi">3</span>
+<span class="nv">f = </span><span class="o">-&gt;</span> <span class="nx">show</span> <span class="s2">&quot;Say: &#39;Yes!&#39;&quot;</span>
+<span class="nx">do</span> <span class="nx">f</span>
+<span class="p">(</span><span class="nx">do</span> <span class="o">-&gt;</span> <span class="nx">show</span> <span class="s2">&quot;Yes!&quot;</span><span class="p">)</span> <span class="k">while</span> <span class="nx">n</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<span class="nv">echoEchoEcho = </span><span class="nf">(msg) -&gt;</span> <span class="nx">msg</span><span class="p">()</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">()</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">()</span>
+<span class="nx">show</span> <span class="nx">echoEchoEcho</span> <span class="o">-&gt;</span> <span class="s2">&quot;No&quot;</span>
+
+<span class="nv">foo = </span><span class="nf">(fun) -&gt;</span> <span class="mi">10</span><span class="o">*</span><span class="nx">fun</span><span class="p">()</span>
+<span class="nx">show</span> <span class="nx">foo</span> <span class="o">-&gt;</span> <span class="mi">12</span>
+
 <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">..</span><span class="mi">3</span><span class="p">]</span>
   <span class="nx">do</span> <span class="nf">(i) -&gt;</span>
     <span class="nx">setTimeout</span> <span class="p">(</span><span class="o">-&gt;</span> <span class="nx">show</span> <span class="s1">&#39;With do: &#39;</span> <span class="o">+</span> <span class="nx">i</span><span class="p">),</span> <span class="mi">0</span>
