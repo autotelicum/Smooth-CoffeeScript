@@ -1,3 +1,12 @@
+1st edition, 2nd revision
+Errata:
+
+p 41 top / 39 top
+The description of the existential operator should be:
+'It returns true unless something is null or undefined.'
+
+
+
 1st edition, 1st revision
 Addenda, errata & minutiae:
 

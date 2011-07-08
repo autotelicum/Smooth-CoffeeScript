@@ -9703,7 +9703,7 @@ true
 
 \end_inset
 
-, if something is 
+ unless something is 
 \begin_inset listings
 inline true
 status open
