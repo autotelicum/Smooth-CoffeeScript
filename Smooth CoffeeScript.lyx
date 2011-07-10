@@ -39,7 +39,7 @@
 \spacing single
 \use_hyperref true
 \pdf_title "Smooth CoffeeScript"
-\pdf_author "E. Hóigaard"
+\pdf_author "E. Hoigaard"
 \pdf_subject "Introduction to functional programming in CoffeeScript"
 \pdf_keywords "CoffeeScript, Functional Programming, Declarative Testing"
 \pdf_bookmarks true
@@ -69,6 +69,11 @@
 \filename_suffix 0
 \color #d4f2fa
 \end_branch
+\branch WithoutSolutions
+\selected 0
+\filename_suffix 0
+\color #c2fac3
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -93,22 +98,52 @@
 
 \begin_body
 
-\begin_layout Title
+\begin_layout Standard
+\begin_inset Branch Solutions
+status open
 
-\size huge
-Smooth CoffeeScript
-\end_layout
-
-\begin_layout Subtitle
-\begin_inset Graphics
-	filename img/CoverCoffee.jpg
-	lyxscale 23
-	scale 23
-	BoundingBox -300bp -170bp 1280bp 853bp
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename cover/SmoothCoverWithSolutions.pdf
+	lyxscale 25
+	extra LaTeX "pages=-"
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Branch WithoutSolutions
+status open
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename cover/SmoothCoverWithoutSolutions.pdf
+	lyxscale 25
+	extra LaTeX "pages=-"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+
+\size huge
+Smooth CoffeeScript
 \end_layout
 
 \begin_layout Author
@@ -128,22 +163,6 @@ Hoigaard
 \begin_inset CommandInset href
 LatexCommand href
 target "http://autotelicum.github.com/Smooth-CoffeeScript"
-
-\end_inset
-
-
-\size normal
-
-\begin_inset Newline newline
-\end_inset
-
-
-\size large
-
-\begin_inset CommandInset href
-LatexCommand href
-name "Based on Eloquent JavaScript by Marijn Haverbeke"
-target "http://eloquentjavascript.net/"
 
 \end_inset
 
@@ -182,6 +201,18 @@ target "http://creativecommons.org/licenses/by/3.0/"
 \end_inset
 
 in any way you see fit, as long as credit is given to the original author.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Based on Eloquent JavaScript by Marijn Haverbeke"
+target "http://eloquentjavascript.net/"
+
+\end_inset
+
+.
 \size large
 
 \begin_inset Newline newline
@@ -212,13 +243,13 @@ st
 
 \end_inset
 
- edition, 1
+ edition, 2
 \begin_inset script superscript
 
 \begin_layout Plain Layout
 
 \size normal
-st
+nd
 \end_layout
 
 \end_inset
@@ -247,7 +278,7 @@ target "http://www.accesstoinsight.org/history.html#fn-2"
 \begin_inset CommandInset href
 LatexCommand href
 name "Public domain cover photo"
-target "http://www.publicdomainpictures.net/view-image.php?image=1476&picture=cup-of-coffee"
+target "http://www.publicdomainpictures.net/view-image.php?image=11133&picture=ostriches-look"
 
 \end_inset
 

@@ -1,4 +1,7 @@
 1st edition, 2nd revision
+
+Added book cover.
+
 Errata:
 
 p 41 top / 39 top
