@@ -1,0 +1,2270 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrartcl
+\begin_preamble
+\definecolor{darkgreen}{cmyk}{0.5, 0, 1, 0.5}
+\definecolor{darkred}{rgb}{0.6, 0.25, 0.15}
+\definecolor{darkblue}{rgb}{0.24, 0.165, 0.6}
+\definecolor{codebackground}{RGB}{236,253,255}
+\definecolor{codestring}{RGB}{121, 103, 99}
+
+\usepackage{multicol}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman Times
+\font_sans Arcitectura
+\font_typewriter Consolas
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_osf false
+\font_sf_scale 94
+\font_tt_scale 96
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref true
+\pdf_title "CoffeeScript Quick Reference"
+\pdf_author "E. Hoigaard"
+\pdf_subject "Reference Card for CoffeeScript"
+\pdf_keywords "CoffeeScript"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 0
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "citecolor=darkblue,linkcolor=darkblue,urlcolor=magenta"
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation landscape
+\suppress_date true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 1cm
+\rightmargin 1.5cm
+\bottommargin 1cm
+\secnumdepth -1
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\listings_params "backgroundcolor={\color{codebackground}},basicstyle={\small\ttfamily\color{black}},comment={[l]{\#}},frame=none,identifierstyle={\color{darkblue}},keywords={true,false,null,this,new,delete,typeof,in,instanceof,return,throw,break,continue,debugger,if,else,switch,for,while,do,try,catch,finally,class,extends,super,undefined,then,unless,until,loop,of,by,when,and,or,is,isnt,not,yes,no,on,off},keywordstyle={\itshape\color{darkgreen}},morecomment={[s]{\#\#\#}{\#\#\#}},morekeywords={each,map,reduceRight,reduce,detect,filter,reject,every,some,include,invoke,pluck,max,min,sortBy,sortedIndex,toArray,size,first,rest,last,compact,flatten,without,uniq,intersect,zip,indexOf,lastIndexOf,range,bind,bindAll,delay,memoize,defer,wrap,compose,keys,values,functions,extend,clone,tap,isEqual,isEmpty,isElement,isArray,isArguments,isFunction,isString,isNumber,isBoolean,isDate,isRegExp,isNaN,isNull,isUndefined,noConflict,identity,times,breakLoop,mixin,uniqueId,templateSettings,template,forEach,foldl,inject,foldr,select,all,any,contains,head,tail,methods,show},morestring={[b]\&quot;},sensitive=true,showstringspaces=false,string={[b]\'},stringstyle={\color{codestring}},tab=true,tabsize=2"
+\bullet 0 0 10 -1
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{multicols}{4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+
+\size huge
+\color magenta
+CoffeeScript
+\begin_inset Newline newline
+\end_inset
+
+Quick Reference
+\end_layout
+
+\begin_layout Subtitle
+•
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "coffeescript.org"
+target "http://jashkenas.github.com/coffee-script"
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+•
+\begin_inset Newline newline
+\end_inset
+
+•
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -2cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+General
+\color inherit
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset space \space{}
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+E.
+ Hoigaard
+\size normal
+ © 2554/2011
+\size default
+ 
+\size normal
+Rev.
+ α
+\begin_inset space \hfill{}
+\end_inset
+
+
+\size default
+
+\begin_inset Graphics
+	filename img/ccbyncsa.png
+	scale 66
+	BoundingBox 0bp 0bp 80bp 15bp
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Whitespace is significant
+\end_layout
+
+\begin_layout Itemize
+Ending a line will terminate expressions - no need to use semicolons
+\end_layout
+
+\begin_layout Itemize
+Semicolons can be used to fit multiple expressions onto a single line
+\end_layout
+
+\begin_layout Itemize
+Use indentation instead of curly braces 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+{ }
+\end_layout
+
+\end_inset
+
+ to surround blocks of code in functions, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if
+\end_layout
+
+\end_inset
+
+ statements, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+switch
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+try/catch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Comments starts with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+#
+\end_layout
+
+\end_inset
+
+ and run to the end of the line
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Functions
+\end_layout
+
+\begin_layout Itemize
+Functions are defined by an optional list of parameters in parentheses,
+ an arrow, and an optional function body.
+ The empty function looks like: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+->
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Mostly no need to use parentheses to invoke a function if it is passed arguments.
+ The implicit call wraps forward to the end of the line or block expression.
+\end_layout
+
+\begin_layout Itemize
+Functions may have default values for arguments.
+ Override the default value by passing a non-null argument.
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Objects and arrays
+\end_layout
+
+\begin_layout Itemize
+Objects and arrays are similar to JavaScript
+\end_layout
+
+\begin_layout Itemize
+When each property is listed on its own line, the commas are optional
+\end_layout
+
+\begin_layout Itemize
+Objects may be created using indentation instead of explicit braces, similar
+ to YAML
+\end_layout
+
+\begin_layout Itemize
+Reserved words, like 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+class
+\end_layout
+
+\end_inset
+
+, can be used as properties of an object without quoting them as strings
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Lexical Scoping and Variable Safety
+\end_layout
+
+\begin_layout Itemize
+Variables are declared implicitly when used (no 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+var
+\end_layout
+
+\end_inset
+
+ keyword).
+\end_layout
+
+\begin_layout Itemize
+The compiler ensures that variables are declared within lexical scope.
+ An outer variable is not redeclared within an inner function when it is
+ in scope
+\end_layout
+
+\begin_layout Itemize
+Using an inner variable can not shadow an outer variable, only refer to
+ it.
+ So avoid reusing the name of an external variable in a deeply nested function
+\end_layout
+
+\begin_layout Itemize
+CoffeeScript output is wrapped in an anonymous function, making it difficult
+ to accidentally pollute the global namespace
+\end_layout
+
+\begin_layout Itemize
+To create top-level variables for other scripts, attach them as properties
+ on 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+window
+\end_layout
+
+\end_inset
+
+, or to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+exports
+\end_layout
+
+\end_inset
+
+ in CommonJS.
+ Use: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+exports ? this
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Splats
+\end_layout
+
+\begin_layout Itemize
+Splats 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+ can be used instead of the variable number of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+arguments
+\end_layout
+
+\end_inset
+
+ object and are available for both function definition and invocation
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Loops and Comprehensions
+\end_layout
+
+\begin_layout Itemize
+Comprehensions 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+for ...
+ in
+\end_layout
+
+\end_inset
+
+ work over arrays, objects, and ranges
+\end_layout
+
+\begin_layout Itemize
+Comprehensions replace for loops, with optional 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+when
+\end_layout
+
+\end_inset
+
+ guard clauses and the value of the current array index: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+for value, index in array
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Array comprehensions are expressions, and can be returned and assigned
+\end_layout
+
+\begin_layout Itemize
+Comprehensions may replace 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+each/forEach
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+map
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+select/filter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use a range when the start and end of a loop is known (integer steps)
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+by
+\end_layout
+
+\end_inset
+
+ to step in fixed-size increments
+\end_layout
+
+\begin_layout Itemize
+When assigning the value of a comprehension to a variable, CoffeeScript
+ collects the result of each iteration into an array
+\end_layout
+
+\begin_layout Itemize
+Return 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+null
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+undefined
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+true
+\end_layout
+
+\end_inset
+
+ if a loop is only for side-effects
+\end_layout
+
+\begin_layout Itemize
+To iterate over the key and value properties in an object, use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+of
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+for own key, value of object
+\end_layout
+
+\end_inset
+
+ to iterate over the keys that are directly defined on an object
+\end_layout
+
+\begin_layout Itemize
+The only low-level loop is the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+while
+\end_layout
+
+\end_inset
+
+ loop.
+ It can be used as an expression, returning an array containing the result
+ of each iteration through the loop
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+until
+\end_layout
+
+\end_inset
+
+ is equivalent to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+while not
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+loop
+\end_layout
+
+\end_inset
+
+ is equivalent to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+while true
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+do
+\end_layout
+
+\end_inset
+
+ keyword inserts a closure wrapper, forwards any arguments and invokes a
+ passed function
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Try/Catch/Finally
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+try/catch
+\end_layout
+
+\end_inset
+
+ statements are as in JavaScript (although expressions)
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+If, Else, Unless, and Conditional Assignment
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if/else
+\end_layout
+
+\end_inset
+
+ can be written without parentheses and curly braces
+\end_layout
+
+\begin_layout Itemize
+Multi-line conditionals are delimited by indentation
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+unless
+\end_layout
+
+\end_inset
+
+ can be used in postfix form i.e.
+ at the end of the statement
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if
+\end_layout
+
+\end_inset
+
+ statements can be used as expressions.
+ No need for 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Chained Comparisons
+\end_layout
+
+\begin_layout Itemize
+Use a chained comparison to test if a value is within a range:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+minimum < value < maximum
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Array Slicing and Splicing with Ranges
+\end_layout
+
+\begin_layout Itemize
+Ranges can be used to extract slices of arrays
+\end_layout
+
+\begin_layout Itemize
+With two dots 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[3..6]
+\end_layout
+
+\end_inset
+
+, the range is inclusive (3, 4, 5, 6)
+\end_layout
+
+\begin_layout Itemize
+With three dots 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[3...6]
+\end_layout
+
+\end_inset
+
+, the range excludes the end (3, 4, 5)
+\end_layout
+
+\begin_layout Itemize
+The same syntax can be used with assignment to replace a segment of an array
+ with new values, splicing it
+\end_layout
+
+\begin_layout Itemize
+Strings are immutable and can not be spliced
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Embedded JavaScript
+\end_layout
+
+\begin_layout Itemize
+Use backquotes 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+``
+\end_layout
+
+\end_inset
+
+ to embed JavaScript code within CoffeeScript
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Everything is an Expression
+\end_layout
+
+\begin_layout Itemize
+Functions return their final value
+\end_layout
+
+\begin_layout Itemize
+The return value is fetched from each branch of execution
+\end_layout
+
+\begin_layout Itemize
+Return early from a function body by using an explicit 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+return
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Variable declarations are at the top of the scope, so assignment can be
+ used within expressions, even for variables that have not been seen before
+\end_layout
+
+\begin_layout Itemize
+Statements, when used as part of an expression, are converted into expressions
+ with a closure wrapper.
+ This allows assignment of the result of a comprehension to a variable
+\end_layout
+
+\begin_layout Itemize
+The following are not expressions: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+break
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+continue
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+return
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Operators and Aliases
+\end_layout
+
+\begin_layout Itemize
+CoffeeScript compiles 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+==
+\end_layout
+
+\end_inset
+
+ into 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+===
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+!=
+\end_layout
+
+\end_inset
+
+ into 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+!==
+\end_layout
+
+\end_inset
+
+.
+ There is no equivalent to the JavaScript 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+==
+\end_layout
+
+\end_inset
+
+ operator
+\end_layout
+
+\begin_layout Itemize
+The alias 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+is
+\end_layout
+
+\end_inset
+
+ is equivalent to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+===
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+isnt
+\end_layout
+
+\end_inset
+
+ corresponds to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+!==
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Logical operator aliases: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+and
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+&&
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+or
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+||
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+not
+\end_layout
+
+\end_inset
+
+ is an alias for 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+while
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if/else
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+switch/when
+\end_layout
+
+\end_inset
+
+ statements the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+then
+\end_layout
+
+\end_inset
+
+ keyword can be used to keep the body on the same line
+\end_layout
+
+\begin_layout Itemize
+Alias for boolean 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+true
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+on
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+yes
+\end_layout
+
+\end_inset
+
+ (as in YAML)
+\end_layout
+
+\begin_layout Itemize
+Alias for boolean 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+false
+\end_layout
+
+\end_inset
+
+ is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+off
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+no
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+For single-line statements, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+unless
+\end_layout
+
+\end_inset
+
+ can be used as the inverse of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+if
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@property
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@method
+\end_layout
+
+\end_inset
+
+ instead of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this.something
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+in
+\end_layout
+
+\end_inset
+
+ to test for array presence
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+of
+\end_layout
+
+\end_inset
+
+ to test for object-key presence
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Existential Operator
+\end_layout
+
+\begin_layout Itemize
+Use the existential operator 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?
+\end_layout
+
+\end_inset
+
+ to check if a variable exists.
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?
+\end_layout
+
+\end_inset
+
+ returns 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+true
+\end_layout
+
+\end_inset
+
+ unless a variable is 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+null
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+undefined
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?=
+\end_layout
+
+\end_inset
+
+ for safer conditional assignment than 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+||=
+\end_layout
+
+\end_inset
+
+ with numbers or strings
+\end_layout
+
+\begin_layout Itemize
+The accessor variant of the existential operator 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?.
+\end_layout
+
+\end_inset
+
+ can be used to soak up null references in a chain of properties
+\end_layout
+
+\begin_layout Itemize
+Use 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+?.
+\end_layout
+
+\end_inset
+
+ instead of the dot accessor 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+.
+\end_layout
+
+\end_inset
+
+ in cases where the base value may be 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+null
+\end_layout
+
+\end_inset
+
+ or 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+undefined
+\end_layout
+
+\end_inset
+
+.
+ If all of the properties exist then the expected result is returned, if
+ the chain is broken, then 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+undefined
+\end_layout
+
+\end_inset
+
+ is returned instead
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Classes, Inheritance, and Super
+\end_layout
+
+\begin_layout Itemize
+Object orientation as in most other object oriented languages
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+class
+\end_layout
+
+\end_inset
+
+ structure allows to name the class, set the superclass with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+extends
+\end_layout
+
+\end_inset
+
+, assign prototypal properties, and define a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+constructor
+\end_layout
+
+\end_inset
+
+, in a single assignable expression
+\end_layout
+
+\begin_layout Itemize
+Constructor functions are named as the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+class
+\end_layout
+
+\end_inset
+
+ name, to support reflection
+\end_layout
+
+\begin_layout Itemize
+Lower level operators: The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+extends
+\end_layout
+
+\end_inset
+
+ operator helps with proper prototype setup.
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+::
+\end_layout
+
+\end_inset
+
+ gives access to an object
+\begin_inset Quotes ers
+\end_inset
+
+s prototype.
+ 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+super()
+\end_layout
+
+\end_inset
+
+ calls the immediate ancestor
+\begin_inset Quotes ers
+\end_inset
+
+s method of the same name
+\end_layout
+
+\begin_layout Itemize
+A class definition is a block of executable code, which may be used for
+ meta programming.
+\end_layout
+
+\begin_layout Itemize
+In the context of a class definition, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this
+\end_layout
+
+\end_inset
+
+ is the class object itself (the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+constructor
+\end_layout
+
+\end_inset
+
+ function), so static properties can be assigned by using 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@property: value
+\end_layout
+
+\end_inset
+
+, and functions defined in parent classes can be called with: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+@inheritedMethodName()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Destructuring Assignment
+\end_layout
+
+\begin_layout Itemize
+To make extracting values from complex arrays and objects convenient, CoffeeScri
+pt implements destructuring assignment
+\end_layout
+
+\begin_layout Itemize
+When assigning an array or object literal to a value, CoffeeScript breaks
+ up and matches both sides against each other, assigning the values on the
+ right to the variables on the left
+\end_layout
+
+\begin_layout Itemize
+The simplest case is parallel assignment 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+[a,b] = [b,a]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+It can be used with functions that return multiple values
+\end_layout
+
+\begin_layout Itemize
+It can be used with any depth of array and object nesting to get deeply
+ nested properties and can be combined with splats
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Function binding
+\end_layout
+
+\begin_layout Itemize
+The fat arrow 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+=>
+\end_layout
+
+\end_inset
+
+ can be used to define a function and bind it to the current value of 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+This is helpful when using callback-based libraries, for creating iterator
+ functions to pass to 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+each
+\end_layout
+
+\end_inset
+
+ or event-handler functions to use with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+bind
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Functions created with 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+=>
+\end_layout
+
+\end_inset
+
+ are able to access properties of the 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+this
+\end_layout
+
+\end_inset
+
+ where they are defined
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Switch/When/Else
+\end_layout
+
+\begin_layout Itemize
+The 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+switch
+\end_layout
+
+\end_inset
+
+ statement do not need a 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+break
+\end_layout
+
+\end_inset
+
+ after every case
+\end_layout
+
+\begin_layout Itemize
+A 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+switch
+\end_layout
+
+\end_inset
+
+ is a returnable, assignable expression
+\end_layout
+
+\begin_layout Itemize
+The format is: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+switch
+\end_layout
+
+\end_inset
+
+ condition, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+when
+\end_layout
+
+\end_inset
+
+ clauses, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+else
+\end_layout
+
+\end_inset
+
+ the default case
+\end_layout
+
+\begin_layout Itemize
+Multiple values, comma separated, can be given for each 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+when
+\end_layout
+
+\end_inset
+
+ clause.
+ If any of the values match, the clause runs
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+String Interpolation, Heredocs, and Block Comments
+\end_layout
+
+\begin_layout Itemize
+Single-quoted strings are literal.
+ Use backslash for escape characters
+\end_layout
+
+\begin_layout Itemize
+Double-quoted strings allow for interpolated values, using 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+#{ ...
+ }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Multiline strings are allowed
+\end_layout
+
+\begin_layout Itemize
+A heredoc 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+'''
+\end_layout
+
+\end_inset
+
+ can be used for formatted or indentation-sensitive text (or to avoid escaping
+ quotes and apostrophes)
+\end_layout
+
+\begin_layout Itemize
+The indentation level that begins a heredoc is maintained throughout, so
+ the text can be aligned with the body of the code
+\end_layout
+
+\begin_layout Itemize
+Double-quoted heredocs 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+"""
+\end_layout
+
+\end_inset
+
+ allow for interpolation
+\end_layout
+
+\begin_layout Itemize
+Block comments 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+###
+\end_layout
+
+\end_inset
+
+ are similar to heredocs, and are preserved in the generated code
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Extended Regular Expressions
+\end_layout
+
+\begin_layout Itemize
+Extended regular expressions are delimited by 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+///
+\end_layout
+
+\end_inset
+
+ and are similar to heredocs and block comments.
+\end_layout
+
+\begin_layout Itemize
+They ignore internal whitespace and can contain comments
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Aliases
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+     and  :  &&       or    :  ||     not  :  !
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+     is   :  ==       isnt  :  !=
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+     yes  :  true     no    :  false
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+     on   :  true     off   :  false
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color magenta
+Miscellaneous
+\end_layout
+
+\begin_layout Itemize
+Twitter comments to @autotelicum
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align right
+
+\size footnotesize
+\begin_inset CommandInset href
+LatexCommand href
+target "http://autotelicum.github.com/Smooth-CoffeeScript/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{multicols}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
