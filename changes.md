@@ -1,3 +1,12 @@
+1st edition, 3rd revision
+
+p 10
+Added reading recommendation to Foreword:
+'To get the most out of the book: Start your text editor and in src-no-solutions open the source code file for the chapter you are reading. If you have a wide-screen display then arrange your windows so the book is on one side and the text editor on the other. Then you can read and run the samples, see the results, experiment with the code and solve the exercises.
+
+If you make copies of the files you work on then you can easily undo experiments. If you get stuck with an exercise then copy my solution from the file in the src directory and study it a bit before moving on. Note that in some of the source files you have to indent your solutions to match the surrounding code.'
+
+
 1st edition, 2nd revision
 
 Added book cover.
