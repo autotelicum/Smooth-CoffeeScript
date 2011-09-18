@@ -6,6 +6,18 @@ Added reading recommendation to Foreword:
 
 If you make copies of the files you work on then you can easily undo experiments. If you get stuck with an exercise then copy my solution from the file in the src directory and study it a bit before moving on. Note that in some of the source files you have to indent your solutions to match the surrounding code.'
 
+p 28 / 27 and 227 / 210
+Change to keep in sync with upcoming CoffeeScript REPL change - It will no longer be required to type `this.` in the REPL, simply press TAB to see global definitions.
+
+p 161 / 146 and 211 / 194
+Changed two standalone `@` to `this` - Using standalone `@` is discouraged (possibly to be deprecated) since standalone `this` is more readable.
+
+Source code changes
+    08-ObjectOrientation.coffee:194
+    A4-NoSolutions.coffee:5
+    prelude/prelude.coffee:263,264
+
+
 
 1st edition, 2nd revision
 
