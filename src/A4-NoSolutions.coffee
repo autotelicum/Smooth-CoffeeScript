@@ -2,7 +2,7 @@ fs = require "fs"
 show = console.log
 
 String::contains = (pattern) ->
-  ///#{pattern}///.test @
+  ///#{pattern}///.test this
 
 leadingWhitespace = (str) ->
   (str.match /(\s*)\w/)[1] ? ""

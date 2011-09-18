@@ -191,7 +191,7 @@ test = x: 10, y: 3
 show test.allProperties()
 
 Object::ownProperties = ->
-  for own property of @
+  for own property of this
     property
 
 test = 'Fat Igor': true, 'Fireball': true

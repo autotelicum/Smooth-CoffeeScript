@@ -40676,7 +40676,7 @@ Object::ownProperties = ->
 
 \begin_layout Plain Layout
 
-  for own property of @
+  for own property of this
 \end_layout
 
 \begin_layout Plain Layout
@@ -52537,7 +52537,7 @@ String::contains = (pattern) ->
 
 \begin_layout Plain Layout
 
-  ///#{pattern}///.test @
+  ///#{pattern}///.test this
 \end_layout
 
 \begin_layout Plain Layout
