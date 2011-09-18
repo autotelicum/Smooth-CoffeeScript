@@ -5436,19 +5436,6 @@ global
 
 .
  You can view it by typing: 
-\begin_inset listings
-lstparams "language=bash"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-this.
-\end_layout
-
-\end_inset
-
- 
 \begin_inset Formula $\rightarrow\!\mid$
 \end_inset
 
@@ -56253,19 +56240,6 @@ setTimeout
 
 \begin_layout Plain Layout
 View the interactive environment with: 
-\begin_inset listings
-lstparams "language=bash"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-this.
-\end_layout
-
-\end_inset
-
- 
 \begin_inset Formula $\rightarrow\!\mid$
 \end_inset
 
