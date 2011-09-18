@@ -260,5 +260,5 @@ if useGlobal
 else
   namespace.prelude = prelude
 
-# In the REPL you can show definitions in the global
-# namespace with: `this.` followed by TAB.
+# In the REPL you can show definitions in the global namespace with: TAB.
+exports.prelude = prelude
