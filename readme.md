@@ -6,7 +6,9 @@ More information:
 [Book webpage](http://autotelicum.github.com/Smooth-CoffeeScript/).
 [Online preview](http://issuu.com/autotelicum/docs/smooth_coffeescript).
 
-Windows: The new native and prebuilt node.js v0.5.1 throws an exception when loading CoffeeScript on both WinXP and Win7 in my testing. Installing the prebuilt cygwin node.js 0.4.9 is described by [semperos](http://techylinguist.com/) in [CoffeeScript on Windows 7](http://techylinguist.com/posts/coffeescript-windows-7). Try the _Full-Featured Method_ to run the examples as described in **Smooth CoffeeScript**.
+Web browser implementations of web sockets currently change regularly. You can contact me on twitter @autotelicum if you have a short question or encounter a problem that might not be worth reporting as an issue.
+
+Windows: The native and prebuilt node.js (0.5.x unstable) mostly works with the source code for the book. Installing the prebuilt cygwin node.js (0.4.x stable) is described by [semperos](http://techylinguist.com/) in [CoffeeScript on Windows 7](http://techylinguist.com/posts/coffeescript-windows-7). Until a stable 0.6 is released, you can try the _Full-Featured Method_ to run all the examples as described in **Smooth CoffeeScript**.
 
 This work is licensed under a [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
 
