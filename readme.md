@@ -8,6 +8,8 @@ More information:
 
 Web browser implementations of web sockets currently change regularly. You can contact me on twitter @autotelicum if you have a short question or encounter a problem that might not be worth reporting as an issue.
 
+NOTE: A compatibility update to node 0.6.0 and coffeescript 1.1.3 is underway... ETA: somewhere around November 20th as time allows.
+
 Windows: The native and prebuilt node.js (0.5.x unstable) mostly works with the source code for the book. Installing the prebuilt cygwin node.js (0.4.x stable) is described by [semperos](http://techylinguist.com/) in [CoffeeScript on Windows 7](http://techylinguist.com/posts/coffeescript-windows-7). Until a stable 0.6 is released, you can try the _Full-Featured Method_ to run all the examples as described in **Smooth CoffeeScript**.
 
 This work is licensed under a [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
