@@ -9,10 +9,14 @@ If you make copies of the files you work on then you can easily undo experiments
 p 28 / 27 and 227 / 210
 Change to keep in sync with upcoming CoffeeScript REPL change - It will no longer be required to type `this.` in the REPL, simply press TAB to see global definitions.
 
+p 128 / 117
+Cleaned up second road object representation in Searching. The last pseudo-code line was failing in CoffeeScript 1.1.3 when curly braces and commas were used.
+
 p 161 / 146 and 211 / 194
 Changed two standalone `@` to `this` - Using standalone `@` is discouraged (possibly to be deprecated) since standalone `this` is more readable.
 
 Source code changes
+    07-Searching.coffee:14
     08-ObjectOrientation.coffee:194
     A4-NoSolutions.coffee:5
     prelude/prelude.coffee:263,264

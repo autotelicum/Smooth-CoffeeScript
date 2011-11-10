@@ -32277,27 +32277,27 @@ status open
 
 \begin_layout Plain Layout
 
-roads = { 'Point Kiukiu': [ {to: 'Hanaiapa', distance: 19},
+roads =
 \end_layout
 
 \begin_layout Plain Layout
 
-                            {to: 'Mt Feani', distance: 15},
+  'Point Kiukiu': [ {to: 'Hanaiapa', distance: 19}
 \end_layout
 
 \begin_layout Plain Layout
 
-                            {to: 'Taaoa', distance: 15} ],
+                    {to: 'Mt Feani', distance: 15}
 \end_layout
 
 \begin_layout Plain Layout
 
-          'Taaoa':        [ ] # et cetera
+                    {to: 'Taaoa', distance: 15} ]
 \end_layout
 
 \begin_layout Plain Layout
 
-        }
+  'Taaoa':        [ ] # et cetera
 \end_layout
 
 \end_inset
