@@ -1,6 +1,7 @@
 # *WebSocket Draft 75/76 implementation.*
 # Straight port to CoffeeScript.
 # No intentional changes to style or substance.
+# Removed unused require of 'sys' module.
 
 # Github: http://github.com/ncr/node.ws.js
 # Compatible with node v0.1.91
@@ -30,7 +31,6 @@ pack = (num) ->
   result += String.fromCharCode(num & 0xFF)
   result
 
-sys    = require "sys"
 net    = require "net"
 crypto = require "crypto"
 requiredHeaders = {
