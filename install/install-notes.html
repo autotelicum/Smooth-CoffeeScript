@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <link rel="stylesheet" href="pandoc-template.css" type="text/css" />
+</head>
+<body>
+<div id="page">
+<h1 id="quick-coffeescript-install">Quick CoffeeScript Install</h1>
+<h2 id="mac-os-x">Mac OS X</h2>
+<p>Download and run the node installer from:</p>
+<pre><code>http://nodejs.org/dist/v0.6.1/node-v0.6.1.pkg
+</code></pre>
+<p>Download and unpack CoffeeScript from</p>
+<pre><code>http://github.com/jashkenas/coffee-script/tarball/1.1.3
+</code></pre>
+<p>Then in the unpacked directory run in Terminal:</p>
+<pre><code>sudo ./bin/cake install
+</code></pre>
+<h2 id="windows-xp-7">Windows XP &amp; 7</h2>
+<p>Download and run the node installer from:</p>
+<pre><code>http://nodejs.org/dist/v0.6.1/node-v0.6.1.msi
+</code></pre>
+<p>Download and unpack CoffeeScript from</p>
+<pre><code>http://github.com/jashkenas/coffee-script/zipball/1.1.3
+</code></pre>
+<p>Create a file in the <code>bin</code> directory named <code>coffee.cmd</code> and insert:</p>
+<pre><code>@node &quot;%COFFEE_PATH%bin\coffee&quot; %*
+</code></pre>
+<p>Rename the directory to for example <code>coffeescript</code> and move it to <code>C:\Program Files</code></p>
+<p>Add an environment variable:</p>
+<pre><code>SET COFFEE_PATH = C:\Program Files\coffeescript\
+</code></pre>
+<p>Insert <code>%COFFEE_PATH%bin</code> into your <code>PATH</code>:</p>
+<pre><code>SET PATH = %PATH%;%COFFEE_PATH%bin;
+</code></pre>
+<p>You can add <code>COFFEE_PATH</code> and modify your <code>PATH</code> in: Control panel, System, Advanced System Settings (only on Windows 7), Advanced tab, Environment Variables.</p>
+<p><img src="WindowsPath.png" alt="Windows path screenshots" /> </p>
+<h2 id="test-of-the-setup">Test of the setup</h2>
+<p>Open a commnad line terminal and run:</p>
+<pre><code>node --version
+#    v0.6.1
+
+coffee --version
+#    CoffeeScript version 1.1.3
+
+coffee -e &quot;console.log 'Hello World'&quot;
+#    Hello World
+</code></pre>
+<p>If not then you need to go back to the installation steps and verify that you got everything set up according to the descriptions on the node.js and CoffeeScript web sites:</p>
+<pre><code>https://github.com/joyent/node/wiki/Installation
+http://jashkenas.github.com/coffee-script/#installation
+</code></pre>
+<h2 id="optional-smooth-coffeescript">Optional Smooth CoffeeScript</h2>
+<p>To install <a href="http://autotelicum.github.com/Smooth-CoffeeScript">Smooth CoffeeScript</a>, download and unpack the latest archive from</p>
+<pre><code>https://github.com/autotelicum/Smooth-CoffeeScript/archives/master
+</code></pre>
+<p>Open a command line terminal, change directory to <code>Smooth-CoffeeScript/src</code> then</p>
+<pre><code>coffee 01-Introduction.coffee
+#    Verify that you can see some 55 results.
+</code></pre>
+<h2 id="optional-test-websockets">Optional Test WebSockets</h2>
+<p>Open a command line terminal, change directory to <code>Smooth-CoffeeScript/src</code> and run:</p>
+<pre><code>coffee 10-TestWebSockets.coffee
+</code></pre>
+<p>Verify that your web browser started and you can see: <code>RESPONSE: Cowabunga!</code></p>
+<p>If not then open the file <code>prelude/prelude.coffee</code> and see the section <code>User settings</code>.</p>
+<p>To stop a webserver or other script that does not stop by itself press: <code>Ctrl-C</code>.</p>
+<hr />
+<p>Formats <a href="install-notes.md">Markdown</a> <a href="install-notes.pdf">PDF</a> <a href="install-notes.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbyncsa.png" alt="License CCBYNCSA" /></p>
+<!-- Commands used to format this document:
+
+Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o install-notes.pdf; open install-notes.pdf
+
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -o install-notes.html; open install-notes.html
+-->
+
+</body>
+</html>
