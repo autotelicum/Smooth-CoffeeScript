@@ -48,7 +48,7 @@ Control panel, System, Advanced System Settings (only on Windows 7), Advanced ta
 
 ## Test of the setup
 
-Open a commnad line terminal and run:
+Open a command line terminal and run:
 
     node --version
     #    v0.6.1
@@ -90,7 +90,7 @@ Verify that your web browser started and you can see: `RESPONSE: Cowabunga!`
 
 If not then open the file `prelude/prelude.coffee` and see the section `User settings`.
 
-To stop a webserver or other script that does not stop by itself press: `Ctrl-C`.
+To stop a web server or other script that does not stop by itself press: `Ctrl-C`.
 
 -----------------------------------------------------------------------------
 
