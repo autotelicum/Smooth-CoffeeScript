@@ -16,6 +16,8 @@ p 161 / 146 and 211 / 194
 Changed two standalone `@` to `this` - Using standalone `@` is discouraged (possibly to be deprecated) since standalone `this` is more readable.
 
 Source code changes
+    02-BasicCoffeeScript.coffee:369
+    05-ErrorHandling.coffee:124
     07-Searching.coffee:14
     08-ObjectOrientation.coffee:194
     A4-NoSolutions.coffee:5

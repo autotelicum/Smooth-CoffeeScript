@@ -316,3 +316,5 @@ chain5 = ->
   false || show 'I am happening!'
   true  || show 'Not me.'
 
+  # Exit from the chain of inputs
+  process.exit()

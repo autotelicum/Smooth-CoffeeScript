@@ -120,3 +120,6 @@ chain1 = ->
         b: true
         c: true
   show hasSevenTruths testdata
+
+  # Exit from the chain of inputs
+  process.exit()
