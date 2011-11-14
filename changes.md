@@ -1,5 +1,8 @@
 1st edition, 3rd revision
 
+p 8-9 and 186 / 169
+Updated to reflect the larger size and better documentation of CoffeeKup 0.3.1 plus a link to Mark Hahn's Introduction.
+
 p 10
 Added reading recommendation to Foreword:
 'To get the most out of the book: Start your text editor and in src-no-solutions open the source code file for the chapter you are reading. If you have a wide-screen display then arrange your windows so the book is on one side and the text editor on the other. Then you can read and run the samples, see the results, experiment with the code and solve the exercises.
@@ -22,6 +25,7 @@ Source code changes
     08-ObjectOrientation.coffee:194
     A4-NoSolutions.coffee:5
     prelude/prelude.coffee:263,264
+    prelude/coffeekup.coffee -> 0.3.1
 
 
 

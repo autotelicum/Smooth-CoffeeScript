@@ -531,7 +531,7 @@ Seed of Life
 \end_inset
 
 .
- Coffeekup is less than 140 lines of Coffee\SpecialChar \-
+ Coffeekup is a few hundred lines of Coffee\SpecialChar \-
 Script.
  No frameworks.
  No JavaScript.
@@ -796,7 +796,7 @@ target "http://jashkenas.github.com/coffee-script/documentation/docs/underscore.
 \end_layout
 
 \begin_layout Itemize
-The Coffeekup library (0.2.3 / MIT) from 
+The Coffeekup library (0.3.1 / MIT) from 
 \begin_inset CommandInset href
 LatexCommand href
 name "Maurice Machado"
@@ -46471,10 +46471,17 @@ target "http://coffeekup.org/"
 
 \end_inset
 
- or even better take the time to read the source code, it is less than 140
- actual lines of CoffeeScript and quite readable.
- The current version is a bit light on documentation but it has examples
- in its standard distribution.
+ or even better take the time to read the source code, it is only a few
+ hundred lines of CoffeeScript and quite readable.
+ There are examples in its standard distribution and 
+\begin_inset CommandInset href
+LatexCommand href
+name "A Beginner's Introduction to CoffeeKup by Mark Hahn"
+target "https://github.com/mark-hahn/coffeekup-intro/raw/master/coffeekup-intro-pandoc/coffeekup-intro.pdf"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
