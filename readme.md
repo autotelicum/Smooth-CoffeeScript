@@ -10,7 +10,7 @@ NOTE: A compatibility update to node 0.6.1 and coffeescript 1.1.3 is underway...
 
 Install: Get CoffeeScript up and running in a few minutes on Mac. Now also on Windows: Native install! No third party compiler, package manager or cygwin emulation layer. [Quick install on Mac and Windows](http://autotelicum.github.com/Smooth-CoffeeScript/install/install-notes.html). The versions mentioned in the install guide are those `Smooth CoffeeScript` has been tested with on Mac OS X 10.6 and Windows 7 --- different versions may or may not work.
 
-If you prefer to use a package manager, then see [npm](https://github.com/isaacs/npm). Read the readme.md, especially the last paragraphs: "Yes, you can publish something evil. It will be removed promptly if reported, and we'll lose respect for you. But there is no vetting process for published modules. If this concerns you, inspect the source before using packages." My take is that your anti-virus program is not going to help if you are attacked through npm.
+If you prefer to use a package manager, then see [npm](https://github.com/isaacs/npm). Read the readme.md, especially the last paragraphs. If npm security concerns you then consider using a restricted user account, an outgoing firewall, a sandbox, jail or a virtual machine.
 
 Web browser implementations of web sockets currently change regularly. At least the latest versions of Safari, Chrome and Opera (if enabled) works, see the `src/prelude/prelude.coffee` file. Internet Explorer 9 and below do not implement web sockets; 10 might work but I have no Windows 8.
 
