@@ -1,7 +1,13 @@
 1st edition, 3rd revision
 
+p 6
+Changed recommended JavaScript supplement to `JavaScript Basics`.
+
 p 8-9 and 186 / 169
 Updated to reflect the larger size and better documentation of CoffeeKup 0.3.1 plus a link to Mark Hahn's Introduction.
+
+p 9
+Updated to Quick Install guide and native node installers.
 
 p 10
 Added reading recommendation to Foreword:

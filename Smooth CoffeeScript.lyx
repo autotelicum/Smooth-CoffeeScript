@@ -377,13 +377,13 @@ Script
  you can in 
 \begin_inset CommandInset href
 LatexCommand href
-name "A re-introduction to JavaScript"
-target "https://developer.mozilla.org/en/A_re-introduction_to_JavaScript"
+name "JavaScript Basics"
+target "http://autotelicum.github.com/Smooth-CoffeeScript/literate/js-intro.html"
 
 \end_inset
 
- by Simon Willison find an overview that can be helpful when debugging or
- using Java\SpecialChar \-
+ by Rebecca Murphey find an overview that can be helpful when debugging
+ or using Java\SpecialChar \-
 Script libraries.
 \end_layout
 
@@ -758,8 +758,15 @@ Smooth Coffee\SpecialChar \-
 Script
 \family default
  is about the Coffee\SpecialChar \-
-Script language, so refer to the websites for tool informati
-on.
+Script language, see 
+\begin_inset CommandInset href
+LatexCommand href
+name "Quick CoffeeScript Install"
+target "http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html"
+
+\end_inset
+
+ or refer to the websites for further installation information.
  This should get you started:
 \end_layout
 
@@ -922,8 +929,15 @@ src/docs
 \end_layout
 
 \begin_layout Standard
-To set up your own working environment first follow the steps described
- at 
+To set up your own working environment follow the steps described 
+\begin_inset CommandInset href
+LatexCommand href
+name "here"
+target "http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html"
+
+\end_inset
+
+ or at 
 \begin_inset CommandInset href
 LatexCommand href
 name "coffeescript.org"
@@ -936,24 +950,8 @@ target "http://jashkenas.github.com/coffee-script/#installation"
 status collapsed
 
 \begin_layout Plain Layout
-The CoffeeScript examples have been tested on Mac OS X 10.6 from source compiled
- by 
-\begin_inset CommandInset href
-LatexCommand href
-name "Clang++"
-target "http://llvm.org/"
-
-\end_inset
-
- and on Windows 7 with prebuilt 
-\begin_inset CommandInset href
-LatexCommand href
-name "Cygwin executables"
-target "http://node-js.prcn.co.cc/"
-
-\end_inset
-
-.
+The CoffeeScript examples have been tested on Mac OS X 10.6 and on Windows
+ 7 with the prebuilt node installers.
 \end_layout
 
 \end_inset
@@ -968,11 +966,11 @@ target "http://node-js.prcn.co.cc/"
 \begin_layout Standard
 Then set up your text editor to support Coffee\SpecialChar \-
 Script, you can find several
- in the 
+ on the 
 \begin_inset CommandInset href
 LatexCommand href
-name "resources"
-target "http://jashkenas.github.com/coffee-script/#resources"
+name "CoffeeScript wiki"
+target "https://github.com/jashkenas/coffee-script/wiki/Text-editor-plugins"
 
 \end_inset
 
