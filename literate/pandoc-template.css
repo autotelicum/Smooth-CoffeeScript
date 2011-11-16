@@ -27,7 +27,6 @@ h1,h2,h3,h4 {
 }
 h1 { margin-bottom: 1em; }
 h2 {
-    font-size: 100%;
     line-height: 1.5em;
     margin:1.5em 0 1.5em 0;
     font-weight:bold;
