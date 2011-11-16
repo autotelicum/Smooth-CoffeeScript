@@ -3,7 +3,7 @@
   http://github.com/rmurphey/jqfundamentals
 % [Creative Commons Attribution-Share Alike 3.0 US](http://creativecommons.org/licenses/by-sa/3.0/us/)
 
-Formats	[Markdown](js-intro.md)	[PDF](js-intro.pdf)	[HTML](js-intro.html)
+Home	[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)	Formats	[Markdown](js-intro.md)	[PDF](js-intro.pdf)	[HTML](js-intro.html)
 
 <!-- Commands used to format this document:
 

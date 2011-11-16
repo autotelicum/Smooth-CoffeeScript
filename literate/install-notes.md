@@ -102,5 +102,5 @@ Copyright autotelicum © 2554/2011 ![License CCBYNCSA](ccbyncsa.png)
 
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o install-notes.pdf; open install-notes.pdf
 
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -o install-notes.html; open install-notes.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o install-notes.html; open install-notes.html
 -->
