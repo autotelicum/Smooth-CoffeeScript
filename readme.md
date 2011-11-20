@@ -6,7 +6,7 @@ More information:
 [Book webpage](http://autotelicum.github.com/Smooth-CoffeeScript/).
 [Online preview](http://issuu.com/autotelicum/docs/smooth_coffeescript).
 
-NOTE: A compatibility update to node 0.6.1 and coffeescript 1.1.3 is underway... ETA: somewhere around November 20th as time allows. Download `master` to get the latest changes.
+NOTE: A compatibility update to node 0.6.2 and coffeescript 1.1.3 is underway... ETA: somewhere around November 20th as time allows. Download `master` to get the latest changes.
 
 Install: Get CoffeeScript up and running in a few minutes on Mac. Now also on Windows: Native install! No third party compiler, package manager or cygwin emulation layer. [Quick install on Mac and Windows](http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html). The versions mentioned in the install guide are those `Smooth CoffeeScript` has been tested with on Mac OS X 10.6 and Windows 7 --- different versions may or may not work.
 
