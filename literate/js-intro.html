@@ -39,19 +39,62 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <h3 class="author">http://github.com/rmurphey/jqfundamentals</h3>
 <h4 class="date">Creative Commons Attribution-Share Alike 3.0 US</h4>
 </div>
-<p>Home <a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a> Formats <a href="js-intro.md">Markdown</a> <a href="js-intro.pdf">PDF</a> <a href="js-intro.html">HTML</a></p>
+<div id="TOC">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax-basics">Syntax Basics</a></li>
+<li><a href="#operators">Operators</a><ul>
+<li><a href="#basic-operators">Basic Operators</a></li>
+<li><a href="#operations-on-numbers-strings">Operations on Numbers &amp; Strings</a></li>
+<li><a href="#logical-operators">Logical Operators</a></li>
+<li><a href="#note">Note</a></li>
+<li><a href="#comparison-operators">Comparison Operators</a></li>
+</ul></li>
+<li><a href="#conditional-code">Conditional Code</a><ul>
+<li><a href="#note-1">Note</a></li>
+<li><a href="#truthy-and-falsy-things">Truthy and Falsy Things</a></li>
+<li><a href="#conditional-variable-assignment-with-the-ternary-operator">Conditional Variable Assignment with The Ternary Operator</a></li>
+<li><a href="#switch-statements">Switch Statements</a></li>
+</ul></li>
+<li><a href="#loops">Loops</a><ul>
+<li><a href="#the-for-loop">The for loop</a></li>
+<li><a href="#the-while-loop">The while loop</a></li>
+<li><a href="#the-do-while-loop">The do-while loop</a></li>
+<li><a href="#breaking-and-continuing">Breaking and continuing</a></li>
+</ul></li>
+<li><a href="#reserved-words">Reserved Words</a></li>
+<li><a href="#arrays">Arrays</a></li>
+<li><a href="#objects">Objects</a><ul>
+<li><a href="#note-2">Note</a></li>
+</ul></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#using-functions">Using Functions</a></li>
+<li><a href="#self-executing-anonymous-functions">Self-Executing Anonymous Functions</a></li>
+<li><a href="#functions-as-arguments">Functions as Arguments</a></li>
+</ul></li>
+<li><a href="#testing-type">Testing Type</a></li>
+<li><a href="#the-this-keyword">The <code>this</code> keyword</a><ul>
+<li><a href="#note-3">Note</a></li>
+</ul></li>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#closures">Closures</a></li>
+</ul>
+</div>
 <!-- Commands used to format this document:
 
-pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md
+pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md --toc
 
-markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md
+markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md --toc
 -->
 
 
-<h2 id="overview">Overview</h2>
+<p></p>
+<p>Home <a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></p>
+<p>Formats <a href="js-intro.md">Markdown</a> <a href="js-intro.pdf">PDF</a> <a href="js-intro.html">HTML</a> </p>
+<h2 id="overview"><a href="#TOC">Overview</a></h2>
 <p>JavaScript is a rich and expressive language in its own right. This section covers the basic concepts of JavaScript, as well as some frequent pitfalls for people who have not used JavaScript before. While it will be of particular value to people with no programming experience, even people who have used other programming languages may benefit from learning about some of the peculiarities of JavaScript.</p>
 <p>If you’re interested in learning more about the JavaScript language, I highly recommend <em>JavaScript: The Good Parts</em> by Douglas Crockford.</p>
-<h2 id="syntax-basics">Syntax Basics</h2>
+<h2 id="syntax-basics"><a href="#TOC">Syntax Basics</a></h2>
 <p>Understanding statements, variable naming, whitespace, and other basic JavaScript syntax.</p>
 <p><strong>A simple variable declaration</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="ch">'hello world'</span>;</code></pre>
@@ -61,8 +104,8 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="dv">2</span> * <span class="dv">3</span> + <span class="dv">5</span>;    <span class="co">// returns 11; multiplication happens first</span><br /><span class="dv">2</span> * (<span class="dv">3</span> + <span class="dv">5</span>);  <span class="co">// returns 16; addition happens first</span></code></pre>
 <p><strong>Tabs enhance readability, but have no special meaning</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="kw">function</span>() {<br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'hello'</span>);<br />};</code></pre>
-<h2 id="operators">Operators</h2>
-<h3 id="basic-operators">Basic Operators</h3>
+<h2 id="operators"><a href="#TOC">Operators</a></h2>
+<h3 id="basic-operators"><a href="#TOC">Basic Operators</a></h3>
 <p>Basic operators allow you to manipulate values.</p>
 <p><strong>Concatenation</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="ch">'hello'</span>;<br /><br /><span class="kw">var</span> bar = <span class="ch">'world'</span>;<br /><br /><span class="kw">console</span>.<span class="fu">log</span>(foo + <span class="ch">' '</span> + bar); <span class="co">// 'hello world'</span></code></pre>
@@ -70,7 +113,7 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="dv">2</span> * <span class="dv">3</span>;<br /><span class="dv">2</span> / <span class="dv">3</span>;</code></pre>
 <p><strong>Incrementing and decrementing</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> i = <span class="dv">1</span>;<br /><br /><span class="kw">var</span> j = ++i;  <span class="co">// pre-increment:  j equals 2; i equals 2</span><br /><span class="kw">var</span> k = i++;  <span class="co">// post-increment: k equals 2; i equals 3</span></code></pre>
-<h3 id="operations-on-numbers-strings">Operations on Numbers &amp; Strings</h3>
+<h3 id="operations-on-numbers-strings"><a href="#TOC">Operations on Numbers &amp; Strings</a></h3>
 <p>In JavaScript, numbers and strings will occasionally behave in ways you might not expect.</p>
 <p><strong>Addition vs. concatenation</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="dv">1</span>;<br /><span class="kw">var</span> bar = <span class="ch">'2'</span>;<br /><br /><span class="kw">console</span>.<span class="fu">log</span>(foo + bar);  <span class="co">// 12. uh oh</span></code></pre>
@@ -79,51 +122,51 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <p>The Number constructor, when called as a function (like above) will have the effect of casting its argument into a number. You could also use the unary plus operator, which does the same thing:</p>
 <p><strong>Forcing a string to act as a number (using the unary-plus operator)</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">console</span>.<span class="fu">log</span>(foo + +bar);</code></pre>
-<h3 id="logical-operators">Logical Operators</h3>
+<h3 id="logical-operators"><a href="#TOC">Logical Operators</a></h3>
 <p>Logical operators allow you to evaluate a series of operands using AND and OR operations.</p>
 <p><strong>Logical AND and OR operators</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="dv">1</span>;<br /><span class="kw">var</span> bar = <span class="dv">0</span>;<br /><span class="kw">var</span> baz = <span class="dv">2</span>;<br /><br />foo || bar;   <span class="co">// returns 1, which is true</span><br />bar || foo;   <span class="co">// returns 1, which is true</span><br /><br />foo &amp;&amp; bar;   <span class="co">// returns 0, which is false</span><br />foo &amp;&amp; baz;   <span class="co">// returns 2, which is true</span><br />baz &amp;&amp; foo;   <span class="co">// returns 1, which is true</span></code></pre>
 <p>Though it may not be clear from the example, the <code>||</code> operator returns the value of the first truthy operand, or, in cases where neither operand is truthy, it’ll return the last of both operands. The <code>&amp;&amp;</code> operator returns the value of the first false operand, or the value of the last operand if both operands are truthy.</p>
-<p>Be sure to consult <a href="#Truthy%20and%20Falsy%20Things" title="Truthy and Falsy Things">the section called “Truthy and Falsy Things”</a> for more details on which values evaluate to <code>true</code> and which evaluate to <code>false</code>.</p>
-<h3 id="note">Note</h3>
+<p>Be sure to consult <a href="#truthy-and-falsy-things" title="Truthy and Falsy Things">the section called “Truthy and Falsy Things”</a> for more details on which values evaluate to <code>true</code> and which evaluate to <code>false</code>.</p>
+<h3 id="note"><a href="#TOC">Note</a></h3>
 <p>You’ll sometimes see developers use these logical operators for flow control instead of using <code>if</code> statements. For example:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="co">// do something with foo if foo is truthy</span><br />foo &amp;&amp; doSomething(foo);<br /><br /><span class="co">// set bar to baz if baz is truthy;</span><br /><span class="co">// otherwise, set it to the return</span><br /><span class="co">// value of createBar()</span><br /><span class="kw">var</span> bar = baz || createBar();</code></pre>
 <p>This style is quite elegant and pleasantly terse; that said, it can be really hard to read, especially for beginners. I bring it up here so you’ll recognize it in code you read, but I don’t recommend using it until you’re extremely comfortable with what it means and how you can expect it to behave.</p>
-<h3 id="comparison-operators">Comparison Operators</h3>
+<h3 id="comparison-operators"><a href="#TOC">Comparison Operators</a></h3>
 <p>Comparison operators allow you to test whether values are equivalent or whether values are identical.</p>
 <p><strong>Comparison operators</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="dv">1</span>;<br /><span class="kw">var</span> bar = <span class="dv">0</span>;<br /><span class="kw">var</span> baz = <span class="ch">'1'</span>;<br /><span class="kw">var</span> bim = <span class="dv">2</span>;<br /><br />foo == bar;   <span class="co">// returns false</span><br />foo != bar;   <span class="co">// returns true</span><br />foo == baz;   <span class="co">// returns true; careful!</span><br /><br />foo === baz;             <span class="co">// returns false</span><br />foo !== baz;             <span class="co">// returns true</span><br />foo === <span class="fu">parseInt</span>(baz);   <span class="co">// returns true</span><br /><br />foo &gt; bim;    <span class="co">// returns false</span><br />bim &gt; baz;    <span class="co">// returns true</span><br />foo &lt;= baz;   <span class="co">// returns true</span></code></pre>
-<h2 id="conditional-code">Conditional Code</h2>
+<h2 id="conditional-code"><a href="#TOC">Conditional Code</a></h2>
 <p>Sometimes you only want to run a block of code under certain conditions. Flow control — via <code>if</code> and <code>else</code> blocks — lets you run code only under certain conditions.</p>
 <p><strong>Flow control</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="kw">true</span>;<br /><span class="kw">var</span> bar = <span class="kw">false</span>;<br /><br /><span class="kw">if</span> (bar) {<br />    <span class="co">// this code will never run</span><br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'hello!'</span>);<br />}<br /><br /><span class="kw">if</span> (bar) {<br />    <span class="co">// this code won't run</span><br />} <span class="kw">else</span> {<br />    <span class="kw">if</span> (foo) {<br />        <span class="co">// this code will run</span><br />    } <span class="kw">else</span> {<br />        <span class="co">// this code would run if foo and bar were both false</span><br />    }<br />}</code></pre>
-<h3 id="note-1">Note</h3>
+<h3 id="note-1"><a href="#TOC">Note</a></h3>
 <p>While curly braces aren’t strictly required around single-line <code>if</code> statements, using them consistently, even when they aren’t strictly required, makes for vastly more readable code.</p>
 <p>Be mindful not to define functions with the same name multiple times within separate <code>if</code>/<code>else</code> blocks, as doing so may not have the expected result.</p>
-<h3 id="truthy-and-falsy-things">Truthy and Falsy Things</h3>
+<h3 id="truthy-and-falsy-things"><a href="#TOC">Truthy and Falsy Things</a></h3>
 <p>In order to use flow control successfully, it’s important to understand which kinds of values are “truthy” and which kinds of values are “falsy.” Sometimes, values that seem like they should evaluate one way actually evaluate another.</p>
 <p><strong>Values that evaluate to <code>true</code></strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="ch">'0'</span>;<br /><span class="ch">'any string'</span>;<br />[];  <span class="co">// an empty array</span><br />{};  <span class="co">// an empty object</span><br /><span class="dv">1</span>;   <span class="co">// any non-zero number</span></code></pre>
 <p><strong>Values that evaluate to <code>false</code></strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="dv">0</span>;<br /><span class="ch">''</span>;  <span class="co">// an empty string</span><br />NaN; <span class="co">// JavaScript's &quot;not-a-number&quot; variable</span><br />null;<br />undefined;  <span class="co">// be careful -- undefined can be redefined!</span></code></pre>
-<h3 id="conditional-variable-assignment-with-the-ternary-operator">Conditional Variable Assignment with The Ternary Operator</h3>
+<h3 id="conditional-variable-assignment-with-the-ternary-operator"><a href="#TOC">Conditional Variable Assignment with The Ternary Operator</a></h3>
 <p>Sometimes you want to set a variable to a value depending on some condition. You could use an <code>if</code>/<code>else</code> statement, but in many cases the ternary operator is more convenient. [Definition: The <em>ternary operator</em> tests a condition; if the condition is true, it returns a certain value, otherwise it returns a different value.]</p>
 <p><strong>The ternary operator</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="co">// set foo to 1 if bar is true;</span><br /><span class="co">// otherwise, set foo to 0</span><br /><span class="kw">var</span> foo = bar ? <span class="dv">1</span> : <span class="dv">0</span>;</code></pre>
 <p>While the ternary operator can be used without assigning the return value to a variable, this is generally discouraged.</p>
-<h3 id="switch-statements">Switch Statements</h3>
+<h3 id="switch-statements"><a href="#TOC">Switch Statements</a></h3>
 <p>Rather than using a series of if/else if/else blocks, sometimes it can be useful to use a switch statement instead. [Definition: <em>Switch statements</em> look at the value of a variable or expression, and run different blocks of code depending on the value.]</p>
 <p><strong>A switch statement</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">switch</span> (foo) {<br /><br />    <span class="kw">case</span> <span class="ch">'bar'</span>:<br />        alert(<span class="ch">'the value was bar -- yay!'</span>);<br />    <span class="kw">break</span>;<br /><br />    <span class="kw">case</span> <span class="ch">'baz'</span>:<br />        alert(<span class="ch">'boo baz :('</span>);<br />    <span class="kw">break</span>;<br /><br />    <span class="dt">default</span>:<br />        alert(<span class="ch">'everything else is just ok'</span>);<br />    <span class="kw">break</span>;<br /><br />}</code></pre>
 <p>Switch statements have somewhat fallen out of favor in JavaScript, because often the same behavior can be accomplished by creating an object that has more potential for reuse, testing, etc. For example:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> stuffToDo = {<br />    <span class="ch">'bar'</span> : <span class="kw">function</span>() {<br />        alert(<span class="ch">'the value was bar -- yay!'</span>);<br />    },<br /><br />    <span class="ch">'baz'</span> : <span class="kw">function</span>() {<br />        alert(<span class="ch">'boo baz :('</span>);<br />    },<br /><br />    <span class="ch">'default'</span> : <span class="kw">function</span>() {<br />        alert(<span class="ch">'everything else is just ok'</span>);<br />    }<br />};<br /><br /><span class="kw">if</span> (stuffToDo[foo]) {<br />    stuffToDo[foo]();<br />} <span class="kw">else</span> {<br />    stuffToDo[<span class="ch">'default'</span>]();<br />}</code></pre>
 <p>We’ll look at objects in greater depth later in this chapter.</p>
-<h2 id="loops">Loops</h2>
+<h2 id="loops"><a href="#TOC">Loops</a></h2>
 <p>Loops let you run a block of code a certain number of times.</p>
 <p><strong>Loops</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="co">// logs 'try 0', 'try 1', ..., 'try 4'</span><br /><span class="kw">for</span> (<span class="kw">var</span> i=<span class="dv">0</span>; i&lt;<span class="dv">5</span>; i++) {<br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'try '</span> + i);<br />}</code></pre>
 <p><em>Note that in</em> <em>Loops even though we use the keyword var before the variable name <code class="varname">i</code>, this does not “scope” the variable <code class="varname">i</code> to the loop block. We’ll discuss scope in depth later in this chapter.</em></p>
-<h3 id="the-for-loop">The for loop</h3>
+<h3 id="the-for-loop"><a href="#TOC">The for loop</a></h3>
 <p>A <code>for</code> loop is made up of four statements and has the following structure:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">for</span> ([initialisation]; [conditional]; [iteration])<br /> [loopBody]</code></pre>
 <p>The <em>initialisation</em> statement is executed only once, before the loop starts. It gives you an opportunity to prepare or declare any variables.</p>
@@ -133,7 +176,7 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <p>Here’s a typical <code>for</code> loop:</p>
 <p><strong>A typical <code>for</code> loop</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">for</span> (<span class="kw">var</span> i = <span class="dv">0</span>, limit = <span class="dv">100</span>; i &lt; limit; i++) {<br />    <span class="co">// This block will be executed 100 times</span><br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Currently at '</span> + i);<br />    <span class="co">// Note: the last log will be &quot;Currently at 99&quot;</span><br />}</code></pre>
-<h3 id="the-while-loop">The while loop</h3>
+<h3 id="the-while-loop"><a href="#TOC">The while loop</a></h3>
 <p>A <code>while</code> loop is similar to an <code>if</code> statement, except that its body will keep executing until the condition evaluates to false.</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">while</span> ([conditional]) [loopBody]</code></pre>
 <p>Here’s a typical <code>while</code> loop:</p>
@@ -143,21 +186,21 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <p><strong>A <code>while</code> loop with a combined conditional and incrementer</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> i = -<span class="dv">1</span>;<br /><span class="kw">while</span> (++i &lt; <span class="dv">100</span>) {<br />    <span class="co">// This block will be executed 100 times</span><br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Currently at '</span> + i);<br />}</code></pre>
 <p>Notice that we’re starting at <code>-1</code> and using the prefix incrementer (<code>++i</code>).</p>
-<h3 id="the-do-while-loop">The do-while loop</h3>
+<h3 id="the-do-while-loop"><a href="#TOC">The do-while loop</a></h3>
 <p>This is almost exactly the same as the <code>while</code> loop, except for the fact that the loop’s body is executed at least once before the condition is tested.</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">do</span> [loopBody] <span class="kw">while</span> ([conditional])</code></pre>
 <p>Here’s a <code>do-while</code> loop:</p>
 <p><strong>A <code>do-while</code> loop</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">do</span> {<br /><br />    <span class="co">// Even though the condition evaluates to false</span><br />    <span class="co">// this loop's body will still execute once.</span><br /><br />    alert(<span class="ch">'Hi there!'</span>);<br /><br />} <span class="kw">while</span> (<span class="kw">false</span>);</code></pre>
 <p>These types of loops are quite rare since only few situations require a loop that blindly executes at least once. Regardless, it’s good to be aware of it.</p>
-<h3 id="breaking-and-continuing">Breaking and continuing</h3>
+<h3 id="breaking-and-continuing"><a href="#TOC">Breaking and continuing</a></h3>
 <p>Usually, a loop’s termination will result from the conditional statement not evaluating to true, but it is possible to stop a loop in its tracks from within the loop’s body with the <code>break</code> statement.</p>
 <p><strong>Stopping a loop</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">for</span> (<span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++) {<br />    <span class="kw">if</span> (something) {<br />        <span class="kw">break</span>;<br />    }<br />}</code></pre>
 <p>You may also want to continue the loop without executing more of the loop’s body. This is done using the <code>continue</code> statement.</p>
 <p><strong>Skipping to the next iteration of a loop</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">for</span> (<span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++) {<br /><br />    <span class="kw">if</span> (something) {<br />        <span class="kw">continue</span>;<br />    }<br /><br />    <span class="co">// The following statement will only be executed</span><br />    <span class="co">// if the conditional 'something' has not been met</span><br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'I have been reached'</span>);<br /><br />}</code></pre>
-<h2 id="reserved-words">Reserved Words</h2>
+<h2 id="reserved-words"><a href="#TOC">Reserved Words</a></h2>
 <p>JavaScript has a number of “reserved words,” or words that have special meaning in the language. You should avoid using these words in your code except when using them with their intended meaning.</p>
 <table>
 <tbody>
@@ -247,7 +290,7 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 </tr>
 </tbody>
 </table>
-<h2 id="arrays">Arrays</h2>
+<h2 id="arrays"><a href="#TOC">Arrays</a></h2>
 <p>Arrays are zero-indexed lists of values. They are a handy way to store a set of related items of the same type (such as strings), though in reality, an array can include multiple types of items, including other arrays.</p>
 <p><strong>A simple array</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myArray = [ <span class="ch">'hello'</span>, <span class="ch">'world'</span> ];</code></pre>
@@ -262,48 +305,48 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myArray = [ <span class="ch">'hello'</span>, <span class="ch">'world'</span> ];<br /><span class="kw">myArray</span>.<span class="fu">push</span>(<span class="ch">'new'</span>);</code></pre>
 <p><strong>Working with arrays</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myArray = [ <span class="ch">'h'</span>, <span class="ch">'e'</span>, <span class="ch">'l'</span>, <span class="ch">'l'</span>, <span class="ch">'o'</span> ];<br /><span class="kw">var</span> myString = <span class="kw">myArray</span>.<span class="fu">join</span>(<span class="ch">''</span>);   <span class="co">// 'hello'</span><br /><span class="kw">var</span> mySplit = <span class="kw">myString</span>.<span class="fu">split</span>(<span class="ch">''</span>);  <span class="co">// [ 'h', 'e', 'l', 'l', 'o' ]</span></code></pre>
-<h2 id="objects">Objects</h2>
+<h2 id="objects"><a href="#TOC">Objects</a></h2>
 <p>Objects contain one or more key-value pairs. The key portion can be any string. The value portion can be any type of value: a number, a string, an array, a function, or even another object.</p>
 <p>[Definition: When one of these values is a function, it’s called a <em>method</em> of the object.] Otherwise, they are called properties.</p>
 <p>As it turns out, nearly everything in JavaScript is an object — arrays, functions, numbers, even strings — and they all have properties and methods.</p>
 <p><strong>Creating an “object literal”</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myObject = {<br />    <span class="dt">sayHello </span>: <span class="kw">function</span>() {<br />        <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'hello'</span>);<br />    },<br />    <span class="dt">myName </span>: <span class="ch">'Rebecca'</span><br />};<br /><span class="kw">myObject</span>.<span class="fu">sayHello</span>();            <span class="co">// logs 'hello'</span><br /><span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">myObject</span>.<span class="fu">myName</span>);   <span class="co">// logs 'Rebecca'</span></code></pre>
-<h4 id="note-2">Note</h4>
+<h4 id="note-2"><a href="#TOC">Note</a></h4>
 <p>When creating object literals, you should note that the key portion of each key-value pair can be written as any valid JavaScript identifier, a string (wrapped in quotes) or a number:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myObject = {<br />    <span class="dt">validIdentifier</span>: <span class="dv">123</span>,<br />    <span class="ch">'some string'</span>: <span class="dv">456</span>,<br />    <span class="dv">99999</span>: <span class="dv">789</span><br />};</code></pre>
 <p>Object literals can be extremely useful for code organization; for more information, read <a href="http://blog.rebeccamurphey.com/2009/10/15/using-objects-to-organize-your-code/">Using Objects to Organize Your Code</a> by Rebecca Murphey.</p>
-<h2 id="functions">Functions</h2>
+<h2 id="functions"><a href="#TOC">Functions</a></h2>
 <p>Functions contain blocks of code that need to be executed repeatedly. Functions can take zero or more arguments, and can optionally return a value.</p>
 <p>Functions can be created in a variety of ways:</p>
 <p><strong>Function Declaration</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">function</span> foo() { <span class="co">/* do something */</span> }</code></pre>
 <p><strong>Named Function Expression</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> foo = <span class="kw">function</span>() { <span class="co">/* do something */</span> }</code></pre>
-<p><em>I prefer the named function expression method of setting a function’s name, for some rather</em> <em><a href="http://yura.thinkweb2.com/named-function-expressions/">in-depth and technical reasons</a>. You are likely to see both methods used in others’ JavaScript code.</em></p>
-<h3 id="using-functions">Using Functions</h3>
+<p><em>I prefer the named function expression method of setting a function’s name, for some rather</em> <em><a href="http://kangax.github.com/nfe/">in-depth and technical reasons</a>. You are likely to see both methods used in others’ JavaScript code.</em></p>
+<h3 id="using-functions"><a href="#TOC">Using Functions</a></h3>
 <p><strong>A simple function</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> greet = <span class="kw">function</span>(person, greeting) {<br />    <span class="kw">var</span> text = greeting + <span class="ch">', '</span> + person;<br />    <span class="kw">console</span>.<span class="fu">log</span>(text);<br />};<br />greet(<span class="ch">'Rebecca'</span>, <span class="ch">'Hello'</span>);</code></pre>
 <p><strong>A function that returns a value</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> greet = <span class="kw">function</span>(person, greeting) {<br />    <span class="kw">var</span> text = greeting + <span class="ch">', '</span> + person;<br />    <span class="kw">return</span> text;<br />};<br /><br /><span class="kw">console</span>.<span class="fu">log</span>(greet(<span class="ch">'Rebecca'</span>,<span class="ch">'hello'</span>));</code></pre>
 <p><strong>A function that returns another function</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> greet = <span class="kw">function</span>(person, greeting) {<br />    <span class="kw">var</span> text = greeting + <span class="ch">', '</span> + person;<br />    <span class="kw">return</span> <span class="kw">function</span>() { <span class="kw">console</span>.<span class="fu">log</span>(text); };<br />};<br /><br /><br /><span class="kw">var</span> greeting = greet(<span class="ch">'Rebecca'</span>, <span class="ch">'Hello'</span>);<br />greeting();</code></pre>
-<h3 id="self-executing-anonymous-functions">Self-Executing Anonymous Functions</h3>
+<h3 id="self-executing-anonymous-functions"><a href="#TOC">Self-Executing Anonymous Functions</a></h3>
 <p>A common pattern in JavaScript is the self-executing anonymous function. This pattern creates a function expression and then immediately executes the function. This pattern is extremely useful for cases where you want to avoid polluting the global namespace with your code — no variables declared inside of the function are visible outside of it.</p>
 <p><strong>A self-executing anonymous function</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript">(<span class="kw">function</span>(){<br />    <span class="kw">var</span> foo = <span class="ch">'Hello world'</span>;<br />})();<br /><br /><br /><span class="kw">console</span>.<span class="fu">log</span>(foo);   <span class="co">// undefined!</span></code></pre>
-<h3 id="functions-as-arguments">Functions as Arguments</h3>
+<h3 id="functions-as-arguments"><a href="#TOC">Functions as Arguments</a></h3>
 <p>In JavaScript, functions are “first-class citizens” — they can be assigned to variables or passed to other functions as arguments. Passing functions as arguments is an extremely common idiom in jQuery.</p>
 <p><strong>Passing an anonymous function as an argument</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myFn = <span class="kw">function</span>(fn) {<br />    <span class="kw">var</span> result = fn();<br />    <span class="kw">console</span>.<span class="fu">log</span>(result);<br />};<br /><br />myFn(<span class="kw">function</span>() { <span class="kw">return</span> <span class="ch">'hello world'</span>; });   <span class="co">// logs 'hello world'</span></code></pre>
 <p><strong>Passing a named function as an argument</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myFn = <span class="kw">function</span>(fn) {<br />    <span class="kw">var</span> result = fn();<br />    <span class="kw">console</span>.<span class="fu">log</span>(result);<br />};<br /><br /><span class="kw">var</span> myOtherFn = <span class="kw">function</span>() {<br />    <span class="kw">return</span> <span class="ch">'hello world'</span>;<br />};<br /><br />myFn(myOtherFn);   <span class="co">// logs 'hello world'</span></code></pre>
-<h2 id="testing-type">Testing Type</h2>
+<h2 id="testing-type"><a href="#TOC">Testing Type</a></h2>
 <p>JavaScript offers a way to test the “type” of a variable. However, the result can be confusing — for example, the type of an Array is “object”.</p>
 <p>It’s common practice to use the <code>typeof</code> operator when trying to determining the type of a specific value.</p>
 <p><strong>Testing the type of various variables</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myFunction = <span class="kw">function</span>() {<br />    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'hello'</span>);<br />};<br /><br /><span class="kw">var</span> myObject = {<br />    <span class="dt">foo </span>: <span class="ch">'bar'</span><br />};<br /><br /><span class="kw">var</span> myArray = [ <span class="ch">'a'</span>, <span class="ch">'b'</span>, <span class="ch">'c'</span> ];<br /><br /><span class="kw">var</span> myString = <span class="ch">'hello'</span>;<br /><br /><span class="kw">var</span> myNumber = <span class="dv">3</span>;<br /><br /><span class="kw">typeof</span> myFunction;   <span class="co">// returns 'function'</span><br /><span class="kw">typeof</span> myObject;     <span class="co">// returns 'object'</span><br /><span class="kw">typeof</span> myArray;      <span class="co">// returns 'object' -- careful!</span><br /><span class="kw">typeof</span> myString;     <span class="co">// returns 'string';</span><br /><span class="kw">typeof</span> myNumber;     <span class="co">// returns 'number'</span><br /><br /><span class="kw">typeof</span> null;         <span class="co">// returns 'object' -- careful!</span><br /><br /><br /><span class="kw">if</span> (<span class="kw">myArray</span>.<span class="fu">push</span> &amp;&amp; <span class="kw">myArray</span>.<span class="fu">slice</span> &amp;&amp; <span class="kw">myArray</span>.<span class="fu">join</span>) {<br />    <span class="co">// probably an array</span><br />    <span class="co">// (this is called &quot;duck typing&quot;)</span><br />}<br /><br /><span class="kw">if</span> (<span class="kw">Object</span>.<span class="fu">prototype</span>.<span class="fu">toString</span>.<span class="fu">call</span>(myArray) === <span class="ch">'[object Array]'</span>) {<br />    <span class="co">// Definitely an array!</span><br />    <span class="co">// This is widely considered as the most robust way</span><br />    <span class="co">// to determine if a specific value is an Array.</span><br />}</code></pre>
 <p>jQuery offers utility methods to help you determine the type of an arbitrary value. These will be covered later.</p>
-<h2 id="the-this-keyword">The <code>this</code> keyword</h2>
+<h2 id="the-this-keyword"><a href="#TOC">The <code>this</code> keyword</a></h2>
 <p>In JavaScript, as in most object-oriented programming languages, <code>this</code> is a special keyword that is used within methods to refer to the object on which a method is being invoked. The value of <code>this</code> is determined using a simple series of steps:</p>
 <ol style="list-style-type: decimal">
 <li>If the function is invoked using <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">Function.call</a> or <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">Function.apply</a>, <code>this</code> will be set to the first argument passed to call/apply. If the first argument passed to call/apply is <code>null</code> or <code>undefined</code>, <code>this</code> will refer to the global object (which is the <code>window</code> object in Web browsers).</li>
@@ -317,12 +360,12 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myName = <span class="ch">'the global object'</span>,<br /><br />    sayHello = <span class="kw">function</span> () {<br />        <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Hi! My name is '</span> + <span class="kw">this</span>.<span class="fu">myName</span>);<br />    },<br /><br />    myObject = {<br />        <span class="dt">myName </span>: <span class="ch">'Rebecca'</span><br />    };<br /><br /><span class="kw">var</span> myObjectHello = <span class="kw">sayHello</span>.<span class="fu">bind</span>(myObject);<br /><br />sayHello();       <span class="co">// logs 'Hi! My name is the global object'</span><br />myObjectHello();  <span class="co">// logs 'Hi! My name is Rebecca'</span></code></pre>
 <p><strong>A function being attached to an object at runtime</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myName = <span class="ch">'the global object'</span>,<br /><br />    sayHello = <span class="kw">function</span>() {<br />        <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Hi! My name is '</span> + <span class="kw">this</span>.<span class="fu">myName</span>);<br />    },<br /><br />    myObject = {<br />        <span class="dt">myName </span>: <span class="ch">'Rebecca'</span><br />    },<br /><br />    secondObject = {<br />        <span class="dt">myName </span>: <span class="ch">'Colin'</span><br />    };<br /><br /><span class="kw">myObject</span>.<span class="fu">sayHello</span> = sayHello;<br /><span class="kw">secondObject</span>.<span class="fu">sayHello</span> = sayHello;<br /><br />sayHello();               <span class="co">// logs 'Hi! My name is the global object'</span><br /><span class="kw">myObject</span>.<span class="fu">sayHello</span>();      <span class="co">// logs 'Hi! My name is Rebecca'</span><br /><span class="kw">secondObject</span>.<span class="fu">sayHello</span>();  <span class="co">// logs 'Hi! My name is Colin'</span></code></pre>
-<h3 id="note-3">Note</h3>
+<h3 id="note-3"><a href="#TOC">Note</a></h3>
 <p>When invoking a function deep within a long namespace, it is often tempting to reduce the amount of code you need to type by storing a reference to the actual function as a single, shorter variable. It is important not to do this with instance methods as this will cause the value of <code>this</code> within the function to change, leading to incorrect code operation. For instance:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myNamespace = {<br />    <span class="dt">myObject </span>: {<br />        <span class="dt">sayHello </span>: <span class="kw">function</span>() {<br />            <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Hi! My name is '</span> + <span class="kw">this</span>.<span class="fu">myName</span>);<br />        },<br /><br />        <span class="dt">myName </span>: <span class="ch">'Rebecca'</span><br />    }<br />};<br /><br /><span class="kw">var</span> hello = <span class="kw">myNamespace.myObject</span>.<span class="fu">sayHello</span>;<br /><br />hello();  <span class="co">// logs 'Hi! My name is undefined'</span></code></pre>
 <p>You can, however, safely reduce everything up to the object on which the method is invoked:</p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myNamespace = {<br />    <span class="dt">myObject </span>: {<br />        <span class="dt">sayHello </span>: <span class="kw">function</span>() {<br />            <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">'Hi! My name is '</span> + <span class="kw">this</span>.<span class="fu">myName</span>);<br />        },<br /><br />        <span class="dt">myName </span>: <span class="ch">'Rebecca'</span><br />    }<br />};<br /><br /><span class="kw">var</span> obj = <span class="kw">myNamespace</span>.<span class="fu">myObject</span>;<br /><br /><span class="kw">obj</span>.<span class="fu">sayHello</span>();  <span class="co">// logs 'Hi! My name is Rebecca'</span></code></pre>
-<h2 id="scope">Scope</h2>
+<h2 id="scope"><a href="#TOC">Scope</a></h2>
 <p>“Scope” refers to the variables that are available to a piece of code at a given time. A lack of understanding of scope can lead to frustrating debugging experiences.</p>
 <p>When a variable is declared inside of a function using the <code>var</code> keyword, it is only available to code inside of that function — code outside of that function cannot access the variable. On the other hand, functions defined <em>inside</em> that function <em>will</em> have access to to the declared variable.</p>
 <p>Furthermore, variables that are declared inside a function without the <code>var</code> keyword are not local to the function — JavaScript will traverse the scope chain all the way up to the window scope to find where the variable was previously defined. If the variable wasn’t previously defined, it will be defined in the global scope, which can have extremely unexpected consequences;</p>
@@ -336,7 +379,7 @@ markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="kw">var</span> myFunction = <span class="kw">function</span>() {<br />    <span class="kw">var</span> foo = <span class="ch">'hello'</span>;<br /><br />    <span class="kw">var</span> myFn = <span class="kw">function</span>() {<br />        <span class="kw">console</span>.<span class="fu">log</span>(foo);<br />    };<br /><br />    foo = <span class="ch">'world'</span>;<br /><br />    <span class="kw">return</span> myFn;<br />};<br /><br /><span class="kw">var</span> f = myFunction();<br />f();  <span class="co">// logs 'world' -- uh oh</span></code></pre>
 <p><strong>Scope insanity</strong></p>
 <pre class="sourceCode"><code class="sourceCode Javascript"><span class="co">// a self-executing anonymous function</span><br />(<span class="kw">function</span>() {<br />    <span class="kw">var</span> baz = <span class="dv">1</span>;<br />    <span class="kw">var</span> bim = <span class="kw">function</span>() { alert(baz); };<br />    bar = <span class="kw">function</span>() { alert(baz); };<br />})();<br /><br /><span class="kw">console</span>.<span class="fu">log</span>(baz);  <span class="co">// baz is not defined outside of the function</span><br /><br />bar();  <span class="co">// bar is defined outside of the anonymous function</span><br />        <span class="co">// because it wasn't declared with var; furthermore,</span><br />        <span class="co">// because it was defined in the same scope as baz,</span><br />        <span class="co">// it has access to baz even though other code</span><br />        <span class="co">// outside of the function does not</span><br /><br />bim();  <span class="co">// bim is not defined outside of the anonymous function,</span><br />        <span class="co">// so this will result in an error</span></code></pre>
-<h2 id="closures">Closures</h2>
+<h2 id="closures"><a href="#TOC">Closures</a></h2>
 <p>Closures are an extension of the concept of scope — functions have access to variables that were available in the scope where the function was created. If that’s confusing, don’t worry: closures are generally best understood by example.</p>
 <p>In “Functions can”see&quot; changes in variable values after the function is defined”, we saw how functions have access to changing variable values. The same sort of behavior exists with functions defined within loops — the function “sees” the change in the variable’s value even after the function is defined, resulting in all clicks alerting 5.</p>
 <p><strong>How to lock in the value of <code>i</code>?</strong></p>

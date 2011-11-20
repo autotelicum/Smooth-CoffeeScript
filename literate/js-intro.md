@@ -3,14 +3,21 @@
   http://github.com/rmurphey/jqfundamentals
 % [Creative Commons Attribution-Share Alike 3.0 US](http://creativecommons.org/licenses/by-sa/3.0/us/)
 
-Home	[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)	Formats	[Markdown](js-intro.md)	[PDF](js-intro.pdf)	[HTML](js-intro.html)
 
 <!-- Commands used to format this document:
 
-pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md
+pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md --toc
 
-markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md
+markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md --toc
 -->
+
+
+\chapter{JavaScript Basics}
+
+Home	[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)
+
+Formats	[Markdown](js-intro.md)	[PDF](js-intro.pdf)	[HTML](js-intro.html)
+\pagebreak
 
 
 ## Overview
@@ -150,7 +157,7 @@ neither operand is truthy, it'll return the last of both operands. The
 the value of the last operand if both operands are truthy.
 
 Be sure to consult [the section called “Truthy and Falsy
-Things”](#Truthy%20and%20Falsy%20Things "Truthy and Falsy Things") for
+Things”](#truthy-and-falsy-things "Truthy and Falsy Things") for
 more details on which values evaluate to `true` and which
 evaluate to `false`.
 
@@ -646,7 +653,7 @@ var foo = function() { /* do something */ }
 
 *I prefer the named function expression method of setting a function's
 name, for some rather* *[in-depth and technical
-reasons](http://yura.thinkweb2.com/named-function-expressions/). You are
+reasons](http://kangax.github.com/nfe/). You are
 likely to see both methods used in others' JavaScript code.*
 
 ### Using Functions
