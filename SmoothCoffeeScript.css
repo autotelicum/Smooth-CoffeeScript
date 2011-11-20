@@ -1,0 +1,388 @@
+
+body {
+    font-family: Palatino, georgia, "times new roman", serif;
+    background-color: #F6F9ED;
+    background-position: center -18em;
+    background-repeat: repeat-x; 
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+img { -ms-interpolation-mode:bicubic; }
+
+h1,h2,h3,h4 { 
+    line-height:1em; 
+    font-size:1.5em; 
+    font-weight: normal; 
+    clear: left;    
+    font-family: 'Optima', sans-serif; 
+}
+h1 { margin-bottom: 1em; }
+h2 {
+    line-height: 1.5em;
+    margin:1.5em 0 1.5em 0;
+    font-weight:bold;
+}
+hr { 
+    border-top: 1px solid silver;
+    border-bottom: none;
+    padding: 0;
+    margin: 1.46em 0 0 0;
+}
+
+pre {
+    margin: 1em 0 1.5em 0;
+    line-height: 1.5em; 
+    color: #111;
+    background: #eaffff;
+    border: 1px solid #ddc;
+    padding: 0.5em 1em;
+    overflow: hidden;
+    font-family: 'Inconsolata', 'Consolas', monospace;
+}
+
+#globalWrapper {
+    margin: 10px 5%;
+    padding: 20px;
+    background: #FEFEF2;
+    line-height: 1.5em;
+}
+
+a {
+    text-decoration: none;
+    background: none;
+}
+a:link {
+    color: #0030c0;
+}
+a:visited {
+    color: #603090;
+}
+a:active {
+    color: #ffa000;
+}
+a:hover {
+    text-decoration: underline;
+}
+h1 {
+    margin-top: 1em;
+    line-height: 1.5em;
+}
+h1.Part {
+    text-align: center;
+}
+sup {
+    font-size: 0.75em;
+    line-height: 0.5em;
+    vertical-align: text-top;
+}
+sub {
+    font-size: 0.75em;
+    line-height: 0.5em;
+    vertical-align: text-bottom;
+}
+div.Standard {
+    margin: 1em 0;
+}
+p.printindex {
+    font-size: 0.90em;
+}
+a.printindex {
+    color: black;
+}
+
+div.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.versalitas, span.noun {
+    font-variant: small-caps;
+}
+span.sans {
+    font-family: sans-serif;
+}
+h2 {
+    line-height: 1.4em;
+}
+div.Description, div.List, li {
+    margin: 1em 0;
+}
+li.nested {
+    list-style-type: none;
+}
+pre {
+    padding: 0em;
+    margin: 0em;
+    width: auto;
+    line-height: 1.5em;
+}
+
+a.Label {
+    text-decoration: none;
+    color: #000000;
+}
+div.PlainVisible {
+    width: auto;
+}
+img.embedded {
+    width: 100%;
+    _width: auto;
+}
+div.listing {
+    display: inline-block;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+span.number-left {
+    float: left;
+    background: #f0f0f0;
+    width: 3em;
+    text-align: right;
+    margin-right: 1em;
+}
+
+h1.title {
+    text-align: center;
+}
+div.tocheader {
+    margin: 1em 0;
+    font-size: large;
+}
+a.toc {
+    color: black;
+}
+div.tocindent {
+    padding: 0 0 0 2em;
+}
+div.toc {
+    margin: 0.5em 0;
+    font-size: 0.95em;
+}
+div.fulltoc {
+    padding: 1em;
+}
+
+span.SupFootMarker {
+    color: #0030c0;
+    font-size: 0.75em;
+    line-height: 0.5em;
+    vertical-align: text-top;
+}
+div.EndFoot {
+    margin: 0.2ex;
+    background: #ffffff;
+    padding: 0.5ex;
+    font-size: small;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: left;
+}
+span.HoverFoot {
+    margin: 0.2ex;
+    border: thin solid #c0c0c0;
+    background: #ffffff;
+    padding: 0.5ex;
+    font-size: small;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: left;
+}
+span.FootOuter .HoverFoot {
+    display: none;
+    position: absolute;
+}
+span.FootOuter:hover .HoverFoot {
+    display: inline;
+    float: none;
+}
+
+div.Frameless {
+}
+div.Boxed {
+    outline-width: thin;
+    outline-style: solid;
+}
+div.Framed {
+    outline-width: thin;
+    outline-style: solid;
+    line-height: 200%;
+}
+
+span.hspace {
+    display: inline-block;
+}
+span.vspace {
+    display: inline-block;
+    vertical-align: text-top;
+}
+span.hfill {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 20mm;
+    background: #fff0f0;
+}
+div.defskip {
+    display: block;
+    height: 1em;
+}
+div.smallskip {
+    display: block;
+    height: 0.5em;
+}
+div.medskip {
+    display: block;
+    height: 1em;
+}
+div.bigskip {
+    display: block;
+    height: 2em;
+}
+div.vfill {
+    display: block;
+    height: 30em;
+}
+
+span.scriptstyle {
+    font-size: 0.75em;
+}
+hr.footer {
+    margin-top: 2em;
+}
+div.footer {
+    font-size: 0.90em;
+    margin: 1em 0;
+}
+
+.formula {
+    text-align: center;
+    font-family: "DejaVu Serif", serif;
+    margin: 1.2em 0;
+}
+span.formula {
+    white-space: nowrap;
+}
+div.formula {
+    padding: 0.5ex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.unknown {
+    color: #800000;
+}
+span.ignored, span.arraydef {
+    display: none;
+}
+.formula i {
+    letter-spacing: 0.1ex;
+}
+
+.align-left, .align-l {
+    text-align: left;
+}
+.align-right, .align-r {
+    text-align: right;
+}
+.align-center, .align-c {
+    text-align: center;
+}
+
+span.overline, span.bar {
+    text-decoration: overline;
+}
+.fraction, .fullfraction {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.fraction .fraction {
+    font-size: 80%;
+    line-height: 100%;
+}
+span.numerator {
+    display: block;
+}
+span.denominator {
+    display: block;
+    padding: 0ex;
+    border-top: thin solid;
+}
+sup.numerator, sup.unit {
+    font-size: 70%;
+    vertical-align: 80%;
+}
+sub.denominator, sub.unit {
+    font-size: 70%;
+    vertical-align: -20%;
+}
+span.sqrt {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.1ex;
+}
+sup.root {
+    font-size: 70%;
+    position: relative;
+    left: 1.4ex;
+}
+span.radical {
+    display: inline-block;
+    padding: 0ex;
+    font-size: 150%;
+    vertical-align: top;
+}
+span.root {
+    display: inline-block;
+    border-top: thin solid;
+    padding: 0ex;
+    vertical-align: middle;
+}
+span.symbol {
+    font-size: 125%;
+}
+span.scripts {
+    display: inline-table;
+    vertical-align: middle;
+}
+.script {
+    display: table-row;
+    text-align: left;
+    line-height: 150%;
+}
+span.limits {
+    display: inline-table;
+    vertical-align: middle;
+}
+.limit {
+    display: table-row;
+    line-height: 95%;
+}
+sup.limit, sub.limit {
+    line-height: 150%;
+}
+span.symbolover {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    float: right;
+    right: 100%;
+    bottom: 0.5em;
+    width: 0px;
+}
+span.withsymbol {
+    display: inline-block;
+}
+span.symbolunder {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    float: right;
+    right: 80%;
+    top: 0.3em;
+    width: 0px;
+}

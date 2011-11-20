@@ -3,7 +3,8 @@ body {
     font-family: Palatino, georgia, "times new roman", serif;
     background-color: #F6F9ED;
     background-position: center -18em;
-    background-repeat: repeat-x; 
+    background-repeat: repeat-x;
+    line-height: 120%;
 }
 
 #page {
