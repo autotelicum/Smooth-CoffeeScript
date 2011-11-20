@@ -5,7 +5,7 @@
 
 Download and run the node installer from:
 
-    http://nodejs.org/dist/v0.6.1/node-v0.6.1.pkg
+    http://nodejs.org/dist/v0.6.2/node-v0.6.2.pkg
 
 Download and unpack CoffeeScript from
 
@@ -20,7 +20,7 @@ Then in the unpacked directory run in Terminal:
 
 Download and run the node installer from:
 
-    http://nodejs.org/dist/v0.6.1/node-v0.6.1.msi
+    http://nodejs.org/dist/v0.6.2/node-v0.6.2.msi
 
 Download and unpack CoffeeScript from
 
@@ -51,7 +51,7 @@ Control panel, System, Advanced System Settings (only on Windows 7), Advanced ta
 Open a command line terminal and run:
 
     node --version
-    #    v0.6.1
+    #    v0.6.2
     
     coffee --version
     #    CoffeeScript version 1.1.3
