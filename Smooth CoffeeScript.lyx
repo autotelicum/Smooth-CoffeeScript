@@ -853,8 +853,7 @@ Script is a new language and tools like
 \family typewriter
 qc
 \family default
- and docco depend on legacy code written respectively in JavaScript and
- Python.
+ depend on legacy code written in JavaScript.
 \end_layout
 
 \end_inset
@@ -902,20 +901,6 @@ ws
 Script and they are small enough to
  read and understand in a short time — at least after you have read this
  book.
- Literate documentation made with docco is in 
-\begin_inset listings
-lstparams "language=bash,showstringspaces=false,tabsize=2"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-src/docs
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard

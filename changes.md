@@ -7,7 +7,7 @@ p 8-9 and 186 / 169
 Updated to reflect the larger size and better documentation of CoffeeKup 0.3.1 plus a link to Mark Hahn's Introduction.
 
 p 9
-Updated to Quick Install guide and native node installers.
+Updated to Quick Install guide and native node installers. Removed reference to docco documentation.
 
 p 10
 Added reading recommendation to Foreword:
