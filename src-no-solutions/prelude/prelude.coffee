@@ -95,7 +95,7 @@ prelude.viewURL = (url) ->
     when 'Darwin'
       require('child_process').exec 'open ' + url
       return
-    when 'Windows', 'CYGWIN_NT-6.1'
+    when 'Windows', 'Windows_NT'
       for browser in windowsBrowsers
         if prelude.fileExists browser
           show "Browser: #{browser} URL: #{url}"
