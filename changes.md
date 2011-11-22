@@ -21,6 +21,9 @@ Change to keep in sync with upcoming CoffeeScript REPL change - It will no longe
 p 128 / 117
 Cleaned up second road object representation in Searching. The last pseudo-code line was failing in CoffeeScript 1.1.3 when curly braces and commas were used.
 
+p 132 / 121, 222 / 205, and 227 / 210
+Changed references from generated documentation to source code.
+
 p 161 / 146 and 211 / 194
 Changed two standalone `@` to `this` - Using standalone `@` is discouraged (possibly to be deprecated) since standalone `this` is more readable.
 
@@ -30,6 +33,7 @@ Source code changes
     07-Searching.coffee:14
     08-ObjectOrientation.coffee:194
     A4-NoSolutions.coffee:5
+    prelude/prelude.coffee:98
     prelude/prelude.coffee:263,264
     prelude/coffeekup.coffee -> 0.3.1
 

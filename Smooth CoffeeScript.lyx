@@ -33387,8 +33387,7 @@ But first, we will need to expand our vocabulary so we can deal with the
  they function and what they do.
  The example implementations will be named with an underscore in front of
  their names to show they are internal and not used in the rest of the book.
- You can compare with the implementations in the literate documentation
- of the Underscore library in 
+ You can compare with the implementations in the Underscore library in 
 \begin_inset listings
 lstparams "language=bash,showstringspaces=false,tabsize=2"
 inline true
@@ -33396,7 +33395,7 @@ status open
 
 \begin_layout Plain Layout
 
-src/docs
+prelude/underscore.coffee
 \end_layout
 
 \end_inset
@@ -55264,12 +55263,12 @@ status open
 
 \begin_layout Plain Layout
 
-src/docs/underscore.html
+src/prelude/underscore.coffee
 \end_layout
 
 \end_inset
 
- for an annotated reference.
+ for the annotated source.
 \end_layout
 
 \end_inset
@@ -56165,12 +56164,12 @@ status open
 
 \begin_layout Plain Layout
 
-src/docs/prelude.html
+src/prelude/prelude.coffee
 \end_layout
 
 \end_inset
 
- for an annotated reference.
+ for the annotated source.
 \end_layout
 
 \end_inset
