@@ -7,8 +7,13 @@
 <title>Smooth CoffeeScript</title>
 </head>
 <body>
+<div class="menu">
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
-<div id="globalWrapper">
+<input class="field" type="button" onclick="document.getElementById('globalWrapper').style.maxWidth = document.getElementById('globalWrapper').style.maxWidth===''?'600px':''" value="Adjust Width"/>
+<input class="field" type="button" onclick="window.open('https://github.com/autotelicum/Smooth-CoffeeScript/archives/master')" value="Download Source"/>
+</div>
+
+<div id="globalWrapper" onclick="void(0)">
 <div class="center"><img class="embedded" src="img/SmoothCoverWithSolutions.jpg" alt="figure img/SmoothCoverWithSolutions.jpg" style="width: 70%; height: auto;"/></div>
 
 <h1 class="title">
@@ -25,15 +30,15 @@ E. Hoigaard
 An introduction to CoffeeScript programming with<br/>
 an emphasis on clarity, abstraction and verification.<span class="large"><br/>
 <div class="vspace" style="height: 25pheight%;">
-
 </div>
+<br/>
 </span>The book is <a class="URL" href="http://creativecommons.org/licenses/by/3.0/">freely</a> available, and may be used (as a whole or in parts)<br/>
 in any way you see fit, as long as credit is given to the original author.<br/>
 <a class="URL" href="http://eloquentjavascript.net/">Based on Eloquent JavaScript by Marijn Haverbeke</a>.<span class="large"><br/>
 <div class="vspace" style="height: 25pheight%;">
 
 </div>
-</span>Typeset in LyX / XeTeX with <span class="sans">Arcitectura</span>.<br/>
+<br/>
 1<sup>st</sup> edition, 3<sup>rd</sup> revision &amp; illustrations © 2554 <a class="URL" href="http://www.accesstoinsight.org/history.html#fn-1">BE</a> / 2011 <a class="URL" href="http://www.accesstoinsight.org/history.html#fn-2">CE</a>.<br/>
 <a class="URL" href="http://www.publicdomainpictures.net/view-image.php?image=11133&amp;picture=ostriches-look">Public domain cover photo</a>.
 </div></div>
@@ -332,7 +337,7 @@ The Coffeekup library (0.3.1 / MIT) from <a class="URL" href="http://coffeekup.o
 Translated <tt>ws</tt> WebSockets (MIT) from <a class="URL" href="https://github.com/ncr/node.ws.js">Jacek Becela</a>
 </li>
 <li>
-The <tt>qc</tt> testing library<span class="FootOuter"><span class="SupFootMarker"> [A] </span><span class="HoverFoot"><span class="SupFootMarker"> [A] </span>This library is only used to test functionality. The CoffeeScript applications in <span class="sans">Smooth CoffeeScript</span> do not depend on it. CoffeeScript is a new language and tools like <tt>qc</tt> depend on legacy code written in JavaScript.</span></span> (2009 / BSD) from <a class="URL" href="https://bitbucket.org/darrint/qc.js/">Darrin Thompson</a>
+The <tt>qc</tt> testing library<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [A] </span><span class="HoverFoot"><span class="SupFootMarker"> [A] </span>This library is only used to test functionality. The CoffeeScript applications in <span class="sans">Smooth CoffeeScript</span> do not depend on it. CoffeeScript is a new language and tools like <tt>qc</tt> depend on legacy code written in JavaScript.</span></span> (2009 / BSD) from <a class="URL" href="https://bitbucket.org/darrint/qc.js/">Darrin Thompson</a>
 </li>
 
 </ul>
@@ -353,7 +358,7 @@ The required libraries have been adapted for standard CoffeeScript and are inclu
 
 </div>
 <div class="Standard">
-To set up your own working environment follow the steps described <a class="URL" href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html">here</a> or at <a class="URL" href="http://jashkenas.github.com/coffee-script/#installation">coffeescript.org</a><span class="FootOuter"><span class="SupFootMarker"> [B] </span><span class="HoverFoot"><span class="SupFootMarker"> [B] </span>The CoffeeScript examples have been tested on Mac OS X 10.6 and on Windows 7 with the prebuilt node installers.</span></span>. If you use Windows then you can adapt the prelude to default to your preferred web browser. You can also find instructions there for how to enable WebSockets if your browser requires it.
+To set up your own working environment follow the steps described <a class="URL" href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html">here</a> or at <a class="URL" href="http://jashkenas.github.com/coffee-script/#installation">coffeescript.org</a><span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [B] </span><span class="HoverFoot"><span class="SupFootMarker"> [B] </span>The CoffeeScript examples have been tested on Mac OS X 10.6 and on Windows 7 with the prebuilt node installers.</span></span>. If you use Windows then you can adapt the prelude to default to your preferred web browser. You can also find instructions there for how to enable WebSockets if your browser requires it.
 </div>
 <div class="Standard">
 Then set up your text editor to support CoffeeScript, you can find several on the <a class="URL" href="https://github.com/jashkenas/coffee-script/wiki/Text-editor-plugins">CoffeeScript wiki</a>. For example to use the <a class="URL" href="https://github.com/jashkenas/coffee-script-tmbundle">TextMate bundle</a> with the cross-platform <a class="URL" href="http://www.sublimetext.com/2">Sublime Text 2 editor</a>, unpack the bundle in a CoffeeScript directory under Packages. This setup gives you syntax highlighting, code snippets, and code completion.
@@ -534,7 +539,8 @@ Each line of the program contains a single instruction. It could be written in E
 <span class="number-left">2</span>Store the number 1 in memory location 1
 <span class="number-left">3</span>Store the value of memory location 1 in location 2
 <span class="number-left">4</span>Subtract the number 11 from the value in location 2
-<span class="number-left">5</span>If the value in memory location 2 is the number 0, continue with instruction 9
+<span class="number-left">5</span>If the value in memory location 2 is the number 0,
+<span class="number-left"> </span>  continue with instruction 9
 <span class="number-left">6</span>Add the value of memory location 1 to location 0
 <span class="number-left">7</span>Add the number 1 to the value of memory location 1
 <span class="number-left">8</span>Continue with instruction 3
@@ -751,7 +757,7 @@ However, the flexibility of the language is also an advantage. It leaves space f
 
 </div>
 <div class="Standard">
-Most chapters in this book contain quite a lot of code<span class="FootOuter"><span class="SupFootMarker"> [C] </span><span class="HoverFoot"><span class="SupFootMarker"> [C] </span>&lsquo;Code&rsquo; is the substance that programs are made of. Every piece of a program, whether it is a single line or the whole thing, can be referred to as &lsquo;code&rsquo;.</span></span>. In my experience, reading and writing code is an important part of learning to program. Try to not just glance over these examples, but read them attentively and understand them. This can be slow and confusing at first, but you will quickly get the hang of it. The same goes for the exercises. Do not assume you understand them until you have actually written a working solution.
+Most chapters in this book contain quite a lot of code<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [C] </span><span class="HoverFoot"><span class="SupFootMarker"> [C] </span>&lsquo;Code&rsquo; is the substance that programs are made of. Every piece of a program, whether it is a single line or the whole thing, can be referred to as &lsquo;code&rsquo;.</span></span>. In my experience, reading and writing code is an important part of learning to program. Try to not just glance over these examples, but read them attentively and understand them. This can be slow and confusing at first, but you will quickly get the hang of it. The same goes for the exercises. Do not assume you understand them until you have actually written a working solution.
 </div>
 <div class="Standard">
 Because of the way the web works, it is always possible to look at the JavaScript programs that people put in their web-pages. This can be a good way to learn how some things are done. Because most web programmers are not &lsquo;professional&rsquo; programmers, or consider JavaScript programming so uninteresting that they never properly learned it, a lot of the code you can find like this is of a <i>very</i> bad quality. When learning from ugly or incorrect code, the ugliness and confusion will propagate into your own code, so be careful who you learn from. Another source of programs are CoffeeScript projects hosted on open source services such as <a class="URL" href="https://github.com">github</a>.
@@ -761,7 +767,7 @@ Because of the way the web works, it is always possible to look at the JavaScrip
 values, variables, and control flow<a class="Label" name="chap:Basic-CoffeeScript"> </a>
 </h1>
 <div class="Standard">
-Inside the computer&rsquo;s world, there is only data. That which is not data, does not exist. Although all data is in essence just a sequence of bits<span class="FootOuter"><span class="SupFootMarker"> [D] </span><span class="HoverFoot"><span class="SupFootMarker"> [D] </span>Bits are any kinds of two-valued things, usually described as <div class="listing">
+Inside the computer&rsquo;s world, there is only data. That which is not data, does not exist. Although all data is in essence just a sequence of bits<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [D] </span><span class="HoverFoot"><span class="SupFootMarker"> [D] </span>Bits are any kinds of two-valued things, usually described as <div class="listing">
 <pre class="listing">0
 </pre>
 </div>
@@ -798,7 +804,7 @@ This is what <div class="listing">
 <pre class="listing">144
 </pre>
 </div>
- looks like in bits<span class="FootOuter"><span class="SupFootMarker"> [E] </span><span class="HoverFoot"><span class="SupFootMarker"> [E] </span>If you were expecting something like <div class="listing">
+ looks like in bits<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [E] </span><span class="HoverFoot"><span class="SupFootMarker"> [E] </span>If you were expecting something like <div class="listing">
 <pre class="listing">10010000
 </pre>
 </div>
@@ -815,7 +821,7 @@ The number above has 64 bits. Numbers in CoffeeScript always do. This has one im
 Not all whole numbers below 10<sup>19</sup> fit in a CoffeeScript number though. For one, there are also negative numbers, so one of the bits has to be used to store the sign of the number. A bigger issue is that non-whole numbers must also be represented. To do this, 11 bits are used to store the position of the decimal dot within the number.
 </div>
 <div class="Standard">
-That leaves 52 bits<span class="FootOuter"><span class="SupFootMarker"> [F] </span><span class="HoverFoot"><span class="SupFootMarker"> [F] </span>Actually, 53, because of a trick that can be used to get one bit for free. Look up the &lsquo;IEEE 754&rsquo; format if you are curious about the details.</span></span>. Any whole number less than 2<sup>52</sup>, which is over 10<sup>15</sup>, will safely fit in a CoffeeScript number. In most cases, the numbers we are using stay well below that, so we do not have to concern ourselves with bits at all. Which is good. I have nothing in particular against bits, but you <i>do</i> need a terrible lot of them to get anything done. When at all possible, it is more pleasant to deal with bigger things.
+That leaves 52 bits<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [F] </span><span class="HoverFoot"><span class="SupFootMarker"> [F] </span>Actually, 53, because of a trick that can be used to get one bit for free. Look up the &lsquo;IEEE 754&rsquo; format if you are curious about the details.</span></span>. Any whole number less than 2<sup>52</sup>, which is over 10<sup>15</sup>, will safely fit in a CoffeeScript number. In most cases, the numbers we are using stay well below that, so we do not have to concern ourselves with bits at all. Which is good. I have nothing in particular against bits, but you <i>do</i> need a terrible lot of them to get anything done. When at all possible, it is more pleasant to deal with bigger things.
 </div>
 <div class="Standard">
 Fractional numbers are written by using a dot.
@@ -845,7 +851,7 @@ For very big or very small numbers, one can also use &lsquo;scientific&rsquo; no
 Which is 2.998 <span class="default"><span class="formula">⋅</span>10<sup>8</sup> = 299</span> <span class="default">800</span> <span class="default">000. </span>
 </div>
 <div class="Standard">
-Calculations with whole numbers (also called integers) that fit in 52 bits are guaranteed to always be precise. Unfortunately, calculations with fractional numbers are generally not. Like <span class="formula"><i>π</i></span> (pi) can not be precisely expressed by a finite amount of decimal digits, many numbers lose some precision when only 64 bits are available to store them. This is a shame, but it only causes practical problems in very specific situations<span class="FootOuter"><span class="SupFootMarker"> [G] </span><span class="HoverFoot"><span class="SupFootMarker"> [G] </span>An example of this, if <div class="listing">
+Calculations with whole numbers (also called integers) that fit in 52 bits are guaranteed to always be precise. Unfortunately, calculations with fractional numbers are generally not. Like <span class="formula"><i>π</i></span> (pi) can not be precisely expressed by a finite amount of decimal digits, many numbers lose some precision when only 64 bits are available to store them. This is a shame, but it only causes practical problems in very specific situations<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [G] </span><span class="HoverFoot"><span class="SupFootMarker"> [G] </span>An example of this, if <div class="listing">
 <pre class="listing">p = 1/3
 </pre>
 </div>
@@ -1060,7 +1066,9 @@ CoffeeScript has triple-quoted strings aka heredocs<a class="IndexReference" nam
 
 </div>
 <div class="Standard">
-The triple double quoted variant allows for interpolated values.<div class="listing">
+The triple double quoted variant allows for interpolated values.
+</div>
+<div class="Standard"><div class="listing">
 <pre class="listing">"""  1
    + 1
    —
@@ -1149,7 +1157,7 @@ The other operators we saw all operated on two values, <div class="listing">
 <pre class="listing">typeof
 </pre>
 </div>
- takes only one. Operators that use two values are called binary operators<a class="IndexReference" name="entry-binary-operator-0" href="#index-binary-operator">↓</a>, while those that take one are called unary operators<a class="IndexReference" name="entry-unary-operator-0" href="#index-unary-operator">↓</a>. The minus<a class="IndexReference" name="entry---0" href="#index--">↓</a> operator can be used both as a binary and a unary operator<span class="FootOuter"><span class="SupFootMarker"> [H] </span><span class="HoverFoot"><span class="SupFootMarker"> [H] </span>Note that there is no space between the unary minus and the value.</span></span>:
+ takes only one. Operators that use two values are called binary operators<a class="IndexReference" name="entry-binary-operator-0" href="#index-binary-operator">↓</a>, while those that take one are called unary operators<a class="IndexReference" name="entry-unary-operator-0" href="#index-unary-operator">↓</a>. The minus<a class="IndexReference" name="entry---0" href="#index--">↓</a> operator can be used both as a binary and a unary operator<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [H] </span><span class="HoverFoot"><span class="SupFootMarker"> [H] </span>Note that there is no space between the unary minus and the value.</span></span>:
 </div>
 <div class="Standard">
 <div class="listing">
@@ -1246,6 +1254,8 @@ I hope you have seen the <div class="listing">
 100 &lt; 315 &lt; 200
 </pre>
 </div>
+</div>
+<div class="Standard">
 Strings can be compared in the same way:
 </div>
 <div class="Standard">
@@ -1428,7 +1438,7 @@ not(12 * 2 is 144 and true)
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="PlainVisible">
@@ -1444,6 +1454,7 @@ true and not false
 true
 </pre>
 </div>
+<div class="Standard">
 I hope you noticed that <div class="listing">
 <pre class="listing">’grass’  != ’green’
 </pre>
@@ -1454,7 +1465,7 @@ I hope you noticed that <div class="listing">
 </div>
 . Grass may be green, but it is not equal to green.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -1522,7 +1533,7 @@ It is a useless program. An expression can be content to just produce a value, b
 <pre class="listing">true
 </pre>
 </div>
-, and then immediately throw them into the bit bucket<span class="FootOuter"><span class="SupFootMarker"> [I] </span><span class="HoverFoot"><span class="SupFootMarker"> [I] </span>The bit bucket is supposedly the place where old bits are kept. On some systems, the programmer has to manually empty it now and then. Fortunately, CoffeeScript comes with a fully-automatic bit-recycling system.</span></span>. This leaves no impression on the world at all, and is not a side effect.
+, and then immediately throw them into the bit bucket<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [I] </span><span class="HoverFoot"><span class="SupFootMarker"> [I] </span>The bit bucket is supposedly the place where old bits are kept. On some systems, the programmer has to manually empty it now and then. Fortunately, CoffeeScript comes with a fully-automatic bit-recycling system.</span></span>. This leaves no impression on the world at all, and is not a side effect.
 </div>
 <div class="Standard">
 <div class="center">
@@ -1646,7 +1657,7 @@ The collection of variables and their values that exist at a given time is calle
 <pre class="listing">global
 </pre>
 </div>
-. You can view it by typing: <span class="formula"> → ∣</span> / &lsquo;Tab&rsquo;. When your browser loads a page, it creates a new environment called <div class="listing">
+. You can view it by typing: <span class="formula"> →∣</span> / &lsquo;Tab&rsquo;. When your browser loads a page, it creates a new environment called <div class="listing">
 <pre class="listing">window
 </pre>
 </div>
@@ -2024,7 +2035,7 @@ Do not worry if you do not quite see how this would work yet. Even if you perfec
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><span class="default"><div class="listing">
@@ -2074,7 +2085,7 @@ How does one get a string with X &lsquo;#&rsquo; characters in it? One way is to
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><span class="default"><div class="listing">
@@ -2318,7 +2329,7 @@ Rewrite the solutions of the previous two exercises to use <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -2328,6 +2339,7 @@ for counter in [0...10]
 show result
 </pre>
 </div>
+<div class="Standard">
 Note the use of the exclusive range and that — as required by CoffeeScript — the statement in the loop is indented two spaces which make it clear that it &lsquo;belongs&rsquo; to the line above it.<div class="listing">
 <pre class="listing">line = ’’
 for counter in [0...10]
@@ -2335,7 +2347,7 @@ for counter in [0...10]
   show line
 </pre>
 </div>
-
+</div>
 </div>
 
 </div>
@@ -2546,7 +2558,7 @@ Write a program to ask yourself, using <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -2712,7 +2724,7 @@ Note that <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -2726,11 +2738,12 @@ loop
 show "Luck took #{count} roll(s)"
 </pre>
 </div>
+<div class="Standard">
 Another solution, arguably nicer, without <div class="listing">
 <pre class="listing">break
 </pre>
 </div>
- but abusing statistics:<div class="listing">
+ but abusing statistics:</div><div class="listing">
 <pre class="listing">luckyNumber = 3 # Choose from 1 to 6
 show ’Your lucky number is ’ + luckyNumber
 count = 0
@@ -3256,7 +3269,7 @@ Write a function called <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -3280,7 +3293,7 @@ show absolute -144
 Pure functions have two very nice properties. They are easy to think about, and they are easy to re-use.
 </div>
 <div class="Standard">
-If a function is pure, a call to it can be seen as a thing in itself. When you are not sure that it is working correctly, you can test it by calling it directly from the console, which is simple because it does not depend on any context<span class="FootOuter"><span class="SupFootMarker"> [J] </span><span class="HoverFoot"><span class="SupFootMarker"> [J] </span>Technically, a pure function can not use the value of any external variables. These values might change, and this could make the function return a different value for the same arguments. In practice, the programmer may consider some variables &lsquo;constant&rsquo; — they are not expected to change — and consider functions that use only constant variables pure. Variables that contain a function value are often good examples of constant variables.</span></span>. It is easy to make these tests automatic — to write a program that tests a specific function. Non-pure functions might return different values based on all kinds of factors, and have side effects that might be hard to test and think about.
+If a function is pure, a call to it can be seen as a thing in itself. When you are not sure that it is working correctly, you can test it by calling it directly from the console, which is simple because it does not depend on any context<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [J] </span><span class="HoverFoot"><span class="SupFootMarker"> [J] </span>Technically, a pure function can not use the value of any external variables. These values might change, and this could make the function return a different value for the same arguments. In practice, the programmer may consider some variables &lsquo;constant&rsquo; — they are not expected to change — and consider functions that use only constant variables pure. Variables that contain a function value are often good examples of constant variables.</span></span>. It is easy to make these tests automatic — to write a program that tests a specific function. Non-pure functions might return different values based on all kinds of factors, and have side effects that might be hard to test and think about.
 </div>
 <div class="Standard">
 Because pure functions are self-sufficient, they are likely to be useful and relevant in a wider range of situations than non-pure ones. Take <div class="listing">
@@ -3348,7 +3361,7 @@ The <div class="listing">
 <pre class="listing">testAbsolute
 </pre>
 </div>
- function calls on testPure in <tt>qc</tt> — <tt>qc</tt> stands for quick check<span class="FootOuter"><span class="SupFootMarker"> [K] </span><span class="HoverFoot"><span class="SupFootMarker"> [K] </span>Koen Claessen and John Hughes from Chalmers University of Technology created QuickCheck for Haskell and its ideas has since been reimplemented in many other programming languages. The <tt>qc</tt> library is an implementation for JavaScript by Darrin Thompson. A CoffeeScript compatible version is included in the prelude.</span></span> — and tells it in the first argument to test <div class="listing">
+ function calls on testPure in <tt>qc</tt> — <tt>qc</tt> stands for quick check<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [K] </span><span class="HoverFoot"><span class="SupFootMarker"> [K] </span>Koen Claessen and John Hughes from Chalmers University of Technology created QuickCheck for Haskell and its ideas has since been reimplemented in many other programming languages. The <tt>qc</tt> library is an implementation for JavaScript by Darrin Thompson. A CoffeeScript compatible version is included in the prelude.</span></span> — and tells it in the first argument to test <div class="listing">
 <pre class="listing">absolute
 </pre>
 </div>
@@ -3589,7 +3602,7 @@ Failed case:
 
 </div>
 <div class="Standard">
-Well it passed 28 tests before a test case for <span class="formula">27<sup>27</sup></span> gave a difference on the last digit<span class="FootOuter"><span class="SupFootMarker"> [L] </span><span class="HoverFoot"><span class="SupFootMarker"> [L] </span>The ECMAScript standard allows these deviations for JavaScript and thus for CoffeeScript. If you should need unlimited precision integers then either use a third party library or a more mathematically inclined programming language such as Pure.</span></span>. Notice the line with <div class="listing">
+Well it passed 28 tests before a test case for <span class="formula">27<sup>27</sup></span> gave a difference on the last digit<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [L] </span><span class="HoverFoot"><span class="SupFootMarker"> [L] </span>The ECMAScript standard allows these deviations for JavaScript and thus for CoffeeScript. If you should need unlimited precision integers then either use a third party library or a more mathematically inclined programming language such as Pure.</span></span>. Notice the line with <div class="listing">
 <pre class="listing">shrinkedArgs
 </pre>
 </div>
@@ -3609,7 +3622,7 @@ Well it passed 28 tests before a test case for <span class="formula">27<sup>27</
 <pre class="listing">140
 </pre>
 </div>
-. So which is correct? None of them<span class="FootOuter"><span class="SupFootMarker"> [M] </span><span class="HoverFoot"><span class="SupFootMarker"> [M] </span>The LyX authoring environment used to create this book integrates with Maxima, the source of this result. Maxima is a computer algebra system that does symbolic and unlimited precision calculations. </span></span>: <span class="formula">9<sup>18</sup> = 150094635296999121</span>.
+. So which is correct? None of them<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [M] </span><span class="HoverFoot"><span class="SupFootMarker"> [M] </span>The LyX authoring environment used to create this book integrates with Maxima, the source of this result. Maxima is a computer algebra system that does symbolic and unlimited precision calculations. </span></span>: <span class="formula">9<sup>18</sup> = 150094635296999121</span>.
 </div>
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
@@ -3659,7 +3672,7 @@ qc.test()
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -3681,7 +3694,7 @@ qc.test()
 
 </div>
 <div class="Standard">
-Writing test declarations before writing a function can be a good way of specifying it. The test declarations in these examples are much larger than the functions they are testing. In <a class="Reference" href="#chap:Binary-Heaps"><span class="sans">Binary Heaps</span>↓</a> is a more realistic example of a class and tests for it. Declarative testing is well suited to testing algorithms and reusable libraries. There are many other test tools that you can choose depending on your preference and task<span class="FootOuter"><span class="SupFootMarker"> [N] </span><span class="HoverFoot"><span class="SupFootMarker"> [N] </span>Most JavaScript test tools are compatible with CoffeeScript or can easily be adapted.</span></span>. The main point here is that a reasonable level of testing is part of writing code.
+Writing test declarations before writing a function can be a good way of specifying it. The test declarations in these examples are much larger than the functions they are testing. In <a class="Reference" href="#chap:Binary-Heaps"><span class="sans">Binary Heaps</span>↓</a> is a more realistic example of a class and tests for it. Declarative testing is well suited to testing algorithms and reusable libraries. There are many other test tools that you can choose depending on your preference and task<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [N] </span><span class="HoverFoot"><span class="SupFootMarker"> [N] </span>Most JavaScript test tools are compatible with CoffeeScript or can easily be adapted.</span></span>. The main point here is that a reasonable level of testing is part of writing code.
 </div>
 <div class="Standard">
 <div class="center">
@@ -3792,7 +3805,8 @@ show ’The variable is: ’ + variable   # second
 
 </div>
 <div class="Standard">
-The variables defined in the local environment are only visible to the code inside the function. If a function calls another function, the newly called function does not see the variables inside the first function.<div class="listing">
+The variables defined in the local environment are only visible to the code inside the function. If a function calls another function, the newly called function does not see the variables inside the first function.</div>
+<div class="Standard"><div class="listing">
 <pre class="listing">andHere = -&gt;
   try show aLocal                     # Not defined
   catch e then show e.message
@@ -4161,7 +4175,7 @@ Write a function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -4525,7 +4539,7 @@ Show how a name can be added to this set, how one can be removed, and how you ca
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="PlainVisible">
@@ -4623,7 +4637,7 @@ CoffeeScript&rsquo;s <div class="listing">
 <pre class="listing">false
 </pre>
 </div>
-. This is useful in some situations, but unpractical in others<span class="FootOuter"><span class="SupFootMarker"> [O] </span><span class="HoverFoot"><span class="SupFootMarker"> [O] </span>In the underscore library you can find a function <div class="listing">
+. This is useful in some situations, but unpractical in others<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [O] </span><span class="HoverFoot"><span class="SupFootMarker"> [O] </span>In the underscore library you can find a function <div class="listing">
 <pre class="listing">isEqual
 </pre>
 </div>
@@ -4776,7 +4790,7 @@ An empty array can be created by simply typing <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -4790,7 +4804,7 @@ An empty array can be created by simply typing <div class="listing">
 show range 4
 </pre>
 </div>
-Instead of naming the loop variable <div class="listing">
+<div class="Standard">Instead of naming the loop variable <div class="listing">
 <pre class="listing">counter
 </pre>
 </div>
@@ -4834,7 +4848,7 @@ If a program uses too many meaningless single-letter variables, it can become un
  for the inner loop, but in general, when the body of a loop is big, you should come up with a variable name that has some clear meaning.
 </div>
 <div class="PlainVisible">
-In CoffeeScript the solution can be written in much shorter forms using a for expression that collects the results or by using the built-in range. <div class="listing">
+In CoffeeScript the solution can be written in much shorter forms using a for expression that collects the results or by using the built-in range. </div><div class="listing">
 <pre class="listing">range = (upto) -&gt; i for i in [0..upto]
 show range 4
 range = (upto) -&gt; [0..upto]
@@ -5061,7 +5075,7 @@ Thus, cutting on newlines (<div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -5147,7 +5161,7 @@ Write a function called <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -5238,16 +5252,14 @@ So yes, <div class="listing">
 , which is correct.
 </div>
 <div class="Standard">
-It helps to always take a moment to consider abnormal (but valid) inputs for a program. These are usually called corner cases<a class="IndexReference" name="entry-corner-case-0" href="#index-corner-case">↓</a>, and it is very common for programs that work perfectly on all the &lsquo;normal&rsquo; inputs to screw up on corner cases<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
-<div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [P] </span><span class="HoverFoot"><span class="SupFootMarker"> [P] </span>Some test cases for <div class="listing">
+It helps to always take a moment to consider abnormal (but valid) inputs for a program. These are usually called corner cases<a class="IndexReference" name="entry-corner-case-0" href="#index-corner-case">↓</a>, and it is very common for programs that work perfectly on all the &lsquo;normal&rsquo; inputs to screw up on corner cases
+<span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [P] </span><span class="HoverFoot"><span class="SupFootMarker"> [P] </span>Some test cases for <div class="listing">
 <pre class="listing">startsWith
 </pre>
 </div>
  are present in the source code file for this chapter.</span></span>
-</div>
-
-</span></span></span>
+</span>
 .
 </div>
 <div class="Standard">
@@ -5330,7 +5342,7 @@ It can be helpful to use CoffeeScript interactively to &lsquo;explore&rsquo; fun
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -5342,6 +5354,7 @@ show catNames ’born 20/09/2004 (mother Yellow Bess): ’ +
               ’Doctor Hobbles the 2nd, Noog’
 </pre>
 </div>
+<div class="Standard">
 The tricky part, which the original description of the algorithm ignored, is dealing with spaces after the colon and the commas. The <div class="listing">
 <pre class="listing">+ 2
 </pre>
@@ -5353,9 +5366,8 @@ The tricky part, which the original description of the algorithm ignored, is dea
  contains both a comma and a space, because that is what the names are really separated by, rather than just a comma.<div class="PlainVisible">
 This function does not do any checking for problems. We assume, in this case, that the input is always correct.
 </div>
-
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -5837,7 +5849,7 @@ The date part is always in the exact same place of a paragraph. How convenient. 
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -5851,6 +5863,7 @@ The date part is always in the exact same place of a paragraph. How convenient. 
 show extractDate ’died 27-04-2006: Black Leclère’
 </pre>
 </div>
+<div class="Standard">
 It would work without the calls to <div class="listing">
 <pre class="listing">Number
 </pre>
@@ -5881,7 +5894,7 @@ Note the <div class="listing">
 <div class="PlainVisible">
 In <a class="Reference" href="#chap:Regular-Expressions"><span class="sans">Regular Expressions</span>↓</a> we will see a more practical and robust way of extracting pieces from strings that have a fixed structure.
 </div>
-
+</div>
 </div>
 
 </div>
@@ -6032,7 +6045,7 @@ To make that second test work, it can be useful to know that <div class="listing
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -6164,7 +6177,7 @@ The <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -6226,7 +6239,7 @@ Write a function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -6241,6 +6254,7 @@ Write a function <div class="listing">
 show oldestCat catData
 </pre>
 </div>
+<div class="Standard">
 The conditions in the <div class="listing">
 <pre class="listing">unless/if
 </pre>
@@ -6257,12 +6271,14 @@ The conditions in the <div class="listing">
 <pre class="listing">null
 </pre>
 </div>
- or a cat that was born after the current cat&rsquo;.<div class="listing">
+ or a cat that was born after the current cat&rsquo;.</div>
+<div class="listing">
 <pre class="listing">for cat, info of catData # Test with dead cats
   delete catData[cat] unless ’death’ of info
 show oldestCat catData
 </pre>
 </div>
+<div class="Standard">
 Note that this function returns <div class="listing">
 <pre class="listing">undefined
 </pre>
@@ -6273,7 +6289,7 @@ Note that this function returns <div class="listing">
 </div>
 . What does your solution do in that case?
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -6373,7 +6389,7 @@ Extend the <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -6390,6 +6406,7 @@ show range 4
 show range 2, 4
 </pre>
 </div>
+<div class="Standard">
 The optional argument does not work precisely like the one in the <div class="listing">
 <pre class="listing">add
 </pre>
@@ -6408,7 +6425,7 @@ The optional argument does not work precisely like the one in the <div class="li
 </div>
 .
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -6519,7 +6536,7 @@ All we need to make this line work is a <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -7391,14 +7408,14 @@ for (i = 0; i &lt; N; ++i) {
 
 </div>
 <div class="Standard">
-That is very ugly, an eyesore if you have any good taste at all. It has been improved somewhat in derived languages like C++ and JavaScript. Other programming languages can have very different approaches<span class="FootOuter"><span class="SupFootMarker"> [Q] </span><span class="HoverFoot"><span class="SupFootMarker"> [Q] </span>In <i>Mathematica</i> a function can be set as listable — eliminating the need for a loop:<div class="PlainVisible">
+That is very ugly, an eyesore if you have any good taste at all. It has been improved somewhat in derived languages like C++ and JavaScript. Other programming languages can have very different approaches<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Q] </span><span class="HoverFoot"><span class="SupFootMarker"> [Q] </span>In <i>Mathematica</i> a function can be set as listable — eliminating the need for a loop:<div class="PlainVisible">
 <span class="scriptsize"><div class="smallskip"> </div><div class="listing">
 <pre class="listing">f[x_] := If[x &gt; 0, Sqrt[x], Sqrt[-x]]; SetAttributes[f, Listable];
 </pre>
 </div>
 </span><br/>
 <span class="scriptsize"><div class="listing">
-<pre class="listing">f[\{3, 0, -2\}]
+<pre class="listing">f[{3, 0, -2}]
 </pre>
 </div>
  <span class="formula"> ⇒ </span> <span class="formula"><span class="scriptstyle"><span class="symbol">{</span></span><span class="sqrt"><span class="radical">√</span><span class="ignored">(</span><span class="root">3</span><span class="ignored">)</span></span>,  0,  <span class="sqrt"><span class="radical">√</span><span class="ignored">(</span><span class="root">2</span><span class="ignored">)</span></span><span class="symbol">}</span></span></span>
@@ -7412,6 +7429,8 @@ That is very ugly, an eyesore if you have any good taste at all. It has been imp
 for element in thing then doSomething element
 </pre>
 </div>
+</div>
+<div class="Standard">
 Still do we have to do this over and over or can it be abstracted?
 </div>
 <div class="Standard">
@@ -7603,7 +7622,7 @@ The function returned by <div class="listing">
  array, but how do you call a function when you do not know how many arguments you have?
 </div>
 <div class="Standard">
-Functions<span class="FootOuter"><span class="SupFootMarker"> [R] </span><span class="HoverFoot"><span class="SupFootMarker"> [R] </span>Unfortunately, on at least older versions of the Internet Explorer browser a lot of built-in functions, such as <div class="listing">
+Functions<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [R] </span><span class="HoverFoot"><span class="SupFootMarker"> [R] </span>Unfortunately, on at least older versions of the Internet Explorer browser a lot of built-in functions, such as <div class="listing">
 <pre class="listing">alert
 </pre>
 </div>
@@ -7729,7 +7748,7 @@ Then, write the higher-order function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -7743,6 +7762,7 @@ bits = [1, 0, 1, 0, 0, 1, 1, 1, 0]
 show countZeroes bits
 </pre>
 </div>
+<div class="Standard">
 Here is the solution that uses a <div class="listing">
 <pre class="listing">count
 </pre>
@@ -7751,7 +7771,8 @@ Here is the solution that uses a <div class="listing">
 <pre class="listing">countZeroes
 </pre>
 </div>
- function even shorter:<div class="listing">
+ function even shorter:</div>
+<div class="listing">
 <pre class="listing">count = (test, array) -&gt;
   reduce array, ((total, element) -&gt;
     total + if test element then 1 else 0), 0
@@ -8263,7 +8284,7 @@ Remove the &lsquo;%&rsquo; characters from header paragraphs and mark them as he
 Process the text of the paragraphs themselves, splitting them into normal parts, emphasised parts, and footnotes.
 </li>
 <li>
-Move all the footnotes to the bottom of the document, leaving numbers<span class="FootOuter"><span class="SupFootMarker"> [S] </span><span class="HoverFoot"><span class="SupFootMarker"> [S] </span>Like this…</span></span> in their place.
+Move all the footnotes to the bottom of the document, leaving numbers<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [S] </span><span class="HoverFoot"><span class="SupFootMarker"> [S] </span>Like this…</span></span> in their place.
 </li>
 <li>
 Wrap each piece into the correct <span class="versalitas"><span class="small">HTML</span></span><span class="default"> tags.</span>
@@ -8285,7 +8306,10 @@ The whole manuscript is in <div class="listing">
 <pre class="listing">readTextFile
 </pre>
 </div>
- function in the prelude.<div class="listing">
+ function in the prelude.
+</div>
+<div class="Standard">
+<div class="listing">
 <pre class="listing">recluseFile = readTextFile ’06-RecluseFile.text’
 </pre>
 </div>
@@ -8353,7 +8377,7 @@ Write a function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -8452,7 +8476,7 @@ This is a tricky algorithm, and there are many not-quite-correct or way-too-long
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <div class="PlainVisible">
@@ -8503,6 +8527,7 @@ Here is one possible solution:
   fragments
 </pre>
 </div>
+<div class="Standard">
 Note the over-eager use of <div class="listing">
 <pre class="listing">map
 </pre>
@@ -8526,6 +8551,7 @@ Note the over-eager use of <div class="listing">
  takes the minimum of them, which is the next point in the string that we have to look at.<div class="PlainVisible">
 If you&rsquo;d write that out without mapping and reducing you&rsquo;d get something like this:
 </div>
+</div>
 <div class="listing">
 <pre class="listing">takeNormalAlternative = -&gt;
   nextAsterisk = text.indexOf ’*’
@@ -8540,6 +8566,7 @@ If you&rsquo;d write that out without mapping and reducing you&rsquo;d get somet
   part
 </pre>
 </div>
+<div class="Standard">
 Which is even more hideous. Most of the time, when a decision has to be made based on a series of things, even if there are only two of them, writing it as array operations is nicer than handling every value in a separate <div class="listing">
 <pre class="listing">if
 </pre>
@@ -8559,7 +8586,7 @@ If you wrote a <div class="listing">
 </div>
  properties.
 </div>
-
+</div>
 </div>
 
 </div>
@@ -8766,7 +8793,7 @@ Looking back at the example <span class="versalitas"><span class="small">HTML</s
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -8947,12 +8974,15 @@ Write a function <div class="listing">
 <div class="PlainVisible">
 This function might come in useful for rendering the footnote references:
 </div>
+<div class="Standard">
 <div class="listing">
 <pre class="listing">footnote = (number) -&gt;
   tag ’sup’,
     [link ’#footnote’ + number, String number]
 </pre>
 </div>
+</div>
+<div class="Standard">
 A <div class="listing">
 <pre class="listing">sup
 </pre>
@@ -8968,12 +8998,12 @@ The tag to render emphasised fragments with is <div class="listing">
 </div>
 , and normal text can be rendered without any extra tags.
 </div>
-
+</div>
 </div>
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -9178,7 +9208,10 @@ show map [1, 10, 100], equals10
 
 </div>
 <div class="Standard">
-Unlike traditional functional definitions, Underscore defines the order of its arguments as array before action. That means we can not simply say: <div class="listing">
+Unlike traditional functional definitions, Underscore defines the order of its arguments as array before action. That means we can not simply say:
+</div>
+<div class="Standard">
+<div class="listing">
 <pre class="listing">square = (x) -&gt; x * x
 show map [[10, 100], [12, 16], [0, 1]],
          partial map, square # Incorrect
@@ -9468,7 +9501,7 @@ Do not duplicate the functionality of <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -9477,6 +9510,7 @@ Do not duplicate the functionality of <div class="listing">
     makeRoad start, arguments[i], arguments[i + 1]
 </pre>
 </div>
+<div class="Standard">
 This function uses one named parameter, <div class="listing">
 <pre class="listing">start
 </pre>
@@ -9499,7 +9533,7 @@ This function uses one named parameter, <div class="listing">
 </div>
  skips the distances.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -9530,6 +9564,8 @@ show ’Roads from the Airport:’
 show roads[’Airport’]
 </pre>
 </div>
+</div>
+<div class="Standard">
 We managed to considerably shorten our description of the road information by defining some convenient operations. You could say we expressed the information more succinctly by expanding our vocabulary. <a class="IndexReference" name="entry-domain-specific-language-0" href="#index-domain-specific-language">↓</a>Defining a &lsquo;little language&rsquo; like this is often a very powerful technique — when, at any time, you find yourself writing repetitive or redundant code, stop and try to come up with a vocabulary that makes it shorter and denser.
 </div>
 <div class="Standard">
@@ -9612,7 +9648,7 @@ The most confusing line is probably the one containing <div class="listing">
 <pre class="listing">Math.random
 </pre>
 </div>
-<a class="IndexReference" name="entry-Math.random-0" href="#index-Math.random">↓</a>. This function returns a pseudo-random<span class="FootOuter"><span class="SupFootMarker"> [T] </span><span class="HoverFoot"><span class="SupFootMarker"> [T] </span>Computers are deterministic machines: They always react in the same way to the input they receive, so they can not produce truly random values. Therefore, we have to make do with series of numbers that look random, but are in fact the result of some complicated deterministic computation.</span></span> number between 0 and 1. Try calling it a few times from the console, it will (most likely) give you a different number every time. The function <div class="listing">
+<a class="IndexReference" name="entry-Math.random-0" href="#index-Math.random">↓</a>. This function returns a pseudo-random<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [T] </span><span class="HoverFoot"><span class="SupFootMarker"> [T] </span>Computers are deterministic machines: They always react in the same way to the input they receive, so they can not produce truly random values. Therefore, we have to make do with series of numbers that look random, but are in fact the result of some complicated deterministic computation.</span></span> number between 0 and 1. Try calling it a few times from the console, it will (most likely) give you a different number every time. The function <div class="listing">
 <pre class="listing">randomInteger
 </pre>
 </div>
@@ -10022,7 +10058,7 @@ Before starting to generate routes, we need one more higher-order function. This
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -10153,7 +10189,7 @@ Now that we have all possible routes, let us try to find the shortest one. Write
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -10166,12 +10202,14 @@ Now that we have all possible routes, let us try to find the shortest one. Write
   currentShortest
 </pre>
 </div>
+<div class="Standard">
 The tricky thing in &lsquo;minimising&rsquo; or &lsquo;maximising&rsquo; algorithms is to not screw up when given an empty array. In this case, we happen to know that there is at least one road between every two places, so we could just ignore it. But that would be a bit lame. What if the road from Puamua to Mount Ootua, which is steep and muddy, is washed away by a rainstorm? It would be a shame if this caused our function to break as well, so it takes care to return <div class="listing">
 <pre class="listing">null
 </pre>
 </div>
  when no routes are found.<div class="PlainVisible">
 Then, the very functional, abstract-everything-we-can approach:
+</div>
 </div>
 <div class="listing">
 <pre class="listing">minimise = (func, array) -&gt;
@@ -10192,6 +10230,7 @@ shortestRoute = (from, to) -&gt;
            possibleRoutes(from, to)
 </pre>
 </div>
+<div class="Standard">
 Unfortunately, it is two times longer than the other version. In programs where you need to minimise several things it might be a good idea to write the generic algorithm like this, so you can re-use it. In most cases the first version is probably good enough.<div class="PlainVisible">
 Note the <div class="listing">
 <pre class="listing">getProperty
@@ -10199,7 +10238,7 @@ Note the <div class="listing">
 </div>
 <a class="IndexReference" name="entry-getProperty-0" href="#index-getProperty">↓</a> function though, it is often useful when doing functional programming with objects.
 </div>
-
+</div>
 </div>
 
 </div>
@@ -10279,7 +10318,7 @@ show heightAt x: 11, y: 18
 We want to cross this landscape, on foot, from the top left to the bottom right. A grid can be approached like a graph. Every square is a node, which is connected to the squares around it.
 </div>
 <div class="Standard">
-We do not like wasting energy, so we would prefer to take the easiest route possible. Going uphill is heavier than going downhill, and going downhill is heavier than going level<span class="FootOuter"><span class="SupFootMarker"> [U] </span><span class="HoverFoot"><span class="SupFootMarker"> [U] </span>No really, it is.</span></span>. This function calculates the amount of &lsquo;weighted meters&rsquo;, between two adjacent squares, which represents how tired you get from walking (or climbing) between them. Going uphill is counted as twice as heavy as going downhill.
+We do not like wasting energy, so we would prefer to take the easiest route possible. Going uphill is heavier than going downhill, and going downhill is heavier than going level<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [U] </span><span class="HoverFoot"><span class="SupFootMarker"> [U] </span>No really, it is.</span></span>. This function calculates the amount of &lsquo;weighted meters&rsquo;, between two adjacent squares, which represents how tired you get from walking (or climbing) between them. Going uphill is counted as twice as heavy as going downhill.
 </div>
 <div class="Standard">
 <div class="listing">
@@ -10352,7 +10391,7 @@ If we are going to find routes through this map, we will again need a function t
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -10372,6 +10411,7 @@ If we are going to find routes through this map, we will again need a function t
 show possibleDirections point 0, 0
 </pre>
 </div>
+<div class="Standard">
 I created a variable <div class="listing">
 <pre class="listing">mapSize
 </pre>
@@ -10402,7 +10442,7 @@ s, which all have to be changed. We could even go as far as making the <div clas
 </div>
 , so this one is unlikely to ever change, and using a variable for it only adds noise.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -10593,7 +10633,7 @@ Write a function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -10608,13 +10648,15 @@ Write a function <div class="listing">
 show estimatedDistance point(3,3), point(9,6)
 </pre>
 </div>
-The strange formulae are used to decompose the path into a straight and a diagonal part. If you have a path like this…<div class="PlainVisible">
+<div class="Standard">
+The strange formulae are used to decompose the path into a straight and a diagonal part. If you have a path like this…</div><div class="PlainVisible">
 <div class="center">
 <img class="embedded" src="img/diagonalpath.png" alt="figure img/diagonalpath.png" style="width: 50%; height: auto;"/>
 
 </div>
 
 </div>
+<div class="Standard">
 <div class="PlainVisible">
 … the path is <div class="listing">
 <pre class="listing">6
@@ -10637,7 +10679,7 @@ The strange formulae are used to decompose the path into a straight and a diagon
 <div class="PlainVisible">
 If you wrote a function that just computes the straight &lsquo;Pythagorean&rsquo; distance between the points, that would also work. What we need is an optimistic estimate, and assuming you can go straight to the goal is certainly optimistic. However, the closer the estimate is to the real distance, the less useless paths our program has to try out.
 </div>
-
+</div>
 </div>
 
 </div>
@@ -10679,7 +10721,7 @@ We will use a binary heap for the open list. What would be a good data structure
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="PlainVisible">
@@ -10711,6 +10753,7 @@ findReached = (list, point) -&gt;
     inner[point.y]
 </pre>
 </div>
+<div class="Standard">
 Another possibility is to merge the <div class="listing">
 <pre class="listing">x
 </pre>
@@ -10719,7 +10762,7 @@ Another possibility is to merge the <div class="listing">
 <pre class="listing">y
 </pre>
 </div>
- of the point into a single property name, and use that to store routes in a single object.<div class="listing">
+ of the point into a single property name, and use that to store routes in a single object.</div><div class="listing">
 <pre class="listing">pointID = (point) -&gt;
   point.x + ’-’ + point.y
 ​
@@ -11222,6 +11265,7 @@ killerRabbit.speak ’GRAAAAAAAAAH!’
 show killerRabbit
 </pre>
 </div>
+<div class="Standard">
 When <div class="listing">
 <pre class="listing">new Rabbit
 </pre>
@@ -11243,6 +11287,7 @@ When <div class="listing">
 </pre>
 </div>
 .
+</div>
 </div>
 <div class="Standard">
 Why is the <div class="listing">
@@ -12040,7 +12085,7 @@ Whenever you write an interface, it is a good idea to add a comment with a quick
 
 </div>
 <div class="Standard">
-Using a piece of paper, a whiteboard or as here a pen and tablet can be effective to sketch your designs. Using a notation roughly similar to UML (Unified Modeling Language) can help in communicating your design to others. Usually you do not need a tool<span class="FootOuter"><span class="SupFootMarker"> [V] </span><span class="HoverFoot"><span class="SupFootMarker"> [V] </span>A few integrated development environments automatically generate diagrams as you are writing your code, for example Visual Studio Ultimate, but it is neither cheap nor compatible with CoffeeScript.</span></span> — unless you really want to or work in a large administrative setting. You can find a quick reference to UML notation via web search. The most useful diagram is the interaction or sequence diagram. Use it to specify how objects talk to each other — especially in distributed systems. The class diagram shown above presents a static view of the system so it is mostly for initial designs.
+Using a piece of paper, a whiteboard or as here a pen and tablet can be effective to sketch your designs. Using a notation roughly similar to UML (Unified Modeling Language) can help in communicating your design to others. Usually you do not need a tool<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [V] </span><span class="HoverFoot"><span class="SupFootMarker"> [V] </span>A few integrated development environments automatically generate diagrams as you are writing your code, for example Visual Studio Ultimate, but it is neither cheap nor compatible with CoffeeScript.</span></span> — unless you really want to or work in a large administrative setting. You can find a quick reference to UML notation via web search. The most useful diagram is the interaction or sequence diagram. Use it to specify how objects talk to each other — especially in distributed systems. The class diagram shown above presents a static view of the system so it is mostly for initial designs.
 </div>
 <div class="Standard">
 Most of the time, when you are designing an interface, you will soon find some limitations and problems in whatever you came up with, and change it. To prevent wasting your time, it is advisable to document your interfaces only <i>after</i> they have been used in a few real situations and proven themselves to be practical. — Of course, this might make it tempting to forget about documentation altogether. Personally, I treat writing documentation as a &lsquo;finishing touch&rsquo; to add to a system. When it feels ready, it is time to write something about it, and to see if it sounds as good in English (or whatever language) as it does in CoffeeScript (or whatever programming language).
@@ -12191,7 +12236,7 @@ The <div class="listing">
 <pre class="listing">]
 </pre>
 </div>
- characters have a special meaning inside a regular expression. They can enclose a set of characters, and they mean &lsquo;any of these characters&rsquo;. Most non-alphanumeric characters have some special meaning inside a regular expression, so it is a good idea to always escape them with a backslash<span class="FootOuter"><span class="SupFootMarker"> [W] </span><span class="HoverFoot"><span class="SupFootMarker"> [W] </span>In this case, the backslashes were not really necessary, because the characters occur between <div class="listing">
+ characters have a special meaning inside a regular expression. They can enclose a set of characters, and they mean &lsquo;any of these characters&rsquo;. Most non-alphanumeric characters have some special meaning inside a regular expression, so it is a good idea to always escape them with a backslash<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [W] </span><span class="HoverFoot"><span class="SupFootMarker"> [W] </span>In this case, the backslashes were not really necessary, because the characters occur between <div class="listing">
 <pre class="listing">[
 </pre>
 </div>
@@ -12286,7 +12331,7 @@ s are digits. Test it against the string <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -12295,9 +12340,10 @@ show ’born 15/11/2003 (mother Spot): White Fang’\
 .search datePattern
 </pre>
 </div>
+<div class="Standard">
 The backslash after the string continues the line after the line break.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -12463,7 +12509,7 @@ Write a pattern that matches e-mail addresses. For simplicity, assume that the p
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -12483,13 +12529,14 @@ show mailAddress.test ’I mailt kenny@tets.nets, ’ +
 show mailAddress.test ’the_giant_sloth@gmail.com’
 </pre>
 </div>
+<div class="Standard">
 The <div class="listing">
 <pre class="listing">\b
 </pre>
 </div>
 s at the start and end of the pattern make sure that the second string does not match.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -12610,7 +12657,7 @@ Re-write the function <div class="listing">
 
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -12625,13 +12672,14 @@ show extractDate \
   "born 5/2/2007 (mother Noog): Long-ear Johnson"
 </pre>
 </div>
+<div class="Standard">
 This version is slightly longer than the previous one, but it has the advantage of actually checking what it is doing, and shouting out when it is given nonsensical input. This was a lot harder without regular expressions — it would have taken a lot of calls to <div class="listing">
 <pre class="listing">indexOf
 </pre>
 </div>
  to find out whether the numbers had one or two digits, and whether the dashes were in the right places.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -12743,6 +12791,7 @@ show stock
 <span class="sans"><span class="large"><i>Exercise 35</i></span></span><br /><div class="PlainVisible">
 That last trick can be used to make the HTML-escaper from <a class="Reference" href="#chap:Functional-Programming"><span class="sans">Functional Programming</span>↑</a> more efficient. You may remember that it looked like this:
 </div>
+<div class="Standard">
 <div class="listing">
 <pre class="listing">escapeHTML = (text) -&gt;
   replacements = [[/&amp;/g, ’&amp;amp;’]
@@ -12755,6 +12804,8 @@ That last trick can be used to make the HTML-escaper from <a class="Reference" h
 show escapeHTML ’&lt; " &amp; " &gt;’
 </pre>
 </div>
+</div>
+<div class="Standard">
 Write a new function <div class="listing">
 <pre class="listing">escapeHTML
 </pre>
@@ -12765,10 +12816,10 @@ Write a new function <div class="listing">
 </div>
  once.
 </div>
-
+</div>
 </div>
 <div class="Standard">
-<span class="FootOuter"><span class="SupFootMarker"> [Solution] </span><span class="HoverFoot"><span class="branch">
+<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Solution] </span><span class="HoverFoot"><span class="branch">
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Solution</i></span></span><br /><div class="listing">
@@ -12785,6 +12836,7 @@ show escapeHTML "The ’pre-formatted’ tag " +
                 "is written \"&lt;pre&gt;\"."
 </pre>
 </div>
+<div class="Standard">
 The <div class="listing">
 <pre class="listing">replacements
 </pre>
@@ -12799,7 +12851,7 @@ The <div class="listing">
 </div>
  expression.
 </div>
-
+</div>
 </div>
 
 </span></span></span>
@@ -12869,7 +12921,7 @@ This chapter deals with the process of organising programs. In small programs, o
 In top down design you look at the overall structure of your application and divide it into smaller parts. There are many ways to do this, one way is to distinguish between technical and application specific areas. For example instead of inserting statements that write application activity in files in various places, the technical part — writing in a file, checking for errors and handling daily log roll-overs — can be placed in a logging utility as a technical service.
 </div>
 <div class="Standard">
-A useful technique is to use a layered approach, where lower layers do not know of higher layers. For example when communicating between processes, lower level protocols can be encapsulated in a layer and when data arrives — instead of a lower layer directly calling a function to handle the data in a higher layer — the lower layer raises an event<span class="FootOuter"><span class="SupFootMarker"> [X] </span><span class="HoverFoot"><span class="SupFootMarker"> [X] </span>The system underlying standard CoffeeScript has an EventEmitter to help you do this. Search for event in the documentation for the runtime system you use to learn more.</span></span> that an interested higher layer can be listening to. It is analogue to what we saw in <a class="Reference" href="#chap:Error-Handling"><span class="sans">Error Handling</span>↑</a> where a failing function does not have any knowledge of who or how an exception will be handled.
+A useful technique is to use a layered approach, where lower layers do not know of higher layers. For example when communicating between processes, lower level protocols can be encapsulated in a layer and when data arrives — instead of a lower layer directly calling a function to handle the data in a higher layer — the lower layer raises an event<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [X] </span><span class="HoverFoot"><span class="SupFootMarker"> [X] </span>The system underlying standard CoffeeScript has an EventEmitter to help you do this. Search for event in the documentation for the runtime system you use to learn more.</span></span> that an interested higher layer can be listening to. It is analogue to what we saw in <a class="Reference" href="#chap:Error-Handling"><span class="sans">Error Handling</span>↑</a> where a failing function does not have any knowledge of who or how an exception will be handled.
 </div>
 <div class="Standard">
 When structuring a program in CoffeeScript, we do two things. We separate it into smaller parts, called module<a class="IndexReference" name="entry-module-0" href="#index-module">↓</a>s, each of which has a specific role, and we specify the relations between these parts.
@@ -12937,7 +12989,7 @@ Most modern programming languages have some kind of module system built in. In C
 <pre class="listing">require
 </pre>
 </div>
- and must rely on system specific services or once again invent something ourselves<span class="FootOuter"><span class="SupFootMarker"> [Y] </span><span class="HoverFoot"><span class="SupFootMarker"> [Y] </span>Projects such as <a class="URL" href="http://substack.net/posts/24ab8c/browserify-browser-side-require-for-your-node-js">browserify</a> is aiming at bringing <div class="listing">
+ and must rely on system specific services or once again invent something ourselves<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Y] </span><span class="HoverFoot"><span class="SupFootMarker"> [Y] </span>Projects such as <a class="URL" href="http://substack.net/posts/24ab8c/browserify-browser-side-require-for-your-node-js">browserify</a> is aiming at bringing <div class="listing">
 <pre class="listing">require
 </pre>
 </div>
@@ -12992,7 +13044,7 @@ for i in [0...6]
 
 </div>
 <div class="Standard">
-The first thing is to remove the print utility at the end<span class="FootOuter"><span class="SupFootMarker"> [Z] </span><span class="HoverFoot"><span class="SupFootMarker"> [Z] </span>How to use a separate test module is shown in <a class="Reference" href="#chap:Binary-Heaps"><span class="sans">Binary Heaps</span>↓</a>.</span></span>. The next is the <div class="listing">
+The first thing is to remove the print utility at the end<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [Z] </span><span class="HoverFoot"><span class="SupFootMarker"> [Z] </span>How to use a separate test module is shown in <a class="Reference" href="#chap:Binary-Heaps"><span class="sans">Binary Heaps</span>↓</a>.</span></span>. The next is the <div class="listing">
 <pre class="listing">require ’./prelude’
 </pre>
 </div>
@@ -13439,11 +13491,13 @@ for i in [0...6]
   circle ctx, x+100*pt.x, y+100*pt.y
 </pre>
 </div>
+<div class="Standard">
 Replacing the loop that used <span class="formula"><i>π</i></span> and trigonometric functions with the one above is the last step for the client side. It is only a few visible changes but we got rid of the rounding error, that fix would have bloated the client with irrelevant details. Here is the client from <div class="listing">
 <pre class="listing">’10-SeedLife.coffee’
 </pre>
 </div>
 :
+</div>
 </div>
 <div class="Standard">
 <div class="listing">
@@ -13573,7 +13627,7 @@ A web server functions by responding to web browser (client) requests. The minim
 <pre class="listing">http://localhost:3389/
 </pre>
 </div>
- in your web browser<span class="FootOuter"><span class="SupFootMarker"> [A] </span><span class="HoverFoot"><span class="SupFootMarker"> [A] </span>Depending on your operating system you can also use numerical IP addresses. <div class="listing">
+ in your web browser<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [A] </span><span class="HoverFoot"><span class="SupFootMarker"> [A] </span>Depending on your operating system you can also use numerical IP addresses. <div class="listing">
 <pre class="listing">127.0.0.1
 </pre>
 </div>
@@ -13689,7 +13743,7 @@ I think you can see that this code practically begs to be abstracted and modular
 <pre class="listing">’10-SeedLife.coffee’
 </pre>
 </div>
- is to show how you can use a module on a web page, so refactoring and beautifying the server is up to you<span class="FootOuter"><span class="SupFootMarker"> [B] </span><span class="HoverFoot"><span class="SupFootMarker"> [B] </span>If you want to understand how to write your own <span class="versalitas"><span class="footnotesize">HTTP</span></span><span class="default"> server then Manuel Kiessling has a <a class="URL" href="http://www.nodebeginner.org/">tutorial</a> that you can easily translate into your own CoffeeScript web server.</span></span></span>.
+ is to show how you can use a module on a web page, so refactoring and beautifying the server is up to you<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [B] </span><span class="HoverFoot"><span class="SupFootMarker"> [B] </span>If you want to understand how to write your own <span class="versalitas"><span class="footnotesize">HTTP</span></span><span class="default"> server then Manuel Kiessling has a <a class="URL" href="http://www.nodebeginner.org/">tutorial</a> that you can easily translate into your own CoffeeScript web server.</span></span></span>.
 </div>
 <div class="Standard">
 Building a program as a set of nice, small modules often means the program will use a lot of different files. When programming for the web, having lots of small code files on a page tend to make the page slower to load. This does not have to be a problem though. You can write and test your program as a number of small files, and put them all into a single big file when &lsquo;publishing&rsquo; the program to the web. The CoffeeScript compiler has a join feature for this.
@@ -14295,7 +14349,9 @@ In the following example the <div class="listing">
 <pre class="listing">-&gt;
 </pre>
 </div>
-. <div class="listing">
+.
+<div class="Standard">
+<div class="listing">
 <pre class="listing">class Widget
   id: ’I am a widget’
   display: =&gt; show @id
@@ -14312,7 +14368,7 @@ b = new Container
 b.callback a.display
 </pre>
 </div>
-
+</div>
 </div>
 <div class="Standard">
 <div class="center">
@@ -14522,7 +14578,7 @@ Similarly, when an element has to be added to the heap, it is put at the end of 
 
 </div>
 <div class="Standard">
-Note how adding or inserting an element does not require it to be compared with every element in the array. In fact, because the jumps between parents and children get bigger as the array gets bigger, this advantage is especially large when we have a lot of elements<span class="FootOuter"><span class="SupFootMarker"> [C] </span><span class="HoverFoot"><span class="SupFootMarker"> [C] </span>The amount of comparisons and swaps that are needed — in the worst case — can be approached by taking the logarithm (base 2) of the amount of elements in the heap.</span></span>.
+Note how adding or inserting an element does not require it to be compared with every element in the array. In fact, because the jumps between parents and children get bigger as the array gets bigger, this advantage is especially large when we have a lot of elements<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [C] </span><span class="HoverFoot"><span class="SupFootMarker"> [C] </span>The amount of comparisons and swaps that are needed — in the worst case — can be approached by taking the logarithm (base 2) of the amount of elements in the heap.</span></span>.
 </div>
 <div class="Standard">
 <div class="center">
@@ -14553,7 +14609,7 @@ Also, because CoffeeScript arrays start at <div class="listing">
 <pre class="listing">class BinaryHeap
 ​
   # Public
-  #——--
+  #--------
   constructor: (@scoreFunction = (x) -&gt; x) -&gt;
     @content = []
 ​
@@ -14574,18 +14630,8 @@ Also, because CoffeeScript arrays start at <div class="listing">
       @content[0] = end
       @_sinkDown 0
     result
-</pre>
-</div>
 
-</div>
-<div class="Standard">
-<p><br/>
-</p>
-
-</div>
-<div class="Standard">
-<div class="listing">
-<pre class="listing">  size: -&gt; @content.length
+  size: -&gt; @content.length
 ​
   remove: (node) -&gt;
     len = @content.length
@@ -14606,7 +14652,7 @@ Also, because CoffeeScript arrays start at <div class="listing">
     throw new Error ’Node not found.’
 ​
   # Private
-  #———
+  #---------
   _bubbleUp: (n) -&gt;
     # Fetch the element that has to be moved.
     element = @content[n]
@@ -14626,18 +14672,8 @@ Also, because CoffeeScript arrays start at <div class="listing">
       else
         break
     return
-</pre>
-</div>
 
-</div>
-<div class="Standard">
-<p><br/>
-</p>
-
-</div>
-<div class="Standard">
-<div class="listing">
-<pre class="listing">  _sinkDown: (n) -&gt;
+  _sinkDown: (n) -&gt;
     # Look up the target element and its score.
     length = @content.length
     element = @content[n]
@@ -14684,11 +14720,7 @@ Also, because CoffeeScript arrays start at <div class="listing">
 </div>
 
 </div>
-<div class="Standard">
-<p><br/>
-</p>
 
-</div>
 <div class="Standard">
 And some test cases…
 </div>
@@ -14777,6 +14809,9 @@ show "Result: #{s} and #{t}"
 </div>
 
 </div>
+<div class="Standard">
+<p></p>
+</div>
 <span class="hfill"> </span><div class="Frameless" style="width: 49%;">
 <div class="listing">
 <pre class="listing"># CPython
@@ -14828,7 +14863,7 @@ The source code and the results are quite similar. On my machine the time for Co
 
 </div>
 <div class="Standard">
-On the next page you can find implementations<span class="FootOuter"><span class="SupFootMarker"> [D] </span><span class="HoverFoot"><span class="SupFootMarker"> [D] </span>Background information on <a class="URL" href="http://en.wikipedia.org/wiki/Eight_queens_puzzle">8 queens puzzle</a>, <a class="URL" href="http://code.activestate.com/recipes/190465-generator-for-permutations-combinations-selections/">implementation</a> and <a class="URL" href="http://aminsblog.wordpress.com/2011/05/29/n-queen-problem-python-2-6-5-vs-pypy-1-5-0/">performance</a>.</span></span> for the classic 8 queens problem. The objective is to place eight queens on a chessboard without any of the queens occupying the same row, column or diagonal. The two implementations use the same algorithm and produce the same results. Timing for CPython 0.27s and for CoffeeScript 0.06s.
+Below you can find implementations<span class="FootOuter"><span class="SupFootMarker" onclick="void(0)"> [D] </span><span class="HoverFoot"><span class="SupFootMarker"> [D] </span>Background information on <a class="URL" href="http://en.wikipedia.org/wiki/Eight_queens_puzzle">8 queens puzzle</a>, <a class="URL" href="http://code.activestate.com/recipes/190465-generator-for-permutations-combinations-selections/">implementation</a> and <a class="URL" href="http://aminsblog.wordpress.com/2011/05/29/n-queen-problem-python-2-6-5-vs-pypy-1-5-0/">performance</a>.</span></span> for the classic 8 queens problem. The objective is to place eight queens on a chessboard without any of the queens occupying the same row, column or diagonal. The two implementations use the same algorithm and produce the same results. Timing for CPython 0.27s and for CoffeeScript 0.06s.
 </div>
 <div class="Standard">
 <div class="Frameless" style="width: 49%;">
@@ -14892,7 +14927,9 @@ solve 8 # Normal chessboard size
 show "Timing: #{(new Date() - start)*0.001}s"
 </pre>
 </div>
-
+<div class="Standard">
+<p></p>
+</div>
 </div>
 <span class="hfill"> </span><div class="Frameless" style="width: 49%;">
 <div class="listing">
@@ -14959,12 +14996,12 @@ print "Timing: ", time.clock()-t, "s"
 </div>
 
 </div>
-<div class="Standard">
-<span class="sans"><span class="hspace" style="width: 3.5em;"></span>Solution 1<span class="hspace" style="width: 3.5em;"></span>   <span class="hspace" style="width: 3.5em;"></span>Solution 92<span class="hspace" style="width: 3.2em;"></span></span>
+<div class="align-center">
+<span class="sans"><span class="hspace" style="width: 3.5em;"></span>Solution 1<span class="hspace" style="width: 3.5em;"></span> ➞ <span class="hspace" style="width: 3.5em;"></span>Solution 92<span class="hspace" style="width: 3.2em;"></span></span>
 </div>
 <div class="Standard">
 <div class="center">
-<img class="embedded" src="img/queens.png" alt="figure img/queens.png" style="width: 100%; height: auto;"/>
+<img class="embedded" src="img/queens.png" alt="figure img/queens.png" style="width: 70%; height: auto;"/>
 
 </div>
 
@@ -15036,18 +15073,8 @@ stripFile = (fromName, toName) -&gt;
   else
     show "Expected a file name " +
          "to strip for solutions"
-</pre>
-</div>
 
-</div>
-<div class="Standard">
-<p><br/>
-</p>
-
-</div>
-<div class="Standard">
-<div class="listing">
-<pre class="listing">copyFile = (fromName, toName) -&gt;
+copyFile = (fromName, toName) -&gt;
   if fromName?
     ifFileExists fromName, -&gt;
       fs.readFile fromName, "utf8",
@@ -15088,6 +15115,9 @@ else
 <h2 class="Section-">
 <a class="toc" name="toc-Section--1"></a>Language Reference
 </h2>
+<div class="Standard">
+Also available as a two page <a class="URL" href="http://autotelicum.github.com/Smooth-CoffeeScript/CoffeeScript%20Quick%20Ref.pdf">Quick Reference</a> in pdf format.
+</div>
 <div class="Standard">
 Refer to <a class="URL" href="http://coffeescript.org">coffeescript.org</a> for further reference material and examples.
 </div>
@@ -15138,7 +15168,7 @@ Comments starts with <div class="listing">
 <ul>
 <li>
 Use backquotes <div class="listing">
-<pre class="listing">‘‘
+<pre class="listing">``
 </pre>
 </div>
  to embed JavaScript code within CoffeeScript
@@ -15982,7 +16012,8 @@ unless            until             when
 while
 </pre>
 </div>
-
+</div>
+<div class="Standard">
 </div>
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>Aliases</i></span></span><br /><div class="listing">
@@ -16029,6 +16060,7 @@ uniq              uniqueId          values
 without           wrap              zip
 </pre>
 </div>
+<div class="Standard">
 General call convention: <div class="listing">
 <pre class="listing">functional obj, iterator, context
 </pre>
@@ -16040,7 +16072,7 @@ Refer to <div class="listing">
 </div>
  for the annotated source.
 </div>
-
+</div>
 </div>
 
 </div>
@@ -16400,12 +16432,15 @@ fileExists        readTextFile      readBinaryFile
 _                 kup               qc
 </pre>
 </div>
+<div class="Standard">
 Refer to <div class="listing">
 <pre class="listing">src/prelude/prelude.coffee
 </pre>
 </div>
  for the annotated source.
 </div>
+</div>
+<div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>CoffeeScript environment</i></span></span><br /><div class="listing">
 <pre class="listing">Buffer            clearInterval     clearTimeout
@@ -16414,8 +16449,12 @@ process           root              setInterval
 setTimeout
 </pre>
 </div>
-View the interactive environment with: <span class="formula"> → ∣</span> / &lsquo;Tab&rsquo;.
 </div>
+<div class="Standard">
+View the interactive environment with: <span class="formula"> →∣</span> / &lsquo;Tab&rsquo;.
+</div>
+</div>
+<div class="Standard">
 <div class="Framed" style="width: 100%;">
 <span class="sans"><span class="large"><i>JavaScript future words</i></span></span><br /><div class="listing">
 <pre class="listing">abstract    boolean     byte        case
@@ -16429,7 +16468,7 @@ throws      transient   var         void
 volatile    with        yield
 </pre>
 </div>
-
+</div>
 </div>
 
 </div>

@@ -42,6 +42,17 @@ pre {
     font-family: 'Inconsolata', 'Consolas', monospace;
 }
 
+div.menu {
+    margin: 10px 5%;
+}
+
+input.field {
+    color:#050;
+    font: 'Optima', sans-serif;
+    background-color: #FEFEF2; /*#FFFCE6;*/
+    border: 1px solid;
+}
+
 #globalWrapper {
     margin: 10px 5%;
     padding: 20px;
@@ -190,6 +201,7 @@ span.HoverFoot {
     font-weight: normal;
     line-height: 1.5em;
     text-align: left;
+    max-width: 600px;
 }
 span.FootOuter .HoverFoot {
     display: none;
