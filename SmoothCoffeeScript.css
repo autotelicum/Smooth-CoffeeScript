@@ -223,6 +223,11 @@ div.Framed {
     outline-style: solid;
     line-height: 200%;
 }
+div.SolutionFramed {
+    outline-width: thin;
+    outline-style: none;
+    padding: 0.5ex;
+}
 
 span.hspace {
     display: inline-block;
