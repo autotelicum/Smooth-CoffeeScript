@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <link rel="stylesheet" href="pandoc-template.css" type="text/css" />
+</head>
+<body>
+<div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<div id="page">
+<h2 id="web-socket-status">Web Socket Status</h2>
+<p>The Web Socket support in browsers is experimental and based on a changing draft standard. For a production application, have a look at <a href="http://socket.io/#browser-support">Socket.io support</a> and <a href="http://socket.io/#how-to-use">documentation</a>.</p>
+<h2 id="mac-os-x-10.6.8">Mac OS X 10.6.8</h2>
+<ul>
+<li>Safari 5.1.1
+<ul>
+<li>No Issues.</li>
+</ul></li>
+</ul>
+<h2 id="windows-7-no-service-pack">Windows 7 (no service pack)</h2>
+<ul>
+<li>Safari 5.1.1
+<ul>
+<li>No Issues. Use this browser if your normal browser fails. You do not have to set it as your default browser. If it is installed in the default location then the browser launcher in the prelude will start it.</li>
+</ul></li>
+<li>Opera 11.52
+<ul>
+<li>No issues. But web sockets have to be enabled manually according to the instructions in the prelude.</li>
+</ul></li>
+<li>Chrome 15.0.874.121 m
+<ul>
+<li>Fail. Does not launch its user interface when started as a child process from node.</li>
+</ul></li>
+<li>Firefox 4
+<ul>
+<li>No issues, if enabled, also works on Windows XP.</li>
+</ul></li>
+<li>Firefox 8.0.1
+<ul>
+<li>Fail. Has switched to a mozilla specific MozWebSocket on the client side. Mozilla’s back and forth on this is described <a href="https://developer.mozilla.org/en/WebSockets">here</a>. The change breaks applications, that worked in their version 4 browser. Changing the client code to MozWebSocket will obviously not work in other browsers, so I am <em>not</em> changing the draft standard compliant code. Besides the server implementation does not implement protocol 10.</li>
+</ul></li>
+<li>Internet Explorer
+<ul>
+<li>Fail. Does not implement web sockets in version 9 and below. Version 10 is untested because it currently requires Windows 8.</li>
+</ul></li>
+</ul>
+<h2 id="test-web-socket">Test Web Socket</h2>
+<p>Open a command line terminal, change directory to <code>Smooth-CoffeeScript/src</code> and run:</p>
+<pre><code>coffee 10-TestWebSockets.coffee
+</code></pre>
+<p>Verify that your web browser started and you can see: <code>RESPONSE: Cowabunga!</code></p>
+<p>If not then open the file <code>prelude/prelude.coffee</code> and see the section <code>User settings</code>.</p>
+<p>To stop a web server or other script that does not stop by itself press: <code>Ctrl-C</code>.</p>
+<hr />
+<p>Formats <a href="web-socket-status.md">Markdown</a> <a href="web-socket-status.pdf">PDF</a> <a href="web-socket-status.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbyncsa.png" alt="License CCBYNCSA" /></p>
+<!-- Commands used to format this document:
+
+Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o web-socket-status.pdf; open web-socket-status.pdf
+
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o web-socket-status.html; open web-socket-status.html
+-->
+
+</body>
+</html>
