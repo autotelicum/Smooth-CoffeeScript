@@ -16084,337 +16084,339 @@ qc.js<a class="Label" name="sub:qc.js"> </a>
 </h3>
 <div class="Standard">
 <div class="Framed" style="width: 100%;">
-<span class="sans"><span class="large"><i>Exported Definitions</i></span></span><br /><div class="Labeling">
-<span class="footnotesize">arbChoose Generator that chooses uniformly among the given generators.</span>
+<span class="sans"><span class="large"><i>Exported Definitions</i></span></span><br />
+<dl>
+<div class="Labeling">
+<span class="footnotesize"><dt>arbChoose</dt><dd>Generator that chooses uniformly among the given generators.</dd></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter generators…</span>
+<span class="footnotesize"><span class="noun">parameter</span> generators…</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">arbConst Generator that always returns one of the given constant values.</span>
+<span class="footnotesize"><dt>arbConst</dt><dd>Generator that always returns one of the given constant values.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter values…</span>
+<span class="footnotesize"><span class="noun">parameter</span> values…</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">arbBool Boolean value generator with 50:50 chance of true or false.</span>
+<span class="footnotesize"><dt>arbBool</dt><dd>Boolean value generator with 50:50 chance of true or false.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbNull Null generator that always generates ’null’.</span>
+<span class="footnotesize"><dt>arbNull</dt><dd>Null generator that always generates ’null’.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbWholeNum Integer value generator for values ≥ 0. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbWholeNum</dt><dd>Integer value generator for values ≥ 0. Supports shrinking.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbInt Integer value generator. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbInt</dt><dd>Integer value generator. Supports shrinking.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbFloatUnit Generator for a floating point value in between 0.0 and 1.0. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbFloatUnit</dt><dd>Generator for a floating point value in between 0.0 and 1.0. Supports shrinking.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbRange Integer range value generator.</span>
-</div>
+<span class="footnotesize"><dt>arbRange</dt><dd>Integer range value generator.</dt>
+</div></span>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter minimum value</span>
+<span class="footnotesize"><span class="noun">parameter</span> minimum value</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter maximum value</span>
+<span class="footnotesize"><span class="noun">parameter</span> maximum value</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">arbNullOr Chooses null with 10% probability and the given generator with 90%. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbNullOr</dt><dd>Chooses null with 10% probability and the given generator with 90%. Supports shrinking.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter another generator</span>
+<span class="footnotesize"><span class="noun">parameter</span> another generator</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">arrShrinkOne Array shrinking strategy that builds new Arrays by removing one element from a given array.</span>
+<span class="footnotesize"><dt>arrShrinkOne</dt><dd>Array shrinking strategy that builds new Arrays by removing one element from a given array.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbArray Array generator. Generates an array of arbitrary length with the given generator.</span>
+<span class="footnotesize"><dt>arbArray</dt><dd>Array generator. Generates an array of arbitrary length with the given generator.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter generator that creates the resulting array values.</span>
+<span class="footnotesize"><span class="noun">parameter</span> generator that creates the resulting array values.</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter an optional shrinking strategy. Default is &lsquo;arrShrinkOne&rsquo;.</span>
+<span class="footnotesize"><span class="noun">parameter</span> an optional shrinking strategy. Default is &lsquo;arrShrinkOne&rsquo;.</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">arbDate Date value generator. Always generates a new Date object by calling &lsquo;new Date()&rsquo;.</span>
+<span class="footnotesize"><dt>arbDate</dt><dd>Date value generator. Always generates a new Date object by calling &lsquo;new Date()&rsquo;.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbMod Basis generator for arbChar and arbString.</span>
+<span class="footnotesize"><dt>arbMod</dt><dd>Basis generator for arbChar and arbString.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbChar Character value generator for any character with character code in range 32-255.</span>
+<span class="footnotesize"><dt>arbChar</dt><dd>Character value generator for any character with character code in range 32-255.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbString String value generator. All characters in the generated String are in range 32-255. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbString</dt><dd>String value generator. All characters in the generated String are in range 32-255. Supports shrinking.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbUndef Generator that always generates ’undefined’.</span>
+<span class="footnotesize"><dt>arbUndef</dt><dd>Generator that always generates ’undefined’.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">arbUndefOr Chooses undefined with 10% probability and the given generator with 90%. Supports shrinking.</span>
+<span class="footnotesize"><dt>arbUndefOr</dt><dd>Chooses undefined with 10% probability and the given generator with 90%. Supports shrinking.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter another generator</span>
+<span class="footnotesize"><span class="noun">parameter</span> another generator</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">expectException Property test function modifier. Using this modifier, it is assumed that the testing function will throw an exception and if not the property will fail.</span>
+<span class="footnotesize"><dt>expectException</dt><dd>Property test function modifier. Using this modifier, it is assumed that the testing function will throw an exception and if not the property will fail.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">failOnException Property test function modifier. Instead of finishing testing when an unexpected exception is thrown, the offending property is marked as failure and <tt>qc</tt> will continue.</span>
+<span class="footnotesize"><dt>failOnException</dt><dd>Property test function modifier. Instead of finishing testing when an unexpected exception is thrown, the offending property is marked as failure and <tt>qc</tt> will continue.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Case Test case class generated every time a property is tested. An instance of Case is always passed as first argument to a property’s testing function so it can control the test case&rsquo;s properties.</span>
+<span class="footnotesize"><dt>Case</dt><dd>Test case class generated every time a property is tested. An instance of Case is always passed as first argument to a property’s testing function so it can control the test case&rsquo;s properties.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Case::assert Tests and notifies <tt>qc</tt> if a property fails or not.</span>
+<span class="footnotesize"><dt>Case::assert</dt><dd>Tests and notifies <tt>qc</tt> if a property fails or not.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter pass false, if the property failed, true otherwise</span>
+<span class="footnotesize"><span class="noun">parameter</span> pass false, if the property failed, true otherwise</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Case::guard Used to test if the input is good for testing the property.</span>
+<span class="footnotesize"><dt>Case::guard</dt><dd>Used to test if the input is good for testing the property.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter pass false to mark the property as invalid for the given input.</span>
+<span class="footnotesize"><span class="noun">parameter</span> pass false to mark the property as invalid for the given input.</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Case::classify Adds a tag to a test run.</span>
+<span class="footnotesize"><dt>Case::classify</dt><dd>Adds a tag to a test run.</span></dt>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter if true then the tag is added to the case, else not.</span>
+<span class="footnotesize"><span class="noun">parameter</span> if true then the tag is added to the case, else not.</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter tag value to add</span>
+<span class="footnotesize"><span class="noun">parameter</span> tag value to add</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Case::collect Collect builds a histogram of all collected values for all runs of the property.</span>
+<span class="footnotesize"><dt>Case::collect</dt><dd>Collect builds a histogram of all collected values for all runs of the property.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter value to collect</span>
+<span class="footnotesize"><span class="noun">parameter</span> value to collect</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Case::noteArg Adds the given value to the test case for reporting in case of failure.</span>
+<span class="footnotesize"><dt>Case::noteArg</dt><dd>Adds the given value to the test case for reporting in case of failure.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter value to add</span>
+<span class="footnotesize"><span class="noun">parameter</span> value to add</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Case::note Same as Case::noteArg but returning its argument so it can be used inline. Defined in prelude.</span>
+<span class="footnotesize"><dt>Case::note</dt><dd>Same as Case::noteArg but returning its argument so it can be used inline. Defined in prelude.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Case::noteVerbose Same as Case::note but also logs the noted args. Defined in prelude.</span>
+<span class="footnotesize"><dt>Case::noteVerbose</dt><dd>Same as Case::note but also logs the noted args. Defined in prelude.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">declare Builds and registers a new property.</span>
+<span class="footnotesize"><dt>declare</dt><dd>Builds and registers a new property.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter the property&rsquo;s name</span>
+<span class="footnotesize"><span class="noun">parameter</span> the property&rsquo;s name</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter array of generators with a length equal to the arity of the body function. The entry at position i will drive the i-th argument of the body function.</span>
+<span class="footnotesize"><span class="noun">parameter</span> array of generators with a length equal to the arity of the body function. The entry at position i will drive the i-th argument of the body function.</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter body function that test the property</span>
+<span class="footnotesize"><span class="noun">parameter</span> body function that test the property</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">return a new registered property object of type Prop.</span>
+<span class="footnotesize"><span class="noun">return</span> a new registered property object of type Prop.</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">testPure Helper to declare a named test property for a pure function. Defined in prelude.</span>
+<span class="footnotesize"><dt>testPure</dt><dd>Helper to declare a named test property for a pure function. Defined in prelude.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter function to test</span>
+<span class="footnotesize"><span class="noun">parameter</span> function to test</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter array of generators matching argument types</span>
+<span class="footnotesize"><span class="noun">parameter</span> array of generators matching argument types</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter a descriptive name</span>
+<span class="footnotesize"><span class="noun">parameter</span> a descriptive name</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter property function which is passed the test-case, the arguments and the result of calling the function being tested. Must return true if the property test succeeded, false otherwise.</span>
+<span class="footnotesize"><span class="noun">parameter</span> property function which is passed the test-case, the arguments and the result of calling the function being tested. Must return true if the property test succeeded, false otherwise.</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">Prop Creates a new property with a given array of argument generators and a testing function. For each generator a value is generated, so for testing a 2-ary function the array must contain 2 generators.</span>
+<span class="footnotesize"><dt>Prop</dt><dd>Creates a new property with a given array of argument generators and a testing function. For each generator a value is generated, so for testing a 2-ary function the array must contain 2 generators.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Prop::run Tests the property.</span>
+<span class="footnotesize"><dt>Prop::run</dt><dd>Tests the property.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter configuration of type Config to test property with</span>
+<span class="footnotesize"><span class="noun">parameter</span> configuration of type Config to test property with</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">return depending on test result a Pass, Fail or Invalid object</span>
+<span class="footnotesize"><span class="noun">return</span> depending on test result a Pass, Fail or Invalid object</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">allProps Internal array of all declared/registered properties</span>
+<span class="footnotesize"><dt>allProps</dt><dd>Internal array of all declared/registered properties</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">resetProps Deletes all declared properties.</span>
+<span class="footnotesize"><dt>resetProps</dt><dd>Deletes all declared properties.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">runAllProps Tests all registered properties.</span>
+<span class="footnotesize"><dt>runAllProps</dt><dd>Tests all registered properties.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter configuration of type Config to test the properties with</span>
+<span class="footnotesize"><span class="noun">parameter</span> configuration of type Config to test the properties with</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter listener of a subclass of ConsoleListener</span>
+<span class="footnotesize"><span class="noun">parameter</span> listener of a subclass of ConsoleListener</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">test Test all known properties with a NodeListener and a configuration of 100 pass and 1000 invalid tests. Defined in prelude.</span>
+<span class="footnotesize"><dt>test</dt><dd>Test all known properties with a NodeListener and a configuration of 100 pass and 1000 invalid tests. Defined in prelude.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Invalid Report class for invalid tested properties.</span>
+<span class="footnotesize"><dt>Invalid</dt><dd>Report class for invalid tested properties.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Pass Report class for successful tested properties.</span>
+<span class="footnotesize"><dt>Pass</dt><dd>Report class for successful tested properties.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Fail Report class for failed tested properties.</span>
+<span class="footnotesize"><dt>Fail</dt><dd>Report class for failed tested properties.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Stats Statistics class for counting number of pass/invalid runs, building histograms and other statistics for reporting on a property and its test results.</span>
+<span class="footnotesize"><dt>Stats</dt><dd>Statistics class for counting number of pass/invalid runs, building histograms and other statistics for reporting on a property and its test results.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Config Testing Configuration.</span>
+<span class="footnotesize"><dt>Config</dt><dd>Testing Configuration.</dt></span>
 </div>
 <ul>
 <li class="nested">
 <div class="Labeling">
-<span class="footnotesize">parameter maximum passes per property</span>
+<span class="footnotesize"><span class="noun">parameter</span> maximum passes per property</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter maximum invalid tests per property</span>
+<span class="footnotesize"><span class="noun">parameter</span> maximum invalid tests per property</span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">parameter maximum number of shrinking steps per property</span>
+<span class="footnotesize"><span class="noun">parameter</span> maximum number of shrinking steps per property</span>
 </div>
 
 </li>
 
 </ul>
 <div class="Labeling">
-<span class="footnotesize">ConsoleListener Abstract class for building &lsquo;console&rsquo; based listeners.</span>
+<span class="footnotesize"><dt>ConsoleListener</dt><dd>Abstract class for building &lsquo;console&rsquo; based listeners.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">NodeListener Listener with node compatible output in colors. Defined in prelude.</span>
+<span class="footnotesize"><dt>NodeListener</dt><dd>Listener with node compatible output in colors. Defined in prelude.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">FBCListener Listener for sending property results to FireBug&rsquo;s console</span>
+<span class="footnotesize"><dt>FBCListener</dt><dd>Listener for sending property results to FireBug&rsquo;s console</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">RhinoListener Listener for Rhino, sending property results to stdout.</span>
+<span class="footnotesize"><dt>RhinoListener</dt><dd>Listener for Rhino, sending property results to stdout.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Distribution Probability distributions</span>
+<span class="footnotesize"><dt>Distribution</dt><dd>Probability distributions</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">genvalue Draws a new value from a generator. A generator is either a function accepting a seed argument or an object with a method ’arb’ accepting a seed argument.</span>
+<span class="footnotesize"><dt>genvalue</dt><dd>Draws a new value from a generator. A generator is either a function accepting a seed argument or an object with a method ’arb’ accepting a seed argument.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">genshrinked Uses the generator specific shrinking method to shrink a value that the generator created earlier. If the generator is a function or has no method named ’shrink’ or is an objects with a ’shrink’ method set to null, then no shrinking will be performed. If a shrinking method is defined, then it is called with the original seed and the value the generator created. The shrinking method must return an array of &lsquo;shrinked&rsquo; values or null, undefined, or an empty array if no &lsquo;shrinked&rsquo; values could be created.</span>
+<span class="footnotesize"><dt>genshrinked</dt><dd>Uses the generator specific shrinking method to shrink a value that the generator created earlier. If the generator is a function or has no method named ’shrink’ or is an objects with a ’shrink’ method set to null, then no shrinking will be performed. If a shrinking method is defined, then it is called with the original seed and the value the generator created. The shrinking method must return an array of &lsquo;shrinked&rsquo; values or null, undefined, or an empty array if no &lsquo;shrinked&rsquo; values could be created.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">justSize Passes the size &lsquo;seed&rsquo; argument used to drive generators directly to the property test function.</span>
+<span class="footnotesize"><dt>justSize</dt><dd>Passes the size &lsquo;seed&rsquo; argument used to drive generators directly to the property test function.</dt></span>
 </div>
 <div class="Labeling">
-<span class="footnotesize">Utilities A group of utilities that can be used to build generators: frequency, choose, randWhole, randInt, randRange, randFloatUnit</span>
+<span class="footnotesize"><dt>Utilities</dt><dd>A group of utilities that can be used to build generators: frequency, choose, randWhole, randInt, randRange, randFloatUnit</dt></span>
 </div>
-
+</dl>
 </div>
 
 </div>
