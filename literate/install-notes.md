@@ -7,7 +7,7 @@ Node now includes the npm package manager on OS X and Windows.
 Choose .pkg on OS X and .msi on Windows and install node from
 <http://nodejs.org/dist/v0.6.3/>
 
-Open a command line terminal and run:
+Open a command line (on Windows 7 right-click and select 'Run as Administrator'):
 
     npm -g install coffee-script
 
