@@ -10,39 +10,14 @@
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
 <div id="page">
 <h1 id="quick-coffeescript-install">Quick CoffeeScript Install</h1>
-<h2 id="mac-os-x">Mac OS X</h2>
-<p>Download and run the node installer from:</p>
-<pre><code>http://nodejs.org/dist/v0.6.2/node-v0.6.2.pkg
-</code></pre>
-<p>Download and unpack CoffeeScript from</p>
-<pre><code>http://github.com/jashkenas/coffee-script/tarball/1.1.3
-</code></pre>
-<p>Then in the unpacked directory run in Terminal:</p>
-<pre><code>sudo ./bin/cake install
-</code></pre>
-<h2 id="windows-xp-7">Windows XP &amp; 7</h2>
-<p>Download and run the node installer from:</p>
-<pre><code>http://nodejs.org/dist/v0.6.2/node-v0.6.2.msi
-</code></pre>
-<p>Download and unpack CoffeeScript from</p>
-<pre><code>http://github.com/jashkenas/coffee-script/zipball/1.1.3
-</code></pre>
-<p>Create a file in the <code>bin</code> directory named <code>coffee.cmd</code> and insert:</p>
-<pre><code>@node &quot;%COFFEE_PATH%bin\coffee&quot; %*
-</code></pre>
-<p>Rename the directory to for example <code>coffeescript</code> and move it to <code>C:\Program Files</code></p>
-<p>Add an environment variable:</p>
-<pre><code>SET COFFEE_PATH = C:\Program Files\coffeescript\
-</code></pre>
-<p>Insert <code>%COFFEE_PATH%bin</code> into your <code>PATH</code>:</p>
-<pre><code>SET PATH = %PATH%;%COFFEE_PATH%bin;
-</code></pre>
-<p>You can add <code>COFFEE_PATH</code> and modify your <code>PATH</code> in: Control panel, System, Advanced System Settings (only on Windows 7), Advanced tab, Environment Variables.</p>
-<p><img src="WindowsPath.png" alt="Windows path screenshots" /> </p>
-<h2 id="test-of-the-setup">Test of the setup</h2>
+<h2 id="coffeescript-with-node-and-npm">CoffeeScript with Node and npm</h2>
+<p>Node now includes the npm package manager on OS X and Windows. Choose .pkg on OS X and .msi on Windows and install node from <a href="http://nodejs.org/dist/v0.6.3/"><code class="url">http://nodejs.org/dist/v0.6.3/</code></a></p>
 <p>Open a command line terminal and run:</p>
+<pre><code>npm -g install coffee-script
+</code></pre>
+<p>If you get errors from npm then you may have to manually delete files from previous installations. See <a href="https://github.com/joyent/node/wiki/Installation"><code class="url">https://github.com/joyent/node/wiki/Installation</code></a>. Test installation with</p>
 <pre><code>node --version
-#    v0.6.2
+#    v0.6.3
 
 coffee --version
 #    CoffeeScript version 1.1.3
@@ -50,14 +25,9 @@ coffee --version
 coffee -e &quot;console.log 'Hello World'&quot;
 #    Hello World
 </code></pre>
-<p>If not then you need to go back to the installation steps and verify that you got everything set up according to the descriptions on the node.js and CoffeeScript web sites:</p>
-<pre><code>https://github.com/joyent/node/wiki/Installation
-http://jashkenas.github.com/coffee-script/#installation
-</code></pre>
+<p>More information at <a href="http://jashkenas.github.com/coffee-script/#installation"><code class="url">http://jashkenas.github.com/coffee-script/#installation</code></a></p>
 <h2 id="optional-smooth-coffeescript">Optional Smooth CoffeeScript</h2>
-<p>To install <a href="http://autotelicum.github.com/Smooth-CoffeeScript">Smooth CoffeeScript</a>, download and unpack the latest archive from</p>
-<pre><code>https://github.com/autotelicum/Smooth-CoffeeScript/archives/master
-</code></pre>
+<p>To install <a href="http://autotelicum.github.com/Smooth-CoffeeScript">Smooth CoffeeScript</a>, download and unpack the latest master archive from <a href="https://github.com/autotelicum/Smooth-CoffeeScript/archives/master"><code class="url">https://github.com/autotelicum/Smooth-CoffeeScript/archives/master</code></a></p>
 <p>Open a command line terminal, change directory to <code>Smooth-CoffeeScript/src</code> then</p>
 <pre><code>coffee 01-Introduction.coffee
 #    Verify that you can see some 55 results.
@@ -66,9 +36,7 @@ http://jashkenas.github.com/coffee-script/#installation
 <p>Open a command line terminal, change directory to <code>Smooth-CoffeeScript/src</code> and run:</p>
 <pre><code>coffee 10-TestWebSockets.coffee
 </code></pre>
-<p>Verify that your web browser started and you can see: <code>RESPONSE: Cowabunga!</code></p>
-<p>If not then open the file <code>prelude/prelude.coffee</code> and see the section <code>User settings</code>.</p>
-<p>To stop a web server or other script that does not stop by itself press: <code>Ctrl-C</code>.</p>
+<p>Verify that your web browser started and you can see: <code>RESPONSE: Cowabunga!</code> If not then open the file <code>prelude/prelude.coffee</code> and see the section <code>User settings</code>. To stop a web server or other script that does not stop by itself press: <code>Ctrl-C</code>.</p>
 <hr />
 <p>Formats <a href="install-notes.md">Markdown</a> <a href="install-notes.pdf">PDF</a> <a href="install-notes.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbyncsa.png" alt="License CCBYNCSA" /></p>
 <!-- Commands used to format this document:
