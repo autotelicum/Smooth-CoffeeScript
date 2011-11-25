@@ -10,7 +10,7 @@ More information:
 
 Install: Get CoffeeScript up and running in a few minutes on Mac. Now also native install on Windows. [Quick install on Mac and Windows](http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html). The versions mentioned in the install guide are those `Smooth CoffeeScript` has been tested with on Mac OS X 10.6 and Windows 7.
 
-If you prefer to use a package manager, then see [npm](https://github.com/isaacs/npm). Read the readme.md, especially the last paragraphs. If npm security concerns you then consider using a restricted user account, an outgoing firewall, a sandbox, jail or a virtual machine.
+The node install includes a package manager: [npm](https://github.com/isaacs/npm). Read the readme.md, especially the last paragraphs. If npm security concerns you then consider using a restricted user account, an outgoing firewall, a sandbox, jail or a virtual machine.
 
 Web browser implementations of web sockets and the draft standard currently change regularly. Safari 5.1.1 works fully on both OS X and Windows. For other browsers see the `src/prelude/prelude.coffee` file and [Windows Web Socket Status](http://autotelicum.github.com/Smooth-CoffeeScript/literate/web-socket-status.html).
 
