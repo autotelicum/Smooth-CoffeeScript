@@ -9,7 +9,7 @@ by [autotelicum](http://twitter.com/#!/autotelicum)_
 How do you add 's' to a word when there is more than one of something?
 
 It is often seen in JavaScript with the ternary operator `?:` but that
-is coding like it was PHP at the expense of future maintenance and
+is hard-coding at the expense of future maintenance and
 internationalization.
 
 First some preliminaries. Let's `show` the results whether we are
@@ -106,7 +106,7 @@ test n for n in [-3..3]
 
 Formats [CoffeeScript](pluralize.coffee)	[Markdown](pluralize.md) [PDF](pluralize.pdf) [HTML](pluralize.html)
 
-Copyright autotelicum © 2554/2011 ![License CCBYNCSA](ccbyncsa.png)
+Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
 
 
 <!--
