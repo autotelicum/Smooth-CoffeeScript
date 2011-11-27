@@ -32,6 +32,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>
 <div id="page">
 <div id="header">
 <h1 class="title"><strong><em>JavaScript Basics</em></strong></h1>
@@ -82,7 +83,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 </div>
 <!-- Commands used to format this document:
 
-pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md --toc
+pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o js-intro.html js-intro.md --toc
 
 markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md --toc
 -->

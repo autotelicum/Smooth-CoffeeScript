@@ -15,14 +15,17 @@
 
 ## Example Programs and Snippets
 
-* Coming Soon
+* Snippets
+    + [Pluralize](pluralize.html)
+* Examples
+    + Coming Soon
 
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](goodies.md)	[HTML](goodies.html)
-Copyright autotelicum © 2554/2011 ![License CCBYNCSA](ccbyncsa.png)
+Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
 
 
 <!-- Command used to format this document:
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o goodies.html; open goodies.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o goodies.html; open goodies.html
 -->

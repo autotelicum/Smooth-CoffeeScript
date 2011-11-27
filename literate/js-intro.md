@@ -6,7 +6,7 @@
 
 <!-- Commands used to format this document:
 
-pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o js-intro.html js-intro.md --toc
+pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o js-intro.html js-intro.md --toc
 
 markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o js-intro.pdf js-intro.md --toc
 -->

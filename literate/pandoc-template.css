@@ -17,6 +17,13 @@ body {
     -moz-box-shadow: 2px 2px 8px #aaa;  
 }
 
+input.field {
+    color:#050;
+    font: 'Optima', sans-serif;
+    background-color: #FEFEF2; /*#FFFCE6;*/
+    border: 1px solid;
+}
+
 img { -ms-interpolation-mode:bicubic; }
 
 h1,h2,h3,h4 { 

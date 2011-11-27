@@ -1,0 +1,1 @@
+<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>

@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>
 <div id="page">
 <h1 id="smooth-coffeescript-goodies">Smooth CoffeeScript Goodies</h1>
 <h2 id="mini-guides">Mini Guides</h2>
@@ -27,12 +28,19 @@
 </ul>
 <h2 id="example-programs-and-snippets">Example Programs and Snippets</h2>
 <ul>
+<li>Snippets
+<ul>
+<li><a href="pluralize.html">Pluralize</a></li>
+</ul></li>
+<li>Examples
+<ul>
 <li>Coming Soon</li>
+</ul></li>
 </ul>
 <hr />
-<p>Formats <a href="goodies.md">Markdown</a> <a href="goodies.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbyncsa.png" alt="License CCBYNCSA" /></p>
+<p>Formats <a href="goodies.md">Markdown</a> <a href="goodies.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbysa.png" alt="License CCBYSA" /></p>
 <!-- Command used to format this document:
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o goodies.html; open goodies.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o goodies.html; open goodies.html
 -->
 
 </body>

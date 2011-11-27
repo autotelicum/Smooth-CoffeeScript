@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>
 <div id="page">
 <h2 id="web-socket-status">Web Socket Status</h2>
 <p>The Web Socket support in browsers is experimental and based on a changing draft standard. For a production application, have a look at <a href="http://socket.io/#browser-support">Socket.io support</a> and <a href="http://socket.io/#how-to-use">documentation</a>.</p>
@@ -53,12 +54,12 @@
 <p>If not then open the file <code>prelude/prelude.coffee</code> and see the section <code>User settings</code>.</p>
 <p>To stop a web server or other script that does not stop by itself press: <code>Ctrl-C</code>.</p>
 <hr />
-<p>Formats <a href="web-socket-status.md">Markdown</a> <a href="web-socket-status.pdf">PDF</a> <a href="web-socket-status.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbyncsa.png" alt="License CCBYNCSA" /></p>
+<p>Formats <a href="web-socket-status.md">Markdown</a> <a href="web-socket-status.pdf">PDF</a> <a href="web-socket-status.html">HTML</a> Copyright autotelicum © 2554/2011 <img src="ccbysa.png" alt="License CCBYSA" /></p>
 <!-- Commands used to format this document:
 
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o web-socket-status.pdf; open web-socket-status.pdf
 
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o web-socket-status.html; open web-socket-status.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o web-socket-status.html; open web-socket-status.html
 -->
 
 </body>

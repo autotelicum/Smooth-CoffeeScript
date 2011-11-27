@@ -52,12 +52,12 @@ To stop a web server or other script that does not stop by itself press: `Ctrl-C
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](install-notes.md)	[PDF](install-notes.pdf)	[HTML](install-notes.html)
-Copyright autotelicum © 2554/2011 ![License CCBYNCSA](ccbyncsa.png)
+Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
 
 
 <!-- Commands used to format this document:
 
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o install-notes.pdf; open install-notes.pdf
 
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -o install-notes.html; open install-notes.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o install-notes.html; open install-notes.html
 -->
