@@ -1,23 +1,25 @@
 
-# Pluralize
+# Pluralize --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
 
-###_A
-[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/) example
-by [autotelicum](http://twitter.com/#!/autotelicum)_
+This literate program is _interactive_ in its HTML form.
+Select a code segment to edit it.
+The generated code and output is updated as you type.
+Source and other document formats are at the end of the document.
 
 
-How do you add 's' to a word when there is more than one of something?
+**How do you add 's' to a word when there is more than one of something?**
 
 It is often seen in JavaScript with the ternary operator `?:` but that
 is hard-coding at the expense of future maintenance and
 internationalization.
 
 First some preliminaries. Let's `show` the results whether we are
-running in a server or a web client. And wrap the different methods
-in a `test` function so we can see if they work.
+running in a server or a web client. Something like
+`show = if exports? then console.log else alert`.
+And wrap the different methods in a `test` function
+so we can see if they work.
 
 ~~~~ {.coffeescript}
-show = if exports? then console.log else alert
 test = (points) ->
 ~~~~
 
@@ -104,22 +106,38 @@ test n for n in [-3..3]
 
 -----------------------------------------------------------------------------
 
+\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{pluralize.coffee}
+
+## Output
+
+~~~~ {.output}
+
+~~~~
+
+\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{pluralize.output}
+
+## JavaScript
+
+~~~~ {.js-source}
+
+~~~~
+
+\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{pluralize.js}
+
+-----------------------------------------------------------------------------
+
 Formats [CoffeeScript](pluralize.coffee)	[Markdown](pluralize.md) [PDF](pluralize.pdf) [HTML](pluralize.html)
+--- [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011 ![License CCBYSA](ccbysa.png)
 
-Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
-
-
-<!--
-Command used to extract code, execute it, and to format this document:
+<!---------------------------------------------------------------------------
+Commands used to extract code, execute it, and to format this document:
 
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-'p
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' | coffee -s
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' >pluralize.coffee
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o pluralize.html; open pluralize.html
+Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee pluralize.coffee | coffee -cs >pluralize.js; echo 'show=console.log' | cat - pluralize.coffee | coffee -s >pluralize.output; plumb pluralize.output
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
 The formatting is done with pandoc, a universal markup converter, and TeX.
-
--->
+---------------------------------------------------------------------------->

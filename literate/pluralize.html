@@ -29,58 +29,110 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
-<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>
+<input class="field" type="button" value="Adjust Width" onclick="(function () {
+        return document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth === '' ? '600px' : '';
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      return window.onload = function() {
+        var evaluateSource, segment, _i, _len, _ref;
+        evaluateSource = function() {
+          var code, codeSegment, jsprogram, program, segment, _i, _len, _ref;
+          program = '';
+          document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
+          _ref = document.getElementsByTagName('pre');
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            codeSegment = _ref[_i];
+            if (codeSegment.className === 'sourceCode') {
+              segment = codeSegment.getElementsByTagName('code')[0].innerHTML;
+              code = segment.replace(/<br>/g, '\n');
+              code = code.replace(/<[^>]*>/g, '');
+              code = code.replace(/[&]gt;/g, '>');
+              code = code.replace(/[&]lt;/g, '<');
+              program += code + '\n';
+            }
+          }
+          jsprogram = '';
+          try {
+            jsprogram = CoffeeScript.compile(program, {
+              bare: true
+            });
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = jsprogram;
+          } catch (error) {
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
+            return;
+          }
+          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };' + jsprogram;
+          try {
+            return eval(jsprogram);
+          } catch (error) {
+            return document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = error;
+          }
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+        }
+        return evaluateSource();
+      };
+    }).call(this);</script>
 <div id="page">
-<h1 id="pluralize">Pluralize</h1>
-<h3 id="a-smooth-coffeescript-example-by-autotelicum"><em>A <a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a> example by <a href="http://twitter.com/#!/autotelicum">autotelicum</a></em></h3>
-<p>How do you add ’s’ to a word when there is more than one of something?</p>
+<h1 id="pluralize----smooth-coffeescript">Pluralize — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<p>This literate program is <em>interactive</em> in its HTML form. Select a code segment to edit it. The generated code and output is updated as you type. Source and other document formats are at the end of the document.</p>
+<p><strong>How do you add ’s’ to a word when there is more than one of something?</strong></p>
 <p>It is often seen in JavaScript with the ternary operator <code>?:</code> but that is hard-coding at the expense of future maintenance and internationalization.</p>
-<p>First some preliminaries. Let’s <code>show</code> the results whether we are running in a server or a web client. And wrap the different methods in a <code>test</code> function so we can see if they work.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">show <span class="kw">=</span> <span class="kw">if</span> exports<span class="kw">?</span> <span class="kw">then</span> <span class="ot">console</span><span class="kw">.</span>log <span class="kw">else</span> alert<br />test <span class="kw">=</span> <span class="fu">(points) -&gt;</span></code></pre>
+<p>First some preliminaries. Let’s <code>show</code> the results whether we are running in a server or a web client. Something like <code>show = if exports? then console.log else alert</code>. And wrap the different methods in a <code>test</code> function so we can see if they work.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">test <span class="kw">=</span> <span class="fu">(points) -&gt;</span></code></pre>
 <h2 id="readable-ways">Readable ways</h2>
 <p>The simplest readable way</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;0: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>if points &gt; 1 then 's' else ''<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;0: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>if points &gt; 1 then 's' else ''<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Encapsulate in a function, future i18n will be easier</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  pluralIf <span class="kw">=</span> <span class="fu">(stem, cond) -&gt;</span> stem <span class="kw">+</span> <span class="kw">(</span><span class="kw">if</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;1: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>pluralIf 'point', points &gt; 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  pluralIf <span class="kw">=</span> <span class="fu">(stem, cond) -&gt;</span> stem <span class="kw">+</span> <span class="kw">(</span><span class="kw">if</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;1: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>pluralIf 'point', points &gt; 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Encapsulate in a function, handle negative numbers</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  pluralUnless <span class="kw">=</span> <span class="fu">(stem, cond) -&gt;</span> stem <span class="kw">+</span> <span class="kw">(</span><span class="kw">unless</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;2: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>pluralUnless 'point', -2 &lt; points &lt; 2<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  pluralUnless <span class="kw">=</span> <span class="fu">(stem, cond) -&gt;</span> stem <span class="kw">+</span> <span class="kw">(</span><span class="kw">unless</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;2: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>pluralUnless 'point', -2 &lt; points &lt; 2<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Encapsulate in a String method, could collide with another definition</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  <span class="ot">String</span><span class="kw">::</span>pluralIf <span class="kw">?=</span> <span class="fu">(cond) -&gt;</span> <span class="dt">this</span> <span class="kw">+</span> <span class="kw">(</span><span class="kw">if</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;3: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>'point'.pluralIf points &gt; 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  <span class="ot">String</span><span class="kw">::</span>pluralIf <span class="kw">?=</span> <span class="fu">(cond) -&gt;</span> <span class="dt">this</span> <span class="kw">+</span> <span class="kw">(</span><span class="kw">if</span> cond <span class="kw">then</span> <span class="st">'s'</span> <span class="kw">else</span> <span class="st">''</span><span class="kw">)</span><br />  show <span class="st">&quot;3: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>'point'.pluralIf points &gt; 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <h2 id="tricks">Tricks</h2>
 <p>Use the existential operator to catch the singular undefined</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;4: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>('s' if points &gt; 1) ? ''<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;4: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>('s' if points &gt; 1) ? ''<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Convert the condition to a number and do an array lookup</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;5: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>['','s'][+(points &gt; 1)]<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;5: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>['','s'][+(points &gt; 1)]<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Use the inverted condition to ask for a letter.</p>
 <p><code>true =&gt; charAt 1 =&gt; ''</code> — <code>false =&gt; charAt 0 =&gt; 's'</code></p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;6: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>'s'.charAt points &lt;= 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;6: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>'s'.charAt points &lt;= 1<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Create an array whose length is determined by the condition. It consists of empty elements so join it with ’s’</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;7: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>Array(1+(points&gt;1)).join 's'<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;7: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>Array(1+(points&gt;1)).join 's'<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <p>Concatenate to an empty array, undefined does nothing</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;8: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>[].concat ('s' if points &gt; 1)<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;8: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>[].concat ('s' if points &gt; 1)<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <h2 id="contributed">Contributed</h2>
 <p>Create an array with either ’s’ or undefined — from <a href="https://gist.github.com/satyr">satyr</a></p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">  show <span class="st">&quot;9: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>['s' if points &gt; 1]<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  show <span class="st">&quot;9: You got </span><span class="ch">#{</span>points<span class="ch">}</span><span class="st"> point</span><span class="ch">#{</span>['s' if points &gt; 1]<span class="ch">}</span><span class="st">&quot;</span></code></pre>
 <h2 id="test">Test</h2>
 <p>Run a test for a small range of numbers</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript">test n <span class="kw">for</span> n <span class="kw">in</span> <span class="kw">[-</span><span class="dv">3</span><span class="kw">..</span><span class="dv">3</span><span class="kw">]</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">test n <span class="kw">for</span> n <span class="kw">in</span> <span class="kw">[-</span><span class="dv">3</span><span class="kw">..</span><span class="dv">3</span><span class="kw">]</span></code></pre>
 <hr />
-<p>Formats <a href="pluralize.coffee">CoffeeScript</a> <a href="pluralize.md">Markdown</a> <a href="pluralize.pdf">PDF</a> <a href="pluralize.html">HTML</a></p>
-<p>Copyright autotelicum © 2554/2011 <img src="ccbysa.png" alt="License CCBYSA" /></p>
-<!--
-Command used to extract code, execute it, and to format this document:
+<p></p>
+<h2 id="output">Output</h2>
+<pre class="output"><code></code></pre>
+<p></p>
+<h2 id="javascript">JavaScript</h2>
+<pre class="js-source"><code></code></pre>
+<p></p>
+<hr />
+<p>Formats <a href="pluralize.coffee">CoffeeScript</a> <a href="pluralize.md">Markdown</a> <a href="pluralize.pdf">PDF</a> <a href="pluralize.html">HTML</a> — <a href="http://twitter.com/#!/autotelicum">autotelicum</a> © 2554/2011 <img src="ccbysa.png" alt="License CCBYSA" /></p>
+<!---------------------------------------------------------------------------
+Commands used to extract code, execute it, and to format this document:
 
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-'p
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' | coffee -s
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' >pluralize.coffee
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o pluralize.html; open pluralize.html
+Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee pluralize.coffee | coffee -cs >pluralize.js; echo 'show=console.log' | cat - pluralize.coffee | coffee -s >pluralize.output; plumb pluralize.output
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
 The formatting is done with pandoc, a universal markup converter, and TeX.
-
--->
+---------------------------------------------------------------------------->
 
 </body>
 </html>

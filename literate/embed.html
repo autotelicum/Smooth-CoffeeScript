@@ -1,0 +1,48 @@
+<input class="field" type="button" value="Adjust Width" onclick="(function () {
+        return document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth === '' ? '600px' : '';
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      return window.onload = function() {
+        var evaluateSource, segment, _i, _len, _ref;
+        evaluateSource = function() {
+          var code, codeSegment, jsprogram, program, segment, _i, _len, _ref;
+          program = '';
+          document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
+          _ref = document.getElementsByTagName('pre');
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            codeSegment = _ref[_i];
+            if (codeSegment.className === 'sourceCode') {
+              segment = codeSegment.getElementsByTagName('code')[0].innerHTML;
+              code = segment.replace(/<br>/g, '\n');
+              code = code.replace(/<[^>]*>/g, '');
+              code = code.replace(/[&]gt;/g, '>');
+              code = code.replace(/[&]lt;/g, '<');
+              program += code + '\n';
+            }
+          }
+          jsprogram = '';
+          try {
+            jsprogram = CoffeeScript.compile(program, {
+              bare: true
+            });
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = jsprogram;
+          } catch (error) {
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
+            return;
+          }
+          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };' + jsprogram;
+          try {
+            return eval(jsprogram);
+          } catch (error) {
+            return document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = error;
+          }
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+        }
+        return evaluateSource();
+      };
+    }).call(this);</script>

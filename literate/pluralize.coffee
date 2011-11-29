@@ -1,4 +1,3 @@
-show = if exports? then console.log else alert
 test = (points) ->
   show "0: You got #{points} point#{if points > 1 then 's' else ''}"
   pluralIf = (stem, cond) -> stem + (if cond then 's' else '')

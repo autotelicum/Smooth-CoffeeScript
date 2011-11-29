@@ -1,5 +1,5 @@
 
-# Smooth CoffeeScript Goodies
+# [Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/) Goodies
 
 ## Mini Guides
 
@@ -13,7 +13,7 @@
     + [CoffeeScript Quick Reference in Japanese from @nextliteracy](http://www.h3.dion.ne.jp/~y.ich/CoffeeScriptQuickRef.pdf)
 
 
-## Example Programs and Snippets
+## Interactive Programs and Snippets
 
 * Snippets
     + [Pluralize](pluralize.html)
