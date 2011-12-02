@@ -118,7 +118,7 @@ partial15lines = () ->
 
 Those implementations are fine and usable as they are. But here comes one of the most fun activities in CoffeeScript: _code reduction_. It is also useful because less code makes maintenance easier --- up to a point --- too clever tricks and the code can become harder to understand. In the following line of code reductions, which one would you choose as the best balance between brevity and readability?
 
-In `partial15lines` there are some redundant words that can be removed. The use of [arguments](file:///Users/eh/Projects/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-arguments-0) can also be replaced with a splat `...`
+In `partial15lines` there are some redundant words that can be removed. The use of [arguments](http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-arguments-0) can also be replaced with a splat `...`
 
 ~~~~ {.coffeescript}
 _ = {}
