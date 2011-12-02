@@ -17,13 +17,14 @@
 
 * Snippets
     + [Pluralize](pluralize.html)
+    + [Partial function application](partial.html)
 * Examples
     + Coming Soon
 
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](goodies.md)	[HTML](goodies.html)
-Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
+--- [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011 ![License CCBYSA](ccbysa.png)
 
 
 <!-- Command used to format this document:

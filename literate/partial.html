@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+/*<![CDATA[*/
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre 
+   { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
+td.lineNumbers { border-right: 1px solid #AAAAAA; text-align: right; color: #AAAAAA; padding-right: 5px; padding-left: 5px; }
+td.sourceCode { padding-left: 5px; }
+code.sourceCode span.kw { color: #007020; font-weight: bold; } 
+code.sourceCode span.dt { color: #902000; }
+code.sourceCode span.dv { color: #40a070; }
+code.sourceCode span.bn { color: #40a070; }
+code.sourceCode span.fl { color: #40a070; }
+code.sourceCode span.ch { color: #4070a0; }
+code.sourceCode span.st { color: #4070a0; }
+code.sourceCode span.co { color: #60a0b0; font-style: italic; }
+code.sourceCode span.ot { color: #007020; }
+code.sourceCode span.al { color: red; font-weight: bold; }
+code.sourceCode span.fu { color: #06287e; }
+code.sourceCode span.re { }
+code.sourceCode span.er { color: red; font-weight: bold; }
+/*]]>*/
+  </style>
+  <link rel="stylesheet" href="pandoc-template.css" />
+</head>
+<body>
+<div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<input class="field" type="button" value="Adjust Width" onclick="(function () {
+        return document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth === '' ? '600px' : '';
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      return window.onload = function() {
+        var canvas, evaluateSource, segment, _i, _len, _ref;
+        canvas = document.getElementById('drawCanvas');
+        if (canvas != null) window.ctx = canvas.getContext('2d');
+        evaluateSource = function() {
+          var code, codeSegment, codeTag, jsprogram, program, segment, _i, _len, _ref;
+          program = '';
+          if (window.ctx != null) {
+            window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
+          }
+          document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
+          _ref = document.getElementsByTagName('pre');
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            codeSegment = _ref[_i];
+            if (codeSegment.className === 'sourceCode') {
+              codeTag = codeSegment.getElementsByTagName('code')[0];
+              if (codeTag.className === 'sourceCode coffeescript') {
+                segment = codeTag.innerHTML;
+                code = segment.replace(/<br>/g, '\n');
+                code = code.replace(/<[^>]*>/g, '');
+                code = code.replace(/[&]gt;/g, '>');
+                code = code.replace(/[&]lt;/g, '<');
+                program += code + '\n';
+              }
+            }
+          }
+          jsprogram = '';
+          try {
+            jsprogram = CoffeeScript.compile(program, {
+              bare: true
+            });
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = jsprogram;
+          } catch (error) {
+            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
+            return;
+          }
+          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };' + jsprogram + '; if (typeof draw !== "undefined") draw(window.ctx);';
+          try {
+            return eval(jsprogram);
+          } catch (error) {
+            return document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = error;
+          }
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+        }
+        return evaluateSource();
+      };
+    }).call(this);</script>
+<div id="page">
+<h1 id="partial-with-free-variables----smooth-coffeescript">Partial with Free Variables — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<blockquote>
+<p>This literate program is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it.</p>
+</blockquote>
+<p><strong>Partial function application with free variables</strong></p>
+<p>Partial function application is presented in <a href="http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-partial-application-0">Smooth CoffeeScript partial application</a>. It is a way to create a function from another function where the first arguments are filled in. With the new function we can then ignore those arguments so subsequent calls become easier to read and write.</p>
+<p>It is not always the case that arguments are so nicely ordered that it is the first ones that need to be held constant. To handle the general case with arbitrary arguments, a special symbol<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup> can designate free variables i.e. those arguments that are not fixed.</p>
+<p>In the code below<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup> the <code>movement</code> function is inspired by the canvas function <code>bezierCurveTo</code>. It takes nine arguments, clearly outdoing <code>bezierCurveTo</code>’s measly six arguments. When calling such a function from many places, several of the arguments may well be the same.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">draw <span class="kw">=</span> <span class="fu">(ctx) -&gt;</span> <span class="co"># Try changing colors below</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">();</span> ctx<span class="kw">.</span>strokeStyle <span class="kw">=</span> <span class="st">'gold'</span><br />  drawMove ctx<span class="kw">,</span> <span class="kw">(</span>ix <span class="kw">for</span> ix <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span><span class="dv">90</span><span class="kw">]</span> <span class="kw">by</span> <span class="dv">10</span><span class="kw">)</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">();</span> ctx<span class="kw">.</span>strokeStyle <span class="kw">=</span> <span class="st">'salmon'</span><br />  drawPath ctx<span class="kw">,</span> <span class="kw">(</span>ix <span class="kw">for</span> ix <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span><span class="dv">90</span><span class="kw">]</span> <span class="kw">by</span> <span class="dv">10</span><span class="kw">)</span><br /><br />movement <span class="kw">=</span> <span class="fu">(ctx, ax, ay, cp1x, cp1y, cp2x, cp2y, x, y) -&gt;</span><br />  ctx<span class="kw">.</span>moveTo ax<span class="kw">,</span> ay<br />  ctx<span class="kw">.</span>bezierCurveTo cp1x<span class="kw">,</span> cp1y<span class="kw">,</span> cp2x<span class="kw">,</span> cp2y<span class="kw">,</span> x<span class="kw">,</span> y<br /><br />drawMove <span class="kw">=</span> <span class="fu">(ctx, args) -&gt;</span><br />  args<span class="kw">.</span>forEach <span class="fu">(ix) -&gt;</span> movement ctx<span class="kw">,</span><br />    <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">150</span><span class="kw">+</span>ix<span class="kw">,</span> <span class="dv">50</span><span class="kw">,</span> <span class="dv">110</span><span class="kw">+</span>ix<span class="kw">,</span> <span class="dv">90</span><br />  ctx<span class="kw">.</span>stroke<span class="kw">()</span></code></pre>
+<p><canvas id="drawCanvas" width="200" height="100"></canvas> </p>
+<p>A wrapper function <code>swirl</code> that takes only those arguments that might change can cut down on the repetition. The <code>partialFree</code> function returns a new function when given a function, its fixed arguments and the placeholder symbol for the variable arguments.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="ot">undefined</span><br />partialFree <span class="kw">=</span> <span class="fu">(func, a...) -&gt;</span> <span class="fu">(b...) -&gt;</span><br />  b<span class="kw">.</span>reverse<span class="kw">()</span><br />  func <span class="kw">(</span><span class="kw">for</span> arg <span class="kw">in</span> a <span class="kw">then</span> arg <span class="kw">?=</span> b<span class="kw">.</span>pop<span class="kw">())...</span><br /><br />swirl <span class="kw">=</span> partialFree movement<span class="kw">,</span> _<span class="kw">,</span> _<span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> _<span class="kw">,</span> <span class="dv">50</span><span class="kw">,</span> _<span class="kw">,</span> <span class="dv">90</span><br /><br />drawPath <span class="kw">=</span> <span class="fu">(ctx, args) -&gt;</span><br />  args<span class="kw">.</span>forEach <span class="fu">(ix) -&gt;</span> swirl ctx<span class="kw">,</span> <span class="dv">200</span><span class="kw">,</span> <span class="dv">150</span><span class="kw">+</span>ix<span class="kw">,</span> <span class="dv">110</span><span class="kw">+</span>ix<br />  ctx<span class="kw">.</span>stroke<span class="kw">()</span></code></pre>
+<h2 id="prior-art">Prior Art</h2>
+<p>Where did the definition of <code>partialFree</code> come from? It started with a <a href="http://duckduckgo.com/?q=Partial%20function%20application">search</a> for existing implementations. The search eventually turned up this JavaScript version from <a href="http://javascriptweblog.wordpress.com/2010/05/17/partial-currys-flashy-cousin/">Angus Croll’s blog</a>.</p>
+<pre class="sourceCode"><code class="sourceCode javascript"><span class="kw">window</span>.___ = {}; <span class="co">//argument placeholder</span><br /><br /><span class="kw">Function</span>.<span class="fu">prototype</span>.<span class="fu">partial</span> = <span class="kw">function</span>() {<br />    <span class="kw">if</span> (<span class="kw">arguments</span>.<span class="fu">length</span>&lt;<span class="dv">1</span>) {<br />        <span class="co">//nothing to pre-assign - return the function as is</span><br />        <span class="kw">return</span> <span class="kw">this</span>;<br />    }<br />    <span class="kw">var</span> __method = <span class="kw">this</span>;<br />    <span class="kw">var</span> args = arguments;<br />    <span class="kw">return</span> <span class="kw">function</span>() {<br />        <span class="co">//build up new arg list, for placeholders use current arg,</span><br />        <span class="co">//otherwise copy original args</span><br />        <span class="kw">var</span> argIndex = <span class="dv">0</span>, myArgs = [];<br />        <span class="kw">for</span> (<span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="kw">args</span>.<span class="fu">length</span>; i++) {<br />            myArgs[i] = <span class="kw">window</span>.___==args[i] ?<br />                arguments[argIndex++] : args[i];<br />        }<br />        <span class="kw">return</span> <span class="kw">__method</span>.<span class="fu">apply</span>(<span class="kw">this</span>, myArgs);<br />    }<br />}</code></pre>
+<p>And this CoffeeScript version from <a href="http://blog.mirotin.net/8/15-lines-long-partial-function-application-with-coffeescript-js">Mirotin</a>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="kw">{}</span><br />partial15lines <span class="kw">=</span> <span class="fu">() -&gt;</span><br />  <span class="kw">[</span>func<span class="kw">,</span> args<span class="kw">...]</span> <span class="kw">=</span> arguments<br />  wrapper <span class="kw">=</span> <span class="fu">() -&gt;</span><br />    i <span class="kw">=</span> <span class="dv">0</span><br />    j <span class="kw">=</span> <span class="dv">0</span><br />    res_args <span class="kw">=</span> <span class="kw">[]</span><br />    <span class="kw">while</span> i <span class="kw">&lt;</span> args<span class="kw">.</span>length<br />      <span class="kw">if</span> args<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">==</span> _<br />        res_args<span class="kw">.</span>push arguments<span class="kw">[</span>j<span class="kw">]</span><br />        j<span class="kw">++</span><br />      <span class="kw">else</span><br />        res_args<span class="kw">.</span>push args<span class="kw">[</span>i<span class="kw">]</span><br />      i<span class="kw">++</span><br />    <span class="kw">return</span> func<span class="kw">.</span>apply <span class="ot">null</span><span class="kw">,</span> res_args</code></pre>
+<h2 id="stepwise-coffeescript-improvements">Stepwise CoffeeScript Improvements</h2>
+<p>Those implementations are fine and usable as they are. But here comes one of the most fun activities in CoffeeScript: <em>code reduction</em>. It is also useful because less code makes maintenance easier — up to a point — too clever tricks and the code can become harder to understand. In the following line of code reductions, which one would you choose as the best balance between brevity and readability?</p>
+<p>In <code>partial15lines</code> there are some redundant words that can be removed. The use of <a href="file:///Users/eh/Projects/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-arguments-0">arguments</a> can also be replaced with a splat <code>...</code></p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="kw">{}</span><br />partial12lines <span class="kw">=</span> <span class="fu">(func, args...) -&gt;</span><br />  <span class="fu">(moreargs...) -&gt;</span><br />    i <span class="kw">=</span> j <span class="kw">=</span> <span class="dv">0</span><br />    res_args <span class="kw">=</span> <span class="kw">[]</span><br />    <span class="kw">while</span> i <span class="kw">&lt;</span> args<span class="kw">.</span>length<br />      <span class="kw">if</span> args<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">==</span> _<br />        res_args<span class="kw">.</span>push moreargs<span class="kw">[</span>j<span class="kw">++]</span><br />      <span class="kw">else</span><br />        res_args<span class="kw">.</span>push args<span class="kw">[</span>i<span class="kw">]</span><br />      i<span class="kw">++</span><br />    func<span class="kw">.</span>apply <span class="ot">null</span><span class="kw">,</span> res_args</code></pre>
+<p>In CoffeeScript <code>while</code> is an expression that returns the value of its inner block, so there is no need for pushing values to a results array.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="kw">{}</span><br />partial10lines <span class="kw">=</span> <span class="fu">(func, args...) -&gt;</span><br />  <span class="fu">(moreargs...) -&gt;</span><br />    i <span class="kw">=</span> j <span class="kw">=</span> <span class="dv">0</span><br />    func<span class="kw">.</span>apply <span class="ot">null</span><span class="kw">,</span><br />      <span class="kw">while</span> i<span class="kw">++</span> <span class="kw">&lt;</span> args<span class="kw">.</span>length<br />        <span class="kw">if</span> args<span class="kw">[</span>i<span class="dv">-1</span><span class="kw">]</span> <span class="kw">==</span> _<br />          moreargs<span class="kw">[</span>j<span class="kw">++]</span><br />        <span class="kw">else</span><br />          args<span class="kw">[</span>i<span class="dv">-1</span><span class="kw">]</span></code></pre>
+<p>A <code>for</code> loop instead of the <code>while</code> gets rid of the <code>length</code> check. A splat can also be used in a call which eliminates the <code>apply</code>. The old school <code>==</code> can be replaced with <code>is</code>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="kw">{}</span><br />partial8lines <span class="kw">=</span> <span class="fu">(func, a...) -&gt;</span> <span class="fu">(b...) -&gt;</span><br />  i <span class="kw">=</span> <span class="dv">0</span><br />  func <span class="kw">(</span><span class="kw">for</span> arg <span class="kw">in</span> a<br />    <span class="kw">if</span> arg <span class="kw">is</span> _<br />      b<span class="kw">[</span>i<span class="kw">++]</span><br />    <span class="kw">else</span><br />      arg<span class="kw">)...</span></code></pre>
+<p>The low level counter <code>i</code> is only used to get the next argument from <code>b</code>. The same effect can be achieved by treating <code>b</code> as a LIFO (Last In First Out) buffer. To do that <code>b</code> has to be reversed.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="kw">{}</span><br />partial5lines <span class="kw">=</span> <span class="fu">(func, a...) -&gt;</span> <span class="fu">(b...) -&gt;</span><br />  b<span class="kw">.</span>reverse<span class="kw">()</span><br />  func <span class="kw">(</span><span class="kw">for</span> arg <span class="kw">in</span> a<br />    <span class="kw">if</span> arg <span class="kw">is</span> _ <span class="kw">then</span> b<span class="kw">.</span>pop<span class="kw">()</span> <span class="kw">else</span> arg<span class="kw">)...</span></code></pre>
+<p>Instead of using an empty object as the placeholder, using <code>undefined</code> allows the <code>if</code> test to be replaced with an <a href="http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-existential-operator-0">existential assignment</a> <code>?=</code>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">_ <span class="kw">=</span> <span class="ot">undefined</span><br />partial4lines <span class="kw">=</span> <span class="fu">(func, a...) -&gt;</span> <span class="fu">(b...) -&gt;</span><br />  b<span class="kw">.</span>reverse<span class="kw">()</span><br />  func <span class="kw">(</span><span class="kw">for</span> arg <span class="kw">in</span> a <span class="kw">then</span> arg <span class="kw">?=</span> b<span class="kw">.</span>pop<span class="kw">())...</span></code></pre>
+<h2 id="test">Test</h2>
+<p>A couple of test cases and an example of <code>partial</code>. In the interactive HTML you can try substituting the number in <code>partial4lines</code> to test the other versions.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">test <span class="kw">=</span> <span class="fu">-&gt;</span><br />  f <span class="kw">=</span> <span class="fu">(x, y, z) -&gt;</span> x <span class="kw">+</span> <span class="dv">2</span><span class="kw">*</span>y <span class="kw">+</span> <span class="dv">5</span><span class="kw">*</span>z<br />  g <span class="kw">=</span> partialFree f<span class="kw">,</span> _<span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> _<br />  show <span class="st">&quot;g 3, 5 =&gt; </span><span class="ch">#{</span>g 3, 5<span class="ch">}</span><span class="st"> Expected: 30&quot;</span><br /><br />  <span class="co"># Modified from an alexkg example</span><br />  fold <span class="kw">=</span> <span class="fu">(f, z, xs) -&gt;</span><br />    z <span class="kw">=</span> f<span class="kw">(</span>z<span class="kw">,</span> x<span class="kw">)</span> <span class="kw">for</span> x <span class="kw">in</span> xs<br />    z<br />  max <span class="kw">=</span> partialFree fold<span class="kw">,</span> <span class="ot">Math</span><span class="kw">.</span>max<span class="kw">,</span> <span class="kw">-</span><span class="ot">Infinity</span><span class="kw">,</span> _<br />  show <span class="st">&quot;max [-10..10] =&gt; </span><span class="ch">#{</span>max [-10..10]<span class="ch">}</span><span class="st"> Expected: 10&quot;</span><br /><br />  <span class="co"># Without free vars</span><br />  partial <span class="kw">=</span> <span class="fu">(f, a...) -&gt;</span> <span class="fu">(b...) -&gt;</span> f a<span class="kw">...,</span> b<span class="kw">...</span><br />  min <span class="kw">=</span> partial fold<span class="kw">,</span> <span class="ot">Math</span><span class="kw">.</span>min<span class="kw">,</span> <span class="ot">Infinity</span><br />  show <span class="st">&quot;min [-10..10] =&gt; </span><span class="ch">#{</span>min [-10..10]<span class="ch">}</span><span class="st"> Expected: -10&quot;</span><br />partialFree <span class="kw">=</span> partial4lines<br />test<span class="kw">()</span></code></pre>
+<hr />
+<h2 id="output">Output</h2>
+<pre class="output"><code></code></pre>
+<p></p>
+<h2 id="javascript">JavaScript</h2>
+<pre class="js-source"><code></code></pre>
+<p></p>
+<hr />
+<p>Formats <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.coffee">CoffeeScript</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.md">Markdown</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.pdf">PDF</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.html">HTML</a></p>
+<p>License <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share Alike</a> by <a href="http://twitter.com/#!/autotelicum">autotelicum</a> © 2554/2011</p>
+<!---------------------------------------------------------------------------
+Commands used to extract code, execute it, and to format this document:
+
+Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
+Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee partial.coffee | coffee -cs >partial.js; echo 'show=console.log' | cat - partial.coffee | coffee -s >partial.output; plumb partial.output
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
+Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o partial.pdf; open partial.pdf
+
+To execute these commands; middle-button select them in the acme environment.
+acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
+The formatting is done with pandoc, a universal markup converter, and TeX.
+---------------------------------------------------------------------------->
+
+
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>In the examples underscore <code>_</code> is used. You may want to choose another symbol to avoid clashes with commonly used libraries such as <a href="http://documentcloud.github.com/underscore/">Underscore</a>. <a href="#fnref1" class="footnoteBackLink">↩</a></p></li>
+<li id="fn2"><p>To run this example standalone you can prepend this <a href="http://coffeekup.org/">CoffeeKup</a> CoffeeScript:</p>
+<pre><code>show = if exports? then console.log else alert
+(require 'fs').writeFileSync &quot;./bezier.html&quot;,
+  webpage = (require 'coffeekup').render -&gt; 
+    doctype 5
+    html -&gt; meta charset: 'utf-8',
+      head -&gt; title 'Bezier path'
+      body -&gt; 
+        canvas id: 'drawCanvas', width: 300, height: 200
+        coffeescript -&gt;
+          window.onload = -&gt;
+            canvas = document.getElementById 'drawCanvas'
+            ctx = canvas.getContext '2d'
+            alert 'No canvas in this browser.' unless ctx?
+            draw ctx if draw?
+</code></pre>
+ <a href="#fnref2" class="footnoteBackLink">↩</a></li>
+</ol>
+</div>
+</body>
+</html>

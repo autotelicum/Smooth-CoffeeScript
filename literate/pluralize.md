@@ -1,10 +1,7 @@
 
 # Pluralize --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
 
-This literate program is _interactive_ in its HTML form.
-Select a code segment to edit it.
-The generated code and output is updated as you type.
-Source and other document formats are at the end of the document.
+> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it.
 
 
 **How do you add 's' to a word when there is more than one of something?**
@@ -106,8 +103,6 @@ test n for n in [-3..3]
 
 -----------------------------------------------------------------------------
 
-\VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{pluralize.coffee}
-
 ## Output
 
 ~~~~ {.output}
@@ -126,15 +121,17 @@ test n for n in [-3..3]
 
 -----------------------------------------------------------------------------
 
-Formats [CoffeeScript](pluralize.coffee)	[Markdown](pluralize.md) [PDF](pluralize.pdf) [HTML](pluralize.html)
---- [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011 ![License CCBYSA](ccbysa.png)
+Formats [CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.coffee)	[Markdown](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.md) [PDF](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.pdf) [HTML](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.html)
+
+License [Creative Commons Attribution Share Alike](http://creativecommons.org/licenses/by-sa/3.0/)
+by [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011
 
 <!---------------------------------------------------------------------------
 Commands used to extract code, execute it, and to format this document:
 
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-'p
+Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee pluralize.coffee | coffee -cs >pluralize.js; echo 'show=console.log' | cat - pluralize.coffee | coffee -s >pluralize.output; plumb pluralize.output
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.

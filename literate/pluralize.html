@@ -1,9 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <title></title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
   <style type="text/css">
 /*<![CDATA[*/
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre 
@@ -25,7 +28,7 @@ code.sourceCode span.re { }
 code.sourceCode span.er { color: red; font-weight: bold; }
 /*]]>*/
   </style>
-  <link rel="stylesheet" href="pandoc-template.css" type="text/css" />
+  <link rel="stylesheet" href="pandoc-template.css" />
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
@@ -35,21 +38,29 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <script src="node_modules/coffee-script.js"></script>
 <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
       return window.onload = function() {
-        var evaluateSource, segment, _i, _len, _ref;
+        var canvas, evaluateSource, segment, _i, _len, _ref;
+        canvas = document.getElementById('drawCanvas');
+        if (canvas != null) window.ctx = canvas.getContext('2d');
         evaluateSource = function() {
-          var code, codeSegment, jsprogram, program, segment, _i, _len, _ref;
+          var code, codeSegment, codeTag, jsprogram, program, segment, _i, _len, _ref;
           program = '';
+          if (window.ctx != null) {
+            window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
+          }
           document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
           _ref = document.getElementsByTagName('pre');
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             codeSegment = _ref[_i];
             if (codeSegment.className === 'sourceCode') {
-              segment = codeSegment.getElementsByTagName('code')[0].innerHTML;
-              code = segment.replace(/<br>/g, '\n');
-              code = code.replace(/<[^>]*>/g, '');
-              code = code.replace(/[&]gt;/g, '>');
-              code = code.replace(/[&]lt;/g, '<');
-              program += code + '\n';
+              codeTag = codeSegment.getElementsByTagName('code')[0];
+              if (codeTag.className === 'sourceCode coffeescript') {
+                segment = codeTag.innerHTML;
+                code = segment.replace(/<br>/g, '\n');
+                code = code.replace(/<[^>]*>/g, '');
+                code = code.replace(/[&]gt;/g, '>');
+                code = code.replace(/[&]lt;/g, '<');
+                program += code + '\n';
+              }
             }
           }
           jsprogram = '';
@@ -62,7 +73,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
             document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
             return;
           }
-          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };' + jsprogram;
+          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };' + jsprogram + '; if (typeof draw !== "undefined") draw(window.ctx);';
           try {
             return eval(jsprogram);
           } catch (error) {
@@ -79,7 +90,9 @@ code.sourceCode span.er { color: red; font-weight: bold; }
     }).call(this);</script>
 <div id="page">
 <h1 id="pluralize----smooth-coffeescript">Pluralize — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
-<p>This literate program is <em>interactive</em> in its HTML form. Select a code segment to edit it. The generated code and output is updated as you type. Source and other document formats are at the end of the document.</p>
+<blockquote>
+<p>This literate program is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it.</p>
+</blockquote>
 <p><strong>How do you add ’s’ to a word when there is more than one of something?</strong></p>
 <p>It is often seen in JavaScript with the ternary operator <code>?:</code> but that is hard-coding at the expense of future maintenance and internationalization.</p>
 <p>First some preliminaries. Let’s <code>show</code> the results whether we are running in a server or a web client. Something like <code>show = if exports? then console.log else alert</code>. And wrap the different methods in a <code>test</code> function so we can see if they work.</p>
@@ -112,7 +125,6 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <p>Run a test for a small range of numbers</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">test n <span class="kw">for</span> n <span class="kw">in</span> <span class="kw">[-</span><span class="dv">3</span><span class="kw">..</span><span class="dv">3</span><span class="kw">]</span></code></pre>
 <hr />
-<p></p>
 <h2 id="output">Output</h2>
 <pre class="output"><code></code></pre>
 <p></p>
@@ -120,13 +132,14 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <pre class="js-source"><code></code></pre>
 <p></p>
 <hr />
-<p>Formats <a href="pluralize.coffee">CoffeeScript</a> <a href="pluralize.md">Markdown</a> <a href="pluralize.pdf">PDF</a> <a href="pluralize.html">HTML</a> — <a href="http://twitter.com/#!/autotelicum">autotelicum</a> © 2554/2011 <img src="ccbysa.png" alt="License CCBYSA" /></p>
+<p>Formats <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.coffee">CoffeeScript</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.md">Markdown</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.pdf">PDF</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.html">HTML</a></p>
+<p>License <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share Alike</a> by <a href="http://twitter.com/#!/autotelicum">autotelicum</a> © 2554/2011</p>
 <!---------------------------------------------------------------------------
 Commands used to extract code, execute it, and to format this document:
 
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-'p
+Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee pluralize.coffee | coffee -cs >pluralize.js; echo 'show=console.log' | cat - pluralize.coffee | coffee -s >pluralize.output; plumb pluralize.output
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.
