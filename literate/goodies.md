@@ -13,13 +13,13 @@
     + [CoffeeScript Quick Reference in Japanese from @nextliteracy](http://www.h3.dion.ne.jp/~y.ich/CoffeeScriptQuickRef.pdf)
 
 
-## Interactive Programs and Snippets
+## Interactive Snippets and Programs 
 
 * Snippets
     + [Pluralize](pluralize.html)
     + [Partial function application](partial.html)
-* Examples
-    + Coming Soon
+* Programs
+    + [Photo Histogram](histogram.html)
 
 -----------------------------------------------------------------------------
 
