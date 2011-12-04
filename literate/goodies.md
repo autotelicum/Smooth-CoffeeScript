@@ -24,7 +24,7 @@
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](goodies.md)	[HTML](goodies.html)
---- [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011 ![License CCBYSA](ccbysa.png)
+--- autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
 
 
 <!-- Command used to format this document:

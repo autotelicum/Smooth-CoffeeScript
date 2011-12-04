@@ -124,7 +124,7 @@ test n for n in [-3..3]
 Formats [CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.coffee)	[Markdown](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.md) [PDF](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.pdf) [HTML](http://autotelicum.github.com/Smooth-CoffeeScript/literate/pluralize.html)
 
 License [Creative Commons Attribution Share Alike](http://creativecommons.org/licenses/by-sa/3.0/)
-by [autotelicum](http://twitter.com/#!/autotelicum) © 2554/2011
+by autotelicum © 2554/2011
 
 <!---------------------------------------------------------------------------
 Commands used to extract code, execute it, and to format this document:
