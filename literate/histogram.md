@@ -13,14 +13,14 @@ It is easy to prototype an idea with CoffeeScript and CoffeeKup. This program sh
 
 In CoffeeKup you write a CoffeeScript function that is `render`ed to HTML. That function can contain the page elements, styling and CoffeeScript functions that are used on the web page. It can also refer to external files so you can modularize and separate the look and feel from the content. To load a script include a tag such as: `script src: 'underscore.js'`.
 
-This `histogram` program can run embedded in a web page, where the program can be changed interactively or it can run standalone. In the browser scripts are loaded into the window environment, the standalone environment instead uses `global` and `require`.
+This `histogram` program can run embedded in a web page, where the program can be changed interactively or it can run standalone. Scripts are loaded into the `window` environment in a web browser, in the standalone environment `global` and `require` are used instead.
 
 An existential test on `exports` can be used to determine which environment the program is running in --- another way is to look at whether the `window` environment is available.
 
 ~~~~ {.coffeescript}
 kup = if exports? then require 'coffeekup' else window.CoffeeKup
 
-webpage = kup.render -> 
+webapp = ->
 ~~~~
 
 ### User Interface
@@ -168,7 +168,7 @@ A complete redraw is performed when a touch or click triggers an update. If it i
 This last bit do not relate to the web application but to the CoffeeKup `render`ing. The generated HTML is displayed either live in the interactive environment or as text --- as nicely formatted as possible.
 
 ~~~~ {.coffeescript}
-, format:on # Get formatted HTML
+webpage = kup.render webapp, format:on
 showDocument webpage
 ~~~~
 
@@ -203,7 +203,7 @@ by autotelicum © 2554/2011
 Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee histogram.coffee | coffee -cs >histogram.js; echo 'show=showDocument=console.log' | cat - histogram.coffee | coffee -s >histogram.output; cp histogram.output histogram-output.html; open histogram-output.html; plumb histogram-output.html
+Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee histogram.coffee | coffee -cs >histogram.js; coffee histogram.coffee |tee histogram-output.html >histogram.output; open histogram-output.html; plumb histogram-output.html
 Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o histogram.pdf; open histogram.pdf
 

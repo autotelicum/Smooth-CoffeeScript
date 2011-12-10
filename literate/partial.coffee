@@ -1,3 +1,7 @@
+
+show = console.log
+showDocument = (doc, width, height) -> show doc
+
 draw = (ctx) -> # Try changing colors below
   ctx.beginPath(); ctx.strokeStyle = 'gold'
   drawMove ctx, (ix for ix in [0...90] by 10)
@@ -14,8 +18,7 @@ drawMove = (ctx, args) ->
   ctx.stroke()
 _ = undefined
 partialFree = (func, a...) -> (b...) ->
-  b.reverse()
-  func (for arg in a then arg ?= b.pop())...
+  func (for arg in a then arg ?= b.shift())...
 
 swirl = partialFree movement, _, _, 0, 30, 30, _, 50, _, 90
 
@@ -76,6 +79,9 @@ _ = undefined
 partial4lines = (func, a...) -> (b...) ->
   b.reverse()
   func (for arg in a then arg ?= b.pop())...
+_ = undefined
+partial3lines = (func, a...) -> (b...) ->
+  func (for arg in a then arg ?= b.shift())...
 test = ->
   f = (x, y, z) -> x + 2*y + 5*z
   g = partialFree f, _, 1, _
@@ -92,5 +98,5 @@ test = ->
   partial = (f, a...) -> (b...) -> f a..., b...
   min = partial fold, Math.min, Infinity
   show "min [-10..10] => #{min [-10..10]} Expected: -10"
-partialFree = partial4lines
+partialFree = partial3lines
 test()

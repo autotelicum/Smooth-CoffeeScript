@@ -1,5 +1,11 @@
 (function() {
-  var n, test;
+  var n, show, showDocument, test;
+
+  show = console.log;
+
+  showDocument = function(doc, width, height) {
+    return show(doc);
+  };
 
   test = function(points) {
     var pluralIf, pluralUnless, _base, _ref, _ref2;

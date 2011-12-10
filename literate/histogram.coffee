@@ -1,6 +1,10 @@
+
+show = console.log
+showDocument = (doc, width, height) -> show doc
+
 kup = if exports? then require 'coffeekup' else window.CoffeeKup
 
-webpage = kup.render -> 
+webapp = ->
   doctype 5
   html ->
     head ->
@@ -92,5 +96,5 @@ webpage = kup.render ->
 
         if view++ is 4 then view = 0
         return
-, format:on # Get formatted HTML
+webpage = kup.render webapp, format:on
 showDocument webpage

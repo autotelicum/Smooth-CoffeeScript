@@ -1,9 +1,15 @@
 (function() {
-  var kup, webpage;
+  var kup, show, showDocument, webapp, webpage;
+
+  show = console.log;
+
+  showDocument = function(doc, width, height) {
+    return show(doc);
+  };
 
   kup = typeof exports !== "undefined" && exports !== null ? require('coffeekup') : window.CoffeeKup;
 
-  webpage = kup.render(function() {
+  webapp = function() {
     doctype(5);
     return html(function() {
       head(function() {
@@ -153,7 +159,9 @@
         };
       });
     });
-  }, {
+  };
+
+  webpage = kup.render(webapp, {
     format: true
   });
 

@@ -55,8 +55,7 @@ A wrapper function `swirl` that takes only those arguments that might change can
 ~~~~ {.coffeescript}
 _ = undefined
 partialFree = (func, a...) -> (b...) ->
-  b.reverse()
-  func (for arg in a then arg ?= b.pop())...
+  func (for arg in a then arg ?= b.shift())...
 
 swirl = partialFree movement, _, _, 0, 30, 30, _, 50, _, 90
 
@@ -182,10 +181,18 @@ partial4lines = (func, a...) -> (b...) ->
   func (for arg in a then arg ?= b.pop())...
 ~~~~
 
+Reversing the `b...` arguments are only required because `pop` returns the last element. Noé Rubinstein joined the  _code reduction_ fun by noticing that the `Array::shift` function removes and returns the first argument.
+
+~~~~ {.coffeescript}
+_ = undefined
+partial3lines = (func, a...) -> (b...) ->
+  func (for arg in a then arg ?= b.shift())...
+~~~~
+
 
 ## Test
 
-A couple of test cases and an example of `partial`. In the interactive HTML you can try substituting the number in `partial4lines` to test the other versions.
+A couple of test cases and an example of `partial`. In the interactive HTML you can try substituting the number in `partial3lines` to test the other versions.
 
 ~~~~ {.coffeescript}
 test = ->
@@ -204,7 +211,7 @@ test = ->
   partial = (f, a...) -> (b...) -> f a..., b...
   min = partial fold, Math.min, Infinity
   show "min [-10..10] => #{min [-10..10]} Expected: -10"
-partialFree = partial4lines
+partialFree = partial3lines
 test()
 ~~~~
 
@@ -237,7 +244,7 @@ by autotelicum © 2554/2011
 Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |tee partial.coffee | coffee -cs >partial.js; echo 'show=console.log' | cat - partial.coffee | coffee -s >partial.output; plumb partial.output
+Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee partial.coffee | coffee -cs >partial.js; coffee partial.coffee >partial.output; plumb partial.output
 Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o partial.pdf; open partial.pdf
 

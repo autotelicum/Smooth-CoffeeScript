@@ -1,6 +1,12 @@
 (function() {
-  var draw, drawMove, drawPath, movement, partial10lines, partial12lines, partial15lines, partial4lines, partial5lines, partial8lines, partialFree, swirl, test, _;
+  var draw, drawMove, drawPath, movement, partial10lines, partial12lines, partial15lines, partial3lines, partial4lines, partial5lines, partial8lines, partialFree, show, showDocument, swirl, test, _;
   var __slice = Array.prototype.slice;
+
+  show = console.log;
+
+  showDocument = function(doc, width, height) {
+    return show(doc);
+  };
 
   draw = function(ctx) {
     var ix;
@@ -46,13 +52,12 @@
     return function() {
       var arg, b;
       b = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      b.reverse();
       return func.apply(null, (function() {
         var _i, _len, _results;
         _results = [];
         for (_i = 0, _len = a.length; _i < _len; _i++) {
           arg = a[_i];
-          _results.push(arg != null ? arg : arg = b.pop());
+          _results.push(arg != null ? arg : arg = b.shift());
         }
         return _results;
       })());
@@ -208,6 +213,26 @@
     };
   };
 
+  _ = void 0;
+
+  partial3lines = function() {
+    var a, func;
+    func = arguments[0], a = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    return function() {
+      var arg, b;
+      b = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      return func.apply(null, (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = a.length; _i < _len; _i++) {
+          arg = a[_i];
+          _results.push(arg != null ? arg : arg = b.shift());
+        }
+        return _results;
+      })());
+    };
+  };
+
   test = function() {
     var f, fold, g, max, min, partial;
     f = function(x, y, z) {
@@ -238,7 +263,7 @@
     return show("min [-10..10] => " + (min([-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])) + " Expected: -10");
   };
 
-  partialFree = partial4lines;
+  partialFree = partial3lines;
 
   test();
 

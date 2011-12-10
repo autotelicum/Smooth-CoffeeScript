@@ -1,3 +1,7 @@
+
+show = console.log
+showDocument = (doc, width, height) -> show doc
+
 test = (points) ->
   show "0: You got #{points} point#{if points > 1 then 's' else ''}"
   pluralIf = (stem, cond) -> stem + (if cond then 's' else '')
