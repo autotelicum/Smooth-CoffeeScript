@@ -1,3 +1,0 @@
-g 3, 5 => 30 Expected: 30
-max [-10..10] => 10 Expected: 10
-min [-10..10] => -10 Expected: -10

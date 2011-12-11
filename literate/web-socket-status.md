@@ -47,12 +47,12 @@ To stop a web server or other script that does not stop by itself press: `Ctrl-C
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](web-socket-status.md)	[PDF](web-socket-status.pdf)	[HTML](web-socket-status.html)
-Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
+Copyright autotelicum © 2554/2011 ![License CCBYSA](../img/ccbysa.png)
 
 
 <!-- Commands used to format this document:
 
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o web-socket-status.pdf; open web-socket-status.pdf
 
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o web-socket-status.html; open web-socket-status.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-menu.html -o web-socket-status.html; open web-socket-status.html
 -->

@@ -5,7 +5,7 @@
 
 Node now includes the npm package manager on OS X and Windows.
 Choose .pkg on OS X and .msi on Windows and install node from
-<http://nodejs.org/dist/v0.6.3/>
+<http://nodejs.org/dist/v0.6.3/> --- See <http://nodejs.org/dist/>  for newer versions.
 
 Open a command line (on Windows 7 right-click and select 'Run as Administrator'):
 
@@ -52,12 +52,12 @@ To stop a web server or other script that does not stop by itself press: `Ctrl-C
 -----------------------------------------------------------------------------
 
 Formats	[Markdown](install-notes.md)	[PDF](install-notes.pdf)	[HTML](install-notes.html)
-Copyright autotelicum © 2554/2011 ![License CCBYSA](ccbysa.png)
+Copyright autotelicum © 2554/2011 ![License CCBYSA](../img/ccbysa.png)
 
 
 <!-- Commands used to format this document:
 
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o install-notes.pdf; open install-notes.pdf
 
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B readability-embed.js -B menu-embed.js -o install-notes.html; open install-notes.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-menu.html -o install-notes.html; open install-notes.html
 -->
