@@ -131,7 +131,7 @@ Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee pluralize.coffee | coffee -cs >pluralize.js; coffee pluralize.coffee >pluralize.output; plumb pluralize.output
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.

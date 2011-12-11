@@ -1,11 +1,16 @@
 
-# Usage: coffee -s <embed.coffee >embed.html
+# Usage: coffee embed-literate.coffee >embed-literate.html; plumb embed-literate.html
 
 kup = require 'coffeekup'
-webpage = kup.render -> 
+
+webfragment = -> 
   input class: 'field', type: 'button', value: 'Adjust Width', onclick: ->
-    document.getElementById('page').style.maxWidth =
-      if document.getElementById('page').style.maxWidth is '' then '600px' else ''
+    [document.getElementById('page').style.maxWidth, @value] =
+      if document.getElementById('page').style.maxWidth is ''
+        ['600px', 'Allow Freeflow']
+      else
+        ['', 'Adjust Width']
+    return
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
   coffeescript ->
@@ -61,6 +66,5 @@ webpage = kup.render ->
         segment.getElementsByTagName('code')[0]
           .addEventListener 'keyup', evaluateSource, false
       evaluateSource()
-, format:on
 
-(require 'fs').writeFileSync "./embed.html", webpage
+console.log kup.render webfragment, format:on

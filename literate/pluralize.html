@@ -33,7 +33,8 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
 <input class="field" type="button" value="Adjust Width" onclick="(function () {
-        return document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth === '' ? '600px' : '';
+        var _ref;
+        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Adjust Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -90,6 +91,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
         return evaluateSource();
       };
     }).call(this);</script>
+
 <div id="page">
 <h1 id="pluralize----smooth-coffeescript">Pluralize — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
 <blockquote>
@@ -141,7 +143,7 @@ Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee pluralize.coffee | coffee -cs >pluralize.js; coffee pluralize.coffee >pluralize.output; plumb pluralize.output
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' >pluralize.html; open pluralize.html; plumb pluralize.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o pluralize.pdf; open pluralize.pdf
 
 To execute these commands; middle-button select them in the acme environment.

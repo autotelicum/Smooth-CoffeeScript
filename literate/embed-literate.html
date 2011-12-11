@@ -1,5 +1,6 @@
 <input class="field" type="button" value="Adjust Width" onclick="(function () {
-        return document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth === '' ? '600px' : '';
+        var _ref;
+        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Adjust Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -56,3 +57,4 @@
         return evaluateSource();
       };
     }).call(this);</script>
+
