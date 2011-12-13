@@ -9,7 +9,7 @@ Install: [Get CoffeeScript up and running in a few minutes on Mac or Windows](ht
 
 The node install includes a package manager: [npm](https://github.com/isaacs/npm). If npm security concerns you then consider using a restricted user account, an outgoing firewall, a sandbox or a virtual machine.
 
-Web browser implementations of web sockets and the draft standard currently change regularly. Safari 5.1.1 works fully on both OS X and Windows. For other browsers see the `src/prelude/prelude.coffee` file and [Web Socket Status](http://autotelicum.github.com/Smooth-CoffeeScript/literate/web-socket-status.html).
+WebSockets have become a proposed standard protocol as [IETF RFC 6455](http://www.rfc-editor.org/rfc/rfc6455.txt). Web browser implementations of it is still a work in progress. Safari 5.1.1 works on both OS X and Windows with the presented examples and servers (using draft 75/76). For other browsers see the `src/prelude/prelude.coffee` file, [Web Socket Status](http://autotelicum.github.com/Smooth-CoffeeScript/literate/web-socket-status.html), and ['When can I use'](http://caniuse.com/#feat=websockets).
 
 
 This work is licensed under a [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
