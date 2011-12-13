@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
+  <meta name="date" content="☕" />
+  <title>Photo histogram in CoffeeKup — Smooth CoffeeScript</title>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -32,9 +33,9 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
-<input class="field" type="button" value="Adjust Width" onclick="(function () {
+<input class="field" type="button" value="Limit Width" onclick="(function () {
         var _ref;
-        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Adjust Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
+        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Limit Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -45,42 +46,126 @@ code.sourceCode span.er { color: red; font-weight: bold; }
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
         evaluateSource = function() {
-          var code, codeSegment, codeTag, jsprogram, program, segment, _i, _len, _ref;
-          program = '';
+          var addElement, addErrorElement, addFrame, code, codeSegment, codeTag, elem, getParent, i, segment, segments, separator, show, showDocument, _i, _len, _len2;
           if (window.ctx != null) {
             window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
           }
-          document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
-          _ref = document.getElementsByTagName('pre');
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            codeSegment = _ref[_i];
-            if (codeSegment.className === 'sourceCode') {
-              codeTag = codeSegment.getElementsByTagName('code')[0];
-              if (codeTag.className === 'sourceCode coffeescript') {
-                segment = codeTag.innerHTML;
-                code = segment.replace(/<br>/g, '\n');
-                code = code.replace(/<[^>]*>/g, '');
-                code = code.replace(/[&]gt;/g, '>');
-                code = code.replace(/[&]lt;/g, '<');
-                program += code + '\n';
+          getParent = function(child) {
+            var _ref;
+            return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+          };
+          elem = window.document.getElementsByClassName('output')[0];
+          while (elem != null) {
+            getParent(elem).removeChild(elem);
+            elem = window.document.getElementsByClassName('output')[0];
+          }
+          addElement = function(parent, text) {
+            var newelem;
+            newelem = document.createElement('code');
+            newelem.setAttribute('class', 'sourceCode output');
+            newelem.innerHTML = text;
+            return parent.appendChild(newelem);
+          };
+          separator = function(parent) {
+            if (parent.getElementsByClassName('output').length === 0) {
+              return addElement(parent, '<hr><br>');
+            }
+          };
+          addErrorElement = function(text) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addElement(parentTag, "<span class=\"al\">" + text + "</span>");
+          };
+          show = function(msg) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            addElement(parentTag, "&rarr; " + msg + "<br>");
+            return msg;
+          };
+          addFrame = function(parent, width, height, content) {
+            var newelem;
+            newelem = document.createElement('iframe');
+            newelem.setAttribute('class', 'output');
+            newelem.setAttribute('width', width);
+            newelem.setAttribute('height', height);
+            newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+            return parent.appendChild(newelem);
+          };
+          showDocument = function(content, width, height) {
+            var parentTag;
+            if (width == null) width = 300;
+            if (height == null) height = 300;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addFrame(parentTag, width, height, content);
+          };
+          segments = (function() {
+            var _i, _len, _ref, _results;
+            _ref = document.getElementsByTagName('pre');
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              codeSegment = _ref[_i];
+              if (codeSegment.className === 'sourceCode') {
+                codeTag = codeSegment.getElementsByTagName('code')[0];
+                if (codeTag.className === 'sourceCode coffeescript') {
+                  segment = codeTag.innerHTML;
+                  code = segment.replace(/<br>/g, '\n');
+                  code = code.replace(/<[^>]*>/g, '');
+                  code = code.replace(/[&]gt;/g, '>');
+                  code = code.replace(/[&]lt;/g, '<');
+                  code = code.replace(/[&]nbsp;/g, ' ');
+                  _results.push({
+                    codeTag: codeTag,
+                    code: code
+                  });
+                } else {
+                  _results.push(void 0);
+                }
+              } else {
+                _results.push(void 0);
               }
             }
+            return _results;
+          })();
+          segments = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = segments.length; _i < _len; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (i = 0, _len = segments.length; i < _len; i++) {
+            segment = segments[i];
+            if (i > 0 && /^[\s]/.test(segment.code)) {
+              segment.code = segments[i - 1].code + '\n' + segment.code;
+              segments[i - 1] = void 0;
+            }
           }
-          jsprogram = '';
-          try {
-            jsprogram = CoffeeScript.compile(program, {
-              bare: true
-            });
-            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = jsprogram;
-          } catch (error) {
-            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
-            return;
-          }
-          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };\nvar showDocument = function(content, width, height) {\nif (width == null) width = 300; if (height == null) height = 300;\nshow(\'<iframe width=\"\' + width + \'\" height=\"\' + height + \'\"\' +\n\'src=\"data:text/html;charset=utf-8,\' +\nencodeURIComponent(content) + \'\"\' + \' />\'); };' + jsprogram + '; if (typeof draw !== "undefined") draw(window.ctx);';
-          try {
-            return eval(jsprogram);
-          } catch (error) {
-            return document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = error;
+          segments = (function() {
+            var _i, _len2, _results;
+            _results = [];
+            for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+            segment = segments[_i];
+            codeTag = segment.codeTag;
+            code = segment.code + '\ndraw window.ctx if draw?';
+            try {
+              eval(CoffeeScript.compile(code, {
+                bare: true
+              }));
+            } catch (error) {
+              addErrorElement(error);
+              return;
+            }
           }
         };
         _ref = document.getElementsByTagName('pre');
@@ -93,9 +178,12 @@ code.sourceCode span.er { color: red; font-weight: bold; }
     }).call(this);</script>
 
 <div id="page">
-<h1 id="photo-histogram-in-coffeekup----smooth-coffeescript">Photo histogram in CoffeeKup — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<header>
+<h1 class="title">Photo histogram in CoffeeKup — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<h4 class="date">☕</h4>
+</header>
 <blockquote>
-<p>This literate program is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it.</p>
+<p>This literate program is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing ‘show name’ after its definition.</p>
 </blockquote>
 <h2 id="photo-histogram">Photo histogram</h2>
 <p>It is easy to prototype an idea with CoffeeScript and CoffeeKup. This program shows separation of color channels as a starting point for some photo analysis.</p>
@@ -103,54 +191,50 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 <p>In CoffeeKup you write a CoffeeScript function that is <code>render</code>ed to HTML. That function can contain the page elements, styling and CoffeeScript functions that are used on the web page. It can also refer to external files so you can modularize and separate the look and feel from the content. To load a script include a tag such as: <code>script src: 'underscore.js'</code>.</p>
 <p>This <code>histogram</code> program can run embedded in a web page, where the program can be changed interactively or it can run standalone. Scripts are loaded into the <code>window</code> environment in a web browser, in the standalone environment <code>global</code> and <code>require</code> are used instead.</p>
 <p>An existential test on <code>exports</code> can be used to determine which environment the program is running in — another way is to look at whether the <code>window</code> environment is available.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">kup <span class="kw">=</span> <span class="kw">if</span> exports<span class="kw">?</span> <span class="kw">then</span> require <span class="st">'coffeekup'</span> <span class="kw">else</span> window<span class="kw">.</span>CoffeeKup<br /><br />webapp <span class="kw">=</span> <span class="fu">-&gt;</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">kup <span class="kw">=</span> <span class="kw">if</span> exports<span class="kw">?</span> <span class="kw">then</span> require <span class="st">'coffeekup'</span> <span class="kw">else</span> window<span class="kw">.</span>CoffeeKup<br /><br />webapp <span class="kw">=</span> <span class="fu">-&gt;</span></code></pre>
 <h3 id="user-interface">User Interface</h3>
 <p>Since the program will use a <code>canvas</code> and some Unicode characters, its <code>doctype</code> and <code>charset</code> are HTML5 and UTF–8. The CSS styling for the application is — so far — very simple so it is included in-line. That is convenient when experimenting, if you are reading this on the web page then you can change the styling and immediately see the effect on the <a href="#output">output</a>.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">  doctype <span class="dv">5</span><br />  html <span class="fu">-&gt;</span><br />    head <span class="fu">-&gt;</span><br />      meta charset<span class="kw">:</span> <span class="st">'utf-8'</span><br />      title <span class="st">'Histogram'</span><br />      style <span class="st">'body        {color: #FFFFFF;  background-color: #404040}</span><br /><span class="st">             #background {position: absolute; top:  40px; left: 20px}</span><br /><span class="st">             #image      {position: absolute; top:   0px; left: 80px}</span><br /><span class="st">             #picture    {position: absolute; top:   0px; left: 80px}</span><br /><span class="st">             #histogram  {position: absolute; top: 140px; left:  0px}'</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">  doctype <span class="dv">5</span><br />  html <span class="fu">-&gt;</span><br />    head <span class="fu">-&gt;</span><br />      meta charset<span class="kw">:</span> <span class="st">'utf-8'</span><br />      title <span class="st">'Histogram'</span><br />      style <span class="st">'body        {color: #FFFFFF;  background-color: #404040}</span><br /><span class="st">             #background {position: absolute; top:  40px; left: 20px}</span><br /><span class="st">             #image      {position: absolute; top:   0px; left: 80px}</span><br /><span class="st">             #picture    {position: absolute; top:   0px; left: 80px}</span><br /><span class="st">             #histogram  {position: absolute; top: 140px; left:  0px}'</span></code></pre>
 <p>The <code>img</code> tag is used to load a photo normally from a file, however in the interactive environment it is instead loaded from a global predefined variable<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. The application does not need to display the original picture, instead it shows a <code>canvas</code> with the processed <code>picture</code>. That <code>canvas</code> is therefore set to the same size and placed via absolute positioning right on top of it.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">    body <span class="fu">-&gt;</span><br />      div id<span class="kw">:</span> <span class="st">'background'</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />        img    id<span class="kw">:</span> <span class="st">'image'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> \<br />          src<span class="kw">:</span> window<span class="kw">?.</span>ostrich <span class="kw">?</span> <span class="st">'../img/ostrich.jpg'</span><br />        canvas id<span class="kw">:</span> <span class="st">'picture'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">90</span><br />        canvas id<span class="kw">:</span> <span class="st">'histogram'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">256</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">100</span><span class="kw">,</span> \<br />          onClick<span class="kw">:</span> <span class="st">'onChange()'</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    body <span class="fu">-&gt;</span><br />      div id<span class="kw">:</span> <span class="st">'background'</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />        img    id<span class="kw">:</span> <span class="st">'image'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> \<br />          src<span class="kw">:</span> window<span class="kw">?.</span>ostrich <span class="kw">?</span> <span class="st">'../img/ostrich.jpg'</span><br />        canvas id<span class="kw">:</span> <span class="st">'picture'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">90</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">90</span><br />        canvas id<span class="kw">:</span> <span class="st">'histogram'</span><span class="kw">,</span> width<span class="kw">:</span> <span class="dv">256</span><span class="kw">,</span> height<span class="kw">:</span> <span class="dv">100</span><span class="kw">,</span> \<br />          onClick<span class="kw">:</span> <span class="st">'onChange()'</span></code></pre>
 <h3 id="functionality">Functionality</h3>
 <p>The application responds to <code>click</code> events on the histogram by displaying either all color channels combined or one of the red, green, blue, or the transparency/alpha channel. First in the web application’s CoffeeScript section is a definition of constants and a variable <code>view</code> that holds an index of what is currently displayed.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">    coffeescript <span class="fu">-&gt;</span><br />      hues <span class="kw">=</span><br />        red<span class="kw">:</span>      <span class="st">'rgba(255, 128, 128, 0.5)'</span><br />        green<span class="kw">:</span>    <span class="st">'rgba(128, 255, 128, 0.5)'</span><br />        blue<span class="kw">:</span>     <span class="st">'rgba(128, 128, 255, 0.5)'</span><br />        alpha<span class="kw">:</span>    <span class="st">'rgba(128, 128, 128, 0.5)'</span><br />      legend    <span class="kw">=</span> <span class="kw">[</span><span class="st">'&#8704;'</span><span class="kw">,</span> <span class="st">'R'</span><span class="kw">,</span> <span class="st">'G'</span><span class="kw">,</span> <span class="st">'B'</span><span class="kw">,</span> <span class="st">'&#945;'</span><span class="kw">]</span><br />      textColor <span class="kw">=</span> <span class="st">'#F7C762'</span><br />      textFont  <span class="kw">=</span> <span class="st">'12pt Times'</span><br />      textPos   <span class="kw">=</span> x<span class="kw">:</span><span class="dv">230</span><span class="kw">,</span> y<span class="kw">:-</span><span class="dv">80</span><br />      view      <span class="kw">=</span> <span class="dv">0</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    coffeescript <span class="fu">-&gt;</span><br />      hues <span class="kw">=</span><br />        red<span class="kw">:</span>      <span class="st">'rgba(255, 128, 128, 0.5)'</span><br />        green<span class="kw">:</span>    <span class="st">'rgba(128, 255, 128, 0.5)'</span><br />        blue<span class="kw">:</span>     <span class="st">'rgba(128, 128, 255, 0.5)'</span><br />        alpha<span class="kw">:</span>    <span class="st">'rgba(128, 128, 128, 0.5)'</span><br />      legend    <span class="kw">=</span> <span class="kw">[</span><span class="st">'&#8704;'</span><span class="kw">,</span> <span class="st">'R'</span><span class="kw">,</span> <span class="st">'G'</span><span class="kw">,</span> <span class="st">'B'</span><span class="kw">,</span> <span class="st">'&#945;'</span><span class="kw">]</span><br />      textColor <span class="kw">=</span> <span class="st">'#F7C762'</span><br />      textFont  <span class="kw">=</span> <span class="st">'12pt Times'</span><br />      textPos   <span class="kw">=</span> x<span class="kw">:</span><span class="dv">230</span><span class="kw">,</span> y<span class="kw">:-</span><span class="dv">80</span><br />      view      <span class="kw">=</span> <span class="dv">0</span></code></pre>
 <p>The data in a photo is stored according to the definition given in <a href="http://www.w3.org/TR/2011/WD-2dcontext-20110405/#dom-imagedata-data">HTML Canvas 2D Context</a> by W3C:</p>
 <blockquote>
 <p>The CanvasPixelArray object provides ordered, indexed access to the color components of each pixel of the image data. The data must be represented in left-to-right order, row by row top to bottom, starting with the top left, with each pixel’s red, green, blue, and alpha components being given in that order for each pixel. Each component of each device pixel represented in this array must be in the range 0..255, representing the 8 bit value for that component. The components must be assigned consecutive indices starting with 0 for the top left pixel’s red component.</p>
 </blockquote>
 <p>This standardized image format makes it easy to count the values in each of the channels with the <code>for ... in</code> statement’s index feature and the modulus <code>%</code> operator.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">      analyze <span class="kw">=</span> <span class="fu">(data) -&gt;</span><br />        bins <span class="kw">=</span> red<span class="kw">:</span> <span class="kw">[],</span> green<span class="kw">:</span> <span class="kw">[],</span> blue<span class="kw">:</span> <span class="kw">[],</span> alpha<span class="kw">:</span> <span class="kw">[]</span><br />        <span class="kw">for</span> name<span class="kw">,</span> bin <span class="kw">of</span> bins<br />          bin<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">=</span> <span class="dv">0</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">..</span><span class="dv">255</span><span class="kw">]</span><br />        <span class="kw">for</span> val<span class="kw">,</span> i <span class="kw">in</span> data<br />          <span class="kw">switch</span> i <span class="kw">%</span> <span class="dv">4</span><br />            <span class="kw">when</span> <span class="dv">0</span> <span class="kw">then</span> bins<span class="kw">.</span>red<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">1</span> <span class="kw">then</span> bins<span class="kw">.</span>green<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">2</span> <span class="kw">then</span> bins<span class="kw">.</span>blue<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">3</span> <span class="kw">then</span> bins<span class="kw">.</span>alpha<span class="kw">[</span>val<span class="kw">]++</span><br />        bins</code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      analyze <span class="kw">=</span> <span class="fu">(data) -&gt;</span><br />        bins <span class="kw">=</span> red<span class="kw">:</span> <span class="kw">[],</span> green<span class="kw">:</span> <span class="kw">[],</span> blue<span class="kw">:</span> <span class="kw">[],</span> alpha<span class="kw">:</span> <span class="kw">[]</span><br />        <span class="kw">for</span> name<span class="kw">,</span> bin <span class="kw">of</span> bins<br />          bin<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">=</span> <span class="dv">0</span> <span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">..</span><span class="dv">255</span><span class="kw">]</span><br />        <span class="kw">for</span> val<span class="kw">,</span> i <span class="kw">in</span> data<br />          <span class="kw">switch</span> i <span class="kw">%</span> <span class="dv">4</span><br />            <span class="kw">when</span> <span class="dv">0</span> <span class="kw">then</span> bins<span class="kw">.</span>red<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">1</span> <span class="kw">then</span> bins<span class="kw">.</span>green<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">2</span> <span class="kw">then</span> bins<span class="kw">.</span>blue<span class="kw">[</span>val<span class="kw">]++</span><br />            <span class="kw">when</span> <span class="dv">3</span> <span class="kw">then</span> bins<span class="kw">.</span>alpha<span class="kw">[</span>val<span class="kw">]++</span><br />        bins</code></pre>
 <p>The width of the <code>histogram</code> canvas was chosen to be the same as the number of values in each of the color channel <code>bins</code>: 256. That simplifies the drawing of the plots, they only have to be scaled to match the height of the canvas. Since the y-coordinate on a canvas defaults to start at the top, the <code>scale</code> function is used to turn the coordinate system upside down — but only after the text <code>legend</code> has been printed in its predetermined location.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">      drawGraphs <span class="kw">=</span> <span class="fu">(ctx, graphs) -&gt;</span><br />        drawPlot <span class="kw">=</span> <span class="fu">(ctx, plot, color) -&gt;</span><br />          ctx<span class="kw">.</span>fillStyle <span class="kw">=</span> color<br />          ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />          ctx<span class="kw">.</span>moveTo <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br />          <span class="kw">for</span> y<span class="kw">,</span> x <span class="kw">in</span> plot<br />            ctx<span class="kw">.</span>lineTo x<span class="kw">,</span> y<br />          ctx<span class="kw">.</span>lineTo plot<span class="kw">.</span>length<span class="kw">,</span> <span class="dv">0</span><br />          ctx<span class="kw">.</span>closePath<span class="kw">()</span><br />          ctx<span class="kw">.</span>fill<span class="kw">()</span><br /><br />        ctx<span class="kw">.</span>translate <span class="dv">0</span><span class="kw">,</span> ctx<span class="kw">.</span>canvas<span class="kw">.</span>height<br />        ctx<span class="kw">.</span>fillStyle <span class="kw">=</span> textColor<br />        ctx<span class="kw">.</span>font <span class="kw">=</span> textFont<br />        ctx<span class="kw">.</span>fillText  legend<span class="kw">[</span>view<span class="kw">],</span> textPos<span class="kw">.</span>x<span class="kw">,</span> textPos<span class="kw">.</span>y<br />        ctx<span class="kw">.</span>scale <span class="dv">1</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">1</span>                        <span class="co"># flip y-axis</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>red<span class="kw">,</span>   hues<span class="kw">.</span>red   <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>green<span class="kw">,</span> hues<span class="kw">.</span>green <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>blue<span class="kw">,</span>  hues<span class="kw">.</span>blue  <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>alpha<span class="kw">,</span> hues<span class="kw">.</span>alpha <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">]</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      drawGraphs <span class="kw">=</span> <span class="fu">(ctx, graphs) -&gt;</span><br />        drawPlot <span class="kw">=</span> <span class="fu">(ctx, plot, color) -&gt;</span><br />          ctx<span class="kw">.</span>fillStyle <span class="kw">=</span> color<br />          ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />          ctx<span class="kw">.</span>moveTo <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br />          <span class="kw">for</span> y<span class="kw">,</span> x <span class="kw">in</span> plot<br />            ctx<span class="kw">.</span>lineTo x<span class="kw">,</span> y<br />          ctx<span class="kw">.</span>lineTo plot<span class="kw">.</span>length<span class="kw">,</span> <span class="dv">0</span><br />          ctx<span class="kw">.</span>closePath<span class="kw">()</span><br />          ctx<span class="kw">.</span>fill<span class="kw">()</span><br /><br />        ctx<span class="kw">.</span>translate <span class="dv">0</span><span class="kw">,</span> ctx<span class="kw">.</span>canvas<span class="kw">.</span>height<br />        ctx<span class="kw">.</span>fillStyle <span class="kw">=</span> textColor<br />        ctx<span class="kw">.</span>font <span class="kw">=</span> textFont<br />        ctx<span class="kw">.</span>fillText  legend<span class="kw">[</span>view<span class="kw">],</span> textPos<span class="kw">.</span>x<span class="kw">,</span> textPos<span class="kw">.</span>y<br />        ctx<span class="kw">.</span>scale <span class="dv">1</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">1</span>                        <span class="co"># flip y-axis</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>red<span class="kw">,</span>   hues<span class="kw">.</span>red   <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>green<span class="kw">,</span> hues<span class="kw">.</span>green <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>blue<span class="kw">,</span>  hues<span class="kw">.</span>blue  <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">]</span><br />        drawPlot ctx<span class="kw">,</span> graphs<span class="kw">.</span>alpha<span class="kw">,</span> hues<span class="kw">.</span>alpha <span class="kw">if</span> view <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">]</span></code></pre>
 <h3 id="events">Events</h3>
 <p>Shared variables, <code>canvas</code> contexts, and the display are initialized when the application has loaded.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">      window<span class="kw">.</span>onload <span class="kw">=</span> <span class="fu">-&gt;</span><br />        $ <span class="kw">=</span> <span class="fu">(element) -&gt;</span> document<span class="kw">.</span>getElementById element<br />        <span class="dt">@image</span> <span class="kw">=</span> $ <span class="st">'image'</span><br />        <span class="dt">@canvas</span> <span class="kw">=</span> $ <span class="st">'picture'</span><br />        <span class="dt">@histogram</span> <span class="kw">=</span> $ <span class="st">'histogram'</span><br /><br />        <span class="dt">@context</span> <span class="kw">=</span> canvas<span class="kw">.</span>getContext <span class="st">'2d'</span><br />        <span class="dt">@plot</span> <span class="kw">=</span> histogram<span class="kw">.</span>getContext <span class="st">'2d'</span><br />        <span class="kw">unless</span> <span class="dt">@context</span><span class="kw">?</span> <span class="kw">or</span> <span class="dt">@plot</span><span class="kw">?</span><br />          alert <span class="st">'No canvas in this browser.'</span><br />          <span class="kw">return</span><br />        window<span class="kw">.</span>onChange<span class="kw">()</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      window<span class="kw">.</span>onload <span class="kw">=</span> <span class="fu">-&gt;</span><br />        $ <span class="kw">=</span> <span class="fu">(element) -&gt;</span> document<span class="kw">.</span>getElementById element<br />        <span class="dt">@image</span> <span class="kw">=</span> $ <span class="st">'image'</span><br />        <span class="dt">@canvas</span> <span class="kw">=</span> $ <span class="st">'picture'</span><br />        <span class="dt">@histogram</span> <span class="kw">=</span> $ <span class="st">'histogram'</span><br /><br />        <span class="dt">@context</span> <span class="kw">=</span> canvas<span class="kw">.</span>getContext <span class="st">'2d'</span><br />        <span class="dt">@plot</span> <span class="kw">=</span> histogram<span class="kw">.</span>getContext <span class="st">'2d'</span><br />        <span class="kw">unless</span> <span class="dt">@context</span><span class="kw">?</span> <span class="kw">or</span> <span class="dt">@plot</span><span class="kw">?</span><br />          alert <span class="st">'No canvas in this browser.'</span><br />          <span class="kw">return</span><br />        window<span class="kw">.</span>onChange<span class="kw">()</span></code></pre>
 <p>A complete redraw is performed when a touch or click triggers an update. If it is an RGB channel that is being displayed then the other channels are set to zero so only the contribution from the current channel is shown in the photo. The <code>view</code> index is updated and clamped.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">      window<span class="kw">.</span>onChange <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="dt">@histogram</span><span class="kw">.</span>width <span class="kw">=</span> <span class="dt">@histogram</span><span class="kw">.</span>width     <span class="co"># reset</span><br />        <span class="dt">@plot</span><span class="kw">.</span>clearRect <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>height<br />        <span class="dt">@context</span><span class="kw">.</span>drawImage <span class="dt">@image</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />          <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />        graphs <span class="kw">=</span> analyze picture<span class="kw">.</span>data<br />        drawGraphs <span class="dt">@plot</span><span class="kw">,</span> graphs<span class="kw">,</span> view<br /><br />        <span class="kw">if</span> <span class="dv">0</span> <span class="kw">&lt;</span> view <span class="kw">&lt;</span> <span class="dv">4</span><br />          picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />            <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />          <span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span>picture<span class="kw">.</span>data<span class="kw">.</span>length<span class="kw">]</span> <span class="kw">by</span> <span class="dv">1</span><br />            <span class="kw">unless</span> i<span class="kw">%</span><span class="dv">4</span> <span class="kw">in</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> view<span class="dv">-1</span><span class="kw">]</span> <span class="co"># unless alpha or current</span><br />              picture<span class="kw">.</span>data<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">=</span> <span class="dv">0</span><br />          <span class="dt">@context</span><span class="kw">.</span>putImageData picture<span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        <span class="kw">if</span> view<span class="kw">++</span> <span class="kw">is</span> <span class="dv">4</span> <span class="kw">then</span> view <span class="kw">=</span> <span class="dv">0</span><br />        <span class="kw">return</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      window<span class="kw">.</span>onChange <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="dt">@histogram</span><span class="kw">.</span>width <span class="kw">=</span> <span class="dt">@histogram</span><span class="kw">.</span>width     <span class="co"># reset</span><br />        <span class="dt">@plot</span><span class="kw">.</span>clearRect <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>height<br />        <span class="dt">@context</span><span class="kw">.</span>drawImage <span class="dt">@image</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />          <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />        graphs <span class="kw">=</span> analyze picture<span class="kw">.</span>data<br />        drawGraphs <span class="dt">@plot</span><span class="kw">,</span> graphs<span class="kw">,</span> view<br /><br />        <span class="kw">if</span> <span class="dv">0</span> <span class="kw">&lt;</span> view <span class="kw">&lt;</span> <span class="dv">4</span><br />          picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />            <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />          <span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span>picture<span class="kw">.</span>data<span class="kw">.</span>length<span class="kw">]</span> <span class="kw">by</span> <span class="dv">1</span><br />            <span class="kw">unless</span> i<span class="kw">%</span><span class="dv">4</span> <span class="kw">in</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> view<span class="dv">-1</span><span class="kw">]</span> <span class="co"># unless alpha or current</span><br />              picture<span class="kw">.</span>data<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">=</span> <span class="dv">0</span><br />          <span class="dt">@context</span><span class="kw">.</span>putImageData picture<span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        <span class="kw">if</span> view<span class="kw">++</span> <span class="kw">is</span> <span class="dv">4</span> <span class="kw">then</span> view <span class="kw">=</span> <span class="dv">0</span><br />        <span class="kw">return</span></code></pre>
 <h3 id="wrap-up">Wrap-up</h3>
 <p>This last bit do not relate to the web application but to the CoffeeKup <code>render</code>ing. The generated HTML is displayed either live in the interactive environment or as text — as nicely formatted as possible.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true">webpage <span class="kw">=</span> kup<span class="kw">.</span>render webapp<span class="kw">,</span> format<span class="kw">:</span><span class="ot">on</span><br />showDocument webpage</code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">webpage <span class="kw">=</span> kup<span class="kw">.</span>render webapp<span class="kw">,</span> format<span class="kw">:</span><span class="ot">on</span><br />showDocument webpage</code></pre>
 <hr />
-<h2 id="output">Output</h2>
-<pre class="output"><code></code></pre>
 <p><canvas id="drawCanvas" width="0" height="0"></canvas> </p>
+<p> </p>
+<p> </p>
 <p></p>
-<h2 id="javascript">JavaScript</h2>
-<pre class="js-source"><code></code></pre>
-<p></p>
-<hr />
 <p>Formats <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram-output.html">Standalone</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.coffee">CoffeeScript</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.md">Markdown</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.pdf">PDF</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.html">HTML</a></p>
 <p>License <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share Alike</a> by autotelicum © 2554/2011</p>
-<!---------------------------------------------------------------------------
+<!--
 Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee histogram.coffee | coffee -cs >histogram.js; coffee histogram.coffee |tee histogram-output.html >histogram.output; open histogram-output.html; plumb histogram-output.html
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o histogram.pdf; open histogram.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
 The formatting is done with pandoc, a universal markup converter, and TeX.
----------------------------------------------------------------------------->
+-->
 
 
 <div class="footnotes">

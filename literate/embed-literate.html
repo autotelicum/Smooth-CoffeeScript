@@ -1,6 +1,6 @@
-<input class="field" type="button" value="Adjust Width" onclick="(function () {
+<input class="field" type="button" value="Limit Width" onclick="(function () {
         var _ref;
-        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Adjust Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
+        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Limit Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -11,42 +11,126 @@
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
         evaluateSource = function() {
-          var code, codeSegment, codeTag, jsprogram, program, segment, _i, _len, _ref;
-          program = '';
+          var addElement, addErrorElement, addFrame, code, codeSegment, codeTag, elem, getParent, i, segment, segments, separator, show, showDocument, _i, _len, _len2;
           if (window.ctx != null) {
             window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
           }
-          document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = '';
-          _ref = document.getElementsByTagName('pre');
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            codeSegment = _ref[_i];
-            if (codeSegment.className === 'sourceCode') {
-              codeTag = codeSegment.getElementsByTagName('code')[0];
-              if (codeTag.className === 'sourceCode coffeescript') {
-                segment = codeTag.innerHTML;
-                code = segment.replace(/<br>/g, '\n');
-                code = code.replace(/<[^>]*>/g, '');
-                code = code.replace(/[&]gt;/g, '>');
-                code = code.replace(/[&]lt;/g, '<');
-                program += code + '\n';
+          getParent = function(child) {
+            var _ref;
+            return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+          };
+          elem = window.document.getElementsByClassName('output')[0];
+          while (elem != null) {
+            getParent(elem).removeChild(elem);
+            elem = window.document.getElementsByClassName('output')[0];
+          }
+          addElement = function(parent, text) {
+            var newelem;
+            newelem = document.createElement('code');
+            newelem.setAttribute('class', 'sourceCode output');
+            newelem.innerHTML = text;
+            return parent.appendChild(newelem);
+          };
+          separator = function(parent) {
+            if (parent.getElementsByClassName('output').length === 0) {
+              return addElement(parent, '<hr><br>');
+            }
+          };
+          addErrorElement = function(text) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addElement(parentTag, "<span class=\"al\">" + text + "</span>");
+          };
+          show = function(msg) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            addElement(parentTag, "&rarr; " + msg + "<br>");
+            return msg;
+          };
+          addFrame = function(parent, width, height, content) {
+            var newelem;
+            newelem = document.createElement('iframe');
+            newelem.setAttribute('class', 'output');
+            newelem.setAttribute('width', width);
+            newelem.setAttribute('height', height);
+            newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+            return parent.appendChild(newelem);
+          };
+          showDocument = function(content, width, height) {
+            var parentTag;
+            if (width == null) width = 300;
+            if (height == null) height = 300;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addFrame(parentTag, width, height, content);
+          };
+          segments = (function() {
+            var _i, _len, _ref, _results;
+            _ref = document.getElementsByTagName('pre');
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              codeSegment = _ref[_i];
+              if (codeSegment.className === 'sourceCode') {
+                codeTag = codeSegment.getElementsByTagName('code')[0];
+                if (codeTag.className === 'sourceCode coffeescript') {
+                  segment = codeTag.innerHTML;
+                  code = segment.replace(/<br>/g, '\n');
+                  code = code.replace(/<[^>]*>/g, '');
+                  code = code.replace(/[&]gt;/g, '>');
+                  code = code.replace(/[&]lt;/g, '<');
+                  code = code.replace(/[&]nbsp;/g, ' ');
+                  _results.push({
+                    codeTag: codeTag,
+                    code: code
+                  });
+                } else {
+                  _results.push(void 0);
+                }
+              } else {
+                _results.push(void 0);
               }
             }
+            return _results;
+          })();
+          segments = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = segments.length; _i < _len; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (i = 0, _len = segments.length; i < _len; i++) {
+            segment = segments[i];
+            if (i > 0 && /^[\s]/.test(segment.code)) {
+              segment.code = segments[i - 1].code + '\n' + segment.code;
+              segments[i - 1] = void 0;
+            }
           }
-          jsprogram = '';
-          try {
-            jsprogram = CoffeeScript.compile(program, {
-              bare: true
-            });
-            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = jsprogram;
-          } catch (error) {
-            document.getElementsByClassName('js-source')[0].getElementsByTagName('code')[0].innerHTML = error;
-            return;
-          }
-          jsprogram = 'var show = function(msg) {\nwindow.document.getElementsByClassName(\'output\')[0]\n  .getElementsByTagName(\'code\')[0].innerHTML += msg + \'\\n\'; };\nvar showDocument = function(content, width, height) {\nif (width == null) width = 300; if (height == null) height = 300;\nshow(\'<iframe width=\"\' + width + \'\" height=\"\' + height + \'\"\' +\n\'src=\"data:text/html;charset=utf-8,\' +\nencodeURIComponent(content) + \'\"\' + \' />\'); };' + jsprogram + '; if (typeof draw !== "undefined") draw(window.ctx);';
-          try {
-            return eval(jsprogram);
-          } catch (error) {
-            return document.getElementsByClassName('output')[0].getElementsByTagName('code')[0].innerHTML = error;
+          segments = (function() {
+            var _i, _len2, _results;
+            _results = [];
+            for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+            segment = segments[_i];
+            codeTag = segment.codeTag;
+            code = segment.code + '\ndraw window.ctx if draw?';
+            try {
+              eval(CoffeeScript.compile(code, {
+                bare: true
+              }));
+            } catch (error) {
+              addErrorElement(error);
+              return;
+            }
           }
         };
         _ref = document.getElementsByTagName('pre');

@@ -1,7 +1,8 @@
+% Photo histogram in CoffeeKup --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
+% 
+% ☕
 
-# Photo histogram in CoffeeKup --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
-
-> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it.
+> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
 
 
 ## Photo histogram
@@ -174,40 +175,30 @@ showDocument webpage
 
 -----------------------------------------------------------------------------
 
-## Output
-
-~~~~ {.output}
-
-~~~~
-
 ![Histogram User Interface](../img/histogram.png)\ 
 
+\subsection{Output}
 \VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{histogram.output}
 
-## JavaScript
-
-~~~~ {.js-source}
-
-~~~~
-
+\subsection{JavaScript}
 \VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{histogram.js}
 
------------------------------------------------------------------------------
+\rule[0.5ex]{1\columnwidth}{1pt}
 
 Formats [Standalone](http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram-output.html)	[CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.coffee)	[Markdown](http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.md) [PDF](http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.pdf) [HTML](http://autotelicum.github.com/Smooth-CoffeeScript/literate/histogram.html)
 
 License [Creative Commons Attribution Share Alike](http://creativecommons.org/licenses/by-sa/3.0/)
 by autotelicum © 2554/2011
 
-<!---------------------------------------------------------------------------
+<!--
 Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee histogram.coffee | coffee -cs >histogram.js; coffee histogram.coffee |tee histogram-output.html >histogram.output; open histogram-output.html; plumb histogram-output.html
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o histogram.pdf; open histogram.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
 The formatting is done with pandoc, a universal markup converter, and TeX.
----------------------------------------------------------------------------->
+-->

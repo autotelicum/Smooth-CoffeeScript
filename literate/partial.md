@@ -1,10 +1,11 @@
+% Partial with Free Variables --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
+% 
+% ☕
 
-# Partial with Free Variables --- _[Smooth CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/)_
-
-> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it.
+> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
 
 
-**Partial function application with free variables**
+##Partial function application with free variables
 
 Partial function application is presented in [Smooth CoffeeScript partial application](http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-partial-application-0). It is a way to create a function from another function where the first arguments are filled in. With the new function we can then ignore those arguments so subsequent calls become easier to read and write.
 
@@ -53,6 +54,7 @@ drawMove = (ctx, args) ->
 A wrapper function `swirl` that takes only those arguments that might change can cut down on the repetition. The `partialFree` function returns a new function when given a function, its fixed arguments and the placeholder symbol for the variable arguments.
 
 ~~~~ {.coffeescript}
+
 _ = undefined
 partialFree = (func, a...) -> (b...) ->
   func (for arg in a then arg ?= b.shift())...
@@ -217,38 +219,28 @@ test()
 
 -----------------------------------------------------------------------------
 
-## Output
-
-~~~~ {.output}
-
-~~~~
-
+\subsection{Output}
 \VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{partial.output}
 
-## JavaScript
-
-~~~~ {.js-source}
-
-~~~~
-
+\subsection{JavaScript}
 \VerbatimInput[baselinestretch=1,fontsize=\footnotesize,numbers=left]{partial.js}
 
------------------------------------------------------------------------------
+\rule[0.5ex]{1\columnwidth}{1pt}
 
 Formats [CoffeeScript](http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.coffee)	[Markdown](http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.md) [PDF](http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.pdf) [HTML](http://autotelicum.github.com/Smooth-CoffeeScript/literate/partial.html)
 
 License [Creative Commons Attribution Share Alike](http://creativecommons.org/licenses/by-sa/3.0/)
 by autotelicum © 2554/2011
 
-<!---------------------------------------------------------------------------
+<!--
 Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee partial.coffee | coffee -cs >partial.js; coffee partial.coffee >partial.output; plumb partial.output
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
+Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o partial.pdf; open partial.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
 The formatting is done with pandoc, a universal markup converter, and TeX.
----------------------------------------------------------------------------->
+-->

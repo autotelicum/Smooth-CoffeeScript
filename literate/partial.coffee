@@ -16,6 +16,7 @@ drawMove = (ctx, args) ->
   args.forEach (ix) -> movement ctx,
     0, 0, 30, 30, 150+ix, 50, 110+ix, 90
   ctx.stroke()
+
 _ = undefined
 partialFree = (func, a...) -> (b...) ->
   func (for arg in a then arg ?= b.shift())...

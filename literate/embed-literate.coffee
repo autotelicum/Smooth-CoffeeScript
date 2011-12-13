@@ -1,15 +1,16 @@
-
-# Usage: coffee embed-literate.coffee >embed-literate.html; plumb embed-literate.html
+###
+Edit ,>coffee -s >embed-literate.html; plumb embed-literate.html
+###
 
 kup = require 'coffeekup'
 
 webfragment = -> 
-  input class: 'field', type: 'button', value: 'Adjust Width', onclick: ->
+  input class: 'field', type: 'button', value: 'Limit Width', onclick: ->
     [document.getElementById('page').style.maxWidth, @value] =
       if document.getElementById('page').style.maxWidth is ''
         ['600px', 'Allow Freeflow']
       else
-        ['', 'Adjust Width']
+        ['', 'Limit Width']
     return
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
@@ -20,48 +21,87 @@ webfragment = ->
     window.onload = ->
       canvas = document.getElementById('drawCanvas')
       window.ctx = canvas.getContext '2d' if canvas?
+
       evaluateSource = ->
-        program = ''
+        # Clear output
         if window.ctx?
           window.ctx.clearRect 0, 0,
             window.ctx.canvas.width, window.ctx.canvas.height
-        document.getElementsByClassName('output')[0]
-          .getElementsByTagName('code')[0].innerHTML = ''
-        for codeSegment in document.getElementsByTagName 'pre'
-          if codeSegment.className is 'sourceCode'
-            codeTag = codeSegment.getElementsByTagName('code')[0]
-            if codeTag.className is 'sourceCode coffeescript'
-              segment = codeTag.innerHTML
-              code = segment.replace /<br>/g, '\n'
-              code = code.replace /<[^>]*>/g, ''
-              code = code.replace /[&]gt;/g, '>'
-              code = code.replace /[&]lt;/g, '<'
-              program += code + '\n'
-        jsprogram = ''
-        try
-          jsprogram = CoffeeScript.compile program, bare: on
-          document.getElementsByClassName('js-source')[0]
-            .getElementsByTagName('code')[0].innerHTML = jsprogram
-        catch error
-          document.getElementsByClassName('js-source')[0]
-            .getElementsByTagName('code')[0].innerHTML = error
-          return
-        jsprogram = '''var show = function(msg) {
-                       window.document.getElementsByClassName('output')[0]
-                         .getElementsByTagName('code')[0].innerHTML += msg + '\\n'; };
-                       var showDocument = function(content, width, height) {
-                       if (width == null) width = 300; if (height == null) height = 300;
-                       show('<iframe width=\"' + width + '\" height=\"' + height + '\"' +
-                       'src=\"data:text/html;charset=utf-8,' +
-                       encodeURIComponent(content) + '\"' + ' />'); };
-                    ''' + jsprogram +
-                    '; if (typeof draw !== "undefined") draw(window.ctx);'
-        try
-          eval jsprogram
-        catch error
-          document.getElementsByClassName('output')[0]
-            .getElementsByTagName('code')[0].innerHTML = error
 
+        getParent = (child) -> child?.parentElement ? child?.parentNode
+        elem = window.document.getElementsByClassName('output')[0]
+        while elem?
+          getParent(elem).removeChild elem
+          elem = window.document.getElementsByClassName('output')[0]
+
+        # Create support functions
+        addElement = (parent, text) ->
+          newelem = document.createElement 'code'
+          newelem.setAttribute 'class', 'sourceCode output'
+          newelem.innerHTML = text
+          parent.appendChild newelem
+        separator = (parent) ->
+          if parent.getElementsByClassName('output').length is 0
+            addElement parent, '<hr><br>'
+        addErrorElement = (text) ->
+          parentTag = getParent codeTag
+          separator parentTag
+          addElement parentTag,
+            """<span class="al">#{text}</span>"""
+        show = (msg) ->
+          parentTag = getParent codeTag
+          separator parentTag
+          addElement parentTag, "&rarr; #{msg}<br>"
+          msg
+        addFrame = (parent, width, height, content) ->
+          newelem = document.createElement 'iframe'
+          newelem.setAttribute 'class', 'output'
+          newelem.setAttribute 'width',  width
+          newelem.setAttribute 'height', height
+          newelem.setAttribute 'src',
+            "data:text/html;charset=utf-8,#{encodeURIComponent content}"
+          parent.appendChild newelem
+        showDocument = (content, width = 300, height = 300) ->
+          parentTag = getParent codeTag
+          separator parentTag
+          addFrame parentTag, width, height, content
+
+        # Obtain each code segment with an ownership tag
+        segments =
+          for codeSegment in document.getElementsByTagName 'pre'
+            if codeSegment.className is 'sourceCode'
+              codeTag = codeSegment.getElementsByTagName('code')[0]
+              if codeTag.className is 'sourceCode coffeescript'
+                segment = codeTag.innerHTML
+                #console.debug "From: #{segment}"
+                code = segment.replace /<br>/g, '\n'
+                code = code.replace /<[^>]*>/g, ''
+                code = code.replace /[&]gt;/g, '>'
+                code = code.replace /[&]lt;/g, '<'
+                code = code.replace /[&]nbsp;/g, ' '
+                #console.debug "To: #{code}"
+                codeTag:codeTag, code:code
+
+        # Stitch together continuing code segments
+        segments = (segment for segment in segments when segment?)
+        for segment, i in segments
+          if i > 0 and /^[\s]/.test segment.code
+            segment.code = segments[i-1].code + '\n' + segment.code
+            segments[i-1] = undefined
+        segments = (segment for segment in segments when segment?)
+
+        # Evaluate code segments
+        for segment in segments
+          codeTag = segment.codeTag
+          code = segment.code + '\ndraw window.ctx if draw?'
+          try
+            eval CoffeeScript.compile code, bare:on
+          catch error
+            addErrorElement error
+            return
+        return
+
+      # Evaluate code segments on load and every keypress
       for segment in document.getElementsByTagName 'pre'
         segment.getElementsByTagName('code')[0]
           .addEventListener 'keyup', evaluateSource, false
