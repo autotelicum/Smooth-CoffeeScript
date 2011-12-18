@@ -18,6 +18,7 @@
 * Snippets
     + [Pluralize](pluralize.html)
     + [Partial function application](partial.html)
+    + [Point distance: hypot](hypot.html)
 * Programs
     + [Photo Histogram](histogram.html)
 

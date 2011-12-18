@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="pandoc-template.appcache">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -33,20 +33,58 @@ code.sourceCode span.er { color: red; font-weight: bold; }
 </head>
 <body>
 <div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<div id="feature-detect">
+  <div id="feature-javascript" style="color:#FF0000; display: block">
+No JavaScript &rarr; no output and no interactivity.  </div>
+  <div id="feature-mathml" style="color:#FF0000; display: none">
+No MathML 1998 &rarr; formulae are not rendered.  </div>
+  <div id="feature-canvas" style="color:#FF0000; display: none">
+No Canvas &rarr; graphical output is not rendered.  </div>
+  <div id="feature-contenteditable" style="color:#FF0000; display: none">
+No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
+</div>
 <input class="field" type="button" value="Limit Width" onclick="(function () {
         var _ref;
         _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Limit Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
+<script src="node_modules/underscore.js"></script>
+<script src="node_modules/underscore.string.js"></script>
+<script src="node_modules/qc.js"></script>
 <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
-      window.ostrich = 'data:image/png;base64,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';
-      return window.onload = function() {
+      var featureDetect;
+      this.reveal = function(parent) {
+        return parent.getElementsByTagName('code')[0].style.display = 'block';
+      };
+      featureDetect = function() {
+        var mathMLSupport, mathelem, _ref, _ref2, _ref3, _ref4, _ref5;
+        if ((_ref = document.getElementById('feature-javascript')) != null) {
+          _ref.style.display = "none";
+        }
+        (mathelem = document.createElement('div')).innerHTML = '<math></math>';
+        mathMLSupport = (mathelem != null ? (_ref2 = mathelem.firstChild) != null ? _ref2.namespaceURI : void 0 : void 0) === 'http://www.w3.org/1998/Math/MathML';
+        if (!mathMLSupport) {
+          if ((_ref3 = document.getElementById('feature-mathml')) != null) {
+            _ref3.style.display = "block";
+          }
+        }
+        if (document.createElement('canvas').getContext == null) {
+          if ((_ref4 = document.getElementById('feature-canvas')) != null) {
+            _ref4.style.display = "block";
+          }
+        }
+        if (!('isContentEditable' in document.documentElement)) {
+          return (_ref5 = document.getElementById('feature-contenteditable')) != null ? _ref5.style.display = "block" : void 0;
+        }
+      };
+      window.onload = function() {
         var canvas, evaluateSource, segment, _i, _len, _ref;
+        featureDetect();
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
         evaluateSource = function() {
-          var addElement, addErrorElement, addFrame, code, codeSegment, codeTag, elem, getParent, i, segment, segments, separator, show, showDocument, _i, _len, _len2;
+          var HtmlListener, addElement, addErrorElement, addFrame, code, codeSegment, codeTag, draw, elem, getParent, i, qcConfig, segment, segments, separator, show, showDocument, test, testPure, _i, _len, _len2;
           if (window.ctx != null) {
             window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
           }
@@ -75,7 +113,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
             var parentTag;
             parentTag = getParent(codeTag);
             separator(parentTag);
-            return addElement(parentTag, "<span class=\"al\">" + text + "</span>");
+            return addElement(parentTag, "<span class=\"er\">" + text + "</span>");
           };
           show = function(msg) {
             var parentTag;
@@ -91,6 +129,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
             newelem.setAttribute('width', width);
             newelem.setAttribute('height', height);
             newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+            newelem.innerHTML = '<div id="feature-dataurl" style="color:#FF0000; display: block">\nNo or insufficient Data URL support &rarr;\nweb page output is not rendered in this browser.</div>';
             return parent.appendChild(newelem);
           };
           showDocument = function(content, width, height) {
@@ -101,6 +140,60 @@ code.sourceCode span.er { color: red; font-weight: bold; }
             separator(parentTag);
             return addFrame(parentTag, width, height, content);
           };
+          HtmlListener = (function() {
+
+            __extends(HtmlListener, ConsoleListener);
+
+            function HtmlListener(maxCollected) {
+              this.maxCollected = maxCollected != null ? maxCollected : 10;
+            }
+
+            HtmlListener.prototype.log = function(str) {
+              return show(str);
+            };
+
+            HtmlListener.prototype.passed = function(str) {
+              return show("<span class=\"kw\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.invalid = function(str) {
+              return show("<span class=\"dt\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.failure = function(str) {
+              return show("<span class=\"al\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.done = function() {
+              show('Completed test.');
+              return resetProps();
+            };
+
+            return HtmlListener;
+
+          })();
+          Case.prototype.note = function(a) {
+            this.noteArg(a);
+            return a;
+          };
+          Case.prototype.noteVerbose = function(a) {
+            this.noteArg(a);
+            show(this.args);
+            return a;
+          };
+          testPure = function(func, types, name, property) {
+            return declare(name, types, function() {
+              var a, c;
+              c = arguments[0], a = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+              return c.assert(property.apply(null, [c].concat(__slice.call(a), [c.note(func.apply(null, a))])));
+            });
+          };
+          qcConfig = new Config(100, 1000);
+          test = function(msg, func) {
+            return _.each([msg, func, runAllProps(qcConfig, new HtmlListener)], function(o) {
+              if (!_.isUndefined(o)) return show(o);
+            });
+          };
           segments = (function() {
             var _i, _len, _ref, _results;
             _ref = document.getElementsByTagName('pre');
@@ -109,7 +202,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
               codeSegment = _ref[_i];
               if (codeSegment.className === 'sourceCode') {
                 codeTag = codeSegment.getElementsByTagName('code')[0];
-                if (codeTag.className === 'sourceCode coffeescript') {
+                if (codeTag.className === 'sourceCode coffeescript' || codeTag.className === 'sourceCode CoffeeScript') {
                   segment = codeTag.innerHTML;
                   code = segment.replace(/<br>/g, '\n');
                   code = code.replace(/<[^>]*>/g, '');
@@ -157,11 +250,12 @@ code.sourceCode span.er { color: red; font-weight: bold; }
           for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
             segment = segments[_i];
             codeTag = segment.codeTag;
-            code = segment.code + '\ndraw window.ctx if draw?';
             try {
-              eval(CoffeeScript.compile(code, {
+              draw = void 0;
+              eval(CoffeeScript.compile(segment.code, {
                 bare: true
               }));
+              if (draw != null) draw(window.ctx);
             } catch (error) {
               addErrorElement(error);
               return;
@@ -172,9 +266,13 @@ code.sourceCode span.er { color: red; font-weight: bold; }
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           segment = _ref[_i];
           segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+          segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
+            return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
+          }), false);
         }
         return evaluateSource();
       };
+      return window.ostrich = 'data:image/png;base64,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';
     }).call(this);</script>
 
 <div id="page">
@@ -226,7 +324,7 @@ Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee partial.coffee | coffee -cs >partial.js; coffee partial.coffee >partial.output; plumb partial.output
-Edit ,>pandoc -f markdown -t html -S -5 --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
+Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Solution<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"100\"><\/canvas>/' >partial.html; open partial.html; plumb partial.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o partial.pdf; open partial.pdf
 
 To execute these commands; middle-button select them in the acme environment.

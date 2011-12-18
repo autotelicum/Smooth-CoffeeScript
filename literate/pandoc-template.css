@@ -8,7 +8,7 @@ body {
 }
 
 #page {
-    background: #FEFEF2;
+    background: #FEFEFE;
     padding: 3em 3em 1.5em 3em;
     border: 1px solid #ccc;
 
@@ -51,14 +51,14 @@ pre {
     margin: 1em 0 1.5em 0;
     line-height: 1.5em; 
     color: #111;
-    background: #eaffff;
+    background: #FEFEF2;
     border: 1px solid #ddc;
     padding: 0.5em 1em;
     overflow: hidden;
 }
 code {
     font-size: 1em;
-    background-color: #eaffff;
+    background-color: #FEFEF2;
     line-height: 1.4em;
     font-family: monospace;
 }

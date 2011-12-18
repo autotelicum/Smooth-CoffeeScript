@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html manifest="pandoc-template.appcache">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="☕" />
+  <title>Point distance: hypot — Smooth CoffeeScript</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+/*<![CDATA[*/
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre 
+   { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
+td.lineNumbers { border-right: 1px solid #AAAAAA; text-align: right; color: #AAAAAA; padding-right: 5px; padding-left: 5px; }
+td.sourceCode { padding-left: 5px; }
+code.sourceCode span.kw { color: #007020; font-weight: bold; } 
+code.sourceCode span.dt { color: #902000; }
+code.sourceCode span.dv { color: #40a070; }
+code.sourceCode span.bn { color: #40a070; }
+code.sourceCode span.fl { color: #40a070; }
+code.sourceCode span.ch { color: #4070a0; }
+code.sourceCode span.st { color: #4070a0; }
+code.sourceCode span.co { color: #60a0b0; font-style: italic; }
+code.sourceCode span.ot { color: #007020; }
+code.sourceCode span.al { color: red; font-weight: bold; }
+code.sourceCode span.fu { color: #06287e; }
+code.sourceCode span.re { }
+code.sourceCode span.er { color: red; font-weight: bold; }
+/*]]>*/
+  </style>
+  <link rel="stylesheet" href="pandoc-template.css" />
+</head>
+<body>
+<div class="rdbWrapper" data-show-read="1" data-show-send-to-kindle="1" data-show-print="1" data-show-email="1" data-orientation="0" data-version="1" data-bg-color="#fffce6"></div><script type="text/javascript">(function() {var s = document.getElementsByTagName("script")[0],rdb = document.createElement("script"); rdb.type = "text/javascript"; rdb.async = true; rdb.src = document.location.protocol + "//www.readability.com/embed.js"; s.parentNode.insertBefore(rdb, s); })();</script>
+<div id="feature-detect">
+  <div id="feature-javascript" style="color:#FF0000; display: block">
+No JavaScript &rarr; no output and no interactivity.  </div>
+  <div id="feature-mathml" style="color:#FF0000; display: none">
+No MathML 1998 &rarr; math is not readable.  </div>
+  <div id="feature-canvas" style="color:#FF0000; display: none">
+No Canvas &rarr; graphical output is not rendered.  </div>
+  <div id="feature-contenteditable" style="color:#FF0000; display: none">
+No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
+</div>
+<input class="field" type="button" value="Limit Width" onclick="(function () {
+        var _ref;
+        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Limit Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script src="node_modules/coffeekup.js"></script>
+<script src="node_modules/underscore.js"></script>
+<script src="node_modules/underscore.string.js"></script>
+<script src="node_modules/qc.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      var featureDetect;
+      this.reveal = function(parent) {
+        return parent.getElementsByTagName('code')[0].style.display = 'block';
+      };
+      featureDetect = function() {
+        var mathmlDetect, _ref, _ref2, _ref3, _ref4;
+        mathmlDetect = function() {
+          var e, passed, used;
+          (e = document.createElement('div')).innerHTML = '<math></math>';
+          passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
+          used = (document.getElementsByTagName('math')) != null;
+          return used && passed && !/Chrome/.test(navigator.userAgent);
+        };
+        if ((_ref = document.getElementById('feature-javascript')) != null) {
+          _ref.style.display = "none";
+        }
+        if (!mathmlDetect()) {
+          if ((_ref2 = document.getElementById('feature-mathml')) != null) {
+            _ref2.style.display = "block";
+          }
+        }
+        if (document.createElement('canvas').getContext == null) {
+          if ((_ref3 = document.getElementById('feature-canvas')) != null) {
+            _ref3.style.display = "block";
+          }
+        }
+        if (!('isContentEditable' in document.documentElement)) {
+          return (_ref4 = document.getElementById('feature-contenteditable')) != null ? _ref4.style.display = "block" : void 0;
+        }
+      };
+      window.onload = function() {
+        var canvas, evaluateSource, segment, _i, _len, _ref;
+        featureDetect();
+        canvas = document.getElementById('drawCanvas');
+        if (canvas != null) window.ctx = canvas.getContext('2d');
+        evaluateSource = function() {
+          var HtmlListener, addElement, addErrorElement, addFrame, code, codeSegment, codeTag, draw, elem, getParent, i, qcConfig, segment, segments, separator, show, showDocument, test, testPure, _i, _len, _len2;
+          if (window.ctx != null) {
+            window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
+          }
+          getParent = function(child) {
+            var _ref;
+            return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+          };
+          elem = window.document.getElementsByClassName('output')[0];
+          while (elem != null) {
+            getParent(elem).removeChild(elem);
+            elem = window.document.getElementsByClassName('output')[0];
+          }
+          addElement = function(parent, text) {
+            var newelem;
+            newelem = document.createElement('code');
+            newelem.setAttribute('class', 'sourceCode output');
+            newelem.innerHTML = text;
+            return parent.appendChild(newelem);
+          };
+          separator = function(parent) {
+            if (parent.getElementsByClassName('output').length === 0) {
+              return addElement(parent, '<hr><br>');
+            }
+          };
+          addErrorElement = function(text) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addElement(parentTag, "<span class=\"er\">" + text + "</span>");
+          };
+          show = function(msg) {
+            var parentTag;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            addElement(parentTag, "&rarr; " + msg + "<br>");
+            return msg;
+          };
+          addFrame = function(parent, width, height, content) {
+            var newelem;
+            newelem = document.createElement('iframe');
+            newelem.setAttribute('class', 'output');
+            newelem.setAttribute('width', width);
+            newelem.setAttribute('height', height);
+            newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+            newelem.innerHTML = '<div id="feature-dataurl" style="color:#FF0000; display: block">\nNo or insufficient Data URL support &rarr;\nweb page output is not rendered in this browser.</div>';
+            return parent.appendChild(newelem);
+          };
+          showDocument = function(content, width, height) {
+            var parentTag;
+            if (width == null) width = 300;
+            if (height == null) height = 300;
+            parentTag = getParent(codeTag);
+            separator(parentTag);
+            return addFrame(parentTag, width, height, content);
+          };
+          HtmlListener = (function() {
+
+            __extends(HtmlListener, ConsoleListener);
+
+            function HtmlListener(maxCollected) {
+              this.maxCollected = maxCollected != null ? maxCollected : 10;
+            }
+
+            HtmlListener.prototype.log = function(str) {
+              return show(str);
+            };
+
+            HtmlListener.prototype.passed = function(str) {
+              return show("<span class=\"kw\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.invalid = function(str) {
+              return show("<span class=\"dt\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.failure = function(str) {
+              return show("<span class=\"al\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.done = function() {
+              show('Completed test.');
+              return resetProps();
+            };
+
+            return HtmlListener;
+
+          })();
+          Case.prototype.note = function(a) {
+            this.noteArg(a);
+            return a;
+          };
+          Case.prototype.noteVerbose = function(a) {
+            this.noteArg(a);
+            show(this.args);
+            return a;
+          };
+          testPure = function(func, types, name, property) {
+            return declare(name, types, function() {
+              var a, c;
+              c = arguments[0], a = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+              return c.assert(property.apply(null, [c].concat(__slice.call(a), [c.note(func.apply(null, a))])));
+            });
+          };
+          qcConfig = new Config(100, 1000);
+          test = function(msg, func) {
+            return _.each([msg, func, runAllProps(qcConfig, new HtmlListener)], function(o) {
+              if (!_.isUndefined(o)) return show(o);
+            });
+          };
+          segments = (function() {
+            var _i, _len, _ref, _results;
+            _ref = document.getElementsByTagName('pre');
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              codeSegment = _ref[_i];
+              if (codeSegment.className === 'sourceCode') {
+                codeTag = codeSegment.getElementsByTagName('code')[0];
+                if (codeTag.className === 'sourceCode coffeescript' || codeTag.className === 'sourceCode CoffeeScript') {
+                  segment = codeTag.innerHTML;
+                  code = segment.replace(/<br>/g, '\n');
+                  code = code.replace(/<[^>]*>/g, '');
+                  code = code.replace(/[&]gt;/g, '>');
+                  code = code.replace(/[&]lt;/g, '<');
+                  code = code.replace(/[&]nbsp;/g, ' ');
+                  _results.push({
+                    codeTag: codeTag,
+                    code: code
+                  });
+                } else {
+                  _results.push(void 0);
+                }
+              } else {
+                _results.push(void 0);
+              }
+            }
+            return _results;
+          })();
+          segments = (function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = segments.length; _i < _len; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (i = 0, _len = segments.length; i < _len; i++) {
+            segment = segments[i];
+            if (i > 0 && /^[\s]/.test(segment.code)) {
+              segment.code = segments[i - 1].code + '\n' + segment.code;
+              segments[i - 1] = void 0;
+            }
+          }
+          segments = (function() {
+            var _i, _len2, _results;
+            _results = [];
+            for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+              segment = segments[_i];
+              if (segment != null) _results.push(segment);
+            }
+            return _results;
+          })();
+          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+            segment = segments[_i];
+            codeTag = segment.codeTag;
+            try {
+              draw = void 0;
+              eval(CoffeeScript.compile(segment.code, {
+                bare: true
+              }));
+              if (draw != null) draw(window.ctx);
+            } catch (error) {
+              addErrorElement(error);
+              return;
+            }
+          }
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+          segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
+            return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
+          }), false);
+        }
+        return evaluateSource();
+      };
+      return window.ostrich = 'data:image/png;base64,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';
+    }).call(this);</script>
+
+<div id="page">
+<header>
+<h1 class="title">Point distance: hypot — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<h4 class="date">☕</h4>
+</header>
+<blockquote>
+<p>This literate program is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing ‘show name’ after its definition.</p>
+</blockquote>
+<h2 id="point-distance-algorithm">Point distance algorithm</h2>
+<p><em>Warning!</em> This snippet is about calculating the distance between two points — not something you would normally worry about. It is a fundamental calculation that can be used in other algorithms such as ‘nearest neighbor’.</p>
+<p>A point is any object that implements <code>x</code> and <code>y</code> properties. Here defined as a class.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="kw">class</span> <span class="dt">Point</span><br />  <span class="kw">constructor</span><span class="kw">:</span> <span class="fu">(@x, @y) -&gt;</span><br />  draw<span class="kw">:</span> <span class="fu">(ctx) -&gt;</span> ctx<span class="kw">.</span>fillRect @x<span class="kw">,</span> @y<span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">1</span><br />  toString<span class="kw">:</span> <span class="fu">-&gt;</span> <span class="st">&quot;(</span><span class="ch">#{</span>@x<span class="ch">}</span><span class="st">, </span><span class="ch">#{</span>@y<span class="ch">}</span><span class="st">)&quot;</span></code></pre>
+<h3 id="euclidean-distance">Euclidean distance</h3>
+<p>The euclidean distance between two points is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msqrt><mrow><msup><mrow><mo stretchy="true">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>-</mo><msub><mi>x</mi><mn>2</mn></msub><mo stretchy="true">)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo stretchy="true">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>-</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="true">)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mrow></math>. Which can be written as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>a</mi><mo>=</mo><msub><mi>x</mi><mn>1</mn></msub><mo>-</mo><msub><mi>x</mi><mn>2</mn></msub></mrow></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>b</mi><mo>=</mo><msub><mi>y</mi><mn>1</mn></msub><mo>-</mo><msub><mi>y</mi><mn>2</mn></msub></mrow></math>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">euclidean <span class="kw">=</span> <span class="fu">(p1, p2) -&gt;</span><br />  <span class="kw">[</span>a<span class="kw">,</span> b<span class="kw">]</span> <span class="kw">=</span> <span class="kw">[</span>p1<span class="kw">?.</span>x <span class="kw">-</span> p2<span class="kw">?.</span>x<span class="kw">,</span> p1<span class="kw">?.</span>y <span class="kw">-</span> p2<span class="kw">?.</span>y<span class="kw">]</span><br />  <span class="ot">Math</span><span class="kw">.</span>sqrt<span class="kw">(</span><span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span>a<span class="kw">,</span> <span class="dv">2</span><span class="kw">)</span> <span class="kw">+</span> <span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span>b<span class="kw">,</span> <span class="dv">2</span><span class="kw">))</span></code></pre>
+<p>This is a classical algorithm based on the Pythagorean theorem.</p>
+<pre class="sourceCode" onclick="reveal(this)" ><b><u>Source</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" ">draw <span class="kw">=</span> <span class="fu">(ctx) -&gt;</span><br />  <span class="co"># A hard-coded approximate figure</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />  ctx<span class="kw">.</span>fillStyle <span class="kw">=</span> <span class="st">'crimson'</span><br />  ctx<span class="kw">.</span>font <span class="kw">=</span> <span class="st">'14pt Times'</span><br />  ctx<span class="kw">.</span>fillText <span class="st">'a&#178; + b&#178; = c&#178;'</span><span class="kw">,</span> <span class="dv">27</span><span class="kw">,</span> <span class="dv">110</span><br /><br />  ctx<span class="kw">.</span>fillText <span class="st">'a'</span><span class="kw">,</span> <span class="dv">66</span><span class="kw">,</span> <span class="dv">74</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />  ctx<span class="kw">.</span>strokeStyle <span class="kw">=</span> <span class="st">'hotpink'</span><br />  ctx<span class="kw">.</span>strokeRect <span class="dv">60</span><span class="kw">,</span> <span class="dv">60</span><span class="kw">,</span> <span class="dv">20</span><span class="kw">,</span> <span class="dv">20</span><br /><br />  ctx<span class="kw">.</span>fillText <span class="st">'b'</span><span class="kw">,</span> <span class="dv">46</span><span class="kw">,</span> <span class="dv">47</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />  ctx<span class="kw">.</span>strokeStyle <span class="kw">=</span> <span class="st">'tomato'</span><br />  ctx<span class="kw">.</span>strokeRect <span class="dv">20</span><span class="kw">,</span> <span class="dv">20</span><span class="kw">,</span> <span class="dv">40</span><span class="kw">,</span> <span class="dv">40</span><br /><br />  ctx<span class="kw">.</span>fillText <span class="st">'c'</span><span class="kw">,</span> <span class="dv">74</span><span class="kw">,</span> <span class="dv">42</span><br />  ctx<span class="kw">.</span>beginPath<span class="kw">()</span><br />  ctx<span class="kw">.</span>strokeStyle <span class="kw">=</span> <span class="st">'darkorange'</span><br />  ctx<span class="kw">.</span>moveTo <span class="dv">60</span><span class="kw">,</span> <span class="dv">20</span><br />  ctx<span class="kw">.</span>lineTo <span class="dv">80</span><span class="kw">,</span> <span class="dv">60</span><br />  ctx<span class="kw">.</span>lineTo <span class="dv">120</span><span class="kw">,</span> <span class="dv">40</span><br />  ctx<span class="kw">.</span>lineTo <span class="dv">100</span><span class="kw">,</span> <span class="dv">0</span><br />  ctx<span class="kw">.</span>lineTo <span class="dv">60</span><span class="kw">,</span> <span class="dv">20</span><br />  ctx<span class="kw">.</span>stroke<span class="kw">()</span></code></pre>
+<p><canvas id="drawCanvas" width="200" height="120"></canvas> </p>
+<h3 id="improved-precision-calculation">Improved precision calculation</h3>
+<p>Mathematically the <code>euclidean</code> calculation is correct and in normal use it will work. However for very large and very small numbers its results are imprecise — more imprecise than they have to be. This is a consequence of the difference between numbers in mathematics and computer floating point numbers. The precision of the results are limited due to the square of the differences, the square causes overflow or underflow to occur at the square root of the machine precision. Fortunately some clever person found that expressing the calculation in another way can improve upon this situation, see <a href="http://en.wikipedia.org/wiki/Hypot">Wikipedia hypot</a>.</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow></msqrt></mrow></math> = <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msqrt><mrow><msup><mi>a</mi><mn>2</mn></msup><mo>&#8901;</mo><mrow><mo stretchy="true">(</mo><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true">(</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mo stretchy="true">)</mo></mrow><mn>2</mn></msup><mo stretchy="true">)</mo></mrow></mrow></msqrt></mrow></math> = <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mrow><mo stretchy="true">&#8739;</mo><mi>a</mi><mo stretchy="true">&#8739;</mo></mrow><msqrt><mrow><mn>1</mn><mo>+</mo><msup><mrow><mo stretchy="true">(</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mo stretchy="true">)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mrow></math></p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">hypot <span class="kw">=</span> <span class="fu">(a, b) -&gt;</span><br />  <span class="kw">if</span> a <span class="kw">is</span> <span class="dv">0</span><br />    <span class="ot">Math</span><span class="kw">.</span>abs<span class="kw">(</span>b<span class="kw">)</span><br />  <span class="kw">else</span><br />    <span class="ot">Math</span><span class="kw">.</span>abs<span class="kw">(</span>a<span class="kw">)</span> <span class="kw">*</span> <span class="ot">Math</span><span class="kw">.</span>sqrt<span class="kw">(</span><span class="dv">1</span> <span class="kw">+</span> <span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span>b<span class="kw">/</span>a<span class="kw">,</span> <span class="dv">2</span><span class="kw">))</span><br />hypotenuse <span class="kw">=</span> <span class="fu">(p1, p2) -&gt;</span><br />  <span class="kw">[</span>a<span class="kw">,</span> b<span class="kw">]</span> <span class="kw">=</span> <span class="kw">[</span>p1<span class="kw">?.</span>x <span class="kw">-</span> p2<span class="kw">?.</span>x<span class="kw">,</span> p1<span class="kw">?.</span>y <span class="kw">-</span> p2<span class="kw">?.</span>y<span class="kw">]</span><br />  hypot a<span class="kw">,</span> b</code></pre>
+<h3 id="polar-coordinates">Polar coordinates</h3>
+<p>As described in <a href="http://en.wikipedia.org/wiki/Hypot">Wikipedia hypot</a>, the <code>hypot</code> function can also be used to convert to polar coordinates.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">polar <span class="kw">=</span> <span class="fu">(p) -&gt;</span><br />  <span class="kw">[</span>x<span class="kw">,</span> y<span class="kw">]</span> <span class="kw">=</span> <span class="kw">[</span>p<span class="kw">.</span>x<span class="kw">,</span> p<span class="kw">.</span>y<span class="kw">]</span><br />  r <span class="kw">=</span> hypot<span class="kw">(</span>x<span class="kw">,</span> y<span class="kw">)</span><br />  &#952; <span class="kw">=</span> <span class="ot">Math</span><span class="kw">.</span>atan2<span class="kw">(</span>y<span class="kw">,</span> x<span class="kw">)</span><br />  <span class="kw">[</span>r<span class="kw">,</span> &#952;<span class="kw">]</span><br />show <span class="st">'Distance from (0, 0), angle in 2&#960; radians'</span><br />show polar <span class="kw">new</span> <span class="dt">Point</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">1</span></code></pre>
+<h3 id="edge-case-tests">Edge case tests</h3>
+<p>Testing with some exceptional values is a good way to check that the function behave as intended.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show <span class="st">&quot;euclidean vs hypotenuse&quot;</span><br />p1 <span class="kw">=</span> p2 <span class="kw">=</span> <span class="ot">undefined</span><br />show <span class="st">&quot;</span><span class="ch">#{</span>euclidean p1, p2<span class="ch">}</span><span class="st"> vs </span><span class="ch">#{</span>hypotenuse p1, p2<span class="ch">}</span><span class="st">&quot;</span><br /><br />p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br />p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br />show <span class="st">&quot;</span><span class="ch">#{</span>euclidean p1, p2<span class="ch">}</span><span class="st"> vs </span><span class="ch">#{</span>hypotenuse p1, p2<span class="ch">}</span><span class="st">&quot;</span><br /><br />p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="fl">1e-200</span><span class="kw">,</span> <span class="fl">1e-200</span><br />p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="fl">2e-200</span><span class="kw">,</span> <span class="fl">2e-200</span><br />show <span class="st">&quot;</span><span class="ch">#{</span>euclidean p1, p2<span class="ch">}</span><span class="st"> vs </span><span class="ch">#{</span>hypotenuse p1, p2<span class="ch">}</span><span class="st">&quot;</span><br /><br />p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="fl">1e200</span><span class="kw">,</span> <span class="fl">1e200</span><br />p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> <span class="fl">2e200</span><span class="kw">,</span> <span class="fl">2e200</span><br />show <span class="st">&quot;</span><span class="ch">#{</span>euclidean p1, p2<span class="ch">}</span><span class="st"> vs </span><span class="ch">#{</span>hypotenuse p1, p2<span class="ch">}</span><span class="st">&quot;</span></code></pre>
+<h2 id="quickcheck">QuickCheck</h2>
+<p>More comprehensive testing can be performed with QuickCheck. It is a test method where the properties of a function are described and data is generated to see if the properties hold. It is suitable for testing algorithms (in game logic and graphics) and is introduced in <a href="http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#entry-testing-0">Smooth CoffeeScript Functions</a>. There is also an <a href="http://autotelicum.github.com/Smooth-CoffeeScript/SmoothCoffeeScript.html#toc-Subsection--23">interface reference</a>.</p>
+<h3 id="how-to">How to</h3>
+<p>You can find some support code in the solution below. It can be used with <code>qc.js</code> to run QuickCheck with the standalone CoffeeScript compiler.</p>
+<pre class="sourceCode" onclick="reveal(this)" ><b><u>Source</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" "><span class="kw">unless</span> exports<span class="kw">?</span><br />  _ <span class="kw">=</span> window<span class="kw">.</span>_ <span class="co"># Workaround for interactive environment quirk.</span><br /><span class="kw">else</span><br />  show <span class="kw">=</span> <span class="ot">console</span><span class="kw">.</span>log<br />  _ <span class="kw">=</span> require <span class="st">'underscore'</span><br />  qc <span class="kw">=</span> require <span class="st">'qc'</span><br />  <span class="co"># Import functions into the global namespace with globalize,</span><br />  <span class="co"># so that they do not need to be qualified each time.</span><br />  globalize <span class="kw">=</span> <span class="fu">(ns, target = global) -&gt;</span><br />    target<span class="kw">[</span>name<span class="kw">]</span> <span class="kw">=</span> ns<span class="kw">[</span>name<span class="kw">]</span> <span class="kw">for</span> name <span class="kw">of</span> ns<br />  <span class="co"># qc is only used for testing so ignore namespace pollution.</span><br />  globalize qc<br /><br /><span class="kw">if</span> exports<span class="kw">?</span><br />  <span class="co"># Set to `no` to get monochrome output</span><br />  useColors <span class="kw">=</span> <span class="ot">no</span><br /><br />  <span class="co"># Node colored output for QuickCheck.</span><br />  <span class="kw">class</span> <span class="dt">NodeListener</span> <span class="kw">extends</span> <span class="dt">ConsoleListener</span><br />    <span class="kw">constructor</span><span class="kw">:</span> <span class="fu">(@maxCollected = 10) -&gt;</span><br />    log<span class="kw">:</span> <span class="fu">(str) -&gt;</span> show str<br />    passed<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message in green</span><br />      <span class="ot">console</span><span class="kw">.</span>log <span class="kw">if</span> useColors <span class="kw">then</span> <span class="st">&quot;\033[32m</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">\033[0m&quot;</span> <span class="kw">else</span> <span class="st">&quot;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&quot;</span><br />    invalid<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message in yellow</span><br />      <span class="ot">console</span><span class="kw">.</span>warn <span class="kw">if</span> useColors <span class="kw">then</span> <span class="st">&quot;\033[33m</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">\033[0m&quot;</span> <span class="kw">else</span> <span class="st">&quot;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&quot;</span><br />    failure<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message in red</span><br />      <span class="ot">console</span><span class="kw">.</span>error <span class="kw">if</span> useColors <span class="kw">then</span> <span class="st">&quot;\033[31m</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">\033[0m&quot;</span> <span class="kw">else</span> <span class="st">&quot;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&quot;</span><br />    done<span class="kw">:</span> <span class="fu">-&gt;</span><br />      show <span class="st">'Completed test.'</span><br />      resetProps<span class="kw">()</span> <span class="co"># Chain here if needed</span><br /><br />  <span class="co"># Enhanced noteArg returning its argument so it can be used inline.</span><br />  Case<span class="kw">::</span>note <span class="kw">=</span> <span class="fu">(a) -&gt;</span> <span class="dt">@noteArg</span> a<span class="kw">;</span> a<br />  <span class="co"># Same as Case::note but also logs the noted args.</span><br />  Case<span class="kw">::</span>noteVerbose <span class="kw">=</span> <span class="fu">(a) -&gt;</span> <span class="dt">@noteArg</span> a<span class="kw">;</span> show <span class="dt">@args</span><span class="kw">;</span> a<br /><br />  <span class="co"># Helper to declare a named test property for</span><br />  <span class="co"># a function func taking types as arguments.</span><br />  <span class="co"># Property is passed the testcase, the arguments</span><br />  <span class="co"># and the result of calling func, it must return</span><br />  <span class="co"># a boolean indicating success or failure.</span><br />  testPure <span class="kw">=</span> <span class="fu">(func, types, name, property) -&gt;</span><br />    declare name<span class="kw">,</span> types<span class="kw">,</span> <span class="fu">(c, a...) -&gt;</span><br />      c<span class="kw">.</span>assert property c<span class="kw">,</span> a<span class="kw">...,</span> c<span class="kw">.</span>note func a<span class="kw">...</span><br /><br />  <span class="co"># Default qc configuration with 100 pass and 1000 invalid tests</span><br />  qcConfig <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Config</span> <span class="dv">100</span><span class="kw">,</span> <span class="dv">1000</span><br /><br />  <span class="co"># Test all known properties</span><br />  test <span class="kw">=</span> <span class="fu">(msg, func) -&gt;</span><br />    _<span class="kw">.</span>each <span class="kw">[</span>msg<span class="kw">,</span> func<span class="kw">,</span> runAllProps qcConfig<span class="kw">,</span> <span class="kw">new</span> <span class="dt">NodeListener]</span><span class="kw">,</span><br />      <span class="fu">(o) -&gt;</span> <span class="kw">unless</span> _<span class="kw">.</span>isUndefined o <span class="kw">then</span> show o</code></pre>
+<h3 id="test-cases">Test cases</h3>
+<p>This test says that the <code>hypot</code> function is expected to return the same result as the <code>euclidean</code>. The <code>euclidean</code> is assumed to be correct for the usually generated arbInt numbers.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">declare <span class="st">'same results for normal range numbers'</span><span class="kw">,</span><br />  <span class="kw">[</span>arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">],</span><br />  <span class="fu">(c, x1, y1, x2, y2) -&gt;</span><br />    p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x1<span class="kw">,</span> y1<br />    p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x2<span class="kw">,</span> y2<br />    d1 <span class="kw">=</span> euclidean p1<span class="kw">,</span> p2<br />    d2 <span class="kw">=</span> hypotenuse p1<span class="kw">,</span> p2<br />    diff <span class="kw">=</span> <span class="kw">(</span>d1 <span class="kw">-</span> d2<span class="kw">)</span><br />    epsilon <span class="kw">=</span> <span class="fl">1e-10</span><br />    c<span class="kw">.</span>assert <span class="kw">-</span>epsilon <span class="kw">&lt;</span> diff <span class="kw">&lt;</span> epsilon</code></pre>
+<p>The next tests say that the <code>hypot</code> function is expected to return different results for large numbers. There are different ways of doing so.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">arbBig <span class="kw">=</span> arbRange<span class="kw">(</span><span class="fl">1e155</span><span class="kw">,</span> <span class="fl">1e165</span><span class="kw">)</span><br />declare <span class="st">'different results for big range numbers'</span><span class="kw">,</span><br />  <span class="kw">[</span>arbBig<span class="kw">,</span> arbBig<span class="kw">,</span> arbBig<span class="kw">,</span> arbBig<span class="kw">],</span><br />  <span class="fu">(c, x1, y1, x2, y2) -&gt;</span><br />    p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x1<span class="kw">,</span> y1<br />    p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x2<span class="kw">,</span> y2<br />    d1 <span class="kw">=</span> euclidean p1<span class="kw">,</span> p2<br />    d2 <span class="kw">=</span> hypotenuse p1<span class="kw">,</span> p2<br />    diff <span class="kw">=</span> <span class="ot">Math</span><span class="kw">.</span>abs d1 <span class="kw">-</span> d2<br />    epsilon <span class="kw">=</span> <span class="fl">1e-10</span><br />    c<span class="kw">.</span>assert diff <span class="kw">&gt;</span> epsilon</code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">declare <span class="st">'different results for large numbers'</span><span class="kw">,</span><br />  <span class="kw">[</span>arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">,</span> arbInt<span class="kw">],</span><br />  <span class="fu">(c, x1, y1, e1, x2, y2, e2) -&gt;</span><br />    p1 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x1<span class="kw">*</span><span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span><span class="dv">10</span><span class="kw">,</span> e1<span class="kw">),</span> y1<span class="kw">*</span><span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span><span class="dv">10</span><span class="kw">,</span> e1<span class="kw">)</span><br />    p2 <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Point</span> x2<span class="kw">*</span><span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span><span class="dv">10</span><span class="kw">,</span> e2<span class="kw">),</span> y2<span class="kw">*</span><span class="ot">Math</span><span class="kw">.</span>pow<span class="kw">(</span><span class="dv">10</span><span class="kw">,</span> e2<span class="kw">)</span><br />    d1 <span class="kw">=</span> euclidean p1<span class="kw">,</span> p2<br />    d2 <span class="kw">=</span> hypotenuse p1<span class="kw">,</span> p2<br />    diff <span class="kw">=</span> <span class="ot">Math</span><span class="kw">.</span>abs d1 <span class="kw">-</span> d2<br />    c<span class="kw">.</span>guard diff <span class="kw">&gt;</span> <span class="dv">1</span><br />    exp <span class="kw">=</span> <span class="dv">9</span><br />    c<span class="kw">.</span>assert e1 <span class="kw">&lt;</span> <span class="kw">-</span>exp <span class="kw">or</span> e1 <span class="kw">&gt;</span> exp <span class="kw">or</span> e2 <span class="kw">&lt;</span> <span class="kw">-</span>exp <span class="kw">or</span> e2 <span class="kw">&gt;</span> exp</code></pre>
+<p>The results will vary on each run as the data is generated. The floating point precision is implementation dependent.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">do test</code></pre>
+<hr />
+<p> </p>
+<p> </p>
+<p></p>
+<p>Formats <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/hypot.coffee">CoffeeScript</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/hypot.md">Markdown</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/hypot.pdf">PDF</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/literate/hypot.html">HTML</a></p>
+<p>License <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share Alike</a> by autotelicum © 2554/2011</p>
+<!--
+Commands used to extract code, execute it, and to format this document:
+
+Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
+Edit ,>ssam -n 'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee hypot.coffee | coffee -cs >hypot.js; coffee hypot.coffee >hypot.output; plumb hypot.output
+Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Source<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"120\"><\/canvas>/' >hypot.html; open hypot.html; plumb hypot.html
+Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o hypot.pdf; open hypot.pdf
+
+To execute these commands; middle-button select them in the acme environment.
+acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.
+The formatting is done with pandoc, a universal markup converter, and TeX.
+-->
+
+</body>
+</html>
