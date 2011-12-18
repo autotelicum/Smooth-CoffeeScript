@@ -1178,7 +1178,7 @@ function arbUndefOr(opt) {
 /**********************************************/
 /*            Exports for CommonJS            */
 /**********************************************/
-if (exports) {
+if ((typeof exports !== "undefined" && exports !== null) && exports) {
     exports.allProps = allProps;
     exports.resetProps = resetProps;
 
