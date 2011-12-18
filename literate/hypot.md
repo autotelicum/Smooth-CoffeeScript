@@ -259,7 +259,7 @@ by autotelicum © 2554/2011
 <!--
 Commands used to extract code, execute it, and to format this document:
 
-Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
+Edit ,x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee hypot.coffee | coffee -cs >hypot.js; coffee hypot.coffee >hypot.output; plumb hypot.output
 Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Source<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"200\" height=\"120\"><\/canvas>/' >hypot.html; open hypot.html; plumb hypot.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o hypot.pdf; open hypot.pdf
