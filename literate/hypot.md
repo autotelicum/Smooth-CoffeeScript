@@ -28,7 +28,7 @@ $\sqrt{a^{2}+b^{2}}$ where $a=x_{1}-x_{2}$ and $b=y_{1}-y_{2}$.
 ~~~~ {.coffeescript}
 euclidean = (p1, p2) ->
   [a, b] = [p1?.x - p2?.x, p1?.y - p2?.y]
-  Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))
+  Math.sqrt Math.pow(a, 2) + Math.pow(b, 2)
 ~~~~
 
 This is a classical algorithm based on the Pythagorean theorem.
@@ -76,9 +76,9 @@ $\left|a\right|\sqrt{1+\left(\frac{b}{a}\right)^{2}}$
 ~~~~ {.coffeescript}
 hypot = (a, b) ->
   if a is 0
-    Math.abs(b)
+    Math.abs b
   else
-    Math.abs(a) * Math.sqrt(1 + Math.pow(b/a, 2))
+    Math.abs(a) * Math.sqrt 1 + Math.pow b/a, 2
 hypotenuse = (p1, p2) ->
   [a, b] = [p1?.x - p2?.x, p1?.y - p2?.y]
   hypot a, b
@@ -92,8 +92,8 @@ As described in [Wikipedia hypot](http://en.wikipedia.org/wiki/Hypot), the `hypo
 ~~~~ {.coffeescript}
 polar = (p) ->
   [x, y] = [p.x, p.y]
-  r = hypot(x, y)
-  θ = Math.atan2(y, x)
+  r = hypot x, y
+  θ = Math.atan2 y, x
   [r, θ]
 show 'Distance from (0, 0), angle in 2π radians'
 show polar new Point 1, 1
@@ -200,7 +200,7 @@ declare 'same results for normal range numbers',
     p2 = new Point x2, y2
     d1 = euclidean p1, p2
     d2 = hypotenuse p1, p2
-    diff = (d1 - d2)
+    diff = d1 - d2
     epsilon = 1e-10
     c.assert -epsilon < diff < epsilon
 ~~~~
@@ -208,7 +208,7 @@ declare 'same results for normal range numbers',
 The next tests say that the `hypot` function is expected to return different results for large numbers. There are different ways of doing so.
 
 ~~~~ {.coffeescript}
-arbBig = arbRange(1e155, 1e165)
+arbBig = arbRange 1e155, 1e165
 declare 'different results for big range numbers',
   [arbBig, arbBig, arbBig, arbBig],
   (c, x1, y1, x2, y2) ->
