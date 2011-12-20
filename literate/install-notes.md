@@ -5,9 +5,9 @@
 
 Node now includes the npm package manager on OS X and Windows.
 Choose .pkg on OS X and .msi on Windows and install node from
-<http://nodejs.org/dist/v0.6.3/> --- See <http://nodejs.org/dist/>  for newer versions.
+<http://nodejs.org/dist/v0.6.6/> --- See <http://nodejs.org/dist/>  for newer versions.
 
-Open a command line (on Windows 7 right-click and select 'Run as Administrator'):
+Open a command line. On Windows 7 right-click and select 'Run as Administrator' when starting the terminal. On Mac OS X you can use 'sudo' when starting the npm command.
 
     npm -g install coffee-script
 
@@ -15,10 +15,10 @@ If you get errors from npm then you may have to manually delete files from previ
 See <https://github.com/joyent/node/wiki/Installation>. Test installation with
 
     node --version
-    #    v0.6.3
+    #    v0.6.6
     
     coffee --version
-    #    CoffeeScript version 1.1.3
+    #    CoffeeScript version 1.2.0
     
     coffee -e "console.log 'Hello World'"
     #    Hello World
