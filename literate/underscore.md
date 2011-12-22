@@ -9,10 +9,10 @@ You can see the generated JavaScript when you write a CoffeeScript
 function by typing 'show name' after its definition.
 
 ~~~~ {.CoffeeScript}
-unless exports?
-  _ = window._ # Workaround for interactive environment quirk.
-else
+if exports?
   _ = require 'underscore'
+else
+  _ = window._ # Workaround for interactive environment quirk.
 
 view = (obj) ->
   show if typeof obj is 'object'
@@ -33,15 +33,17 @@ tryIt = ->
 
 ## Underscore version 1.2.3
 
-[Underscore](http://github.com/documentcloud/underscore/) is a library for functional style programming. It provides 60-odd functions that support both the usual
-functional suspects: **map**, **select**, **invoke** --- as well as more
-specialized helpers: function binding, javascript templating, deep
-equality testing, and so on. It delegates to built-in functions, if
-present, so modern browsers will use the native implementations of
-**forEach**, **map**, **reduce**, **filter**, **every**, **some** and
-**indexOf**.
+[Underscore](http://github.com/documentcloud/underscore/) is a library
+for functional style programming. It provides 60-odd functions that
+support both the usual functional suspects: **map**, **select**,
+**invoke** --- as well as more specialized helpers: function binding,
+javascript templating, deep equality testing, and so on. It delegates
+to built-in functions, if present, so modern browsers will use the
+native implementations of **forEach**, **map**, **reduce**, **filter**,
+**every**, **some** and **indexOf**.
 
-*Underscore is an open-source component of [DocumentCloud](http://documentcloud.org/).* You can find more information and updates at [Underscore.js](http://documentcloud.github.com/underscore).
+*Underscore is an open-source component of [DocumentCloud](http://documentcloud.org/).*
+You can find more information and updates at [Underscore.js](http://documentcloud.github.com/underscore).
 
 
 ### Downloads
@@ -258,7 +260,11 @@ show _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
 **map**: extracting a list of property values.
 
 ~~~~ {.coffeescript}
-stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}]
+stooges = [
+  {name : 'moe', age : 40}
+  {name : 'larry', age : 50}
+  {name : 'curly', age : 60}
+]
 show _.pluck stooges, 'name'
 ~~~~
 
@@ -271,7 +277,11 @@ will be used on each value to generate the criterion by which the value
 is ranked.
 
 ~~~~ {.coffeescript}
-stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}]
+stooges = [
+  {name : 'moe', age : 40}
+  {name : 'larry', age : 50}
+  {name : 'curly', age : 60}
+]
 view _.max stooges, (stooge) -> stooge.age
 ~~~~
 

@@ -23,18 +23,18 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         return parent.getElementsByTagName('code')[0].style.display = 'block';
       };
       featureDetect = function() {
-        var mathmlDetect, _ref, _ref2, _ref3, _ref4;
+        var mathmlDetect, used, _ref, _ref2, _ref3, _ref4;
         mathmlDetect = function() {
-          var e, passed, used;
+          var e, passed;
           (e = document.createElement('div')).innerHTML = '<math></math>';
           passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
-          used = (document.getElementsByTagName('math')) != null;
-          return used && passed && !/Chrome/.test(navigator.userAgent);
+          return passed && !/Chrome/.test(navigator.userAgent);
         };
         if ((_ref = document.getElementById('feature-javascript')) != null) {
           _ref.style.display = "none";
         }
-        if (!mathmlDetect()) {
+        used = (document.getElementsByTagName('math')) != null;
+        if (used && mathmlDetect() === false) {
           if ((_ref2 = document.getElementById('feature-mathml')) != null) {
             _ref2.style.display = "block";
           }
@@ -49,7 +49,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         }
       };
       window.onload = function() {
-        var canvas, evaluateSource, segment, _i, _len, _ref;
+        var canvas, delayedEvaluation, evaluateSource, segment, _i, _len, _ref;
         featureDetect();
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
@@ -110,9 +110,9 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             separator(parentTag);
             return addFrame(parentTag, width, height, content);
           };
-          HtmlListener = (function() {
+          HtmlListener = (function(_super) {
 
-            __extends(HtmlListener, ConsoleListener);
+            __extends(HtmlListener, _super);
 
             function HtmlListener(maxCollected) {
               this.maxCollected = maxCollected != null ? maxCollected : 10;
@@ -141,7 +141,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 
             return HtmlListener;
 
-          })();
+          })(ConsoleListener);
           Case.prototype.note = function(a) {
             this.noteArg(a);
             return a;
@@ -232,10 +232,11 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             }
           }
         };
+        delayedEvaluation = _.throttle(evaluateSource, 100);
         _ref = document.getElementsByTagName('pre');
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           segment = _ref[_i];
-          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', delayedEvaluation, false);
           segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
             return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
           }), false);

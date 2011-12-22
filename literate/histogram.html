@@ -37,7 +37,7 @@ code.sourceCode span.er { color: red; font-weight: bold; }
   <div id="feature-javascript" style="color:#FF0000; display: block">
 No JavaScript &rarr; no output and no interactivity.  </div>
   <div id="feature-mathml" style="color:#FF0000; display: none">
-No MathML 1998 &rarr; formulae are not rendered.  </div>
+No MathML 1998 &rarr; math is not readable.  </div>
   <div id="feature-canvas" style="color:#FF0000; display: none">
 No Canvas &rarr; graphical output is not rendered.  </div>
   <div id="feature-contenteditable" style="color:#FF0000; display: none">
@@ -58,28 +58,33 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         return parent.getElementsByTagName('code')[0].style.display = 'block';
       };
       featureDetect = function() {
-        var mathMLSupport, mathelem, _ref, _ref2, _ref3, _ref4, _ref5;
+        var mathmlDetect, used, _ref, _ref2, _ref3, _ref4;
+        mathmlDetect = function() {
+          var e, passed;
+          (e = document.createElement('div')).innerHTML = '<math></math>';
+          passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
+          return passed && !/Chrome/.test(navigator.userAgent);
+        };
         if ((_ref = document.getElementById('feature-javascript')) != null) {
           _ref.style.display = "none";
         }
-        (mathelem = document.createElement('div')).innerHTML = '<math></math>';
-        mathMLSupport = (mathelem != null ? (_ref2 = mathelem.firstChild) != null ? _ref2.namespaceURI : void 0 : void 0) === 'http://www.w3.org/1998/Math/MathML';
-        if (!mathMLSupport) {
-          if ((_ref3 = document.getElementById('feature-mathml')) != null) {
-            _ref3.style.display = "block";
+        used = (document.getElementsByTagName('math')) != null;
+        if (used && mathmlDetect() === false) {
+          if ((_ref2 = document.getElementById('feature-mathml')) != null) {
+            _ref2.style.display = "block";
           }
         }
         if (document.createElement('canvas').getContext == null) {
-          if ((_ref4 = document.getElementById('feature-canvas')) != null) {
-            _ref4.style.display = "block";
+          if ((_ref3 = document.getElementById('feature-canvas')) != null) {
+            _ref3.style.display = "block";
           }
         }
         if (!('isContentEditable' in document.documentElement)) {
-          return (_ref5 = document.getElementById('feature-contenteditable')) != null ? _ref5.style.display = "block" : void 0;
+          return (_ref4 = document.getElementById('feature-contenteditable')) != null ? _ref4.style.display = "block" : void 0;
         }
       };
       window.onload = function() {
-        var canvas, evaluateSource, segment, _i, _len, _ref;
+        var canvas, delayedEvaluation, evaluateSource, segment, _i, _len, _ref;
         featureDetect();
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
@@ -140,9 +145,9 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             separator(parentTag);
             return addFrame(parentTag, width, height, content);
           };
-          HtmlListener = (function() {
+          HtmlListener = (function(_super) {
 
-            __extends(HtmlListener, ConsoleListener);
+            __extends(HtmlListener, _super);
 
             function HtmlListener(maxCollected) {
               this.maxCollected = maxCollected != null ? maxCollected : 10;
@@ -171,7 +176,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 
             return HtmlListener;
 
-          })();
+          })(ConsoleListener);
           Case.prototype.note = function(a) {
             this.noteArg(a);
             return a;
@@ -262,10 +267,11 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             }
           }
         };
+        delayedEvaluation = _.throttle(evaluateSource, 100);
         _ref = document.getElementsByTagName('pre');
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           segment = _ref[_i];
-          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', delayedEvaluation, false);
           segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
             return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
           }), false);
@@ -313,7 +319,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      window<span class="kw">.</span>onChange <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="dt">@histogram</span><span class="kw">.</span>width <span class="kw">=</span> <span class="dt">@histogram</span><span class="kw">.</span>width     <span class="co"># reset</span><br />        <span class="dt">@plot</span><span class="kw">.</span>clearRect <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@histogram</span><span class="kw">.</span>height<br />        <span class="dt">@context</span><span class="kw">.</span>drawImage <span class="dt">@image</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />          <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />        graphs <span class="kw">=</span> analyze picture<span class="kw">.</span>data<br />        drawGraphs <span class="dt">@plot</span><span class="kw">,</span> graphs<span class="kw">,</span> view<br /><br />        <span class="kw">if</span> <span class="dv">0</span> <span class="kw">&lt;</span> view <span class="kw">&lt;</span> <span class="dv">4</span><br />          picture <span class="kw">=</span> <span class="dt">@context</span><span class="kw">.</span>getImageData <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />            <span class="dt">@image</span><span class="kw">.</span>width<span class="kw">,</span> <span class="dt">@image</span><span class="kw">.</span>height<br />          <span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span>picture<span class="kw">.</span>data<span class="kw">.</span>length<span class="kw">]</span> <span class="kw">by</span> <span class="dv">1</span><br />            <span class="kw">unless</span> i<span class="kw">%</span><span class="dv">4</span> <span class="kw">in</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> view<span class="dv">-1</span><span class="kw">]</span> <span class="co"># unless alpha or current</span><br />              picture<span class="kw">.</span>data<span class="kw">[</span>i<span class="kw">]</span> <span class="kw">=</span> <span class="dv">0</span><br />          <span class="dt">@context</span><span class="kw">.</span>putImageData picture<span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><br /><br />        <span class="kw">if</span> view<span class="kw">++</span> <span class="kw">is</span> <span class="dv">4</span> <span class="kw">then</span> view <span class="kw">=</span> <span class="dv">0</span><br />        <span class="kw">return</span></code></pre>
 <h3 id="wrap-up">Wrap-up</h3>
 <p>This last bit do not relate to the web application but to the CoffeeKup <code>render</code>ing. The generated HTML is displayed either live in the interactive environment or as text — as nicely formatted as possible.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">webpage <span class="kw">=</span> kup<span class="kw">.</span>render webapp<span class="kw">,</span> format<span class="kw">:</span><span class="ot">on</span><br />showDocument webpage</code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">webpage <span class="kw">=</span> kup<span class="kw">.</span>render webapp<span class="kw">,</span> format<span class="kw">:</span><span class="ot">on</span><br />showDocument webpage<br /><br /><span class="co">#show '\n' + _.escape webpage # Uncomment to show the html</span></code></pre>
 <hr />
 <p><canvas id="drawCanvas" width="0" height="0"></canvas> </p>
 <p> </p>
@@ -324,8 +330,8 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <!--
 Commands used to extract code, execute it, and to format this document:
 
-Edit ,x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-p
-Edit ,>ssam -n 'x/^~~+[   ]*{\.coffeescript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee histogram.coffee | coffee -cs >histogram.js; coffee histogram.coffee |tee histogram-output.html >histogram.output; open histogram-output.html; plumb histogram-output.html
+Edit ,x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-p
+Edit ,>ssam -n 'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee histogram.coffee | coffee -cs >histogram.js; coffee histogram.coffee |tee histogram-output.html >histogram.output; open histogram-output.html; plumb histogram-output.html
 Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Solution<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >histogram.html; open histogram.html; plumb histogram.html
 Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o histogram.pdf; open histogram.pdf
 

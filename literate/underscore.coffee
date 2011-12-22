@@ -2,10 +2,10 @@
 show = console.log
 showDocument = (doc, width, height) -> show doc
 
-unless exports?
-  _ = window._ # Workaround for interactive environment quirk.
-else
+if exports?
   _ = require 'underscore'
+else
+  _ = window._ # Workaround for interactive environment quirk.
 
 view = (obj) ->
   show if typeof obj is 'object'
@@ -58,9 +58,17 @@ show _.all [true, 1, null, 'yes'], _.identity
 show _.any [null, 0, 'yes', false]
 show _.include [1, 2, 3], 3
 show _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
-stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}]
+stooges = [
+  {name : 'moe', age : 40}
+  {name : 'larry', age : 50}
+  {name : 'curly', age : 60}
+]
 show _.pluck stooges, 'name'
-stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}]
+stooges = [
+  {name : 'moe', age : 40}
+  {name : 'larry', age : 50}
+  {name : 'curly', age : 60}
+]
 view _.max stooges, (stooge) -> stooge.age
 numbers = [10, 5, 100, 2, 1000]
 show _.min numbers

@@ -171,6 +171,8 @@ This last bit do not relate to the web application but to the CoffeeKup `render`
 ~~~~ {.coffeescript}
 webpage = kup.render webapp, format:on
 showDocument webpage
+
+#show '\n' + _.escape webpage # Uncomment to show the html
 ~~~~
 
 -----------------------------------------------------------------------------

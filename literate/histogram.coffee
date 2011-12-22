@@ -98,3 +98,5 @@ webapp = ->
         return
 webpage = kup.render webapp, format:on
 showDocument webpage
+
+#show '\n' + _.escape webpage # Uncomment to show the html

@@ -58,18 +58,18 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         return parent.getElementsByTagName('code')[0].style.display = 'block';
       };
       featureDetect = function() {
-        var mathmlDetect, _ref, _ref2, _ref3, _ref4;
+        var mathmlDetect, used, _ref, _ref2, _ref3, _ref4;
         mathmlDetect = function() {
-          var e, passed, used;
+          var e, passed;
           (e = document.createElement('div')).innerHTML = '<math></math>';
           passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
-          used = (document.getElementsByTagName('math')) != null;
-          return used && passed && !/Chrome/.test(navigator.userAgent);
+          return passed && !/Chrome/.test(navigator.userAgent);
         };
         if ((_ref = document.getElementById('feature-javascript')) != null) {
           _ref.style.display = "none";
         }
-        if (!mathmlDetect()) {
+        used = (document.getElementsByTagName('math')) != null;
+        if (used && mathmlDetect() === false) {
           if ((_ref2 = document.getElementById('feature-mathml')) != null) {
             _ref2.style.display = "block";
           }
@@ -84,7 +84,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         }
       };
       window.onload = function() {
-        var canvas, evaluateSource, segment, _i, _len, _ref;
+        var canvas, delayedEvaluation, evaluateSource, segment, _i, _len, _ref;
         featureDetect();
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
@@ -145,9 +145,9 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             separator(parentTag);
             return addFrame(parentTag, width, height, content);
           };
-          HtmlListener = (function() {
+          HtmlListener = (function(_super) {
 
-            __extends(HtmlListener, ConsoleListener);
+            __extends(HtmlListener, _super);
 
             function HtmlListener(maxCollected) {
               this.maxCollected = maxCollected != null ? maxCollected : 10;
@@ -176,7 +176,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 
             return HtmlListener;
 
-          })();
+          })(ConsoleListener);
           Case.prototype.note = function(a) {
             this.noteArg(a);
             return a;
@@ -267,10 +267,11 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             }
           }
         };
+        delayedEvaluation = _.throttle(evaluateSource, 100);
         _ref = document.getElementsByTagName('pre');
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           segment = _ref[_i];
-          segment.getElementsByTagName('code')[0].addEventListener('keyup', evaluateSource, false);
+          segment.getElementsByTagName('code')[0].addEventListener('keyup', delayedEvaluation, false);
           segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
             return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
           }), false);
@@ -288,7 +289,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <blockquote>
 <p>This reference is an adaptation of the documentation found at <a href="http://documentcloud.github.com/underscore">Underscore.js</a>. It is <em>interactive</em> in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript when you write a CoffeeScript function by typing ‘show name’ after its definition.</p>
 </blockquote>
-<pre class="sourceCode" onclick="reveal(this)" ><b><u>Example</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" "><span class="kw">unless</span> exports<span class="kw">?</span><br />  _ <span class="kw">=</span> window<span class="kw">.</span>_ <span class="co"># Workaround for interactive environment quirk.</span><br /><span class="kw">else</span><br />  _ <span class="kw">=</span> require <span class="st">'underscore'</span><br /><br />view <span class="kw">=</span> <span class="fu">(obj) -&gt;</span><br />  show <span class="kw">if</span> <span class="kw">typeof</span> obj <span class="kw">is</span> <span class="st">'object'</span><br />    <span class="st">&quot;&quot;&quot;{</span><span class="ch">#{</span>&quot;\n  #{k<span class="ch">}</span><span class="st">: </span><span class="ch">#{</span>v<span class="ch">}</span><span class="st">&quot; for own k,v of obj}\n}&quot;&quot;&quot;</span><br />  <span class="kw">else</span> obj<br /><br />tryIt <span class="kw">=</span> <span class="fu">-&gt;</span><br />  show view <span class="co"># Show equivalent JavaScript</span><br />  view <span class="kw">{</span><br />    <span class="st">'JavaScript'</span> <span class="kw">:</span> <span class="st">&quot;we could have been the closest of friends&quot;</span><br />    <span class="st">'EcmaScript'</span> <span class="kw">:</span> <span class="st">&quot;we might have been the world's greatest lovers&quot;</span><br />    <span class="st">'But'</span>        <span class="kw">:</span> <span class="st">&quot;now we're just without each other&quot;</span><br />  <span class="kw">}</span><br /><span class="co"># Uncomment the next line to try it</span><br /><span class="co"># tryIt()</span></code></pre>
+<pre class="sourceCode" onclick="reveal(this)" ><b><u>Example</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" "><span class="kw">if</span> exports<span class="kw">?</span><br />  _ <span class="kw">=</span> require <span class="st">'underscore'</span><br /><span class="kw">else</span><br />  _ <span class="kw">=</span> window<span class="kw">.</span>_ <span class="co"># Workaround for interactive environment quirk.</span><br /><br />view <span class="kw">=</span> <span class="fu">(obj) -&gt;</span><br />  show <span class="kw">if</span> <span class="kw">typeof</span> obj <span class="kw">is</span> <span class="st">'object'</span><br />    <span class="st">&quot;&quot;&quot;{</span><span class="ch">#{</span>&quot;\n  #{k<span class="ch">}</span><span class="st">: </span><span class="ch">#{</span>v<span class="ch">}</span><span class="st">&quot; for own k,v of obj}\n}&quot;&quot;&quot;</span><br />  <span class="kw">else</span> obj<br /><br />tryIt <span class="kw">=</span> <span class="fu">-&gt;</span><br />  show view <span class="co"># Show equivalent JavaScript</span><br />  view <span class="kw">{</span><br />    <span class="st">'JavaScript'</span> <span class="kw">:</span> <span class="st">&quot;we could have been the closest of friends&quot;</span><br />    <span class="st">'EcmaScript'</span> <span class="kw">:</span> <span class="st">&quot;we might have been the world's greatest lovers&quot;</span><br />    <span class="st">'But'</span>        <span class="kw">:</span> <span class="st">&quot;now we're just without each other&quot;</span><br />  <span class="kw">}</span><br /><span class="co"># Uncomment the next line to try it</span><br /><span class="co"># tryIt()</span></code></pre>
 <h2 id="underscore-version-1.2.3">Underscore version 1.2.3</h2>
 <p><a href="http://github.com/documentcloud/underscore/">Underscore</a> is a library for functional style programming. It provides 60-odd functions that support both the usual functional suspects: <strong>map</strong>, <strong>select</strong>, <strong>invoke</strong> — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of <strong>forEach</strong>, <strong>map</strong>, <strong>reduce</strong>, <strong>filter</strong>, <strong>every</strong>, <strong>some</strong> and <strong>indexOf</strong>.</p>
 <p><em>Underscore is an open-source component of <a href="http://documentcloud.org/">DocumentCloud</a>.</em> You can find more information and updates at <a href="http://documentcloud.github.com/underscore">Underscore.js</a>.</p>
@@ -360,11 +361,11 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <h4 id="pluck">pluck</h4>
 <p><code>_.pluck list, propertyName</code></p>
 <p>A convenient version of what is perhaps the most common use-case for <strong>map</strong>: extracting a list of property values.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">},</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">},</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}]</span><br />show _<span class="kw">.</span>pluck stooges<span class="kw">,</span> <span class="st">'name'</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}</span><br /><span class="kw">]</span><br />show _<span class="kw">.</span>pluck stooges<span class="kw">,</span> <span class="st">'name'</span></code></pre>
 <h4 id="max">max</h4>
 <p><code>_.max list, [iterator], [context]</code></p>
 <p>Returns the maximum value in <strong>list</strong>. If <strong>iterator</strong> is passed, it will be used on each value to generate the criterion by which the value is ranked.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">},</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">},</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}]</span><br />view _<span class="kw">.</span>max stooges<span class="kw">,</span> <span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>age</code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}</span><br /><span class="kw">]</span><br />view _<span class="kw">.</span>max stooges<span class="kw">,</span> <span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>age</code></pre>
 <h4 id="min">min</h4>
 <p><code>_.min list, [iterator], [context]</code></p>
 <p>Returns the minimum value in <strong>list</strong>. If <strong>iterator</strong> is passed, it will be used on each value to generate the criterion by which the value is ranked.</p>

@@ -37,12 +37,12 @@ webfragment = ->
         (e = document.createElement 'div').innerHTML = '<math></math>'
         passed = e.firstChild and 'namespaceURI' of e.firstChild and
           e.firstChild.namespaceURI is 'http://www.w3.org/1998/Math/MathML'
-        used = (document.getElementsByTagName 'math')?
         # TODO Needs a better test. Testing on Chrome directly because
         # it reports it supports MathML even though that is not the case.
-        used and passed and not /Chrome/.test navigator.userAgent
+        passed and not /Chrome/.test navigator.userAgent
       document.getElementById('feature-javascript')?.style.display = "none"
-      unless mathmlDetect()
+      used = (document.getElementsByTagName 'math')?
+      if used and mathmlDetect() is false
         document.getElementById('feature-mathml')?.style.display = "block"
       unless document.createElement('canvas').getContext?
         document.getElementById('feature-canvas')?.style.display = "block"
@@ -175,11 +175,12 @@ webfragment = ->
             addErrorElement error
             return
         return
+      delayedEvaluation = _.throttle evaluateSource, 100
 
       # Evaluate code segments on load and every keypress
       for segment in document.getElementsByTagName 'pre'
         segment.getElementsByTagName('code')[0]
-          .addEventListener 'keyup', evaluateSource, false
+          .addEventListener 'keyup', delayedEvaluation, false
         segment.getElementsByTagName('code')[0]
           .addEventListener 'focus', (-> @innerHTML =
             @innerHTML.toString().replace /<span[^>]*>/g, ''), false
