@@ -1,1 +1,24 @@
-<input class="field" type="button" onclick="document.getElementById('page').style.maxWidth = document.getElementById('page').style.maxWidth===''?'600px':''" value="Adjust Width"/>
+<input class="field" type="button" value="Adjust Width" onclick="(function () {
+        return this.value = toggleLayout() ? 'Allow Freeflow' : 'Limit Width';
+      }).call(this);" />
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      var switchLayout;
+      this.toggleLayout = function() {
+        var fixedLayout;
+        fixedLayout = document.getElementById('page').style.maxWidth === '';
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.fixedLayout = fixedLayout;
+        }
+        return switchLayout(fixedLayout);
+      };
+      switchLayout = function(fixedLayout) {
+        document.getElementById('page').style.maxWidth = fixedLayout ? '600px' : '';
+        return fixedLayout;
+      };
+      return window.onload = function() {
+        if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.fixedLayout : void 0) !== 'false') {
+          return switchLayout(true);
+        }
+      };
+    }).call(this);</script>
+

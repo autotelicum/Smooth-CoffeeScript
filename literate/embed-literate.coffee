@@ -15,13 +15,8 @@ webfragment = ->
     div id: "feature-contenteditable", style: "color:#FF0000; display: none", ->
       text "No ContentEditable &rarr; CoffeeScript sections can not be changed."
 
-  input class: 'field', type: 'button', value: 'Limit Width', onclick: ->
-    [document.getElementById('page').style.maxWidth, @value] =
-      if document.getElementById('page').style.maxWidth is ''
-        ['600px', 'Allow Freeflow']
-      else
-        ['', 'Limit Width']
-    return
+  input class: 'field', type: 'button', value: 'Adjust Width', onclick: ->
+    @value = if toggleLayout() then 'Allow Freeflow' else 'Limit Width'
 
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
@@ -32,6 +27,14 @@ webfragment = ->
   coffeescript ->
     @reveal = (parent) ->
       parent.getElementsByTagName('code')[0].style.display = 'block'
+    @toggleLayout = ->
+      fixedLayout = document.getElementById('page').style.maxWidth is ''
+      localStorage?.fixedLayout = fixedLayout
+      switchLayout fixedLayout
+    switchLayout = (fixedLayout) ->
+      document.getElementById('page').style.maxWidth =
+        if fixedLayout then '600px' else ''
+      fixedLayout
     featureDetect = ->
       mathmlDetect = ->
         (e = document.createElement 'div').innerHTML = '<math></math>'
@@ -51,6 +54,7 @@ webfragment = ->
 
     window.onload = ->
       featureDetect()
+      switchLayout(on) if localStorage?.fixedLayout isnt 'false'
 
       canvas = document.getElementById('drawCanvas')
       window.ctx = canvas.getContext '2d' if canvas?

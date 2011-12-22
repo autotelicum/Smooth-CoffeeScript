@@ -30,5 +30,5 @@ Formats	[Markdown](goodies.md)	[HTML](goodies.html)
 
 
 <!-- Command used to format this document:
-Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-menu.html -o goodies.html; open goodies.html
+Edit ,>pandoc -f markdown -t html -S --css pandoc-template.css --template pandoc-template.html -B embed-menu.html -o goodies.html; open goodies.html
 -->

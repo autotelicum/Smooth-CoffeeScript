@@ -8,9 +8,8 @@ No Canvas &rarr; graphical output is not rendered.  </div>
   <div id="feature-contenteditable" style="color:#FF0000; display: none">
 No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 </div>
-<input class="field" type="button" value="Limit Width" onclick="(function () {
-        var _ref;
-        _ref = document.getElementById('page').style.maxWidth === '' ? ['600px', 'Allow Freeflow'] : ['', 'Limit Width'], document.getElementById('page').style.maxWidth = _ref[0], this.value = _ref[1];
+<input class="field" type="button" value="Adjust Width" onclick="(function () {
+        return this.value = toggleLayout() ? 'Allow Freeflow' : 'Limit Width';
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -18,9 +17,21 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <script src="node_modules/underscore.string.js"></script>
 <script src="node_modules/qc.js"></script>
 <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
-      var featureDetect;
+      var featureDetect, switchLayout;
       this.reveal = function(parent) {
         return parent.getElementsByTagName('code')[0].style.display = 'block';
+      };
+      this.toggleLayout = function() {
+        var fixedLayout;
+        fixedLayout = document.getElementById('page').style.maxWidth === '';
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.fixedLayout = fixedLayout;
+        }
+        return switchLayout(fixedLayout);
+      };
+      switchLayout = function(fixedLayout) {
+        document.getElementById('page').style.maxWidth = fixedLayout ? '600px' : '';
+        return fixedLayout;
       };
       featureDetect = function() {
         var mathmlDetect, used, _ref, _ref2, _ref3, _ref4;
@@ -51,6 +62,9 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
       window.onload = function() {
         var canvas, delayedEvaluation, evaluateSource, segment, _i, _len, _ref;
         featureDetect();
+        if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.fixedLayout : void 0) !== 'false') {
+          switchLayout(true);
+        }
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
         evaluateSource = function() {
