@@ -1,12 +1,14 @@
 
 body {
-    font-family: Palatino, georgia, "times new roman", serif;
+    font-family: "book antiqua", Palatino, georgia, "times new roman", serif;
     background-color: #F6F9ED;
     background-position: center -18em;
     background-repeat: repeat-x;
-    line-height: 120%;
+    line-height: 1.3em;
 }
-
+sup, sub {
+    line-height: 1em;
+}
 #page {
     background: #FEFEFE;
     padding: 3em 3em 1.5em 3em;
@@ -61,4 +63,5 @@ code {
     background-color: #FEFEF2;
     line-height: 1.4em;
     font-family: monospace;
+    word-wrap: break-word;
 }

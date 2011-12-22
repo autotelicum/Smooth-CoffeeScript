@@ -1139,7 +1139,7 @@ _.templateSettings = saveSettings
 
  Returns a wrapped object. Calling methods on this object will continue
 to return wrapped objects until `value` is used. ( [A more realistic
-example.](#styles))
+example.](#object-oriented-and-functional-styles))
 
 ~~~~ {.coffeescript}
 stooges = [

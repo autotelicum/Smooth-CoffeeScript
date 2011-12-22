@@ -43,8 +43,8 @@ No Canvas &rarr; graphical output is not rendered.  </div>
   <div id="feature-contenteditable" style="color:#FF0000; display: none">
 No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 </div>
-<input class="field" type="button" value="Adjust Width" onclick="(function () {
-        return this.value = toggleLayout() ? 'Allow Freeflow' : 'Limit Width';
+<input class="field" type="button" value="Adjust layout" onclick="(function () {
+        return this.value = toggleLayout() ? 'Allow freeflow' : 'Use fixed width';
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
@@ -65,7 +65,22 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         return switchLayout(fixedLayout);
       };
       switchLayout = function(fixedLayout) {
+        var s;
         document.getElementById('page').style.maxWidth = fixedLayout ? '600px' : '';
+        s = document.getElementById('page').style;
+        if (fixedLayout) {
+          s.webkitHyphens = 'auto';
+          s.mozHyphens = 'auto';
+          s.msHyphens = 'auto';
+          s.hyphens = 'auto';
+          s.textAlign = 'justify';
+        } else {
+          s.webkitHyphens = '';
+          s.mozHyphens = '';
+          s.msHyphens = '';
+          s.hyphens = '';
+          s.textAlign = '';
+        }
         return fixedLayout;
       };
       featureDetect = function() {
@@ -642,7 +657,7 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <h2 id="chaining">Chaining</h2>
 <h4 id="chain">chain</h4>
 <p><code>_(obj).chain</code></p>
-<p>Returns a wrapped object. Calling methods on this object will continue to return wrapped objects until <code>value</code> is used. ( <a href="#styles">A more realistic example.</a>)</p>
+<p>Returns a wrapped object. Calling methods on this object will continue to return wrapped objects until <code>value</code> is used. ( <a href="#object-oriented-and-functional-styles">A more realistic example.</a>)</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">25</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">21</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">23</span><span class="kw">}</span><br /><span class="kw">]</span><br />youngest <span class="kw">=</span> _<span class="kw">(</span>stooges<span class="kw">).</span>chain<span class="kw">()</span><br />  <span class="kw">.</span>sortBy<span class="kw">(</span><span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>age<span class="kw">)</span><br />  <span class="kw">.</span>map<span class="kw">(</span><span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>name <span class="kw">+</span> <span class="st">' is '</span> <span class="kw">+</span> stooge<span class="kw">.</span>age<span class="kw">)</span><br />  <span class="kw">.</span>first<span class="kw">()</span><br />  <span class="kw">.</span>value<span class="kw">()</span><br />show youngest</code></pre>
 <h4 id="value">value</h4>
 <p><code>_(obj).value</code></p>

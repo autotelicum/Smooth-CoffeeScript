@@ -15,8 +15,8 @@ webfragment = ->
     div id: "feature-contenteditable", style: "color:#FF0000; display: none", ->
       text "No ContentEditable &rarr; CoffeeScript sections can not be changed."
 
-  input class: 'field', type: 'button', value: 'Adjust Width', onclick: ->
-    @value = if toggleLayout() then 'Allow Freeflow' else 'Limit Width'
+  input class: 'field', type: 'button', value: 'Adjust layout', onclick: ->
+    @value = if toggleLayout() then 'Allow freeflow' else 'Use fixed width'
 
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
@@ -34,6 +34,19 @@ webfragment = ->
     switchLayout = (fixedLayout) ->
       document.getElementById('page').style.maxWidth =
         if fixedLayout then '600px' else ''
+      s = document.getElementById('page').style
+      if fixedLayout
+        s.webkitHyphens = 'auto'
+        s.mozHyphens = 'auto'
+        s.msHyphens = 'auto'
+        s.hyphens = 'auto'
+        s.textAlign = 'justify'
+      else
+        s.webkitHyphens = ''
+        s.mozHyphens = ''
+        s.msHyphens = ''
+        s.hyphens = ''
+        s.textAlign = ''
       fixedLayout
     featureDetect = ->
       mathmlDetect = ->
