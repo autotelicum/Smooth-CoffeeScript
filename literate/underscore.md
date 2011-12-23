@@ -28,6 +28,7 @@ tryIt = ->
   }
 # Uncomment the next line to try it
 # tryIt()
+# show -> 'all' in _.functions _ # To see code for an expression
 ~~~~
 
 
@@ -632,7 +633,7 @@ milliseconds. If you pass the optional **arguments**, they will be
 forwarded on to the **function** when it is invoked.
 
 ~~~~ {.coffeescript}
-log = _.bind show, console
+log = _.bind show, console ? window
 _.delay log, 1, 'logged later'
 # See the end of this document for the output
 ~~~~
@@ -906,7 +907,7 @@ show _.isArguments [1,2,3]
  Returns *true* if **object** is a Function.
 
 ~~~~ {.coffeescript}
-show _.isFunction console.debug
+show _.isFunction console?.debug
 ~~~~
 
 #### isString
