@@ -57,7 +57,7 @@ webfragment = ->
         # it reports it supports MathML even though that is not the case.
         passed and not /Chrome/.test navigator.userAgent
       document.getElementById('feature-javascript')?.style.display = "none"
-      used = (document.getElementsByTagName 'math')?
+      used = (document.getElementsByTagName('math')?.length > 0)
       if used and mathmlDetect() is false
         document.getElementById('feature-mathml')?.style.display = "block"
       unless document.createElement('canvas').getContext?
