@@ -4,7 +4,7 @@
 
 > This reference is an adaptation of the documentation found at
 [Underscore.js](http://documentcloud.github.com/underscore).
-It is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it.
+It is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it.
 You can see the generated JavaScript when you write a CoffeeScript
 function by typing 'show name' after its definition.
 

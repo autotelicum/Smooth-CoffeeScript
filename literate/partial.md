@@ -2,7 +2,7 @@
 % 
 % ☕
 
-> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
+> This literate program is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
 
 
 ##Partial function application with free variables
@@ -194,7 +194,7 @@ partial3lines = (func, a...) -> (b...) ->
 
 ## Test
 
-A couple of test cases and an example of `partial`. In the interactive HTML you can try substituting the number in `partial3lines` to test the other versions.
+A couple of test cases and an example of `partial`. In the interactive HTML~5~ you can try substituting the number in `partial3lines` to test the other versions.
 
 ~~~~ {.coffeescript}
 test = ->

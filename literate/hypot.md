@@ -2,7 +2,7 @@
 % 
 % ☕
 
-> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
+> This literate program is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
 
 
 ## Point distance algorithm

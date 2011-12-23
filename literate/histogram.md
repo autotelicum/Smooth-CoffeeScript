@@ -2,7 +2,7 @@
 % 
 % ☕
 
-> This literate program is _interactive_ in its HTML form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
+> This literate program is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing 'show name' after its definition.
 
 
 ## Photo histogram
@@ -26,7 +26,7 @@ webapp = ->
 
 ### User Interface
 
-Since the program will use a `canvas` and some Unicode characters, its `doctype` and `charset` are HTML5 and UTF-8. The CSS styling for the application is --- so far --- very simple so it is included in-line. That is convenient when experimenting, if you are reading this on the web page then you can change the styling and immediately see the effect on the [output](#output).
+Since the program will use a `canvas` and some Unicode characters, its `doctype` and `charset` are HTML~5~ and UTF-8. The CSS styling for the application is --- so far --- very simple so it is included in-line. That is convenient when experimenting, if you are reading this on the web page then you can change the styling and immediately see the effect on the [output](#output).
 
 ~~~~ {.coffeescript}
   doctype 5
