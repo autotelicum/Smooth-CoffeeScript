@@ -2,7 +2,7 @@
 % 
 % ☕
 
-> This reference is an adaptation of the documentation found at
+> This reference is an adaptation of the documentation at
 [Underscore.js](http://documentcloud.github.com/underscore).
 It is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it.
 You can see the generated JavaScript when you write a CoffeeScript
@@ -43,8 +43,7 @@ to built-in functions, if present, so modern browsers will use the
 native implementations of **forEach**, **map**, **reduce**, **filter**,
 **every**, **some** and **indexOf**.
 
-*Underscore is an open-source component of [DocumentCloud](http://documentcloud.org/).*
-You can find more information and updates at [Underscore.js](http://documentcloud.github.com/underscore).
+You can find more information and updates at [Underscore.js](http://documentcloud.github.com/underscore). Extensions to Underscore are listed in the [Mixin Catalog Wiki](https://github.com/documentcloud/underscore/wiki/Mixin-Catalog). *Underscore is an open-source component of [DocumentCloud](http://documentcloud.org/).*
 
 
 ### Downloads

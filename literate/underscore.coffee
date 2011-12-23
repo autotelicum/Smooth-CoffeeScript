@@ -21,6 +21,7 @@ tryIt = ->
   }
 # Uncomment the next line to try it
 # tryIt()
+# show -> 'all' in _.functions _ # To see code for an expression
 show _.map [ 1, 2, 3 ], (n) -> n * 2
 show _([ 1, 2, 3 ]).map (n) -> n * 2
 lyrics = [
@@ -112,7 +113,7 @@ fibonacci = _.memoize (n) ->
 
 show timeIt fibonacci, 1000
 show timeIt fibonacci, 1000
-log = _.bind show, console
+log = _.bind show, console ? window
 _.delay log, 1, 'logged later'
 # See the end of this document for the output
 _.defer -> show 'deferred'
@@ -165,7 +166,7 @@ show (-> _.isArray arguments)()
 show _.isArray [1,2,3]
 show (-> _.isArguments arguments)(1, 2, 3)
 show _.isArguments [1,2,3]
-show _.isFunction console.debug
+show _.isFunction console?.debug
 show _.isString "moe"
 show _.isNumber 8.4 * 5
 show _.isBoolean null
