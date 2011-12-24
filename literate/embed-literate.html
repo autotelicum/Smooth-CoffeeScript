@@ -9,17 +9,30 @@ No Canvas &rarr; graphical output is not rendered.  </div>
 No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 </div>
 <input class="field" type="button" value="Adjust layout" onclick="(function () {
-        return this.value = toggleLayout() ? 'Allow freeflow' : 'Use fixed width';
+        return this.value = toggleLayout() ? 'Layout: fixed' : 'Layout: freeflow';
+      }).call(this);" />
+<input class="field" type="button" value="Switch editor" onclick="(function () {
+        return this.value = switchEditor() ? 'Editor: CodeMirror' : 'Editor: plain text';
       }).call(this);" />
 <script src="node_modules/coffee-script.js"></script>
 <script src="node_modules/coffeekup.js"></script>
 <script src="node_modules/underscore.js"></script>
 <script src="node_modules/underscore.string.js"></script>
 <script src="node_modules/qc.js"></script>
+<script src="codemirror/codemirror.js"></script>
+<script src="codemirror/coffeescript.js"></script>
+<link rel="stylesheet" href="codemirror/codemirror.css" />
+<link rel="stylesheet" href="codemirror/pantheme.css" />
 <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
       var featureDetect, switchLayout;
       this.reveal = function(parent) {
         return parent.getElementsByTagName('code')[0].style.display = 'block';
+      };
+      this.switchEditor = function() {
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.editor = this.useCodeMirror ? 'TextArea' : 'CodeMirror';
+        }
+        return this.useCodeMirror = !this.useCodeMirror;
       };
       this.toggleLayout = function() {
         var fixedLayout;
@@ -75,22 +88,23 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
         }
       };
       window.onload = function() {
-        var canvas, delayedEvaluation, evaluateSource, segment, _i, _len, _ref;
+        var activateEditor, canvas, cmEvaluation, createEditor, evaluateSource, getParent, keyEvaluation, segment, _i, _len, _ref;
         featureDetect();
         if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.fixedLayout : void 0) !== 'false') {
           switchLayout(true);
         }
+        this.useCodeMirror = (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.editor : void 0) === 'CodeMirror';
         canvas = document.getElementById('drawCanvas');
         if (canvas != null) window.ctx = canvas.getContext('2d');
+        getParent = function(child) {
+          var _ref;
+          return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+        };
         evaluateSource = function() {
-          var HtmlListener, addElement, addErrorElement, addFrame, code, codeSegment, codeTag, draw, elem, getParent, i, qcConfig, segment, segments, separator, show, showDocument, test, testPure, _i, _len, _len2;
+          var HtmlListener, addElement, addErrorElement, addFrame, code, codeSegment, codeTag, draw, elem, i, incredibleindex, qcConfig, segment, segments, separator, show, showDocument, test, testPure, _len, _ref;
           if (window.ctx != null) {
             window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
           }
-          getParent = function(child) {
-            var _ref;
-            return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
-          };
           elem = window.document.getElementsByClassName('output')[0];
           while (elem != null) {
             getParent(elem).removeChild(elem);
@@ -201,8 +215,15 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
               codeSegment = _ref[_i];
               if (codeSegment.className === 'sourceCode') {
                 codeTag = codeSegment.getElementsByTagName('code')[0];
+                if (codeTag === null || codeTag === void 0) {
+                  codeTag = codeSegment.getElementsByTagName('textarea')[0];
+                }
                 if (codeTag.className === 'sourceCode coffeescript' || codeTag.className === 'sourceCode CoffeeScript') {
-                  segment = codeTag.innerHTML;
+                  if (codeTag.value != null) {
+                    segment = codeTag.value;
+                  } else {
+                    segment = codeTag.innerHTML;
+                  }
                   code = segment.replace(/<br>/g, '\n');
                   code = code.replace(/<[^>]*>/g, '');
                   code = code.replace(/[&]gt;/g, '>');
@@ -246,8 +267,8 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             }
             return _results;
           })();
-          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
-            segment = segments[_i];
+          for (incredibleindex = 0, _ref = segments.length; 0 <= _ref ? incredibleindex < _ref : incredibleindex > _ref; 0 <= _ref ? incredibleindex++ : incredibleindex--) {
+            segment = segments[incredibleindex];
             codeTag = segment.codeTag;
             try {
               draw = void 0;
@@ -261,14 +282,60 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
             }
           }
         };
-        delayedEvaluation = _.throttle(evaluateSource, 100);
+        keyEvaluation = function(evt) {
+          var _ref, _ref2;
+          if ((evt != null ? evt.keyCode : void 0) === 13) {
+            if (evt != null) if ((_ref = evt.target) != null) _ref.rows++;
+          }
+          if ((_ref2 = evt != null ? evt.keyCode : void 0) !== 16 && _ref2 !== 37 && _ref2 !== 38 && _ref2 !== 39 && _ref2 !== 40) {
+            evaluateSource();
+          }
+        };
+        cmEvaluation = function(editor, _arg) {
+          var from, newText, next, to;
+          from = _arg.from, to = _arg.to, newText = _arg.newText, next = _arg.next;
+          editor.save();
+          return evaluateSource();
+        };
+        createEditor = function(codeElement, text) {
+          var c, countLines, elemCodeMirror, newelem;
+          newelem = document.createElement('textarea');
+          newelem.setAttribute('class', 'sourceCode coffeescript');
+          countLines = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = text.length; _i < _len; _i++) {
+              c = text[_i];
+              if (c === '\n') _results.push(c);
+            }
+            return _results;
+          })()).length + 1;
+          newelem.setAttribute('style', 'width: 98%;');
+          newelem.setAttribute('rows', countLines);
+          newelem.setAttribute('autofocus', 'true');
+          newelem.setAttribute('spellcheck', 'false');
+          newelem.innerHTML = text;
+          newelem.addEventListener('keyup', keyEvaluation, false);
+          getParent(codeElement).replaceChild(newelem, codeElement);
+          if (this.useCodeMirror) {
+            return elemCodeMirror = CodeMirror.fromTextArea(newelem, {
+              onChange: cmEvaluation,
+              lineNumbers: true,
+              theme: 'pantheme'
+            });
+          }
+        };
+        activateEditor = function() {
+          var sourcecode;
+          this.removeEventListener('focus', activateEditor, false);
+          sourcecode = this.innerHTML.toString().replace(/<\/?span[^>]*>/g, '');
+          sourcecode = sourcecode.replace(/<br[ ]*[^>]*>/g, '\n');
+          return createEditor(this, sourcecode);
+        };
         _ref = document.getElementsByTagName('pre');
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           segment = _ref[_i];
-          segment.getElementsByTagName('code')[0].addEventListener('keyup', delayedEvaluation, false);
-          segment.getElementsByTagName('code')[0].addEventListener('focus', (function() {
-            return this.innerHTML = this.innerHTML.toString().replace(/<span[^>]*>/g, '');
-          }), false);
+          segment.getElementsByTagName('code')[0].addEventListener('focus', activateEditor, false);
         }
         return evaluateSource();
       };

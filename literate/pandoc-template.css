@@ -65,3 +65,12 @@ code {
     font-family: monospace;
     word-wrap: break-word;
 }
+textarea {
+    font-size: 1em;
+    background-color: #FEFEF2;
+    line-height: 1.4em;
+    font-family: monospace;
+    word-wrap: break-word;
+    border: 0px solid #cccccc;
+    padding: 5px;
+}

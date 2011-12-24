@@ -1,0 +1,12 @@
+
+.cm-s-pantheme span.CodeMirror-selected {background: #afafaf !important;}
+.cm-s-pantheme span.cm-comment { color: #60a0b0; font-style: italic; }
+.cm-s-pantheme span.cm-keyword { color: #007020; font-weight: bold; }
+.cm-s-pantheme span.cm-string { color: #4070a0; }
+.cm-s-pantheme span.cm-variable {color: #002000;}
+.cm-s-pantheme span.cm-number {color: #40a070;}
+.cm-s-pantheme span.cm-error {color: darkred;}
+.cm-s-pantheme .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: blue !important;
+}

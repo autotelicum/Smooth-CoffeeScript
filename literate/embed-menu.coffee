@@ -6,7 +6,7 @@ kup = require 'coffeekup'
 
 webfragment = ->
   input class: 'field', type: 'button', value: 'Adjust layout', onclick: ->
-    @value = if toggleLayout() then 'Allow freeflow' else 'Use fixed width'
+    @value = if toggleLayout() then 'Layout: fixed' else 'Layout: freeflow'
   coffeescript ->
     @toggleLayout = ->
       fixedLayout = document.getElementById('page').style.maxWidth is ''

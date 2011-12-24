@@ -16,17 +16,26 @@ webfragment = ->
       text "No ContentEditable &rarr; CoffeeScript sections can not be changed."
 
   input class: 'field', type: 'button', value: 'Adjust layout', onclick: ->
-    @value = if toggleLayout() then 'Allow freeflow' else 'Use fixed width'
+    @value = if toggleLayout() then 'Layout: fixed' else 'Layout: freeflow'
+  input class: 'field', type: 'button', value: 'Switch editor', onclick: ->
+    @value = if switchEditor() then 'Editor: CodeMirror' else 'Editor: plain text'
 
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
   script src: 'node_modules/underscore.js'
   script src: 'node_modules/underscore.string.js'
   script src: 'node_modules/qc.js'
+  script src: 'codemirror/codemirror.js'
+  script src: 'codemirror/coffeescript.js'
+  link rel: 'stylesheet', href: 'codemirror/codemirror.css'
+  link rel: 'stylesheet', href: 'codemirror/pantheme.css'
 
   coffeescript ->
     @reveal = (parent) ->
       parent.getElementsByTagName('code')[0].style.display = 'block'
+    @switchEditor = ->
+      localStorage?.editor = if @useCodeMirror then 'TextArea' else 'CodeMirror'
+      @useCodeMirror = not @useCodeMirror
     @toggleLayout = ->
       fixedLayout = document.getElementById('page').style.maxWidth is ''
       localStorage?.fixedLayout = fixedLayout
@@ -68,9 +77,12 @@ webfragment = ->
     window.onload = ->
       featureDetect()
       switchLayout(on) if localStorage?.fixedLayout isnt 'false'
+      @useCodeMirror = localStorage?.editor is 'CodeMirror'
 
       canvas = document.getElementById('drawCanvas')
       window.ctx = canvas.getContext '2d' if canvas?
+
+      getParent = (child) -> child?.parentElement ? child?.parentNode
 
       evaluateSource = ->
         # Clear output
@@ -78,7 +90,6 @@ webfragment = ->
           window.ctx.clearRect 0, 0,
             window.ctx.canvas.width, window.ctx.canvas.height
 
-        getParent = (child) -> child?.parentElement ? child?.parentNode
         elem = window.document.getElementsByClassName('output')[0]
         while elem?
           getParent(elem).removeChild elem
@@ -161,9 +172,14 @@ webfragment = ->
           for codeSegment in document.getElementsByTagName 'pre'
             if codeSegment.className is 'sourceCode'
               codeTag = codeSegment.getElementsByTagName('code')[0]
+              if codeTag is null or codeTag is undefined 
+                codeTag = codeSegment.getElementsByTagName('textarea')[0]
               if codeTag.className is 'sourceCode coffeescript' \
                   or codeTag.className is 'sourceCode CoffeeScript'
-                segment = codeTag.innerHTML
+                if codeTag.value?
+                  segment = codeTag.value
+                else
+                  segment = codeTag.innerHTML
                 #console.debug "From: #{segment}"
                 code = segment.replace /<br>/g, '\n'
                 code = code.replace /<[^>]*>/g, ''
@@ -182,7 +198,8 @@ webfragment = ->
         segments = (segment for segment in segments when segment?)
 
         # Evaluate code segments
-        for segment in segments
+        for incredibleindex in [0...segments.length]
+          segment = segments[incredibleindex]
           codeTag = segment.codeTag
           try
             draw = undefined
@@ -192,15 +209,45 @@ webfragment = ->
             addErrorElement error
             return
         return
-      delayedEvaluation = _.throttle evaluateSource, 100
 
-      # Evaluate code segments on load and every keypress
+      # Text editor with live code evaluation
+      keyEvaluation = (evt) ->
+        evt?.target?.rows++ if evt?.keyCode is 13 # Enter
+        evaluateSource() unless evt?.keyCode in
+          [16,37,38,39,40] # Ignore shift and arrow keys
+        return
+
+      cmEvaluation = (editor, {from, to, newText, next}) ->
+        editor.save()
+        evaluateSource()
+
+      createEditor = (codeElement, text) ->
+        newelem = document.createElement 'textarea'
+        newelem.setAttribute 'class', 'sourceCode coffeescript'
+        countLines = (c for c in text when c is '\n').length + 1
+        newelem.setAttribute 'style', 'width: 98%;'
+        newelem.setAttribute 'rows', countLines
+        newelem.setAttribute 'autofocus', 'true'
+        newelem.setAttribute 'spellcheck', 'false'
+        newelem.innerHTML = text
+        newelem.addEventListener 'keyup', keyEvaluation, false
+        getParent(codeElement).replaceChild newelem, codeElement
+        if @useCodeMirror
+          elemCodeMirror = CodeMirror.fromTextArea newelem,
+            onChange: cmEvaluation
+            lineNumbers: true
+            theme: 'pantheme'
+
+      activateEditor = ->
+        @removeEventListener 'focus', activateEditor, false
+        sourcecode = @innerHTML.toString().replace /<\/?span[^>]*>/g, ''
+        sourcecode = sourcecode.replace /<br[ ]*[^>]*>/g, '\n'
+        createEditor this, sourcecode
+
+      # Activate text editor when code gets focus
       for segment in document.getElementsByTagName 'pre'
         segment.getElementsByTagName('code')[0]
-          .addEventListener 'keyup', delayedEvaluation, false
-        segment.getElementsByTagName('code')[0]
-          .addEventListener 'focus', (-> @innerHTML =
-            @innerHTML.toString().replace /<span[^>]*>/g, ''), false
+          .addEventListener 'focus', activateEditor, false
 
       evaluateSource()
 

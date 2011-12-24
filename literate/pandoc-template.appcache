@@ -5,3 +5,7 @@ node_modules/underscore.js
 node_modules/underscore.string.js
 node_modules/qc.js
 pandoc-template.css
+codemirror/codemirror.css
+codemirror/codemirror.js
+codemirror/coffeescript.js
+codemirror/pantheme.css
