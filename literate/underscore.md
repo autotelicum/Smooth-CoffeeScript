@@ -32,7 +32,7 @@ tryIt = ->
 ~~~~
 
 
-## Underscore version 1.2.3
+## Underscore
 
 [Underscore](http://github.com/documentcloud/underscore/) is a library
 for functional style programming. It provides 60-odd functions that
@@ -50,50 +50,15 @@ You can find more information and updates at [Underscore.js](http://documentclou
 
 *Right-click, and use "Save As"*
 
-* [Development Version](http://documentcloud.github.com/underscore/underscore.js)
+* [Latest Development Version](http://documentcloud.github.com/underscore/underscore.js)
     * *34kb, Uncompressed with Comments*
-* [Production Version](http://documentcloud.github.com/underscore/underscore-min.js)
+* [Latest Production Version](http://documentcloud.github.com/underscore/underscore-min.js)
     * *< 4kb, Minified and Gzipped*
 
-
-## Object-Oriented and Functional Styles
-
-You can use Underscore in either an object-oriented or a functional
-style, depending on your preference. The following two lines of code are
-identical ways to double a list of numbers.
-
 ~~~~ {.coffeescript}
-show _.map [ 1, 2, 3 ], (n) -> n * 2
-show _([ 1, 2, 3 ]).map (n) -> n * 2
+show "Underscore version #{_.VERSION} is used in this documentation"
 ~~~~
 
-Using the object-oriented style allows you to chain together methods.
-Calling `chain` on a wrapped object will cause all future method calls
-to return wrapped objects as well. When you've finished the computation,
-use `value` to retrieve the final value. Here's an example of chaining
-together a **map/flatten/reduce**, in order to get the word count of
-every word in a song.
-
-~~~~ {.coffeescript}
-lyrics = [
-  {line : 1, words : "I'm a lumberjack and I'm okay"}
-  {line : 2, words : "I sleep all night and I work all day"}
-  {line : 3, words : "He's a lumberjack and he's okay"}
-  {line : 4, words : "He sleeps all night and he works all day"}
-]
-view _(lyrics).chain()
-  .map((line) -> line.words.split " ")
-  .flatten()
-  .reduce(((counts, word) ->
-    counts[word] = (counts[word] or 0) + 1
-    counts), {})
-  .value()
-~~~~
-
-In addition, the [Array prototype's
-methods](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/prototype)
-are proxied through the chained Underscore object, so you can slip a
-`reverse` or a `push` into your chain, and continue to modify the array.
 
 ## Collection Functions (Arrays or Objects)
 
@@ -569,7 +534,7 @@ show _.range 0
  Bind a **function** to an **object**, meaning that whenever the
 function is called, the value of *this* will be the **object**.
 Optionally, bind **arguments** to the **function** to pre-fill them,
-also known as **currying**.
+also known as **partial application**.
 
 ~~~~ {.coffeescript}
 func = (greeting) -> greeting + ': ' + this.name
@@ -655,10 +620,10 @@ _.defer -> show 'deferred'
 
 `_.throttle function, wait` 
 
- Returns a throttled version of the function, that, when invoked
-repeatedly, will only actually call the wrapped function at most once
-per every **wait** milliseconds. Useful for rate-limiting events that
-occur faster than you can keep up with.
+Creates and returns a new, throttled version of the passed function,
+that, when invoked repeatedly, will only actually call the original
+function at most once per every **wait** milliseconds. Useful for
+rate-limiting events that occur faster than you can keep up with.
 
 ~~~~ {.coffeescript}
 updatePosition = (evt) -> show "Position #{evt}"
@@ -672,12 +637,12 @@ for i in [0..10]
 
 `_.debounce function, wait` 
 
- Calling a debounced function will postpone its execution until after
-**wait** milliseconds have elapsed since the last time the function was
-invoked. Useful for implementing behavior that should only happen
-*after* the input has stopped arriving. For example: rendering a preview
-of a Markdown comment, recalculating a layout after the window has
-stopped being resized...
+Creates and returns a new debounced version of the passed function
+that will postpone its execution until after **wait** milliseconds have
+elapsed since the last time it was invoked. Useful for implementing
+behavior that should only happen after the input has stopped arriving.
+For example: rendering a preview of a Markdown comment, recalculating
+a layout after the window has stopped being resized, and so on.
 
 ~~~~ {.coffeescript}
 calculateLayout = -> show "It's quiet now"
@@ -835,11 +800,11 @@ chain, in order to perform operations on intermediate results within the
 chain.
 
 ~~~~ {.coffeescript}
-show _([1,2,3,200]).chain().
-  filter((num) -> num % 2 is 0).
-  tap(show).
-  map((num) -> num * num).
-  value()
+show _.chain([1,2,3,200])
+  .filter((num) -> num % 2 is 0)
+  .tap(show)
+  .map((num) -> num * num)
+  .value()
 ~~~~
 
 #### isEqual
@@ -923,7 +888,7 @@ show _.isString "moe"
 
 `_.isNumber object` 
 
- Returns *true* if **object** is a Number.
+ Returns *true* if **object** is a Number (including `NaN`).
 
 ~~~~ {.coffeescript}
 show _.isNumber 8.4 * 5
@@ -1114,12 +1079,14 @@ show compiled {epithet: "stooge"}
 
 If ERB-style delimiters aren't your cup of tea, you can change
 Underscore's template settings to use different symbols to set off
-interpolated code. Define an **interpolate** regex, and an (optional)
-**evaluate** regex to match expressions that should be inserted and
-evaluated, respectively. If no **evaluate** regex is provided, your
-templates will only be capable of interpolating values. For example, to
-perform [Mustache.js](http://github.com/janl/mustache.js#readme) style
-templating:
+interpolated code. Define an **interpolate** regex to match expressions
+that should be interpolated verbatim, an **escape** regex to match
+expressions that should be inserted after being HTML escaped, and
+an **evaluate** regex to match expressions that should be evaluated
+without insertion into the resulting string. You may define or omit
+any combination of the three. For example, to perform
+[Mustache.js](http://github.com/janl/mustache.js#readme)
+style templating:
 
 ~~~~ {.coffeescript}
 saveSettings = _.templateSettings
@@ -1133,13 +1100,48 @@ _.templateSettings = saveSettings
 
 ## Chaining
 
+You can use Underscore in either an object-oriented or a functional
+style, depending on your preference. The following two lines of code are
+identical ways to double a list of numbers.
+
+~~~~ {.coffeescript}
+show _.map [ 1, 2, 3 ], (n) -> n * 2
+show _([ 1, 2, 3 ]).map (n) -> n * 2
+~~~~
+
+Using the object-oriented style allows you to chain together methods.
+Calling `chain` on a wrapped object will cause all future method calls
+to return wrapped objects as well. When you've finished the computation,
+use `value` to retrieve the final value. Here's an example of chaining
+together a **map/flatten/reduce**, in order to get the word count of
+every word in a song.
+
+~~~~ {.coffeescript}
+lyrics = [
+  {line : 1, words : "I'm a lumberjack and I'm okay"}
+  {line : 2, words : "I sleep all night and I work all day"}
+  {line : 3, words : "He's a lumberjack and he's okay"}
+  {line : 4, words : "He sleeps all night and he works all day"}
+]
+view _.chain(lyrics)
+  .map((line) -> line.words.split " ")
+  .flatten()
+  .reduce(((counts, word) ->
+    counts[word] = (counts[word] or 0) + 1
+    counts), {}).value()
+~~~~
+
+In addition, the [Array prototype's
+methods](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/prototype)
+are proxied through the chained Underscore object, so you can slip a
+`reverse` or a `push` into your chain, and continue to modify the array.
+
 #### chain
 
-`_(obj).chain ` 
+`_.chain(obj) ` 
 
  Returns a wrapped object. Calling methods on this object will continue
-to return wrapped objects until `value` is used. ( [A more realistic
-example.](#object-oriented-and-functional-styles))
+to return wrapped objects until `value` is used.
 
 ~~~~ {.coffeescript}
 stooges = [
@@ -1147,7 +1149,7 @@ stooges = [
   {name : 'moe', age : 21}
   {name : 'larry', age : 23}
 ]
-youngest = _(stooges).chain()
+youngest = _.chain(stooges)
   .sortBy((stooge) -> stooge.age)
   .map((stooge) -> stooge.name + ' is ' + stooge.age)
   .first()

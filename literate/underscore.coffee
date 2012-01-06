@@ -22,21 +22,7 @@ tryIt = ->
 # Uncomment the next line to try it
 # tryIt()
 # show -> 'all' in _.functions _ # To see code for an expression
-show _.map [ 1, 2, 3 ], (n) -> n * 2
-show _([ 1, 2, 3 ]).map (n) -> n * 2
-lyrics = [
-  {line : 1, words : "I'm a lumberjack and I'm okay"}
-  {line : 2, words : "I sleep all night and I work all day"}
-  {line : 3, words : "He's a lumberjack and he's okay"}
-  {line : 4, words : "He sleeps all night and he works all day"}
-]
-view _(lyrics).chain()
-  .map((line) -> line.words.split " ")
-  .flatten()
-  .reduce(((counts, word) ->
-    counts[word] = (counts[word] or 0) + 1
-    counts), {})
-  .value()
+show "Underscore version #{_.VERSION} is used in this documentation"
 _.each [ 1, 2, 3 ], (num) -> show num
 _.each {one : 1, two : 2, three : 3}, (num, key) -> show num
 show _.map [ 1, 2, 3 ], (num) -> num * 3
@@ -150,11 +136,11 @@ view _.extend {name : 'moe'}, {age : 50}
 iceCream = {flavor : "chocolate"}
 view _.defaults iceCream, {flavor : "vanilla", sprinkles : "lots"}
 view _.clone {name : 'moe'}
-show _([1,2,3,200]).chain().
-  filter((num) -> num % 2 is 0).
-  tap(show).
-  map((num) -> num * num).
-  value()
+show _.chain([1,2,3,200])
+  .filter((num) -> num % 2 is 0)
+  .tap(show)
+  .map((num) -> num * num)
+  .value()
 moe   = {name : 'moe', luckyNumbers : [13, 27, 34]}
 clone = {name : 'moe', luckyNumbers : [13, 27, 34]}
 moe is clone
@@ -207,12 +193,26 @@ template = _.template "Hello {{ name }}!"
 show template name : "Mustache"
 
 _.templateSettings = saveSettings
+show _.map [ 1, 2, 3 ], (n) -> n * 2
+show _([ 1, 2, 3 ]).map (n) -> n * 2
+lyrics = [
+  {line : 1, words : "I'm a lumberjack and I'm okay"}
+  {line : 2, words : "I sleep all night and I work all day"}
+  {line : 3, words : "He's a lumberjack and he's okay"}
+  {line : 4, words : "He sleeps all night and he works all day"}
+]
+view _.chain(lyrics)
+  .map((line) -> line.words.split " ")
+  .flatten()
+  .reduce(((counts, word) ->
+    counts[word] = (counts[word] or 0) + 1
+    counts), {}).value()
 stooges = [
   {name : 'curly', age : 25}
   {name : 'moe', age : 21}
   {name : 'larry', age : 23}
 ]
-youngest = _(stooges).chain()
+youngest = _.chain(stooges)
   .sortBy((stooge) -> stooge.age)
   .map((stooge) -> stooge.name + ' is ' + stooge.age)
   .first()

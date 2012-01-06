@@ -23,7 +23,6 @@ webfragment = ->
   script src: 'node_modules/coffee-script.js'
   script src: 'node_modules/coffeekup.js'
   script src: 'node_modules/underscore.js'
-  script src: 'node_modules/underscore.string.js'
   script src: 'node_modules/qc.js'
   script src: 'codemirror/codemirror.js'
   script src: 'codemirror/coffeescript.js'
