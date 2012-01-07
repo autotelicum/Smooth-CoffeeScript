@@ -1,0 +1,10 @@
+CACHE MANIFEST
+node_modules/coffee-script.js
+node_modules/coffeekup.js
+node_modules/underscore.js
+node_modules/qc.js
+pandoc-template.css
+codemirror/codemirror.css
+codemirror/codemirror.js
+codemirror/coffeescript.js
+codemirror/pantheme.css
