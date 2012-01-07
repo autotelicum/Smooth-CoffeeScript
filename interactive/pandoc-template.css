@@ -1,0 +1,130 @@
+
+body {
+    font-family: "book antiqua", Palatino, georgia, "times new roman", serif;
+    background-color: #F6F9ED;
+    background-position: center -18em;
+    background-repeat: repeat-x;
+    line-height: 1.3em;
+}
+sup, sub {
+    line-height: 1em;
+}
+#page {
+    background: #FEFEFE;
+    padding: 3em 3em 1.5em 3em;
+    border: 1px solid #ccc;
+
+    box-shadow: 2px 2px 8px #aaa;
+    -webkit-box-shadow: 2px 2px 8px #aaa;
+    -moz-box-shadow: 2px 2px 8px #aaa;  
+}
+
+input.field {
+    color:#050;
+    font-family: Optima, sans-serif;
+    background-color: #FEFEF2; /*#FFFCE6;*/
+    border: 1px solid;
+    margin: 2px 2px 10px 2px;
+    line-height:1.1em; 
+}
+
+img { -ms-interpolation-mode:bicubic; }
+
+h1,h2,h3,h4 { 
+    line-height:1em; 
+    font-size:1.5em; 
+    font-weight: normal; 
+    clear: left;    
+    font-family: 'Optima', sans-serif; 
+}
+h1 {
+    line-height: 1.5em;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight:bold;
+}
+h2 {
+    line-height: 1.5em;
+    margin:1.5em 0 1.5em 0;
+    font-weight:bold;
+}
+hr { 
+    border-top: 1px solid silver;
+    border-bottom: none;
+    padding: 0;
+    margin: 1.46em 0 0 0;
+}
+h5 {
+    text-align: center;
+}
+
+/* code */
+pre {
+    margin: 1em 0 1.5em 0;
+    line-height: 1.5em; 
+    color: #111;
+    background: #FEFEF2;
+    border: 1px solid #ddc;
+    padding: 0.5em 1em;
+    overflow: hidden;
+}
+/*
+code.coffeescript {
+    border-top: 1px solid silver;
+    padding-top: 5px;
+}
+*/
+code {
+    font-size: 1em;
+    background-color: #FEFEF2;
+    line-height: 1.4em;
+    font-family: monospace;
+    word-wrap: break-word;
+}
+textarea {
+    font-size: 1em;
+    background-color: #FEFEF2;
+    line-height: 1.4em;
+    font-family: monospace;
+    word-wrap: break-word;
+    border: 0px solid #cccccc;
+    padding: 5px;
+}
+a {
+    text-decoration: none;
+}
+a:link {
+    color: teal;
+}
+a:visited {
+    color: indigo;
+}
+a:hover, a.active {
+    color: maroon;
+}
+
+/* There's got to be a better way than this that works in all browsers */
+section#exercise-1, section#exercise-2, section#exercise-3, section#exercise-4,
+section#exercise-5, section#exercise-6, section#exercise-7, section#exercise-8,
+section#exercise-9, section#exercise-10, section#exercise-11, section#exercise-12,
+section#exercise-13, section#exercise-14, section#exercise-15, section#exercise-16,
+section#exercise-17, section#exercise-18, section#exercise-19, section#exercise-20,
+section#exercise-21, section#exercise-22, section#exercise-23, section#exercise-24,
+section#exercise-25, section#exercise-26, section#exercise-27, section#exercise-28,
+section#exercise-29, section#exercise-30, section#exercise-31, section#exercise-32,
+section#exercise-33, section#exercise-34, section#exercise-35, section#exercise-36,
+section#exercise-37, section#exercise-38, section#exercise-39, section#exercise-40,
+section#exercise-41, section#exercise-42, section#exercise-43, section#exercise-44,
+section#exercise-45, section#exercise-46, section#exercise-47, section#exercise-48,
+section#exercise-49, section#exercise-50  {
+    border:solid #D0D0D0 1pt;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* Right-side marking of sections */
+/*
+section  {
+    border-right:solid #D07070 1pt;
+    padding-right: 5px;
+}
+*/
