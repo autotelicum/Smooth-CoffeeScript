@@ -1,0 +1,177 @@
+\documentclass[10pt,oneside]{scrbook}
+\usepackage{amssymb,amsmath}
+\usepackage{fancyvrb}
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+  \usepackage{fontspec,xltxtra,xunicode}
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \setmainfont[Mapping=tex-text]{Palatino}
+  \setsansfont[Scale=0.94,Mapping=tex-text]{Optima}
+  \setmonofont[Scale=0.96]{Inconsolata}
+\else
+  \ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+\fi
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(lhs)$
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2.2cm,bmargin=3.3cm}
+\setcounter{secnumdepth}{-2}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{color}
+\definecolor{shadecolor}{rgb}{1, 0, 0}
+\definecolor{darkgreen}{cmyk}{0.5, 0, 1, 0.5}
+\definecolor{darkred}{rgb}{0.6, 0.25, 0.15}
+\definecolor{darkblue}{RGB}{38, 0, 136}
+\definecolor{codebackground}{RGB}{234,255,255}
+\definecolor{codestring}{RGB}{121, 103, 99}
+\usepackage{listings}
+\lstset{
+backgroundcolor={\color{codebackground}},
+basicstyle={\small\ttfamily\color{black}},
+comment={[l]{\#}},
+frame=none,
+identifierstyle={\color{darkblue}},
+keywords={true,false,null,this,new,delete,typeof,in,instanceof,return,throw,break,continue,debugger,if,else,switch,for,while,do,try,catch,finally,class,extends,super,undefined,then,unless,until,loop,of,by,when,and,or,is,isnt,not,yes,no,on,off},
+keywordstyle={\itshape\color{darkblue}},
+morecomment={[s]{\#\#\#}{\#\#\#}},
+morestring={[b]\'},
+sensitive=true,
+showstringspaces=false,
+string={[b]\"},
+stringstyle={\color{codestring}},
+tab=true,
+tabsize=2
+}
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+\usepackage{float} % provides the H option for float placement
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+    unicode=false, % unicode breaks when used with xetex
+    bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+    backref=false,colorlinks=true,citecolor=darkblue,
+    linkcolor=darkblue,urlcolor=darkblue,xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+$if(subscript)$
+\newcommand{\textsubscr}[1]{\ensuremath{_{\scriptsize\textrm{#1}}}}
+$endif$
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+\tableofcontents
+
+$endif$
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

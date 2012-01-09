@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html manifest="pandoc-template.appcache">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="☕" />
+  <title>Grimoire — Smooth CoffeeScript</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+/*<![CDATA[*/
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre 
+   { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
+td.lineNumbers { border-right: 1px solid #AAAAAA; text-align: right; color: #AAAAAA; padding-right: 5px; padding-left: 5px; }
+td.sourceCode { padding-left: 5px; }
+code.sourceCode span.kw { color: #007020; font-weight: bold; } 
+code.sourceCode span.dt { color: #902000; }
+code.sourceCode span.dv { color: #40a070; }
+code.sourceCode span.bn { color: #40a070; }
+code.sourceCode span.fl { color: #40a070; }
+code.sourceCode span.ch { color: #4070a0; }
+code.sourceCode span.st { color: #4070a0; }
+code.sourceCode span.co { color: #60a0b0; font-style: italic; }
+code.sourceCode span.ot { color: #007020; }
+code.sourceCode span.al { color: red; font-weight: bold; }
+code.sourceCode span.fu { color: #06287e; }
+code.sourceCode span.re { }
+code.sourceCode span.er { color: red; font-weight: bold; }
+/*]]>*/
+  </style>
+  <link rel="stylesheet" href="pandoc-template.css" />
+  <link rel="stylesheet" href="codemirror/codemirror.css" />
+  <link rel="stylesheet" href="codemirror/pantheme.css" />
+</head>
+<body>
+<div id="feature-detect">
+  <div id="feature-javascript" style="color:#FF0000; display: block">
+No JavaScript &rarr; no output and no interactivity.  </div>
+  <div id="feature-mathml" style="color:#FF0000; display: none">
+No MathML 1998 &rarr; math is not readable.  </div>
+  <div id="feature-canvas" style="color:#FF0000; display: none">
+No Canvas &rarr; graphical output is not rendered.  </div>
+  <div id="feature-contenteditable" style="color:#FF0000; display: none">
+No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
+</div>
+<input class="field" type="button" value="Adjust layout" onclick="(function () {
+        return this.value = toggleLayout() ? 'Layout: fixed' : 'Layout: freeflow';
+      }).call(this);" />
+<input class="field" type="button" value="Select editor" onclick="(function () {
+        return this.value = switchEditor() ? 'Editor: CodeMirror' : 'Editor: plain text';
+      }).call(this);" />
+<input class="field" type="button" value="Evaluation" onclick="(function () {
+        return this.value = switchEvaluation() ? '↑ ↩  Evaluate' : 'Auto Evaluate';
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script src="node_modules/coffeekup.js"></script>
+<script src="node_modules/underscore.js"></script>
+<script src="node_modules/qc.js"></script>
+<script src="codemirror/codemirror.js"></script>
+<script src="codemirror/coffeescript.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      var featureDetect, switchLayout;
+      this.reveal = function(instance) {
+        var _ref, _ref2;
+        if ((_ref = instance.getElementsByTagName('section')[0]) != null) {
+          _ref.style.display = 'block';
+        }
+        if ((_ref2 = instance.getElementsByTagName('h5')[0]) != null) {
+          _ref2.innerHTML = 'Solution';
+        }
+        return instance.onclick = void 0;
+      };
+      this.switchEditor = function() {
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.editor = this.useCodeMirror ? 'TextArea' : 'CodeMirror';
+        }
+        return this.useCodeMirror = !this.useCodeMirror;
+      };
+      this.switchEvaluation = function() {
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.evaluation = (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual' ? 'automatic' : 'manual';
+        }
+        return (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual';
+      };
+      this.toggleLayout = function() {
+        var fixedLayout;
+        fixedLayout = document.getElementById('page').style.maxWidth === '';
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.fixedLayout = fixedLayout;
+        }
+        return switchLayout(fixedLayout);
+      };
+      switchLayout = function(fixedLayout) {
+        var s;
+        document.getElementById('page').style.maxWidth = fixedLayout ? '600px' : '';
+        s = document.getElementById('page').style;
+        if (fixedLayout) {
+          s.webkitHyphens = 'auto';
+          s.mozHyphens = 'auto';
+          s.msHyphens = 'auto';
+          s.hyphens = 'auto';
+          s.textAlign = 'justify';
+        } else {
+          s.webkitHyphens = '';
+          s.mozHyphens = '';
+          s.msHyphens = '';
+          s.hyphens = '';
+          s.textAlign = '';
+        }
+        return fixedLayout;
+      };
+      featureDetect = function() {
+        var adjustCoverPosition, mathmlDetect, used, _ref, _ref2, _ref3, _ref4, _ref5;
+        adjustCoverPosition = function(idFeature) {
+          var canvasCover, lineHeight, topPos, _ref;
+          canvasCover = document.getElementById('drawCanvas');
+          topPos = parseInt(canvasCover != null ? canvasCover.style.top : void 0);
+          lineHeight = (_ref = document.getElementById(idFeature)) != null ? _ref.scrollHeight : void 0;
+          return canvasCover != null ? canvasCover.style.top = (topPos + lineHeight) + 'px' : void 0;
+        };
+        mathmlDetect = function() {
+          var e, passed;
+          (e = document.createElement('div')).innerHTML = '<math></math>';
+          passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
+          return passed && !/Chrome/.test(navigator.userAgent);
+        };
+        if ((_ref = document.getElementById('feature-javascript')) != null) {
+          _ref.style.display = "none";
+        }
+        used = ((_ref2 = document.getElementsByTagName('math')) != null ? _ref2.length : void 0) > 0;
+        if (used && mathmlDetect() === false) {
+          if ((_ref3 = document.getElementById('feature-mathml')) != null) {
+            _ref3.style.display = "block";
+          }
+          adjustCoverPosition('feature-mathml');
+        }
+        if (document.createElement('canvas').getContext == null) {
+          if ((_ref4 = document.getElementById('feature-canvas')) != null) {
+            _ref4.style.display = "block";
+          }
+          adjustCoverPosition('feature-canvas');
+        }
+        if (!('isContentEditable' in document.documentElement)) {
+          if ((_ref5 = document.getElementById('feature-contenteditable')) != null) {
+            _ref5.style.display = "block";
+          }
+          return adjustCoverPosition('feature-contenteditable');
+        }
+      };
+      return window.onload = function() {
+        var activateEditor, addElement, addFrame, canvas, clearCanvas, cmAutoEvaluation, cmEvaluation, cmManualEvaluation, createEditor, drawCanvas, evaluateSource, getParent, keyDownEvaluation, keyUpEvaluation, segment, separator, showDocumentHere, showHere, _i, _len, _ref;
+        featureDetect();
+        if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.fixedLayout : void 0) !== 'false') {
+          switchLayout(true);
+        }
+        this.useCodeMirror = (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.editor : void 0) === 'CodeMirror';
+        canvas = document.getElementById('drawCanvas');
+        if (canvas != null) window.ctx = canvas.getContext('2d');
+        clearCanvas = function() {
+          if (window.ctx != null) {
+            return window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
+          }
+        };
+        drawCanvas = function(draw) {
+          clearCanvas();
+          return draw(window.ctx);
+        };
+        getParent = function(child) {
+          var _ref;
+          return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+        };
+        addElement = function(parent, text) {
+          var newelem;
+          newelem = document.createElement('code');
+          newelem.setAttribute('class', 'sourceCode output');
+          newelem.innerHTML = text;
+          return parent.appendChild(newelem);
+        };
+        separator = function(parent) {
+          if (parent.getElementsByClassName('output').length === 0) {
+            return addElement(parent, '<hr><br>');
+          }
+        };
+        addFrame = function(parent, width, height, content) {
+          var newelem;
+          newelem = document.createElement('iframe');
+          newelem.setAttribute('class', 'output');
+          newelem.setAttribute('width', width);
+          newelem.setAttribute('height', height);
+          newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+          newelem.innerHTML = '<div id="feature-dataurl" style="color:#FF0000; display: block">\nNo or insufficient Data URL support &rarr;\nweb page output is not rendered in this browser.</div>';
+          return parent.appendChild(newelem);
+        };
+        showHere = function(atTag, obj, shallow, symbol) {
+          var displayShallow, msg, parentTag;
+          if (shallow == null) shallow = false;
+          if (symbol == null) symbol = '&rarr;';
+          displayShallow = function(o) {
+            var k, v;
+            return "{" + ((function() {
+              var _results;
+              _results = [];
+              for (k in o) {
+                if (!__hasProp.call(o, k)) continue;
+                v = o[k];
+                _results.push("\n  " + k + ": " + v);
+              }
+              return _results;
+            })()) + "\n}";
+          };
+          msg = (function() {
+            switch (typeof obj) {
+              case 'undefined':
+              case 'string':
+              case 'function':
+                return obj;
+              case 'object':
+                if (shallow) {
+                  return displayShallow(obj);
+                } else {
+                  try {
+                    return JSON.stringify(obj);
+                  } catch (err) {
+                    return displayShallow(obj);
+                  }
+                }
+                break;
+              default:
+                return obj != null ? obj.toString() : void 0;
+            }
+          })();
+          parentTag = getParent(atTag);
+          separator(parentTag);
+          addElement(parentTag, "" + symbol + " " + msg + "<br>");
+          return obj;
+        };
+        showDocumentHere = function(atTag, content, width, height) {
+          var parentTag;
+          if (width == null) width = 300;
+          if (height == null) height = 300;
+          parentTag = getParent(atTag);
+          separator(parentTag);
+          addFrame(parentTag, width, height, content);
+        };
+        evaluateSource = function(field) {
+          var HtmlListener, addErrorElement, codeSegment, codeTag, confirm, currentSegment, currentTag, elem, getCode, getCurrentTagId, i, incredibleIndex, incredibleLength, incredibleStart, incredibleTime, outLength, outList, prompt, qcConfig, runOnDemand, segment, segments, test, testPure, view, _fn, _i, _len, _len2;
+          if (field == null) field = null;
+          show = function(obj, shallow, symbol) {
+            if (shallow == null) shallow = false;
+            if (symbol == null) symbol = '&rarr;';
+            showHere(currentTag, obj, shallow, symbol);
+          };
+          view = function(obj, shallow, symbol) {
+            if (shallow == null) shallow = false;
+            if (symbol == null) symbol = '&rarr;';
+            return showHere(currentTag, obj, shallow, symbol);
+          };
+          showDocument = function(content, width, height) {
+            if (width == null) width = 300;
+            if (height == null) height = 300;
+            return showDocumentHere(currentTag, content, width, height);
+          };
+          addErrorElement = function(text) {
+            return show("<span class=\"er\">" + text + "</span>");
+          };
+          getCurrentTagId = function(id) {
+            return id.match(/button-\w+-(.*)/)[1];
+          };
+          runOnDemand = function(func) {
+            show("<button id='button-run-" + currentTag.id + "'> Run </button>");
+            document.getElementById("button-run-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func();
+            };
+          };
+          confirm = function(message, func) {
+            show(("" + message) + ("  <button id='button-yes-" + currentTag.id + "'> Yes </button>") + ("  <button id='button-no-" + currentTag.id + "'> No </button>"));
+            document.getElementById("button-yes-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(true);
+            };
+            document.getElementById("button-no-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(false);
+            };
+          };
+          prompt = function(message, defaultValue, func) {
+            show(("" + message) + ("  <input id='input-prompt-" + currentTag.id + "' value='" + defaultValue + "' />") + ("  <button id='button-prompt-" + currentTag.id + "'> Go </button>"));
+            document.getElementById("button-prompt-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(document.getElementById("input-prompt-" + (getCurrentTagId(this.id))).value);
+            };
+          };
+          HtmlListener = (function(_super) {
+
+            __extends(HtmlListener, _super);
+
+            function HtmlListener(maxCollected) {
+              this.maxCollected = maxCollected != null ? maxCollected : 10;
+            }
+
+            HtmlListener.prototype.log = function(str) {
+              return show(str);
+            };
+
+            HtmlListener.prototype.passed = function(str) {
+              return show("<span class=\"kw\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.invalid = function(str) {
+              return show("<span class=\"dt\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.failure = function(str) {
+              return show("<span class=\"al\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.done = function() {
+              show('Completed test.');
+              return resetProps();
+            };
+
+            return HtmlListener;
+
+          })(ConsoleListener);
+          Case.prototype.note = function(a) {
+            this.noteArg(a);
+            return a;
+          };
+          Case.prototype.noteVerbose = function(a) {
+            this.noteArg(a);
+            show(this.args);
+            return a;
+          };
+          testPure = function(func, types, name, property) {
+            declare(name, types, function() {
+              var a, c;
+              c = arguments[0], a = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+              return c.assert(property.apply(null, [c].concat(__slice.call(a), [c.note(func.apply(null, a))])));
+            });
+          };
+          qcConfig = new Config(100, 1000);
+          test = function(msg, func) {
+            return _.each([msg, func, runAllProps(qcConfig, new HtmlListener)], function(o) {
+              if (!_.isUndefined(o)) return show(o);
+            });
+          };
+          getCode = function(codeTag) {
+            var code, segment;
+            if (codeTag.value != null) {
+              segment = codeTag.value;
+            } else {
+              segment = codeTag.innerHTML;
+            }
+            code = segment.replace(/<br>/g, '\n');
+            code = code.replace(/<[\/]?span[^>]*>/g, '');
+            code = code.replace(/[&]gt;/g, '>');
+            code = code.replace(/[&]lt;/g, '<');
+            code = code.replace(/[&]nbsp;/g, ' ');
+            return {
+              codeTag: codeTag,
+              code: code
+            };
+          };
+          if ((field != null) && this.incrementalEvaluation) {
+            segments = [getCode(field)];
+          } else {
+            segments = (function() {
+              var _i, _len, _ref, _results;
+              _ref = window.document.getElementsByTagName('pre');
+              _results = [];
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                codeSegment = _ref[_i];
+                if (codeSegment.className === 'sourceCode') {
+                  codeTag = codeSegment.firstChild;
+                  if (codeTag.className === 'sourceCode coffeescript' || codeTag.className === 'sourceCode CoffeeScript') {
+                    _results.push(getCode(codeTag));
+                  } else {
+                    _results.push(void 0);
+                  }
+                } else {
+                  _results.push(void 0);
+                }
+              }
+              return _results;
+            })();
+            segments = (function() {
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = segments.length; _i < _len; _i++) {
+                segment = segments[_i];
+                if (segment != null) _results.push(segment);
+              }
+              return _results;
+            })();
+            for (i = 0, _len = segments.length; i < _len; i++) {
+              segment = segments[i];
+              if (i > 0 && /^[\s]/.test(segment.code)) {
+                segment.code = segments[i - 1].code + '\n' + segment.code;
+                segments[i - 1] = void 0;
+              }
+            }
+            segments = (function() {
+              var _i, _len2, _results;
+              _results = [];
+              for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+                segment = segments[_i];
+                if (segment != null) _results.push(segment);
+              }
+              return _results;
+            })();
+          }
+          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+            segment = segments[_i];
+            outList = getParent(segment.codeTag).getElementsByClassName('output');
+            outLength = outList != null ? outList.length : void 0;
+            while (outList && outLength > 0) {
+              elem = outList[--outLength];
+              getParent(elem).removeChild(elem);
+            }
+          }
+          incredibleLength = segments.length;
+          _fn = function(currentTag) {
+            var draw, incredibleResult, magic, promoteToGlobal, _j, _len3, _ref;
+            try {
+              draw = void 0;
+              incredibleResult = eval(CoffeeScript.compile(currentSegment.code, {
+                bare: true
+              }));
+              if (draw != null) drawCanvas(draw);
+              if (incredibleResult !== void 0 && typeof incredibleResult !== 'function') {
+                show(incredibleResult, true, '&crarr;');
+              }
+              if (typeof globalNames !== "undefined" && globalNames !== null) {
+                promoteToGlobal = function(magic) {
+                  var magicValue;
+                  try {
+                    magicValue = eval(magic);
+                  } catch (error) {
+                    return;
+                  }
+                  return this[magic] = magicValue;
+                };
+                _ref = globalNames.split(' ');
+                for (_j = 0, _len3 = _ref.length; _j < _len3; _j++) {
+                  magic = _ref[_j];
+                  promoteToGlobal(magic);
+                }
+              }
+            } catch (error) {
+              console.log(error.message);
+              addErrorElement(error);
+            }
+          };
+          for (incredibleIndex = 0; incredibleIndex < incredibleLength; incredibleIndex += 1) {
+            incredibleStart = new Date();
+            currentSegment = segments[incredibleIndex];
+            currentTag = currentSegment.codeTag;
+            if (currentTag.id === '') currentTag.id = "codeTag" + incredibleIndex;
+            _fn(currentTag);
+            if ((typeof showTiming !== "undefined" && showTiming !== null) && showTiming === true) {
+              incredibleTime = Number(0.001 * (new Date() - incredibleStart)).toFixed(3);
+              show("" + incredibleTime + "s", true, '☕');
+            }
+          }
+        };
+        keyDownEvaluation = function(evt) {
+          var _ref;
+          if (evt == null) return;
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual') {
+            if (evt.keyCode === 13 && evt.shiftKey) {
+              evt.preventDefault();
+              evaluateSource(evt.currentTarget);
+            }
+          }
+          if (evt.keyCode === 13 && !evt.shiftKey) {
+            if ((_ref = evt.target) != null) _ref.rows++;
+          }
+        };
+        keyUpEvaluation = function(evt) {
+          var _ref;
+          if (evt == null) return;
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) !== 'manual') {
+            if ((_ref = evt.keyCode) !== 16 && _ref !== 37 && _ref !== 38 && _ref !== 39 && _ref !== 40) {
+              return evaluateSource(evt.currentTarget);
+            }
+          }
+        };
+        cmEvaluation = function(editor) {
+          editor.save();
+          return evaluateSource(editor.getTextArea());
+        };
+        cmAutoEvaluation = function(editor) {
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) !== 'manual') {
+            return cmEvaluation(editor);
+          }
+        };
+        cmManualEvaluation = function(editor) {
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual') {
+            return cmEvaluation(editor);
+          }
+        };
+        createEditor = function(codeElement, text) {
+          var c, countLines, elemCodeMirror, newelem;
+          newelem = document.createElement('textarea');
+          newelem.setAttribute('id', codeElement.id);
+          newelem.setAttribute('class', codeElement.getAttribute('class'));
+          countLines = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = text.length; _i < _len; _i++) {
+              c = text[_i];
+              if (c === '\n') _results.push(c);
+            }
+            return _results;
+          })()).length + 1;
+          newelem.setAttribute('rows', countLines);
+          newelem.setAttribute('style', 'width: 98%;');
+          newelem.setAttribute('autofocus', 'true');
+          newelem.setAttribute('spellcheck', 'false');
+          newelem.innerHTML = text;
+          newelem.addEventListener('keydown', keyDownEvaluation, false);
+          newelem.addEventListener('keyup', keyUpEvaluation, false);
+          getParent(codeElement).replaceChild(newelem, codeElement);
+          if (this.useCodeMirror) {
+            return elemCodeMirror = CodeMirror.fromTextArea(newelem, {
+              onChange: cmAutoEvaluation,
+              extraKeys: {
+                'Shift-Enter': cmManualEvaluation
+              },
+              lineNumbers: true,
+              theme: 'pantheme'
+            });
+          }
+        };
+        activateEditor = function() {
+          var sourcecode;
+          this.removeEventListener('focus', activateEditor, false);
+          sourcecode = this.innerHTML.toString().replace(/<\/?span[^>]*>/g, '');
+          sourcecode = sourcecode.replace(/<br[ ]*[^>]*>/g, '\n');
+          return createEditor(this, sourcecode);
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.firstChild.addEventListener('focus', activateEditor, false);
+        }
+        this.incrementalEvaluation = false;
+        return evaluateSource();
+      };
+    }).call(this);</script>
+
+<div id="page">
+<header>
+<h1 class="title">Grimoire — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
+<h4 class="date">☕</h4>
+</header>
+<blockquote>
+<p>This literate program is <em>interactive</em> in its HTML<sub>5</sub> form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript as you modify a CoffeeScript function by typing ‘show name’ after its definition.</p>
+</blockquote>
+<section id="grimoire">
+<h2>Grimoire</h2>
+<p>A Grimoire is a book of magical incantations. This program got the name because it is full of magic. Not the superstitious kind — but magical constants, assumptions and implicit definitions — follow its style and conventions at your own peril. As it is with magic, this program does not actually work, it is all sleight of hand.</p>
+<p>There is a little touch of self-referential magic in here: This literate program documents the internals of its own kind of literate program documents including itself.</p>
+<p>If you have some CoffeeScript that would be more spiffy packaged in an interactive HTML<sub>5</sub> document, then be warned: As in magical potions, the ingredients are exotic and intoxicating. They include <code>ssam</code> (streaming sam rc script) from <code>plan9port</code>, <code>pandoc</code> (the Haskell universal format converter) and the enchanted <code>CodeMirror</code> — the embedded editor that shows your code as it <em>really</em> is.</p>
+<section id="the-crystal-ball-of-hindsight">
+<h4>The Crystal Ball of Hindsight</h4>
+<p>One night, under the full moon, I might make this more approachable. There isn’t anything going on in the <code>sam</code> structural regular expressions or the <code>ssam</code> pipeline that could not be done in, say, a CoffeeScript program. It is this way because the <code>plan9</code> toolset is eminent for prototyping and experiments and <code>pandoc</code> does most of the work. Creating these documents is a little something I am doing for fun. Building a professional quality publishing pipeline — while interesting — would be an order of magnitude more work. This is not like any commercial application I have ever seen or written.</p>
+<p>The program attempts to change as little as possible in the <code>markdown</code> format, but meddles — quite unwisely — in the internals of the HTML<sub>5</sub> created by <code>pandoc</code>. This is to create one document that is simultaneously a <code>markdown</code> document, a literate CoffeeScript program, and an interactive HTML<sub>5</sub> application.</p>
+</section>
+<section id="editor-commandline-commands">
+<h3>Editor Commandline Commands</h3>
+<p>I use <code>acme</code> to stir the ingredients, but you can use any editor/command line you like — don’t blame me for the result. Speaking of don’t blame me: If this program does not work for you, then it is not a bug, it is because you don’t believe in magic — because <em>seriously</em> you don’t, do you?</p>
+<p>Below are the commands I use to extract CoffeeScript code, execute it and to format these Grimoire documents. To execute the commands; middle-button select them in the <code>acme</code> environment (if you are reading the markdown source code). As you can see, the magical constants start right here. To use the commands with another document, snarf them and <code>s/grimoire/new-document-name/g</code>.</p>
+<section id="simple-extraction">
+<h5>Simple Extraction</h5>
+<p>This command extracts CoffeeScript to an editor buffer — only bird tracks followed by the capitalization that you see below are extracted. This is used to avoid extracting code blocks that are spelled in all capitals i.e <code>~~~~ {.COFFEESCRIPT}</code>. In the online environment those blocks become read-only and are not executed.</p>
+<pre class="sourceCode"><code class="sourceCode bash">Edit ,x/^~~+[   ]*<span class="dt">{\.[cC]offee[sS]cript.*}</span>$/+,/^~~+$/-p</code></pre>
+</section>
+<section id="extract-and-run-standalone">
+<h5>Extract and Run Standalone</h5>
+<p>The next command extracts the CoffeeScript and prepend definitions that are provided by the interactive environment but do not exist in the standard standalone environment. Creates a CoffeeScript file. Compiles to a JavaScript file. Runs the CoffeeScript to produce an HTML and an output file. You can edit this bit if the document is not producing HTML. Opens the HTML in your web browser and plumbs it back into <code>acme</code>.</p>
+<pre class="sourceCode"><code class="sourceCode bash">Edit ,<span class="kw">&gt;</span>ssam -n <span class="st">'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-'</span> <span class="kw">|</span><span class="kw">cat</span> embed-standalone.coffee - <span class="kw">|</span><span class="kw">tee</span> grimoire.coffee <span class="kw">|</span> coffee -cs <span class="kw">&gt;</span>grimoire.js; coffee grimoire.coffee <span class="kw">|</span><span class="kw">tee</span> grimoire-output.html <span class="kw">&gt;</span>grimoire.output; open grimoire-output.html; plumb grimoire-output.html</code></pre>
+</section>
+<section id="create-pdf-with-tex">
+<h5>Create PDF with TeX</h5>
+<p>The following command produces a PDF version of the document. It uses XeTeX which in this case must be present on your system together with too many TeX packages to list (try a full 1.6Gb install if you have the bandwidth or spend hours as I do: start from a basic TeX and add individual packages one-by-one in the Tex Live Utility). It is not required unless you want a PDF version. By the way XeTeX has some trouble with Unicode characters, sometimes. Anyway it assumes that the command above has been run, the <code>VerbatimInput</code> lines near the end of this document (you can only see them in the markdown not in the HTML because they are TeX commands) uses the created files to insert program output and JavaScript translation into the PDF. You can delete those lines if you don’t want that.</p>
+<pre class="sourceCode"><code class="sourceCode bash">Edit ,<span class="kw">&gt;</span>markdown2pdf --listings --xetex <span class="st">'--template=pandoc-template.tex'</span> -o grimoire.pdf; open grimoire.pdf</code></pre>
+</section>
+<section id="create-an-html5-application">
+<h5>Create an HTML<sub>5</sub> Application</h5>
+<p>The last command produces an interactive HTML<sub>5</sub> document. It does assume that the 2<sup>nd</sup> commands above has been run sometime earlier (to bootstrap itself). The command below works as a straight pipeline. First running the markdown through <code>pandoc</code> to produce HTML<sub>5</sub> with <code>section</code> and <code>mathml</code> elements<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. It creates a standalone document based on the template in <code>pandoc-template.html</code> and includes different CSS files for styling itself and its embedded editor. It also includes itself with the <code>-B</code> (<code>include-before-body</code>) option, not the interactive HTML that you might be reading, but the output-HTML that the interactive HTML produces.</p>
+<p>The next four stages are all <code>ssam</code> substitutions in the HTML that <code>pandoc</code> produced. Talk about being dependent on internal implementation details — the <code>pandoc</code> used is version is 1.8.2.</p>
+<ol type="1">
+<li><p>The relevant <code>&lt;code&gt;</code> elements (based on their class and spelling) are made contenteditable. That is only used to allow them to get focus and could possibly be replaced by pseudo onclick handlers. They are also set to <em>not</em> be <code>spellcheck</code>ed, which should be obvious for <code>&lt;code&gt;</code> elements. But even with that flag, Firefox still spellchecks the CoffeeScript in the elements displaying a lot of ugly squiggles.</p></li>
+<li><p>Sections with an id that starts with <code>view-solution</code> are hidden and given a <code>reveal</code> event handler. The hidden part goes on to the next section, which in the markdown can be marked with a header <code>#####</code> without a text. That bit is now depending on <code>pandoc</code> not optimizing those superfluous headers away. But it makes it possible for solutions to have multiple code blocks and images in them.</p></li>
+<li><p>This part replaces the 1<sup>st</sup> and only the 1<sup>st</sup> image reference in a document with a canvas element. This is something that should be changed: a canvas element isn’t usable without scripting and this could be done in scripting.</p></li>
+<li><p>The last defaults images to be centered instead of left aligned. This should be done in CSS instead.</p></li>
+</ol>
+<pre class="sourceCode"><code class="sourceCode bash">Edit ,<span class="kw">&gt;</span>pandoc -f markdown -t html -S -5 --mathml --section-divs --css pandoc-template.css --css codemirror/codemirror.css --css codemirror/pantheme.css --template pandoc-template.html -B grimoire-output.html <span class="kw">|</span> ssam <span class="st">'s/(&lt;code class=&quot;sourceCode [cC]offee[sS]cript&quot;)/\1 contenteditable=\&quot;true\&quot; spellcheck=\&quot;false\&quot;/g'</span> <span class="kw">|</span> ssam <span class="st">'s/(&lt;section id=&quot;view-solution[0-9\-]*&quot;)(&gt;)(\n.*\n)(&lt;section id=&quot;section[0-9\-]*&quot;)(&gt;)/\1 onclick=\&quot;reveal(this)\&quot; \2\3\4 style=\&quot;display:none\&quot; \5/g'</span> <span class="kw">|</span> ssam <span class="st">'s/&lt;img src=\&quot;[^\&quot;]+\&quot; alt=\&quot;[^\&quot;]+\&quot; \/&gt;/&lt;canvas id=\&quot;drawCanvas\&quot; width=\&quot;320\&quot; height=\&quot;320\&quot; style=\&quot;position: absolute; top: 333px; left: 200px\&quot;&gt;&lt;\/canvas&gt;/'</span> <span class="kw">|</span> ssam <span class="st">'s/(&lt;p)(&gt;&lt;img)/\1 align=center\2/g'</span> <span class="kw">&gt;</span>grimoire.html; open grimoire.html; plumb grimoire.html</code></pre>
+</section>
+</section>
+<section id="interactive-environment">
+<h3>Interactive Environment</h3>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">webfragment <span class="kw">=</span> <span class="fu">-&gt;</span></code></pre>
+<section id="feature-detection-warning-elements">
+<h4>Feature detection warning elements</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">  div id<span class="kw">:</span> <span class="st">&quot;feature-detect&quot;</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />    div id<span class="kw">:</span> <span class="st">&quot;feature-javascript&quot;</span><span class="kw">,</span> style<span class="kw">:</span> <span class="st">&quot;color:#FF0000; display: block&quot;</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />      text <span class="st">&quot;No JavaScript &amp;rarr; no output and no interactivity.&quot;</span><br />    div id<span class="kw">:</span> <span class="st">&quot;feature-mathml&quot;</span><span class="kw">,</span> style<span class="kw">:</span> <span class="st">&quot;color:#FF0000; display: none&quot;</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />      text <span class="st">&quot;No MathML 1998 &amp;rarr; math is not readable.&quot;</span><br />    div id<span class="kw">:</span> <span class="st">&quot;feature-canvas&quot;</span><span class="kw">,</span> style<span class="kw">:</span> <span class="st">&quot;color:#FF0000; display: none&quot;</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />      text <span class="st">&quot;No Canvas &amp;rarr; graphical output is not rendered.&quot;</span><br />    div id<span class="kw">:</span> <span class="st">&quot;feature-contenteditable&quot;</span><span class="kw">,</span> style<span class="kw">:</span> <span class="st">&quot;color:#FF0000; display: none&quot;</span><span class="kw">,</span> <span class="fu">-&gt;</span><br />      text <span class="st">&quot;No ContentEditable &amp;rarr; CoffeeScript sections can not be changed.&quot;</span></code></pre>
+</section>
+<section id="user-settings-menu">
+<h4>User settings menu</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">  input <span class="kw">class</span><span class="dt">:</span> <span class="st">'field'</span><span class="kw">,</span> type<span class="kw">:</span> <span class="st">'button'</span><span class="kw">,</span> value<span class="kw">:</span> <span class="st">'Adjust layout'</span><span class="kw">,</span> onclick<span class="kw">:</span> <span class="fu">-&gt;</span><br />    <span class="dt">@value</span> <span class="kw">=</span> <span class="kw">if</span> toggleLayout<span class="kw">()</span> <span class="kw">then</span> <span class="st">'Layout: fixed'</span> <span class="kw">else</span> <span class="st">'Layout: freeflow'</span><br />  input <span class="kw">class</span><span class="dt">:</span> <span class="st">'field'</span><span class="kw">,</span> type<span class="kw">:</span> <span class="st">'button'</span><span class="kw">,</span> value<span class="kw">:</span> <span class="st">'Select editor'</span><span class="kw">,</span> onclick<span class="kw">:</span> <span class="fu">-&gt;</span><br />    <span class="dt">@value</span> <span class="kw">=</span> <span class="kw">if</span> switchEditor<span class="kw">()</span> <span class="kw">then</span> <span class="st">'Editor: CodeMirror'</span> <span class="kw">else</span> <span class="st">'Editor: plain text'</span><br />  input <span class="kw">class</span><span class="dt">:</span> <span class="st">'field'</span><span class="kw">,</span> type<span class="kw">:</span> <span class="st">'button'</span><span class="kw">,</span> value<span class="kw">:</span> <span class="st">'Evaluation'</span><span class="kw">,</span> onclick<span class="kw">:</span> <span class="fu">-&gt;</span><br />    <span class="dt">@value</span> <span class="kw">=</span> <span class="kw">if</span> switchEvaluation<span class="kw">()</span> <span class="kw">then</span> <span class="st">'&#8593; &#8617;  Evaluate'</span> <span class="kw">else</span> <span class="st">'Auto Evaluate'</span></code></pre>
+</section>
+<section id="external-scripts">
+<h4>External scripts</h4>
+<p>These scripts should be the same as those listed in the application manifest, <code>pandoc-template.appcache</code> that is mentioned in the <code>pandoc-template.html</code> file.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">  script src<span class="kw">:</span> <span class="st">'node_modules/coffee-script.js'</span><br />  script src<span class="kw">:</span> <span class="st">'node_modules/coffeekup.js'</span><br />  script src<span class="kw">:</span> <span class="st">'node_modules/underscore.js'</span><br />  script src<span class="kw">:</span> <span class="st">'node_modules/qc.js'</span><br />  script src<span class="kw">:</span> <span class="st">'codemirror/codemirror.js'</span><br />  script src<span class="kw">:</span> <span class="st">'codemirror/coffeescript.js'</span></code></pre>
+</section>
+</section>
+<section id="the-interactive-environment">
+<h3>The Interactive Environment</h3>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">  coffeescript <span class="fu">-&gt;</span></code></pre>
+<section id="hidden-sections-support">
+<h4>Hidden sections support</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    <span class="dt">@reveal</span> <span class="kw">=</span> <span class="fu">(instance) -&gt;</span> <span class="co"># Very pandoc specific: requires --section-divs</span><br />      instance<span class="kw">.</span>getElementsByTagName<span class="kw">(</span><span class="st">'section'</span><span class="kw">)[</span><span class="dv">0</span><span class="kw">]?.</span>style<span class="kw">.</span>display <span class="kw">=</span> <span class="st">'block'</span><br />      instance<span class="kw">.</span>getElementsByTagName<span class="kw">(</span><span class="st">'h5'</span><span class="kw">)[</span><span class="dv">0</span><span class="kw">]?.</span>innerHTML <span class="kw">=</span> <span class="st">'Solution'</span><br />      instance<span class="kw">.</span>onclick <span class="kw">=</span> <span class="ot">undefined</span></code></pre>
+</section>
+<section id="user-settings-support">
+<h4>User settings support</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    <span class="dt">@switchEditor</span> <span class="kw">=</span> <span class="fu">-&gt;</span><br />      localStorage<span class="kw">?.</span>editor <span class="kw">=</span> <span class="kw">if</span> <span class="dt">@useCodeMirror</span> <span class="kw">then</span> <span class="st">'TextArea'</span> <span class="kw">else</span> <span class="st">'CodeMirror'</span><br />      <span class="dt">@useCodeMirror</span> <span class="kw">=</span> <span class="kw">not</span> <span class="dt">@useCodeMirror</span><br />    <span class="dt">@switchEvaluation</span> <span class="kw">=</span> <span class="fu">-&gt;</span><br />      localStorage<span class="kw">?.</span>evaluation <span class="kw">=</span><br />        <span class="kw">if</span> localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />          <span class="st">'automatic'</span><br />        <span class="kw">else</span><br />          <span class="st">'manual'</span><br />      localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />    <span class="dt">@toggleLayout</span> <span class="kw">=</span> <span class="fu">-&gt;</span><br />      fixedLayout <span class="kw">=</span> document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'page'</span><span class="kw">).</span>style<span class="kw">.</span>maxWidth <span class="kw">is</span> <span class="st">''</span><br />      localStorage<span class="kw">?.</span>fixedLayout <span class="kw">=</span> fixedLayout<br />      switchLayout fixedLayout<br />    switchLayout <span class="kw">=</span> <span class="fu">(fixedLayout) -&gt;</span> <span class="co"># Should be in CSS</span><br />      document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'page'</span><span class="kw">).</span>style<span class="kw">.</span>maxWidth <span class="kw">=</span><br />        <span class="kw">if</span> fixedLayout <span class="kw">then</span> <span class="st">'600px'</span> <span class="kw">else</span> <span class="st">''</span><br />      s <span class="kw">=</span> document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'page'</span><span class="kw">).</span>style<br />      <span class="kw">if</span> fixedLayout<br />        s<span class="kw">.</span>webkitHyphens <span class="kw">=</span> <span class="st">'auto'</span><br />        s<span class="kw">.</span>mozHyphens <span class="kw">=</span> <span class="st">'auto'</span><br />        s<span class="kw">.</span>msHyphens <span class="kw">=</span> <span class="st">'auto'</span><br />        s<span class="kw">.</span>hyphens <span class="kw">=</span> <span class="st">'auto'</span><br />        s<span class="kw">.</span>textAlign <span class="kw">=</span> <span class="st">'justify'</span><br />      <span class="kw">else</span><br />        s<span class="kw">.</span>webkitHyphens <span class="kw">=</span> <span class="st">''</span><br />        s<span class="kw">.</span>mozHyphens <span class="kw">=</span> <span class="st">''</span><br />        s<span class="kw">.</span>msHyphens <span class="kw">=</span> <span class="st">''</span><br />        s<span class="kw">.</span>hyphens <span class="kw">=</span> <span class="st">''</span><br />        s<span class="kw">.</span>textAlign <span class="kw">=</span> <span class="st">''</span><br />      fixedLayout</code></pre>
+</section>
+<section id="feature-detection">
+<h4>Feature Detection</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    featureDetect <span class="kw">=</span> <span class="fu">-&gt;</span><br />      adjustCoverPosition <span class="kw">=</span> <span class="fu">(idFeature) -&gt;</span> <span class="co"># Should be in CSS</span><br />        canvasCover <span class="kw">=</span> document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'drawCanvas'</span><span class="kw">)</span><br />        topPos <span class="kw">=</span> <span class="ot">parseInt</span> canvasCover<span class="kw">?.</span>style<span class="kw">.</span>top<br />        lineHeight <span class="kw">=</span> document<span class="kw">.</span>getElementById<span class="kw">(</span>idFeature<span class="kw">)?.</span>scrollHeight<br />        canvasCover<span class="kw">?.</span>style<span class="kw">.</span>top <span class="kw">=</span> <span class="kw">(</span>topPos <span class="kw">+</span> lineHeight<span class="kw">)</span> <span class="kw">+</span> <span class="st">'px'</span><br /><br />      mathmlDetect <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="kw">(</span>e <span class="kw">=</span> document<span class="kw">.</span>createElement <span class="st">'div'</span><span class="kw">).</span>innerHTML <span class="kw">=</span> <span class="st">'&lt;math&gt;&lt;/math&gt;'</span><br />        passed <span class="kw">=</span> e<span class="kw">.</span>firstChild <span class="kw">and</span> <span class="st">'namespaceURI'</span> <span class="kw">of</span> e<span class="kw">.</span>firstChild <span class="kw">and</span><br />          e<span class="kw">.</span>firstChild<span class="kw">.</span>namespaceURI <span class="kw">is</span> <span class="st">'http://www.w3.org/1998/Math/MathML'</span><br />        <span class="co"># </span><span class="al">TODO</span><span class="co"> Needs a better test. Testing on Chrome directly because</span><br />        <span class="co"># it reports it supports MathML even though that is not the case.</span><br />        passed <span class="kw">and</span> <span class="kw">not</span> <span class="st">/Chrome/</span><span class="kw">.</span>test navigator<span class="kw">.</span>userAgent<br /><br />      document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'feature-javascript'</span><span class="kw">)?.</span>style<span class="kw">.</span>display <span class="kw">=</span> <span class="st">&quot;none&quot;</span><br />      used <span class="kw">=</span> <span class="kw">(</span>document<span class="kw">.</span>getElementsByTagName<span class="kw">(</span><span class="st">'math'</span><span class="kw">)?.</span>length <span class="kw">&gt;</span> <span class="dv">0</span><span class="kw">)</span><br />      <span class="kw">if</span> used <span class="kw">and</span> mathmlDetect<span class="kw">()</span> <span class="kw">is</span> <span class="ot">false</span><br />        document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'feature-mathml'</span><span class="kw">)?.</span>style<span class="kw">.</span>display <span class="kw">=</span> <span class="st">&quot;block&quot;</span><br />        adjustCoverPosition <span class="st">'feature-mathml'</span><br />      <span class="kw">unless</span> document<span class="kw">.</span>createElement<span class="kw">(</span><span class="st">'canvas'</span><span class="kw">).</span>getContext<span class="kw">?</span><br />        document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'feature-canvas'</span><span class="kw">)?.</span>style<span class="kw">.</span>display <span class="kw">=</span> <span class="st">&quot;block&quot;</span><br />        adjustCoverPosition <span class="st">'feature-canvas'</span><br />      <span class="kw">unless</span> <span class="st">'isContentEditable'</span> <span class="kw">of</span> document<span class="kw">.</span>documentElement<br />        document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'feature-contenteditable'</span><span class="kw">)?.</span>style<span class="kw">.</span>display <span class="kw">=</span> <span class="st">&quot;block&quot;</span><br />        adjustCoverPosition <span class="st">'feature-contenteditable'</span></code></pre>
+</section>
+<section id="startup">
+<h4>Startup</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">    window<span class="kw">.</span>onload <span class="kw">=</span> <span class="fu">-&gt;</span><br />      featureDetect<span class="kw">()</span><br />      switchLayout<span class="kw">(</span><span class="ot">on</span><span class="kw">)</span> <span class="kw">if</span> localStorage<span class="kw">?.</span>fixedLayout <span class="kw">isnt</span> <span class="st">'false'</span><br />      <span class="dt">@useCodeMirror</span> <span class="kw">=</span> localStorage<span class="kw">?.</span>editor <span class="kw">is</span> <span class="st">'CodeMirror'</span></code></pre>
+</section>
+<section id="runtime-canvas-support">
+<h4>Runtime canvas support</h4>
+<p>As mentioned in the command used to create an <a href="#create-an-html5-application">HTML<sub>5</sub> application, item #3</a> this should not be done automatically.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      canvas <span class="kw">=</span> document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">'drawCanvas'</span><span class="kw">)</span><br />      window<span class="kw">.</span>ctx <span class="kw">=</span> canvas<span class="kw">.</span>getContext <span class="st">'2d'</span> <span class="kw">if</span> canvas<span class="kw">?</span><br /><br />      clearCanvas <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="kw">if</span> window<span class="kw">.</span>ctx<span class="kw">?</span><br />          window<span class="kw">.</span>ctx<span class="kw">.</span>clearRect <span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span><br />            window<span class="kw">.</span>ctx<span class="kw">.</span>canvas<span class="kw">.</span>width<span class="kw">,</span> window<span class="kw">.</span>ctx<span class="kw">.</span>canvas<span class="kw">.</span>height<br />      drawCanvas <span class="kw">=</span> <span class="fu">(draw) -&gt;</span><br />        clearCanvas<span class="kw">()</span><br />        draw window<span class="kw">.</span>ctx</code></pre>
+</section>
+<section id="runtime-output-support">
+<h4>Runtime output support</h4>
+<p>The <code>dataurl</code> in <code>addFrame</code> is not displayed in IE9 nor is its <code>innerHTML</code>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      getParent <span class="kw">=</span> <span class="fu">(child) -&gt;</span> child<span class="kw">?.</span>parentElement <span class="kw">?</span> child<span class="kw">?.</span>parentNode<br /><br />      addElement <span class="kw">=</span> <span class="fu">(parent, text) -&gt;</span><br />        newelem <span class="kw">=</span> document<span class="kw">.</span>createElement <span class="st">'code'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'class'</span><span class="kw">,</span> <span class="st">'sourceCode output'</span><br />        newelem<span class="kw">.</span>innerHTML <span class="kw">=</span> text<br />        parent<span class="kw">.</span>appendChild newelem<br /><br />      separator <span class="kw">=</span> <span class="fu">(parent) -&gt;</span><br />        <span class="kw">if</span> parent<span class="kw">.</span>getElementsByClassName<span class="kw">(</span><span class="st">'output'</span><span class="kw">).</span>length <span class="kw">is</span> <span class="dv">0</span><br />          addElement parent<span class="kw">,</span> <span class="st">'&lt;hr&gt;&lt;br&gt;'</span><br /><br />      addFrame <span class="kw">=</span> <span class="fu">(parent, width, height, content) -&gt;</span><br />        newelem <span class="kw">=</span> document<span class="kw">.</span>createElement <span class="st">'iframe'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'class'</span><span class="kw">,</span> <span class="st">'output'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'width'</span><span class="kw">,</span>  width<br />        newelem<span class="kw">.</span>setAttribute <span class="st">'height'</span><span class="kw">,</span> height<br />        newelem<span class="kw">.</span>setAttribute <span class="st">'src'</span><span class="kw">,</span><br />          <span class="st">&quot;data:text/html;charset=utf-8,</span><span class="ch">#{</span>encodeURIComponent content<span class="ch">}</span><span class="st">&quot;</span><br />        newelem<span class="kw">.</span>innerHTML <span class="kw">=</span> <br />          <span class="st">'''&lt;div id=&quot;feature-dataurl&quot; style=&quot;color:#FF0000; display: block&quot;&gt;</span><br /><span class="st">             No or insufficient Data URL support &amp;rarr;</span><br /><span class="st">             web page output is not rendered in this browser.&lt;/div&gt;'''</span><br />        parent<span class="kw">.</span>appendChild newelem<br /><br />      showHere <span class="kw">=</span> <span class="fu">(atTag, obj, shallow = false, symbol = '&amp;rarr;') -&gt;</span><br />        displayShallow <span class="kw">=</span> <span class="fu">(o) -&gt;</span><br />          <span class="st">&quot;&quot;&quot;{</span><span class="ch">#{</span>&quot;\n  #{k<span class="ch">}</span><span class="st">: </span><span class="ch">#{</span>v<span class="ch">}</span><span class="st">&quot; for own k,v of o}\n}&quot;&quot;&quot;</span><br />        msg <span class="kw">=</span> <span class="kw">switch</span> <span class="kw">typeof</span> obj<br />          <span class="kw">when</span> <span class="st">'undefined'</span><span class="kw">,</span> <span class="st">'string'</span><span class="kw">,</span> <span class="st">'function'</span><br />            obj<br />          <span class="kw">when</span> <span class="st">'object'</span><br />            <span class="kw">if</span> shallow<br />              displayShallow obj<br />            <span class="kw">else</span><br />              <span class="kw">try</span><br />                JSON<span class="kw">.</span>stringify obj<br />              <span class="kw">catch</span> err<br />                displayShallow obj<br />          <span class="kw">else</span> obj<span class="kw">?.</span>toString<span class="kw">()</span><br />        parentTag <span class="kw">=</span> getParent atTag<br />        separator parentTag<br />        addElement parentTag<span class="kw">,</span> <span class="st">&quot;</span><span class="ch">#{</span>symbol<span class="ch">}</span><span class="st"> </span><span class="ch">#{</span>msg<span class="ch">}</span><span class="st">&lt;br&gt;&quot;</span><br />        obj<br /><br />      showDocumentHere <span class="kw">=</span> <span class="fu">(atTag, content, width = 300, height = 300) -&gt;</span><br />        parentTag <span class="kw">=</span> getParent atTag<br />        separator parentTag<br />        addFrame parentTag<span class="kw">,</span> width<span class="kw">,</span> height<span class="kw">,</span> content<br />        <span class="kw">return</span></code></pre>
+</section>
+<section id="coffeescript-evaluation">
+<h4>CoffeeScript Evaluation</h4>
+<p>This is called during startup for a full evaluation. It is also triggered by changes in one of the editor types, where it can be full evaluation with code stitching for short articles or incremental i.e. one code block for a whole book.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      evaluateSource <span class="kw">=</span> <span class="fu">(field = null) -&gt;</span></code></pre>
+</section>
+<section id="main-output-functions">
+<h4>Main output functions</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        show <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rarr;') -&gt;</span><br />          showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />          <span class="kw">return</span> <span class="co"># Suppress display of the return value</span><br />        view <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rarr;') -&gt;</span><br />          showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />        showDocument <span class="kw">=</span> <span class="fu">(content, width = 300, height = 300) -&gt;</span><br />          showDocumentHere currentTag<span class="kw">,</span> content<span class="kw">,</span> width<span class="kw">,</span> height<br />        addErrorElement <span class="kw">=</span> <span class="fu">(text) -&gt;</span><br />          show <span class="st">&quot;&quot;&quot;&lt;span class=&quot;er&quot;&gt;</span><span class="ch">#{</span>text<span class="ch">}</span><span class="st">&lt;/span&gt;&quot;&quot;&quot;</span></code></pre>
+</section>
+<section id="callbacks-with-output-related-to-place-of-definition">
+<h4>Callbacks with output related to place of definition</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        <span class="co"># Naming convention: 'button-' &lt;type&gt; '-' &lt;codeTagId&gt;</span><br />        getCurrentTagId <span class="kw">=</span> <span class="fu">(id) -&gt;</span> id<span class="kw">.</span>match<span class="kw">(</span><span class="st">/button-\w+-(.*)/</span><span class="kw">)[</span><span class="dv">1</span><span class="kw">]</span><br /><br />        runOnDemand <span class="kw">=</span> <span class="fu">(func) -&gt;</span><br />          show <span class="st">&quot;&lt;button id='button-run-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">'&gt; Run &lt;/button&gt;&quot;</span><br />          document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">&quot;button-run-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">&quot;</span><span class="kw">).</span>onclick <span class="kw">=</span> <span class="fu">-&gt;</span><br />            currentTag <span class="kw">=</span> document<span class="kw">.</span>getElementById getCurrentTagId <span class="dt">@id</span><br />            view <span class="kw">=</span> show <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rArr;') -&gt;</span><br />              showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />            showDocument <span class="kw">=</span> <span class="fu">(content, width = 300, height = 300) -&gt;</span><br />              showDocumentHere currentTag<span class="kw">,</span> content<span class="kw">,</span> width<span class="kw">,</span> height<br />            func<span class="kw">()</span><br />          <span class="kw">return</span><br /><br />        confirm <span class="kw">=</span> <span class="fu">(message, func) -&gt;</span><br />          show <span class="st">&quot;</span><span class="ch">#{</span>message<span class="ch">}</span><span class="st">&quot;</span> <span class="kw">+</span><br />            <span class="st">&quot;  &lt;button id='button-yes-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">'&gt; Yes &lt;/button&gt;&quot;</span> <span class="kw">+</span><br />            <span class="st">&quot;  &lt;button id='button-no-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">'&gt; No &lt;/button&gt;&quot;</span><br />          document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">&quot;button-yes-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">&quot;</span><span class="kw">).</span>onclick <span class="kw">=</span> <span class="fu">-&gt;</span><br />            currentTag <span class="kw">=</span> document<span class="kw">.</span>getElementById getCurrentTagId <span class="dt">@id</span><br />            view <span class="kw">=</span> show <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rArr;') -&gt;</span><br />              showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />            showDocument <span class="kw">=</span> <span class="fu">(content, width = 300, height = 300) -&gt;</span><br />              showDocumentHere currentTag<span class="kw">,</span> content<span class="kw">,</span> width<span class="kw">,</span> height<br />            func <span class="ot">true</span><br />          document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">&quot;button-no-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">&quot;</span><span class="kw">).</span>onclick <span class="kw">=</span> <span class="fu">-&gt;</span><br />            currentTag <span class="kw">=</span> document<span class="kw">.</span>getElementById getCurrentTagId <span class="dt">@id</span><br />            view <span class="kw">=</span> show <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rArr;') -&gt;</span><br />              showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />            showDocument <span class="kw">=</span> <span class="fu">(content, width = 300, height = 300) -&gt;</span><br />              showDocumentHere currentTag<span class="kw">,</span> content<span class="kw">,</span> width<span class="kw">,</span> height<br />            func <span class="ot">false</span><br />          <span class="kw">return</span><br /><br />        prompt <span class="kw">=</span> <span class="fu">(message, defaultValue, func) -&gt;</span><br />          show <span class="st">&quot;</span><span class="ch">#{</span>message<span class="ch">}</span><span class="st">&quot;</span> <span class="kw">+</span><br />            <span class="st">&quot;  &lt;input id='input-prompt-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">' value='</span><span class="ch">#{</span>defaultValue<span class="ch">}</span><span class="st">' /&gt;&quot;</span> <span class="kw">+</span><br />            <span class="st">&quot;  &lt;button id='button-prompt-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">'&gt; Go &lt;/button&gt;&quot;</span><br />          document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">&quot;button-prompt-</span><span class="ch">#{</span>currentTag.id<span class="ch">}</span><span class="st">&quot;</span><span class="kw">).</span>onclick <span class="kw">=</span> <span class="fu">-&gt;</span><br />            currentTag <span class="kw">=</span> document<span class="kw">.</span>getElementById getCurrentTagId <span class="dt">@id</span><br />            view <span class="kw">=</span> show <span class="kw">=</span> <span class="fu">(obj, shallow = false, symbol = '&amp;rArr;') -&gt;</span><br />              showHere currentTag<span class="kw">,</span> obj<span class="kw">,</span> shallow<span class="kw">,</span> symbol<br />            showDocument <span class="kw">=</span> <span class="fu">(content, width = 300, height = 300) -&gt;</span><br />              showDocumentHere currentTag<span class="kw">,</span> content<span class="kw">,</span> width<span class="kw">,</span> height<br />            func document<span class="kw">.</span>getElementById<span class="kw">(</span><span class="st">&quot;input-prompt-</span><span class="ch">#{</span>getCurrentTagId @id<span class="ch">}</span><span class="st">&quot;</span><span class="kw">).</span>value<br />          <span class="kw">return</span></code></pre>
+</section>
+<section id="quickcheck">
+<h4>QuickCheck</h4>
+<p>You may ask: “What are these completely unrelated QuickCheck helpers doing here?” Well, it could be that I am simply trying to distract you while I pull something out of my sleeve — or it could be that I didn’t get round to moving them into <code>qc.js</code>, which as its name implies is written in JavaScript (and it is not a CommonJS module either).</p>
+<p>Incidentally JavaScript could learn a thing or two from CoffeeScript. For example: it could use a backtick feature for embedding CoffeeScript into it. Until the day when these helpers are moved to a better resting place, at least they are not doing much harm here … unless you summon them. QuickCheck is a minor imp, using randomness to cause havoc in your code. Several examples are shown in ‘Smooth CoffeeScript’ which is why the helpers are here. Let me know if you should have converted <code>qc.js</code> to CoffeeScript or have written something better.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        <span class="co"># HTML colored output for QuickCheck.</span><br />        <span class="kw">class</span> <span class="dt">HtmlListener</span> <span class="kw">extends</span> <span class="dt">ConsoleListener</span><br />          <span class="kw">constructor</span><span class="kw">:</span> <span class="fu">(@maxCollected = 10) -&gt;</span><br />          log<span class="kw">:</span> <span class="fu">(str) -&gt;</span> show str<br />          passed<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message as OK</span><br />            show <span class="st">&quot;&quot;&quot;&lt;span class=&quot;kw&quot;&gt;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&lt;/span&gt;&quot;&quot;&quot;</span><br />          invalid<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message as warning</span><br />            show <span class="st">&quot;&quot;&quot;&lt;span class=&quot;dt&quot;&gt;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&lt;/span&gt;&quot;&quot;&quot;</span><br />          failure<span class="kw">:</span> <span class="fu">(str) -&gt;</span> <span class="co"># print message as error</span><br />            show <span class="st">&quot;&quot;&quot;&lt;span class=&quot;al&quot;&gt;</span><span class="ch">#{</span>str<span class="ch">}</span><span class="st">&lt;/span&gt;&quot;&quot;&quot;</span><br />          done<span class="kw">:</span> <span class="fu">-&gt;</span><br />            show <span class="st">'Completed test.'</span><br />            resetProps<span class="kw">()</span> <span class="co"># Chain here if needed</span><br /><br />        <span class="co"># Enhanced noteArg returning its argument so it can be used inline.</span><br />        Case<span class="kw">::</span>note <span class="kw">=</span> <span class="fu">(a) -&gt;</span> <span class="dt">@noteArg</span> a<span class="kw">;</span> a<br />        <span class="co"># Same as Case::note but also logs the noted args.</span><br />        Case<span class="kw">::</span>noteVerbose <span class="kw">=</span> <span class="fu">(a) -&gt;</span> <span class="dt">@noteArg</span> a<span class="kw">;</span> show <span class="dt">@args</span><span class="kw">;</span> a<br /><br />        <span class="co"># Helper to declare a named test property for</span><br />        <span class="co"># a function func taking types as arguments.</span><br />        <span class="co"># Property is passed the testcase, the arguments</span><br />        <span class="co"># and the result of calling func, it must return</span><br />        <span class="co"># a boolean indicating success or failure.</span><br />        testPure <span class="kw">=</span> <span class="fu">(func, types, name, property) -&gt;</span><br />          declare name<span class="kw">,</span> types<span class="kw">,</span> <span class="fu">(c, a...) -&gt;</span><br />            c<span class="kw">.</span>assert property c<span class="kw">,</span> a<span class="kw">...,</span> c<span class="kw">.</span>note func a<span class="kw">...</span><br />          <span class="kw">return</span><br /><br />        <span class="co"># Default qc configuration with 100 pass and 1000 invalid tests</span><br />        qcConfig <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Config</span> <span class="dv">100</span><span class="kw">,</span> <span class="dv">1000</span><br /><br />        <span class="co"># Test all known properties</span><br />        test <span class="kw">=</span> <span class="fu">(msg, func) -&gt;</span><br />          _<span class="kw">.</span>each <span class="kw">[</span>msg<span class="kw">,</span> func<span class="kw">,</span> runAllProps qcConfig<span class="kw">,</span> <span class="kw">new</span> <span class="dt">HtmlListener]</span><span class="kw">,</span><br />            <span class="fu">(o) -&gt;</span> <span class="kw">unless</span> _<span class="kw">.</span>isUndefined o <span class="kw">then</span> show o</code></pre>
+</section>
+<section id="traversing-and-unescaping">
+<h4>Traversing and unescaping</h4>
+<p>The code for the field or the document is obtained with tags that relate the code back to its HTML element. The tag is needed to direct output to its place of origin. When an editor is instantiated for a <code>&lt;code&gt;</code> element it changes to a <code>&lt;textarea&gt;</code> so matching is on the class of a <code>&lt;pre&gt;</code>’s firstChild.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        getCode <span class="kw">=</span> <span class="fu">(codeTag) -&gt;</span><br />          <span class="kw">if</span> codeTag<span class="kw">.</span>value<span class="kw">?</span><br />            segment <span class="kw">=</span> codeTag<span class="kw">.</span>value<br />          <span class="kw">else</span><br />            segment <span class="kw">=</span> codeTag<span class="kw">.</span>innerHTML<br />          <span class="co">#console.debug &quot;From: #{segment}&quot;</span><br />          code <span class="kw">=</span> segment<span class="kw">.</span>replace <span class="st">/&lt;br&gt;/g</span><span class="kw">,</span> <span class="st">'\n'</span><br />          code <span class="kw">=</span> code<span class="kw">.</span>replace <span class="st">/&lt;[\/]?span[^&gt;]*&gt;/g</span><span class="kw">,</span> <span class="st">''</span><br />          code <span class="kw">=</span> code<span class="kw">.</span>replace <span class="st">/[&amp;]gt;/g</span><span class="kw">,</span> <span class="st">'&gt;'</span><br />          code <span class="kw">=</span> code<span class="kw">.</span>replace <span class="st">/[&amp;]lt;/g</span><span class="kw">,</span> <span class="st">'&lt;'</span><br />          code <span class="kw">=</span> code<span class="kw">.</span>replace <span class="st">/[&amp;]nbsp;/g</span><span class="kw">,</span> <span class="st">' '</span><br />          <span class="co">#console.debug &quot;To: #{code}&quot;</span><br />          codeTag<span class="kw">:</span>codeTag<span class="kw">,</span> code<span class="kw">:</span>code<br /><br />        <span class="kw">if</span> field<span class="kw">?</span> <span class="kw">and</span> <span class="dt">@incrementalEvaluation</span><br />          segments <span class="kw">=</span> <span class="kw">[</span>getCode field<span class="kw">]</span><br />        <span class="kw">else</span><br />          <span class="co"># Obtain each code segment with an ownership tag</span><br />          segments <span class="kw">=</span><br />            <span class="kw">for</span> codeSegment <span class="kw">in</span> window<span class="kw">.</span>document<span class="kw">.</span>getElementsByTagName <span class="st">'pre'</span><br />              <span class="kw">if</span> codeSegment<span class="kw">.</span>className <span class="kw">is</span> <span class="st">'sourceCode'</span><br />                codeTag <span class="kw">=</span> codeSegment<span class="kw">.</span>firstChild<br />                <span class="kw">if</span> codeTag<span class="kw">.</span>className <span class="kw">is</span> <span class="st">'sourceCode coffeescript'</span> \<br />                    <span class="kw">or</span> codeTag<span class="kw">.</span>className <span class="kw">is</span> <span class="st">'sourceCode CoffeeScript'</span><br />                  getCode codeTag</code></pre>
+<p>Stitch together continuing code segments. This is done based on a test of whether they begin with whitespace. For example a class with methods in different code blocks or a program that is split up in sections as in this document. This only works during full evaluation.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">          segments <span class="kw">=</span> <span class="kw">(</span>segment <span class="kw">for</span> segment <span class="kw">in</span> segments <span class="kw">when</span> segment<span class="kw">?)</span><br />          <span class="kw">for</span> segment<span class="kw">,</span> i <span class="kw">in</span> segments<br />            <span class="kw">if</span> i <span class="kw">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="st">/^[\s]/</span><span class="kw">.</span>test segment<span class="kw">.</span>code<br />              segment<span class="kw">.</span>code <span class="kw">=</span> segments<span class="kw">[</span>i<span class="dv">-1</span><span class="kw">].</span>code <span class="kw">+</span> <span class="st">'\n'</span> <span class="kw">+</span> segment<span class="kw">.</span>code<br />              segments<span class="kw">[</span>i<span class="dv">-1</span><span class="kw">]</span> <span class="kw">=</span> <span class="ot">undefined</span><br />          segments <span class="kw">=</span> <span class="kw">(</span>segment <span class="kw">for</span> segment <span class="kw">in</span> segments <span class="kw">when</span> segment<span class="kw">?)</span></code></pre>
+</section>
+<section id="clear-output">
+<h4>Clear output</h4>
+<p>A performance test showed that the vast majority of time was consumed by this little loop: deleting previously shown output from the DOM. It made full code reevaluation an impossibility for anything but short articles. It was tested in three different browsers and <code>removeChild</code> was unbeliably slow in all of them. I don’t know of alternatives for quickly removing elements, so the evaluation model for large documents was changed to incremental.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        <span class="kw">for</span> segment <span class="kw">in</span> segments<br />          outList <span class="kw">=</span> getParent<span class="kw">(</span>segment<span class="kw">.</span>codeTag<span class="kw">).</span>getElementsByClassName <span class="st">'output'</span><br />          outLength <span class="kw">=</span> outList<span class="kw">?.</span>length<br />          <span class="kw">while</span> outList <span class="kw">and</span> outLength <span class="kw">&gt;</span> <span class="dv">0</span><br />            elem <span class="kw">=</span> outList<span class="kw">[--</span>outLength<span class="kw">]</span><br />            getParent<span class="kw">(</span>elem<span class="kw">).</span>removeChild elem</code></pre>
+</section>
+<section id="evaluation">
+<h4>Evaluation</h4>
+<p>No real sandbox here, so the names and loop construct was changed to minimize the chance of conflict with the code that is being executed. Since clearing output made full reevaluation impossible, a small system where variables that are mentioned in <code>globalNames</code> are automatically promoted from the execution environment to the global environment was set up. This makes the named previous definitions available in subsequent code blocks during incremental evaluation (where there is no code stitching).</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">        <span class="co"># Evaluate code segments</span><br />        incredibleLength <span class="kw">=</span> segments<span class="kw">.</span>length<br />        <span class="kw">for</span> incredibleIndex <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">...</span>incredibleLength<span class="kw">]</span> <span class="kw">by</span> <span class="dv">1</span><br />          incredibleStart <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Date</span><span class="kw">()</span><br />          currentSegment <span class="kw">=</span> segments<span class="kw">[</span>incredibleIndex<span class="kw">]</span><br />          currentTag <span class="kw">=</span> currentSegment<span class="kw">.</span>codeTag<br />          <span class="kw">if</span> currentTag<span class="kw">.</span>id <span class="kw">is</span> <span class="st">''</span><br />            currentTag<span class="kw">.</span>id <span class="kw">=</span> <span class="st">&quot;codeTag</span><span class="ch">#{</span>incredibleIndex<span class="ch">}</span><span class="st">&quot;</span><br />          do <span class="fu">(currentTag) -&gt;</span><br />            <span class="kw">try</span><br />              draw <span class="kw">=</span> <span class="ot">undefined</span><br />              incredibleResult <span class="kw">=</span> <span class="ot">eval</span> CoffeeScript<span class="kw">.</span>compile \<br />                currentSegment<span class="kw">.</span>code<span class="kw">,</span> bare<span class="kw">:</span><span class="ot">on</span><br />              drawCanvas draw <span class="kw">if</span> draw<span class="kw">?</span><br />              <span class="kw">if</span> incredibleResult <span class="kw">isnt</span> <span class="ot">undefined</span> <span class="kw">and</span><br />                 <span class="kw">typeof</span> incredibleResult <span class="kw">isnt</span> <span class="st">'function'</span><br />                show incredibleResult<span class="kw">,</span> <span class="ot">on</span><span class="kw">,</span> <span class="st">'&amp;crarr;'</span><br />              <span class="kw">if</span> globalNames<span class="kw">?</span><br />                promoteToGlobal <span class="kw">=</span> <span class="fu">(magic) -&gt;</span><br />                  <span class="kw">try</span><br />                    magicValue <span class="kw">=</span> <span class="ot">eval</span> magic<br />                  <span class="kw">catch</span> error<br />                    <span class="kw">return</span> <span class="co"># doesn't exist</span><br />                  <span class="dt">this</span><span class="kw">[</span>magic<span class="kw">]</span> <span class="kw">=</span> magicValue<br />                <span class="kw">for</span> magic <span class="kw">in</span> globalNames<span class="kw">.</span>split <span class="st">' '</span><br />                  promoteToGlobal magic<br />            <span class="kw">catch</span> error<br />              <span class="ot">console</span><span class="kw">.</span>log error<span class="kw">.</span>message<br />              addErrorElement error<br />            <span class="kw">return</span><br />          <span class="kw">if</span> showTiming<span class="kw">?</span> <span class="kw">and</span> showTiming <span class="kw">is</span> <span class="ot">on</span><br />            incredibleTime <span class="kw">=</span> <span class="ot">Number</span><span class="kw">(</span><span class="fl">0.001</span> <span class="kw">*</span><br />              <span class="kw">(</span><span class="kw">new</span> <span class="dt">Date</span><span class="kw">()</span> <span class="kw">-</span> incredibleStart<span class="kw">)).</span>toFixed <span class="dv">3</span><br />            show <span class="st">&quot;</span><span class="ch">#{</span>incredibleTime<span class="ch">}</span><span class="st">s&quot;</span><span class="kw">,</span> <span class="ot">on</span><span class="kw">,</span> <span class="st">'&#9749;'</span><br />        <span class="kw">return</span></code></pre>
+</section>
+<section id="embedded-editors">
+<h4>Embedded Editors</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      <span class="co"># Textarea editor code evaluation</span><br />      keyDownEvaluation <span class="kw">=</span> <span class="fu">(evt) -&gt;</span><br />        <span class="kw">return</span> <span class="kw">unless</span> evt<span class="kw">?</span><br />        <span class="kw">if</span> localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />          <span class="kw">if</span> evt<span class="kw">.</span>keyCode <span class="kw">is</span> <span class="dv">13</span> <span class="kw">and</span> evt<span class="kw">.</span>shiftKey <span class="co"># &#8593; Shift / &#8617; Enter</span><br />            evt<span class="kw">.</span>preventDefault<span class="kw">()</span><br />            evaluateSource evt<span class="kw">.</span>currentTarget<br />        <span class="kw">if</span> evt<span class="kw">.</span>keyCode <span class="kw">is</span> <span class="dv">13</span> <span class="kw">and</span> <span class="kw">not</span> evt<span class="kw">.</span>shiftKey<br />          evt<span class="kw">.</span>target<span class="kw">?.</span>rows<span class="kw">++</span><br />        <span class="kw">return</span><br />      keyUpEvaluation <span class="kw">=</span> <span class="fu">(evt) -&gt;</span><br />        <span class="kw">return</span> <span class="kw">unless</span> evt<span class="kw">?</span><br />        <span class="kw">unless</span> localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />          evaluateSource evt<span class="kw">.</span>currentTarget <span class="kw">unless</span> evt<span class="kw">.</span>keyCode <span class="kw">in</span><br />            <span class="kw">[</span><span class="dv">16</span><span class="kw">,</span><span class="dv">37</span><span class="kw">,</span><span class="dv">38</span><span class="kw">,</span><span class="dv">39</span><span class="kw">,</span><span class="dv">40</span><span class="kw">]</span> <span class="co"># Ignore shift and arrow keys</span><br /><br />      <span class="co"># CodeMirror editor code evaluation</span><br />      cmEvaluation <span class="kw">=</span> <span class="fu">(editor) -&gt;</span><br />        editor<span class="kw">.</span>save<span class="kw">()</span><br />        evaluateSource editor<span class="kw">.</span>getTextArea<span class="kw">()</span><br />      cmAutoEvaluation <span class="kw">=</span> <span class="fu">(editor) -&gt;</span><br />        <span class="kw">unless</span> localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />          cmEvaluation editor<br />      cmManualEvaluation <span class="kw">=</span> <span class="fu">(editor) -&gt;</span><br />        <span class="kw">if</span> localStorage<span class="kw">?.</span>evaluation <span class="kw">is</span> <span class="st">'manual'</span><br />          cmEvaluation editor</code></pre>
+<p>Create an editor by converting a <code>&lt;code&gt;</code> element to a <code>&lt;textarea&gt;</code>. If CodeMirror is enabled then the <code>&lt;textarea&gt;</code> is used as a basis for that editor.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      createEditor <span class="kw">=</span> <span class="fu">(codeElement, text) -&gt;</span><br />        newelem <span class="kw">=</span> document<span class="kw">.</span>createElement <span class="st">'textarea'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'id'</span><span class="kw">,</span> codeElement<span class="kw">.</span>id<br />        newelem<span class="kw">.</span>setAttribute <span class="st">'class'</span><span class="kw">,</span> codeElement<span class="kw">.</span>getAttribute<span class="kw">(</span><span class="st">'class'</span><span class="kw">)</span><br />        countLines <span class="kw">=</span> <span class="kw">(</span>c <span class="kw">for</span> c <span class="kw">in</span> text <span class="kw">when</span> c <span class="kw">is</span> <span class="st">'\n'</span><span class="kw">).</span>length <span class="kw">+</span> <span class="dv">1</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'rows'</span><span class="kw">,</span> countLines<br />        newelem<span class="kw">.</span>setAttribute <span class="st">'style'</span><span class="kw">,</span> <span class="st">'width: 98%;'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'autofocus'</span><span class="kw">,</span> <span class="st">'true'</span><br />        newelem<span class="kw">.</span>setAttribute <span class="st">'spellcheck'</span><span class="kw">,</span> <span class="st">'false'</span><br />        newelem<span class="kw">.</span>innerHTML <span class="kw">=</span> text<br />        newelem<span class="kw">.</span>addEventListener <span class="st">'keydown'</span><span class="kw">,</span> keyDownEvaluation<span class="kw">,</span> <span class="ot">false</span><br />        newelem<span class="kw">.</span>addEventListener <span class="st">'keyup'</span><span class="kw">,</span> keyUpEvaluation<span class="kw">,</span> <span class="ot">false</span><br />        getParent<span class="kw">(</span>codeElement<span class="kw">).</span>replaceChild newelem<span class="kw">,</span> codeElement<br />        <span class="kw">if</span> <span class="dt">@useCodeMirror</span><br />          elemCodeMirror <span class="kw">=</span> CodeMirror<span class="kw">.</span>fromTextArea newelem<span class="kw">,</span><br />            onChange<span class="kw">:</span> cmAutoEvaluation<br />            extraKeys<span class="kw">:</span> <span class="kw">{</span><span class="st">'Shift-Enter'</span><span class="kw">:</span> cmManualEvaluation<span class="kw">}</span><br />            lineNumbers<span class="kw">:</span> <span class="ot">true</span><br />            theme<span class="kw">:</span> <span class="st">'pantheme'</span></code></pre>
+<p>Setup editor activation</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      activateEditor <span class="kw">=</span> <span class="fu">-&gt;</span><br />        <span class="dt">@removeEventListener</span> <span class="st">'focus'</span><span class="kw">,</span> activateEditor<span class="kw">,</span> <span class="ot">false</span><br />        sourcecode <span class="kw">=</span> <span class="dt">@innerHTML</span><span class="kw">.</span>toString<span class="kw">().</span>replace <span class="st">/&lt;\/?span[^&gt;]*&gt;/g</span><span class="kw">,</span> <span class="st">''</span><br />        sourcecode <span class="kw">=</span> sourcecode<span class="kw">.</span>replace <span class="st">/&lt;br[ ]*[^&gt;]*&gt;/g</span><span class="kw">,</span> <span class="st">'\n'</span><br />        createEditor <span class="dt">this</span><span class="kw">,</span> sourcecode<br /><br />      <span class="co"># Activate text editor when code gets focus</span><br />      <span class="kw">for</span> segment <span class="kw">in</span> document<span class="kw">.</span>getElementsByTagName <span class="st">'pre'</span><br />        segment<span class="kw">.</span>firstChild<span class="kw">.</span>addEventListener <span class="st">'focus'</span><span class="kw">,</span> activateEditor<span class="kw">,</span> <span class="ot">false</span></code></pre>
+<p>Complete evaluation works for smaller articles, but not for a whole book. This is primarily because getting rid of old output elements with the DOM <code>removeChild</code> is very slow.</p>
+<p>So set <code>@incrementalEvaluation</code> to <code>on</code> in larger texts.</p>
+<p>A suitable place is the same — likely hidden — section were <code>@globalNames</code> is initialized. Code stitching is only in effect when <code>@incrementalEvaluation</code> is <code>off</code>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">      <span class="dt">@incrementalEvaluation</span> <span class="kw">=</span> <span class="ot">off</span><br />      evaluateSource<span class="kw">()</span></code></pre>
+</section>
+<section id="bootstrap">
+<h4>Bootstrap</h4>
+<p>Create the embeddable HTML/JavaScript fragment as output. This does not actually bootstrap Grimoire. If it did then as soon as an error happened during editing, the whole thing would come tumbling down. To bootstrap use the <a href="#editor-commandline-commands">Editor Commandline Commands</a> or copy the code from the output field.</p>
+<p>Is it possible to copyright magic? Let’s say that the HTML/JavaScript code that is produced by this document is public domain or MIT licensed. Then you can use that any way you want to at your own risk. This document itself is licensed as CC-BYSA. To get the all the files this depend on go to the <code>interactive</code> directory in the repository branch <a href="https://github.com/autotelicum/Smooth-CoffeeScript/tree/gh-pages/interactive"><code>gh-pages</code></a>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><br />kup <span class="kw">=</span> <span class="kw">if</span> exports<span class="kw">?</span> <span class="kw">then</span> require <span class="st">'coffeekup'</span> <span class="kw">else</span> window<span class="kw">.</span>CoffeeKup<br /><br />display <span class="kw">=</span> <span class="kw">if</span> exports<span class="kw">?</span><br />  <span class="ot">console</span><span class="kw">.</span>log<br /><span class="kw">else</span><br />  <span class="fu">(html) -&gt;</span> show _<span class="kw">.</span><span class="ot">escape</span> html<br /><br />display kup<span class="kw">.</span>render webfragment<span class="kw">,</span> format<span class="kw">:</span><span class="ot">on</span></code></pre>
+<hr />
+<p> </p>
+<p> </p>
+<p></p>
+<p>Formats <a href="http://autotelicum.github.com/Smooth-CoffeeScript/interactive/grimoire-output.html">Standalone</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/interactive/grimoire.coffee">CoffeeScript</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/interactive/grimoire.md">Markdown</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/interactive/grimoire.pdf">PDF</a> <a href="http://autotelicum.github.com/Smooth-CoffeeScript/interactive/grimoire.html">HTML</a></p>
+<p>License <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share Alike</a> by autotelicum © 2555/2012</p>
+</section>
+</section>
+</section>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>MathML is at this time not rendered in the two consumer browsers, Microsoft Internet Explorer and Google Chrome. I have tried MathJax but that resulted in Opera displaying garbage instead of equations. I found that it was unacceptable that Opera which does show W3C standard MathML get degraded, just because Google and Microsoft have chosen not to implement the standard. Of course in a commercial project the decision would likely be the other way round because of Opera’s tiny market share compared with IE and Chrome. MathML renders fine in Firefox, Opera, and Safari on OS X &amp; iOS. <a href="#fnref1" class="footnoteBackLink">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

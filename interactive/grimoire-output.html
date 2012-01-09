@@ -1,0 +1,561 @@
+<div id="feature-detect">
+  <div id="feature-javascript" style="color:#FF0000; display: block">
+No JavaScript &rarr; no output and no interactivity.  </div>
+  <div id="feature-mathml" style="color:#FF0000; display: none">
+No MathML 1998 &rarr; math is not readable.  </div>
+  <div id="feature-canvas" style="color:#FF0000; display: none">
+No Canvas &rarr; graphical output is not rendered.  </div>
+  <div id="feature-contenteditable" style="color:#FF0000; display: none">
+No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
+</div>
+<input class="field" type="button" value="Adjust layout" onclick="(function () {
+        return this.value = toggleLayout() ? 'Layout: fixed' : 'Layout: freeflow';
+      }).call(this);" />
+<input class="field" type="button" value="Select editor" onclick="(function () {
+        return this.value = switchEditor() ? 'Editor: CodeMirror' : 'Editor: plain text';
+      }).call(this);" />
+<input class="field" type="button" value="Evaluation" onclick="(function () {
+        return this.value = switchEvaluation() ? '↑ ↩  Evaluate' : 'Auto Evaluate';
+      }).call(this);" />
+<script src="node_modules/coffee-script.js"></script>
+<script src="node_modules/coffeekup.js"></script>
+<script src="node_modules/underscore.js"></script>
+<script src="node_modules/qc.js"></script>
+<script src="codemirror/codemirror.js"></script>
+<script src="codemirror/coffeescript.js"></script>
+<script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+      var featureDetect, switchLayout;
+      this.reveal = function(instance) {
+        var _ref, _ref2;
+        if ((_ref = instance.getElementsByTagName('section')[0]) != null) {
+          _ref.style.display = 'block';
+        }
+        if ((_ref2 = instance.getElementsByTagName('h5')[0]) != null) {
+          _ref2.innerHTML = 'Solution';
+        }
+        return instance.onclick = void 0;
+      };
+      this.switchEditor = function() {
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.editor = this.useCodeMirror ? 'TextArea' : 'CodeMirror';
+        }
+        return this.useCodeMirror = !this.useCodeMirror;
+      };
+      this.switchEvaluation = function() {
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.evaluation = (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual' ? 'automatic' : 'manual';
+        }
+        return (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual';
+      };
+      this.toggleLayout = function() {
+        var fixedLayout;
+        fixedLayout = document.getElementById('page').style.maxWidth === '';
+        if (typeof localStorage !== "undefined" && localStorage !== null) {
+          localStorage.fixedLayout = fixedLayout;
+        }
+        return switchLayout(fixedLayout);
+      };
+      switchLayout = function(fixedLayout) {
+        var s;
+        document.getElementById('page').style.maxWidth = fixedLayout ? '600px' : '';
+        s = document.getElementById('page').style;
+        if (fixedLayout) {
+          s.webkitHyphens = 'auto';
+          s.mozHyphens = 'auto';
+          s.msHyphens = 'auto';
+          s.hyphens = 'auto';
+          s.textAlign = 'justify';
+        } else {
+          s.webkitHyphens = '';
+          s.mozHyphens = '';
+          s.msHyphens = '';
+          s.hyphens = '';
+          s.textAlign = '';
+        }
+        return fixedLayout;
+      };
+      featureDetect = function() {
+        var adjustCoverPosition, mathmlDetect, used, _ref, _ref2, _ref3, _ref4, _ref5;
+        adjustCoverPosition = function(idFeature) {
+          var canvasCover, lineHeight, topPos, _ref;
+          canvasCover = document.getElementById('drawCanvas');
+          topPos = parseInt(canvasCover != null ? canvasCover.style.top : void 0);
+          lineHeight = (_ref = document.getElementById(idFeature)) != null ? _ref.scrollHeight : void 0;
+          return canvasCover != null ? canvasCover.style.top = (topPos + lineHeight) + 'px' : void 0;
+        };
+        mathmlDetect = function() {
+          var e, passed;
+          (e = document.createElement('div')).innerHTML = '<math></math>';
+          passed = e.firstChild && 'namespaceURI' in e.firstChild && e.firstChild.namespaceURI === 'http://www.w3.org/1998/Math/MathML';
+          return passed && !/Chrome/.test(navigator.userAgent);
+        };
+        if ((_ref = document.getElementById('feature-javascript')) != null) {
+          _ref.style.display = "none";
+        }
+        used = ((_ref2 = document.getElementsByTagName('math')) != null ? _ref2.length : void 0) > 0;
+        if (used && mathmlDetect() === false) {
+          if ((_ref3 = document.getElementById('feature-mathml')) != null) {
+            _ref3.style.display = "block";
+          }
+          adjustCoverPosition('feature-mathml');
+        }
+        if (document.createElement('canvas').getContext == null) {
+          if ((_ref4 = document.getElementById('feature-canvas')) != null) {
+            _ref4.style.display = "block";
+          }
+          adjustCoverPosition('feature-canvas');
+        }
+        if (!('isContentEditable' in document.documentElement)) {
+          if ((_ref5 = document.getElementById('feature-contenteditable')) != null) {
+            _ref5.style.display = "block";
+          }
+          return adjustCoverPosition('feature-contenteditable');
+        }
+      };
+      return window.onload = function() {
+        var activateEditor, addElement, addFrame, canvas, clearCanvas, cmAutoEvaluation, cmEvaluation, cmManualEvaluation, createEditor, drawCanvas, evaluateSource, getParent, keyDownEvaluation, keyUpEvaluation, segment, separator, showDocumentHere, showHere, _i, _len, _ref;
+        featureDetect();
+        if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.fixedLayout : void 0) !== 'false') {
+          switchLayout(true);
+        }
+        this.useCodeMirror = (typeof localStorage !== "undefined" && localStorage !== null ? localStorage.editor : void 0) === 'CodeMirror';
+        canvas = document.getElementById('drawCanvas');
+        if (canvas != null) window.ctx = canvas.getContext('2d');
+        clearCanvas = function() {
+          if (window.ctx != null) {
+            return window.ctx.clearRect(0, 0, window.ctx.canvas.width, window.ctx.canvas.height);
+          }
+        };
+        drawCanvas = function(draw) {
+          clearCanvas();
+          return draw(window.ctx);
+        };
+        getParent = function(child) {
+          var _ref;
+          return (_ref = child != null ? child.parentElement : void 0) != null ? _ref : child != null ? child.parentNode : void 0;
+        };
+        addElement = function(parent, text) {
+          var newelem;
+          newelem = document.createElement('code');
+          newelem.setAttribute('class', 'sourceCode output');
+          newelem.innerHTML = text;
+          return parent.appendChild(newelem);
+        };
+        separator = function(parent) {
+          if (parent.getElementsByClassName('output').length === 0) {
+            return addElement(parent, '<hr><br>');
+          }
+        };
+        addFrame = function(parent, width, height, content) {
+          var newelem;
+          newelem = document.createElement('iframe');
+          newelem.setAttribute('class', 'output');
+          newelem.setAttribute('width', width);
+          newelem.setAttribute('height', height);
+          newelem.setAttribute('src', "data:text/html;charset=utf-8," + (encodeURIComponent(content)));
+          newelem.innerHTML = '<div id="feature-dataurl" style="color:#FF0000; display: block">\nNo or insufficient Data URL support &rarr;\nweb page output is not rendered in this browser.</div>';
+          return parent.appendChild(newelem);
+        };
+        showHere = function(atTag, obj, shallow, symbol) {
+          var displayShallow, msg, parentTag;
+          if (shallow == null) shallow = false;
+          if (symbol == null) symbol = '&rarr;';
+          displayShallow = function(o) {
+            var k, v;
+            return "{" + ((function() {
+              var _results;
+              _results = [];
+              for (k in o) {
+                if (!__hasProp.call(o, k)) continue;
+                v = o[k];
+                _results.push("\n  " + k + ": " + v);
+              }
+              return _results;
+            })()) + "\n}";
+          };
+          msg = (function() {
+            switch (typeof obj) {
+              case 'undefined':
+              case 'string':
+              case 'function':
+                return obj;
+              case 'object':
+                if (shallow) {
+                  return displayShallow(obj);
+                } else {
+                  try {
+                    return JSON.stringify(obj);
+                  } catch (err) {
+                    return displayShallow(obj);
+                  }
+                }
+                break;
+              default:
+                return obj != null ? obj.toString() : void 0;
+            }
+          })();
+          parentTag = getParent(atTag);
+          separator(parentTag);
+          addElement(parentTag, "" + symbol + " " + msg + "<br>");
+          return obj;
+        };
+        showDocumentHere = function(atTag, content, width, height) {
+          var parentTag;
+          if (width == null) width = 300;
+          if (height == null) height = 300;
+          parentTag = getParent(atTag);
+          separator(parentTag);
+          addFrame(parentTag, width, height, content);
+        };
+        evaluateSource = function(field) {
+          var HtmlListener, addErrorElement, codeSegment, codeTag, confirm, currentSegment, currentTag, elem, getCode, getCurrentTagId, i, incredibleIndex, incredibleLength, incredibleStart, incredibleTime, outLength, outList, prompt, qcConfig, runOnDemand, segment, segments, test, testPure, view, _fn, _i, _len, _len2;
+          if (field == null) field = null;
+          show = function(obj, shallow, symbol) {
+            if (shallow == null) shallow = false;
+            if (symbol == null) symbol = '&rarr;';
+            showHere(currentTag, obj, shallow, symbol);
+          };
+          view = function(obj, shallow, symbol) {
+            if (shallow == null) shallow = false;
+            if (symbol == null) symbol = '&rarr;';
+            return showHere(currentTag, obj, shallow, symbol);
+          };
+          showDocument = function(content, width, height) {
+            if (width == null) width = 300;
+            if (height == null) height = 300;
+            return showDocumentHere(currentTag, content, width, height);
+          };
+          addErrorElement = function(text) {
+            return show("<span class=\"er\">" + text + "</span>");
+          };
+          getCurrentTagId = function(id) {
+            return id.match(/button-\w+-(.*)/)[1];
+          };
+          runOnDemand = function(func) {
+            show("<button id='button-run-" + currentTag.id + "'> Run </button>");
+            document.getElementById("button-run-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func();
+            };
+          };
+          confirm = function(message, func) {
+            show(("" + message) + ("  <button id='button-yes-" + currentTag.id + "'> Yes </button>") + ("  <button id='button-no-" + currentTag.id + "'> No </button>"));
+            document.getElementById("button-yes-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(true);
+            };
+            document.getElementById("button-no-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(false);
+            };
+          };
+          prompt = function(message, defaultValue, func) {
+            show(("" + message) + ("  <input id='input-prompt-" + currentTag.id + "' value='" + defaultValue + "' />") + ("  <button id='button-prompt-" + currentTag.id + "'> Go </button>"));
+            document.getElementById("button-prompt-" + currentTag.id).onclick = function() {
+              var currentTag;
+              currentTag = document.getElementById(getCurrentTagId(this.id));
+              view = show = function(obj, shallow, symbol) {
+                if (shallow == null) shallow = false;
+                if (symbol == null) symbol = '&rArr;';
+                return showHere(currentTag, obj, shallow, symbol);
+              };
+              showDocument = function(content, width, height) {
+                if (width == null) width = 300;
+                if (height == null) height = 300;
+                return showDocumentHere(currentTag, content, width, height);
+              };
+              return func(document.getElementById("input-prompt-" + (getCurrentTagId(this.id))).value);
+            };
+          };
+          HtmlListener = (function(_super) {
+
+            __extends(HtmlListener, _super);
+
+            function HtmlListener(maxCollected) {
+              this.maxCollected = maxCollected != null ? maxCollected : 10;
+            }
+
+            HtmlListener.prototype.log = function(str) {
+              return show(str);
+            };
+
+            HtmlListener.prototype.passed = function(str) {
+              return show("<span class=\"kw\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.invalid = function(str) {
+              return show("<span class=\"dt\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.failure = function(str) {
+              return show("<span class=\"al\">" + str + "</span>");
+            };
+
+            HtmlListener.prototype.done = function() {
+              show('Completed test.');
+              return resetProps();
+            };
+
+            return HtmlListener;
+
+          })(ConsoleListener);
+          Case.prototype.note = function(a) {
+            this.noteArg(a);
+            return a;
+          };
+          Case.prototype.noteVerbose = function(a) {
+            this.noteArg(a);
+            show(this.args);
+            return a;
+          };
+          testPure = function(func, types, name, property) {
+            declare(name, types, function() {
+              var a, c;
+              c = arguments[0], a = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+              return c.assert(property.apply(null, [c].concat(__slice.call(a), [c.note(func.apply(null, a))])));
+            });
+          };
+          qcConfig = new Config(100, 1000);
+          test = function(msg, func) {
+            return _.each([msg, func, runAllProps(qcConfig, new HtmlListener)], function(o) {
+              if (!_.isUndefined(o)) return show(o);
+            });
+          };
+          getCode = function(codeTag) {
+            var code, segment;
+            if (codeTag.value != null) {
+              segment = codeTag.value;
+            } else {
+              segment = codeTag.innerHTML;
+            }
+            code = segment.replace(/<br>/g, '\n');
+            code = code.replace(/<[\/]?span[^>]*>/g, '');
+            code = code.replace(/[&]gt;/g, '>');
+            code = code.replace(/[&]lt;/g, '<');
+            code = code.replace(/[&]nbsp;/g, ' ');
+            return {
+              codeTag: codeTag,
+              code: code
+            };
+          };
+          if ((field != null) && this.incrementalEvaluation) {
+            segments = [getCode(field)];
+          } else {
+            segments = (function() {
+              var _i, _len, _ref, _results;
+              _ref = window.document.getElementsByTagName('pre');
+              _results = [];
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                codeSegment = _ref[_i];
+                if (codeSegment.className === 'sourceCode') {
+                  codeTag = codeSegment.firstChild;
+                  if (codeTag.className === 'sourceCode coffeescript' || codeTag.className === 'sourceCode CoffeeScript') {
+                    _results.push(getCode(codeTag));
+                  } else {
+                    _results.push(void 0);
+                  }
+                } else {
+                  _results.push(void 0);
+                }
+              }
+              return _results;
+            })();
+            segments = (function() {
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = segments.length; _i < _len; _i++) {
+                segment = segments[_i];
+                if (segment != null) _results.push(segment);
+              }
+              return _results;
+            })();
+            for (i = 0, _len = segments.length; i < _len; i++) {
+              segment = segments[i];
+              if (i > 0 && /^[\s]/.test(segment.code)) {
+                segment.code = segments[i - 1].code + '\n' + segment.code;
+                segments[i - 1] = void 0;
+              }
+            }
+            segments = (function() {
+              var _i, _len2, _results;
+              _results = [];
+              for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+                segment = segments[_i];
+                if (segment != null) _results.push(segment);
+              }
+              return _results;
+            })();
+          }
+          for (_i = 0, _len2 = segments.length; _i < _len2; _i++) {
+            segment = segments[_i];
+            outList = getParent(segment.codeTag).getElementsByClassName('output');
+            outLength = outList != null ? outList.length : void 0;
+            while (outList && outLength > 0) {
+              elem = outList[--outLength];
+              getParent(elem).removeChild(elem);
+            }
+          }
+          incredibleLength = segments.length;
+          _fn = function(currentTag) {
+            var draw, incredibleResult, magic, promoteToGlobal, _j, _len3, _ref;
+            try {
+              draw = void 0;
+              incredibleResult = eval(CoffeeScript.compile(currentSegment.code, {
+                bare: true
+              }));
+              if (draw != null) drawCanvas(draw);
+              if (incredibleResult !== void 0 && typeof incredibleResult !== 'function') {
+                show(incredibleResult, true, '&crarr;');
+              }
+              if (typeof globalNames !== "undefined" && globalNames !== null) {
+                promoteToGlobal = function(magic) {
+                  var magicValue;
+                  try {
+                    magicValue = eval(magic);
+                  } catch (error) {
+                    return;
+                  }
+                  return this[magic] = magicValue;
+                };
+                _ref = globalNames.split(' ');
+                for (_j = 0, _len3 = _ref.length; _j < _len3; _j++) {
+                  magic = _ref[_j];
+                  promoteToGlobal(magic);
+                }
+              }
+            } catch (error) {
+              console.log(error.message);
+              addErrorElement(error);
+            }
+          };
+          for (incredibleIndex = 0; incredibleIndex < incredibleLength; incredibleIndex += 1) {
+            incredibleStart = new Date();
+            currentSegment = segments[incredibleIndex];
+            currentTag = currentSegment.codeTag;
+            if (currentTag.id === '') currentTag.id = "codeTag" + incredibleIndex;
+            _fn(currentTag);
+            if ((typeof showTiming !== "undefined" && showTiming !== null) && showTiming === true) {
+              incredibleTime = Number(0.001 * (new Date() - incredibleStart)).toFixed(3);
+              show("" + incredibleTime + "s", true, '☕');
+            }
+          }
+        };
+        keyDownEvaluation = function(evt) {
+          var _ref;
+          if (evt == null) return;
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual') {
+            if (evt.keyCode === 13 && evt.shiftKey) {
+              evt.preventDefault();
+              evaluateSource(evt.currentTarget);
+            }
+          }
+          if (evt.keyCode === 13 && !evt.shiftKey) {
+            if ((_ref = evt.target) != null) _ref.rows++;
+          }
+        };
+        keyUpEvaluation = function(evt) {
+          var _ref;
+          if (evt == null) return;
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) !== 'manual') {
+            if ((_ref = evt.keyCode) !== 16 && _ref !== 37 && _ref !== 38 && _ref !== 39 && _ref !== 40) {
+              return evaluateSource(evt.currentTarget);
+            }
+          }
+        };
+        cmEvaluation = function(editor) {
+          editor.save();
+          return evaluateSource(editor.getTextArea());
+        };
+        cmAutoEvaluation = function(editor) {
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) !== 'manual') {
+            return cmEvaluation(editor);
+          }
+        };
+        cmManualEvaluation = function(editor) {
+          if ((typeof localStorage !== "undefined" && localStorage !== null ? localStorage.evaluation : void 0) === 'manual') {
+            return cmEvaluation(editor);
+          }
+        };
+        createEditor = function(codeElement, text) {
+          var c, countLines, elemCodeMirror, newelem;
+          newelem = document.createElement('textarea');
+          newelem.setAttribute('id', codeElement.id);
+          newelem.setAttribute('class', codeElement.getAttribute('class'));
+          countLines = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = text.length; _i < _len; _i++) {
+              c = text[_i];
+              if (c === '\n') _results.push(c);
+            }
+            return _results;
+          })()).length + 1;
+          newelem.setAttribute('rows', countLines);
+          newelem.setAttribute('style', 'width: 98%;');
+          newelem.setAttribute('autofocus', 'true');
+          newelem.setAttribute('spellcheck', 'false');
+          newelem.innerHTML = text;
+          newelem.addEventListener('keydown', keyDownEvaluation, false);
+          newelem.addEventListener('keyup', keyUpEvaluation, false);
+          getParent(codeElement).replaceChild(newelem, codeElement);
+          if (this.useCodeMirror) {
+            return elemCodeMirror = CodeMirror.fromTextArea(newelem, {
+              onChange: cmAutoEvaluation,
+              extraKeys: {
+                'Shift-Enter': cmManualEvaluation
+              },
+              lineNumbers: true,
+              theme: 'pantheme'
+            });
+          }
+        };
+        activateEditor = function() {
+          var sourcecode;
+          this.removeEventListener('focus', activateEditor, false);
+          sourcecode = this.innerHTML.toString().replace(/<\/?span[^>]*>/g, '');
+          sourcecode = sourcecode.replace(/<br[ ]*[^>]*>/g, '\n');
+          return createEditor(this, sourcecode);
+        };
+        _ref = document.getElementsByTagName('pre');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          segment = _ref[_i];
+          segment.firstChild.addEventListener('focus', activateEditor, false);
+        }
+        this.incrementalEvaluation = false;
+        return evaluateSource();
+      };
+    }).call(this);</script>
+

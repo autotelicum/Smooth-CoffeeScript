@@ -22,6 +22,8 @@
     + [Point distance: hypot](hypot.html)
 * Programs
     + [Photo Histogram](histogram.html)
+* Documentation
+    + [Grimoire](../interactive/grimoire.html)
 
 -----------------------------------------------------------------------------
 
