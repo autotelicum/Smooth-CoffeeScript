@@ -3,6 +3,8 @@
 **Smooth CoffeeScript** is a free book about CoffeeScript and programming. No previous programming knowledge is required. Over 200 pages and 35 exercises. Download includes book and full source code with and without solutions.
 More information: [Book webpage](http://autotelicum.github.com/Smooth-CoffeeScript/).
 
+[Interactive HTML 5 edition](http://autotelicum.github.com/Smooth-CoffeeScript/interactive/interactive-coffeescript.html).
+
 Download `master` to get the latest version. The `gh-pages` branch contain the website.
 
 Install: [Get CoffeeScript up and running in a few minutes on Mac or Windows](http://autotelicum.github.com/Smooth-CoffeeScript/literate/install-notes.html). The versions mentioned in the install guide are those `Smooth CoffeeScript` has been tested with on Mac OS X 10.6 and Windows 7.
