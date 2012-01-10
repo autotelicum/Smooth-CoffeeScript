@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My drawing | My awesome website</title>
+    <style>body {font-family: sans-serif}
+header, nav, section, footer {display: block}</style>
+    <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
+          draw = function(ctx, x, y) {
+            var angle, circle, _ref, _ref2, _results;
+            circle = function(ctx, x, y) {
+              ctx.beginPath();
+              ctx.arc(x, y, 100, 0, 2 * Math.PI, false);
+              return ctx.stroke();
+            };
+            ctx.strokeStyle = 'rgba(255,40,20,0.7)';
+            circle(ctx, x, y);
+            _results = [];
+            for (angle = 0, _ref = 2 * Math.PI, _ref2 = 1 / 3 * Math.PI; 0 <= _ref ? angle < _ref : angle > _ref; angle += _ref2) {
+              _results.push(circle(ctx, x + 100 * Math.cos(angle), y + 100 * Math.sin(angle)));
+            }
+            return _results;
+          };
+          return window.onload = function() {
+            var canvas, context;
+            canvas = document.getElementById('drawCanvas');
+            context = canvas.getContext('2d');
+            return draw(context, 300, 200);
+          };
+        }).call(this);</script>
+  </head>
+  <body>
+    <header>
+      <h1>Seed of Life</h1>
+    </header>
+    <canvas id="drawCanvas" width="550" height="400"></canvas>
+  </body>
+</html>
+
+Library            Version
+------------------   -------------
+Coffeescript         1.2.0
+Underscore           1.2.4
+CoffeeKup            0.3.1edge
+QuickCheck           qc.js-2009
+55
+Also, your hair is on fire.
+4
+107
+107
+104
+104
+3.141592653589793
+{ log: [Function],
+  info: [Function],
+  warn: [Function],
+  error: [Function],
+  dir: [Function],
+  time: [Function],
+  timeEnd: [Function],
+  trace: [Function],
+  assert: [Function] }
+[Function]
+13
+NaN
+0
+2
+4
+6
+8
+10
+12
+0
+2
+4
+6
+8
+10
+12
+1024
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+0
+2
+4
+6
+8
+10
+12
+0
+2
+4
+6
+8
+10
+12
+0
+2
+4
+6
+8
+10
+12
+1024
+#
+##
+###
+####
+#####
+######
+#######
+########
+#########
+##########
+0
+12
+0
+(1)
+(2)
+(3)
+4
+(5)
+(6)
+(7)
+8
+(9)
+(10)
+(11)
+12
+(13)
+(14)
+(15)
+16
+(17)
+(18)
+(19)
+20
+0
+(1)
+(2)
+(3)
+4
+(5)
+(6)
+(7)
+8
+(9)
+(10)
+(11)
+12
+(13)
+(14)
+(15)
+16
+(17)
+(18)
+(19)
+20
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11*
+12*
+13*
+14*
+15*
+16**
+17**
+18**
+19**
+20**
+The show is on!
+21
+21
+Your lucky number is 5
+3
+3
+3
+5
+Luck took 4 roll(s)
+Your lucky number is 3
+6
+6
+5
+4
+1
+3
+You are lucky 16% of the time
+undefined
+I am a side effect.
+undefined
+undefined
+I want to be
+I want to be
+false
+false
+false
+false
+false
+false
+false
+Apollo5
+nullify
+25
+NaN
+25
+I am happening!
+Yow!!
+I am alive
+What happened?
+I am extinct
+I am A-OK
+possum is not defined
+The variable is: first
+In test, the variable holds second.
+In showVariable, the variable holds: second
+The variable is: second
+aLocal is not defined
+aLocal is defined
+local
+9
+power 3, 3 = 27
+(((1 * 3) + 5) * 3)
+14
+false
+Hello!!
+undefined!!
+R 2 D 2
+11
+11
+Cannot read property 'length' of null
+47
+undefined
+{ colour: 'grey', name: 'Spot' }
+1000
+10
+20
+{ '5': 20 }
+8
+true
+true
+{ content: [Circular] }
+{ lets: 1, go: { deep: { down: [Object] } } }
+{ lets: 1, go: { deep: { down: [Object] } } } true
+false
+true
+false
+15
+10
+Processing e-mail #0: Dear nephew, ... (mail number 1)
+Processing e-mail #1: (mail number 2)
+Processing e-mail #2: (mail number 3)
+Processing e-mail #0: mail one
+Processing e-mail #1: mail two
+Processing e-mail #2: mail three
+[ 0, 1, 2, 3, 4 ]
+[ 0, 1, 2, 3, 4 ]
+[ 0, 1, 2, 3, 4 ]
+[ 0, 2, 4, 6, 8, 10, 12 ]
+function
+DOH
+Mack the Knife
+Knife
+[ 'Mack', 'the' ]
+Processing e-mail #0 Nephew,
+
+I bough...
+Processing e-mail #1 Dear Nephew,
+
+Ve...
+Processing e-mail #2 [... and so on ....
+Processing e-mail #3 ...
+
+born 02/04/...
+Processing e-mail #4 ...
+
+died 12/12/...
+Processing e-mail #5 ...
+
+born 15/11/...
+Processing e-mail #6 ...
+
+born 10/04/...
+Processing e-mail #7 ...
+
+died 30/05/...
+Processing e-mail #8 ...
+
+born 01/06/...
+Processing e-mail #9 ...
+
+born 20/09/...
+Processing e-mail #10 ...
+
+born 15/01/...
+Processing e-mail #11 Dear nephew,
+
+Yo...
+Processing e-mail #12 ...
+
+born 22/07/...
+Processing e-mail #13 ...
+
+died 13/02/...
+Processing e-mail #14 ...
+
+born 05/02/...
+Processing e-mail #15 ...
+
+born 03/03/...
+[ 'Cities', 'of', 'the', 'Interior' ]
+[ 'a', 'b', 'c', 'd' ]
+true
+true
+true
+true
+
+op
+in
+[ 'Doctor Hobbles the 2nd', 'Noog' ]
+{ Bugeye: true,
+  'Miss Bushtail': true,
+  'White Fang': true,
+  'Yellow Bess': true,
+  Catharina: true,
+  'Fat Igor': true,
+  'Doctor Hobbles the 2nd': true,
+  Noog: true,
+  'The Moose': true,
+  'Red Lion': true,
+  'Doctor Hobbles the 3rd': true,
+  'Little Iroquois': true,
+  Goblin: true,
+  Reginald: true,
+  'Little Maggie': true,
+  'Long-ear Johnson': true,
+  Asoka: true,
+  'Dark Empress': true,
+  Rabbitface: true } true
+Good old Spot, may she rest in peace.
+Bugeye
+Miss Bushtail
+White Fang
+Yellow Bess
+Catharina
+Fat Igor
+Doctor Hobbles the 2nd
+Noog
+The Moose
+Red Lion
+Doctor Hobbles the 3rd
+Little Iroquois
+Goblin
+Reginald
+Little Maggie
+Long-ear Johnson
+Asoka
+Dark Empress
+Rabbitface
+{ Bugeye: true,
+  'Miss Bushtail': true,
+  'White Fang': true,
+  'Yellow Bess': true,
+  Catharina: true,
+  'Fat Igor': true,
+  'Doctor Hobbles the 2nd': true,
+  Noog: true,
+  'The Moose': true,
+  'Red Lion': true,
+  'Doctor Hobbles the 3rd': true,
+  'Little Iroquois': true,
+  Goblin: true,
+  Reginald: true,
+  'Little Maggie': true,
+  'Long-ear Johnson': true,
+  undefined: true,
+  Asoka: true,
+  'Dark Empress': true,
+  Rabbitface: true } true
+There are 20 cats.
+Thu, 31 Jan 1980 17:00:00 GMT
+Tue, 10 Jan 2012 16:47:38 GMT
+Thu, 31 Jan 1980 17:00:00 GMT
+Fri, 30 Mar 2007 01:20:30 GMT
+Year: 2012 month: 0 day: 10
+Hour: 23 minutes: 47 seconds: 38
+Day of week: 2
+1326214058169
+true
+true
+false
+true
+-420
+Wed, 26 Apr 2006 17:00:00 GMT
+Spot
+bah
+{ name: 'Clementine',
+  birth: Sun, 14 Feb 1999 17:00:00 GMT,
+  mother: 'Spot',
+  death: Wed, 11 Dec 2002 17:00:00 GMT } true
+{ name: 'Spot',
+  birth: Tue, 04 Mar 1997 17:00:00 GMT,
+  mother: 'unknown',
+  death: Mon, 12 Feb 2007 17:00:00 GMT } true
+Fat Igor, born 1/6/2004 from mother Miss Bushtail.
+01/01/2000
+Bugeye
+undefined
+You gave me 3 arguments.
+From here to
+Infinity
+7
+10
+[ 0, 1, 2, 3, 4 ]
+[ 2, 3, 4 ]
+55
+55
+0
+1
+2
+[ 'Heaven', 'Earth' ]
+our mother
+bah
+undefined
+undefined
+Something went wrong: Can not take the last element of an empty array.
+Caught: Sasquatch is not defined
+Error: Fire!
+true
+5
+6
+7
+5
+6
+7
+7
+8
+9
+Wampeter
+Foma
+Granfalloon
+111
+false
+5
+true
+true
+111
+4
+4
+[ 0, 2, 10, 3 ]
+[ 0, 2, 10, 3 ]
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>A quote</title>
+  </head>
+  <body>
+    <h1>A quote</h1>
+    <blockquote>
+      <p>The connection between the language in which we
+      think/program and the problems and solutions we can
+      imagine is very close. For this reason restricting
+      language features with the intent of eliminating
+      programmer errors is at best dangerous.</p>
+      <p>-- Bjarne Stroustrup</p>
+    </blockquote>
+    <p>Mr. Stroustrup is the inventor of the C++
+    programming language, but quite an insightful
+    person nevertheless.</p>
+    <p>Also, here is a picture of an ostrich:</p>
+    <img src="data:image/png;base64,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"/>
+  </body>
+</html>
+Found 25 paragraphs.
+{ type: 'h1', content: ' The Book of Programming' }
+{ type: 'h1', content: ' The Book of Programming' }
+{ type: 'h2', content: ' The Two Aspects' }
+{ type: 'p',
+  content: 'Below the surface of the machine, the program moves.\nWithout effort, it expands and contracts. In great harmony, \nelectrons scatter and regroup. The forms on the monitor\nare but ripples on the water. The essence stays invisibly\nbelow.' }
+{ type: 'h1',
+  content: [ { type: 'normal', content: ' The Book of Programming' } ] }
+{ type: 'h2',
+  content: [ { type: 'normal', content: ' The Two Aspects' } ] }
+{ type: 'p',
+  content: 
+   [ { type: 'normal',
+       content: 'Below the surface of the machine, the program moves.\nWithout effort, it expands and contracts. In great harmony, \nelectrons scatter and regroup. The forms on the monitor\nare but ripples on the water. The essence stays invisibly\nbelow.' } ] }
+Footnotes from the recluse:
+[ { type: 'footnote',
+    content: 'This is not to be read as an encouragement of sloppy\nprogramming, but rather as a warning against neurotic\nadherence to rules of thumb.',
+    number: 1 },
+  { type: 'footnote',
+    content: 'Referring to the danger of internal inconsistency\nand duplicated structure in unorganised code.',
+    number: 2 },
+  { type: 'footnote',
+    content: 'Referring to the fact that structure tends to put\nrestrictions on the evolution of a program.',
+    number: 3 } ]
+{ type: 'p',
+  content: 
+   [ { type: 'normal',
+       content: 'Realising this problem, the programmer will start to spend\na lot of time thinking about structure. His programs will\nbe rigidly structured, like rock sculptures. They are solid,\nbut when they must change, violence must be done to them\n' },
+     { type: 'reference', number: 3 },
+     { type: 'normal', content: '.' } ] }
+&lt;a href=&quot;http:&#x2F;&#x2F;www.gokgs.com&#x2F;&quot;&gt;Play Go!&lt;&#x2F;a&gt;
+<a href="http://www.gokgs.com/">Play Go!</a>
+{ name: 'a',
+  attributes: { href: 'http://www.gokgs.com/' },
+  content: [ 'Play Go!' ] }
+{ name: 'html',
+  attributes: undefined,
+  content: 
+   [ { name: 'head', attributes: undefined, content: [Object] },
+     { name: 'body',
+       attributes: undefined,
+       content: 'In his house at R\'lyeh dead Cthulu waits dreaming.' } ] }
+{ name: 'img',
+  attributes: { src: 'http://autotelicum.github.com/Smooth-CoffeeScript/img/ostrich.jpg' },
+  content: [] }
+&lt; &quot; &amp; &quot; &gt;
+<a href="http://www.nedroid.com">Drawings!</a>
+<html><head><title>The Test</title></head><body><h1>The Test</h1><p>Here is a paragraph and an image...</p><img src="data:image/png;base64,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"/></body></html>
+{ name: 'sup',
+  attributes: undefined,
+  content: [ { name: 'a', attributes: [Object], content: [Object] } ] } 3
+{ name: 'p',
+  attributes: undefined,
+  content: [ 'Of themselves, Data and Control are without structure. The\nprogrammers of old moulded their programs out of this raw\nsubstance. Over time, the amorphous Data has crystallised\ninto data types, and the chaotic Control was restricted\ninto control structures and functions.' ] }
+55
+55
+1 2 3 4
+[ false, true, false ]
+Error: object is not a function
+[ [ 100, 10000 ], [ 144, 256 ], [ 0, 1 ] ]
+[ [ 100, 10000 ], [ 144, 256 ], [ 0, 1 ] ]
+isDefined Math.PI  = true
+isDefined Math.PIE = false
+[ { point1: 'Point Kiukiu', point2: 'Hanaiapa', length: 19 },
+  { point1: 'Point Kiukiu', point2: 'Mt Feani', length: 15 } ]
+{ 'Point Kiukiu': 
+   [ { to: 'Hanaiapa', distance: 19 },
+     { to: 'Mt Feani', distance: 15 },
+     { to: 'Taaoa', distance: 15 } ],
+  Taaoa: [] }
+{ 'Point Kiukiu': 
+   [ { to: 'Hanaiapa', distance: 19 },
+     { to: 'Mt Feani', distance: 15 },
+     { to: 'Taaoa', distance: 15 },
+     { to: 'Hanaiapa', distance: 19 },
+     { to: 'Mt Feani', distance: 15 },
+     { to: 'Taaoa', distance: 15 } ],
+  Taaoa: [ { to: 'Point Kiukiu', distance: 15 } ],
+  Hanaiapa: [ { to: 'Point Kiukiu', distance: 19 } ],
+  'Mt Feani': [ { to: 'Point Kiukiu', distance: 15 } ] }
+Roads from the Airport:
+[ { to: 'Hanaiapa', distance: 6 },
+  { to: 'Mt Feani', distance: 5 },
+  { to: 'Atuona', distance: 4 },
+  { to: 'Mt Ootua', distance: 11 } ]
+[ { to: 'Point Kiukiu', distance: 19 },
+  { to: 'Point Kiukiu', distance: 19 },
+  { to: 'Airport', distance: 6 } ]
+Oops Error: No place named 'Hanalapa' found.
+[ 'Hanaiapa', 'Point Kiukiu', 'Mt Feani' ]
+true
+[ 1, 4, 9 ]
+[ 1, 4, 9 ]
+true
+true
+true
+true
+false
+true
+false
+true
+false
+true
+true
+[ 1, 2, 3, 4, 5, 6 ]
+[ 1, 2, 3, 4, 5, 6 ]
+[ 0, 4 ]
+[ 1, 3, 5 ]
+22
+[ { places: [ 'Hanapaoa', 'Mt Ootua' ], length: 3 } ]
+[ 'Point Kiukiu',
+  'Taaoa',
+  'Atuona',
+  'Hanakee pearl lodge',
+  'Cemetery',
+  'Mt Ootua',
+  'Puamua',
+  'Point Teohotepapapa' ]
+[ 'Point Kiukiu',
+  'Taaoa',
+  'Atuona',
+  'Hanakee pearl lodge',
+  'Cemetery',
+  'Mt Ootua',
+  'Puamua',
+  'Point Teohotepapapa' ]
+111
+448
+291
+true
+[ { x: 1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 } ]
+1
+2
+3
+4
+5
+6
+723
+The rabbit says 'Well, now you're asking me.'
+The white rabbit says 'Oh my ears and whiskers, how late it's getting!'
+The fat rabbit says 'I could sure use a carrot right now.'
+The fat rabbit says 'Yum.'
+The fat rabbit says 'Burp.'
+The white rabbit says 'Hurry!'
+The fat rabbit says 'Tasty!'
+The killer rabbit says 'GRAAAAAAAAAH!'
+{ adjective: 'killer' }
+Rabbit
+Object
+The jumbo rabbit says 'Carry me, I weigh 1.2 stones'
+The tiny rabbit says 'He ain't heavy, he is my brother'
+Books balance: true.
+Books balance: false.
+Start balance 50
+You maxed out!
+After batch balance 5
+Starting with 50
+After batch balance -5
+Object
+[object Object]
+[]
+[ 'speak' ]
+Rabbit
+The undefined rabbit says 'I am generic'
+The undefined rabbit says 'I am not initialized'
+The undefined rabbit says 'I am not initialized'
+true
+small
+long, sharp, and bloody
+small
+The killer rabbit dances a jig.
+The hazel rabbit says 'Good Frith!'
+Yes, there is a cat called 'constructor'.
+[ 'x', 'y', 'allProperties' ]
+[ 'Fat Igor', 'Fireball' ]
+The head of a lion.
+The body of a goat.
+The tail of a snake.
+Property name = Mordecai
+Property hasOwnProperty = Uh-oh
+Property name = Mordecai
+Property hasOwnProperty = Uh-oh
+true
+false
+false
+true
+Grover is blue
+Elmo is orange
+Bert is yellow
+2
+15
+2
+10
+5
+true
+false
+true
+false
+4
+5
+5
+true
+false
+true
+20
+true
+null
+[ 'yes', index: 4, input: '... yes' ]
+[ 'Giant Ape', 'Ape', index: 0, input: 'Giant Ape' ]
+Word: miasma Explanation: a poisonous fog thought to cause illness
+Sun, 04 Feb 2007 17:00:00 GMT
+Pablo Picasso
+Paul Gauguin
+Vincent Van Gogh
+Picasso, Pablo
+Gauguin, Paul
+Van Gogh, Vincent
+no lemons, 1 cabbage, and 100 eggs
+The 'pre-formatted' tag is written &quot;&lt;pre&gt;&quot;.
+false
+false
+true
+{ name: 'a',
+  attributes: { href: 'http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.102.244&rep=rep1&type=pdf' },
+  content: [ 'What Every Computer Scientist Should Know About Floating-Point Arithmetic' ] }
+[ 0, 4, 8, 12, 16 ]
+[ 0, 4, 8, 12, 16 ]
+When it is sunny
+Dress lightly.
+Go outside.
+When it is cloudy
+Go outside.
+When it is tornado
+Seek shelter
+When it is hailstorm
+Unknown weather type: hailstorm
+21 is divisible by three.
+24 is divisible by three.
+27 is divisible by three.
+x is 3 and y is 4
+{ firstName: 'Alan', lastName: 'Turing' }
+Distinguished Alan of the Turing family.
+4 * π * r * r when r = 1
+12.566370614359172
+[ 0, 2, 4, 6 ]
+[ 'For Madmen only', 'Price of Admittance: Your Mind.' ]
+Price of Admittance: Your Mind.
+because I say so the reason is 
+6, 1,3,4,5 and 2
+3 and 2
+I am a widget
+I am a container
+I am a widget
+Say: 'Yes!'
+Yes!
+Yes!
+Yes!
+NoNoNo
