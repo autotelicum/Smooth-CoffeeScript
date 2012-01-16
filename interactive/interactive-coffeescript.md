@@ -119,10 +119,11 @@ have a look at the ghost in the machine: [Grimoire](./grimoire.html).
 It is ifself an interactive literate document.
 
 The source of this book is a [literate markdown
-program/document](./interactive-coffeescript.md) which produces
-this code: [CoffeeScript](./interactive-coffeescript.coffee), that
-translates into [JavaScript](./interactive-coffeescript.js) and
-produces this [output](./interactive-coffeescript.output).
+program/document](https://raw.github.com/autotelicum/Smooth-CoffeeScript/gh-pages/interactive/interactive-coffeescript.md)
+which produces this code:
+[CoffeeScript](./interactive-coffeescript.coffee), that translates
+into [JavaScript](./interactive-coffeescript.js) and produces this
+[output](./interactive-coffeescript.output).
 
 The book is [freely (CCBYSA)](http://creativecommons.org/licenses/by/3.0/)
 available, and may be used (as a whole or in parts) in any way you
