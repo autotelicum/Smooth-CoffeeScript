@@ -3520,7 +3520,7 @@
 
   show(names.replace(/([\w ]+), ([\w ]+)/g, '$2 $1'));
 
-  show(names.replace(/([\w]+),([\w]+)/g, '$2 $1'));
+  show(names.replace(/([\w\x20]+),\u0020([\w\x20]+)/g, '$2 $1'));
 
   eatOne = function(match, amount, unit) {
     amount = Number(amount) - 1;

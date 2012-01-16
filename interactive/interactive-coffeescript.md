@@ -9056,10 +9056,14 @@ Van Gogh, Vincent'''
 
 show names.replace /([\w ]+), ([\w ]+)/g, '$2 $1'
 
+# Non-printable characters can be tricky in regular
+# expressions, actually all non-ASCII characters can
+# be, they can be represented with their numeric codes:
+# unicode \u0020 = hexadecimal \x20 = ascii #32 = ' '
 show names.replace ///
-  ([\w ]+)         # Lastname
-  ,
-  ([\w ]+)         # Firstname
+  ([\w\x20]+)         # Lastname
+  ,\u0020
+  ([\w\x20]+)         # Firstname
 ///g, '$2 $1'
 ~~~~
 

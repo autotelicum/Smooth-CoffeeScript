@@ -2351,9 +2351,9 @@ Van Gogh, Vincent'''
 show names.replace /([\w ]+), ([\w ]+)/g, '$2 $1'
 
 show names.replace ///
-  ([\w ]+)         # Lastname
-  ,
-  ([\w ]+)         # Firstname
+  ([\w\x20]+)         # Lastname
+  ,\u0020
+  ([\w\x20]+)         # Firstname
 ///g, '$2 $1'
 eatOne = (match, amount, unit) ->
   amount = Number(amount) - 1
