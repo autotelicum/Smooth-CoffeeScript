@@ -155,7 +155,7 @@ QuickCheck           qc.js-2009"""
 
 # Dummy definitions for standalone execution
 if exports?
-  view = show
+  view = (obj) -> show(obj); obj
   runOnDemand = confirm = prompt = ->
 total = 0
 count = 1
@@ -1085,6 +1085,8 @@ negate = (func) ->
 morethan = (x,y) -> x > y
 lessthan = negate morethan
 show lessthan 5, 7
+show Math.min [5, 6]...
+
 negate = (func) ->
   (args...) -> not func args...
 
@@ -2350,6 +2352,10 @@ Van Gogh, Vincent'''
 
 show names.replace /([\w ]+), ([\w ]+)/g, '$2 $1'
 
+# Non-printable characters can be tricky in regular
+# expressions, actually all non-ASCII characters can
+# be, they can be represented with their numeric codes:
+# unicode \u0020 = hexadecimal \x20 = ascii #32 = ' '
 show names.replace ///
   ([\w\x20]+)         # Lastname
   ,\u0020
@@ -2470,6 +2476,7 @@ lastName = "Turing"
 
 name = {firstName, lastName}
 show name
+
 decorate = ({firstName, lastName}) ->
   show "Distinguished #{firstName} " +
        "of the #{lastName} family."
@@ -2525,6 +2532,12 @@ do f
 (do -> show "Yes!") while n-- > 0
 echoEchoEcho = (msg) -> msg() + msg() + msg()
 show echoEchoEcho -> "No"
+runOnDemand ->
+  for i in [1..3]
+    do (i) ->
+      setTimeout (-> show 'With do: ' + i), 0
+  for i in [1..3]
+    setTimeout (-> show 'Without: ' + i), 0
 class BinaryHeap
 
   # Public

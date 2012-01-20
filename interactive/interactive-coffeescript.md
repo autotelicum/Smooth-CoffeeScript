@@ -376,17 +376,23 @@ In this Interactive Edition almost all examples[^3] can be edited
 and the changes you make take effect instantly. To open an editor,
 touch or click on the program text in the example.
 
-You can choose to disable automatic evaluation in the menu at the
-top of this page; then you will have to use a keystroke combination
-instead. There you can also choose between editing in a plain text
-area or with the embedded CodeMirror editor. If you have a compatible
-browser then try the CodeMirror option --- it has syntax highlighting
-and semi-automatic indentation.
-
 [^3]: Some examples are read-only and can not be executed. A few
 are locked to avoid spoiling exercises, some because they are
 intended to run on a server, and a few only show a concept without
 the surrounding program.
+
+You can choose to disable automatic evaluation in the menu at the
+top of this page; then you will have to use a keystroke combination
+instead.[^manual] There you can also choose between editing in a plain text
+area or with the embedded CodeMirror editor. If you have a compatible
+browser then try the CodeMirror option --- it has syntax highlighting
+and semi-automatic indentation.
+
+[^manual]: Manual evaluation is only intended for net-books and
+mobile devices without sufficient processing power. It is more
+inconvenient when you have to remember to evaluate _every_ time you
+have typed something. In particular code attached to `Run` buttons
+do _not_ change unless the newly entered program text is evaluated.
 
 >**Tip**: Some browsers may become unresponsive when
 running for example a never ending loop --- so save work you may
@@ -395,14 +401,13 @@ this web page or restart your browser.
 
 Some of the examples in the last chapter of the book show WebSockets
 --- it is optional but to run them you need a [compatible
-browser](../literate/web-socket-status.html)
-and CoffeeScript on your system. Installing CoffeeScript on Windows
-and Mac OS X is easy, see the couple of steps involved in [Quick
-CoffeeScript
-Install](../literate/install-notes.html).
-You get a Read-Eval-Print-Loop (REPL), a commandline interpreter
-and compiler that can watch for file changes and compile your
-CoffeeScript modules whenever you save them.
+browser](../literate/web-socket-status.html) and CoffeeScript on
+your system. Installing CoffeeScript on Windows and Mac OS X is
+easy, see the couple of steps involved in [Quick CoffeeScript
+Install](../literate/install-notes.html).  You get a Read-Eval-Print-Loop
+(REPL), a commandline interpreter and compiler that can watch for
+file changes and compile your CoffeeScript modules whenever you
+save them.
 
 ##### ○•○
 
@@ -427,7 +432,7 @@ are introduced. The following tables summarize them:
   Symbol    Explanation
 ----------- ------------------------------------------------
     `→`     normal output from `show`/`view` functions
-    `⇒`     asyncronous  output from display functions
+    `⇒`     asynchronous  output from display functions
     `↵`     return value from an executed code block
     `☕`     timing information if enabled
 ----------- ------------------------------------------------
@@ -507,7 +512,7 @@ QuickCheck           qc.js-2009"""
 
 # Dummy definitions for standalone execution
 if exports?
-  view = show
+  view = (obj) -> show(obj); obj
   runOnDemand = confirm = prompt = ->
 ~~~~
 
@@ -926,7 +931,7 @@ different numbers that can be expressed. With three decimal digits,
 only the numbers 0 to 999 can be written, which is 10^3^ = 1000
 different numbers. With 64 binary digits, 2^64^ different numbers
 can be written.  This is a lot, more than 10^19^ (a one with nineteen
-zeroes).
+zeros).
 
 [^E]:  If you were expecting something like `10010000` here — good
 call, but read on. CoffeeScript's numbers are not stored as integers.
@@ -2030,7 +2035,7 @@ show current
 
 The `loop`[](#index-loop) construct does not have a part that
 checks for the end of the loop. It is the same as `while true`.
-This means that it is dependant on the `break` statement inside it
+This means that it is dependent on the `break` statement inside it
 to ever stop. The same program could also have been written as
 simply…
 
@@ -5089,7 +5094,7 @@ JavaScript.  Other programming languages can have very different
 approaches[^Q].  In CoffeeScript it becomes the reasonably pleasant:
 
 [^Q]:
-    In *Mathematica* a function can be set as listable — eliminating
+    In *Mathematica* a function can be set as `Listable` — eliminating
     the need for a loop:
 
     ~~~ {.listing}
@@ -5266,6 +5271,8 @@ Now you know the underlying `arguments` mechanism remember that you
 can also use splats…
 
 ~~~~ {.coffeescript}
+show Math.min [5, 6]...
+
 negate = (func) ->
   (args...) -> not func args...
 
@@ -10188,7 +10195,9 @@ pt = new Point 3, 4
 show "x is #{x} and y is #{y}"
 ~~~~
 
-Attribute names can be inferred from an anonymous object.
+Attribute names can be inferred from an anonymous object.  A function
+can have an anonymous object as argument and extract the attributes
+as variables.
 
 ~~~~ {.coffeescript}
 firstName = "Alan"
@@ -10196,12 +10205,7 @@ lastName = "Turing"
 
 name = {firstName, lastName}
 show name
-~~~~
 
-A function can have an anonymous object as argument and extract the
-attributes as variables.
-
-~~~~ {.coffeescript}
 decorate = ({firstName, lastName}) ->
   show "Distinguished #{firstName} " +
        "of the #{lastName} family."
@@ -10322,12 +10326,13 @@ inside its block.  The `setTimeout` function calls the innermost
 function after the loop has finished.  Without capture the `i`
 variable is `4`.
 
-~~~~ {.COFFEESCRIPT}
-for i in [1..3]
-  do (i) ->
-    setTimeout (-> show 'With do: ' + i), 0
-for i in [1..3]
-  setTimeout (-> show 'Without: ' + i), 0
+~~~~ {.coffeescript}
+runOnDemand ->
+  for i in [1..3]
+    do (i) ->
+      setTimeout (-> show 'With do: ' + i), 0
+  for i in [1..3]
+    setTimeout (-> show 'Without: ' + i), 0
 ~~~~
 
 
@@ -10694,9 +10699,9 @@ print 'Result:', s, 'and', t
 ~~~~
 
 ~~~~ {.cpp}
-// C++ pointer-free version using valarray template.
+// C++ pointer-free version using standard valarray template.
 // LLVM: clang++ -O3 -std=c++0x A3-Microrun.cpp -o mb; ./mb
-// Visual 2010 C++: cl /Ox /Ob2 /Oi /Ot /Oy- /Ox /Ob2 /Oi /Ot /Oy- /EHsc A3-Microrun.cpp
+// Visual 2010 C++: cl /Ox /Ob2 /Oi /Ot /Oy- /EHsc A3-Microrun.cpp
 
 #include <cstdlib>
 #include <cmath>

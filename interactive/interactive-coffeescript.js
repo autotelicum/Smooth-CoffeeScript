@@ -219,7 +219,10 @@
   this.incrementalEvaluation = true;
 
   if (typeof exports !== "undefined" && exports !== null) {
-    view = show;
+    view = function(obj) {
+      show(obj);
+      return obj;
+    };
     runOnDemand = confirm = prompt = function() {};
   }
 
@@ -1731,6 +1734,8 @@
   lessthan = negate(morethan);
 
   show(lessthan(5, 7));
+
+  show(Math.min.apply(Math, [5, 6]));
 
   negate = function(func) {
     return function() {
@@ -3850,6 +3855,25 @@
   show(echoEchoEcho(function() {
     return "No";
   }));
+
+  runOnDemand(function() {
+    var i, _fn, _results;
+    _fn = function(i) {
+      return setTimeout((function() {
+        return show('With do: ' + i);
+      }), 0);
+    };
+    for (i = 1; i <= 3; i++) {
+      _fn(i);
+    }
+    _results = [];
+    for (i = 1; i <= 3; i++) {
+      _results.push(setTimeout((function() {
+        return show('Without: ' + i);
+      }), 0));
+    }
+    return _results;
+  });
 
   BinaryHeap = (function() {
 
