@@ -75,11 +75,12 @@ code.coffeescript {
 }
 */
 code {
-    font-size: 1em;
+    /* font-size: 1em; */
     background-color: #FEFEF2;
     line-height: 1.4em;
     font-family: monospace;
     word-wrap: break-word;
+    white-space: pre-wrap;
 }
 textarea {
     font-size: 1em;
