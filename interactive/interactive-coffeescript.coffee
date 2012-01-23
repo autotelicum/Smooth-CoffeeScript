@@ -8,6 +8,25 @@ CoffeeKup = require 'coffeekup'
 show = console.log
 showDocument = (doc, width, height) -> show doc
 
+# NOTE Touch or click here to edit this program. Then change
+# the colors, fonts, ... and see the effect on the book cover.
+
+surfaceStyle = back:'silver', front:'#663300'
+hiddenStyle = back:'darkgrey', front:'grey'
+[smallFont, bigFont] = ['12px sans-serif','52px sans-serif']
+surfaceText = 'CoffeeScript   ✵   Scratch Card  ✵  '
+
+# Slight obfuscation. The ... converts an array to arguments
+decode = (nums) -> String.fromCharCode nums...
+hidden = [{x:15, y:100, font: bigFont, text: decode \
+            [67,111,102,102,101,101,83,99,114,105,112,116]}
+          {x:80, y:180, font: bigFont, text: decode \
+            [73,116,39,115,32,106,117,115,116]}
+          {x:30, y:260, font: bigFont, text: decode \
+            [74,97,118,97,83,99,114,105,112,116,33]}
+          {x:190, y:310, font: smallFont, text: decode \
+            [68,79,85,66,76,69,80,76,85,83,71,79,79,68]}]
+
 draw = (ctx) -> # ctx is an HTML5 Canvas context
   class Point
     constructor: (@x, @y) ->
@@ -36,7 +55,7 @@ draw = (ctx) -> # ctx is an HTML5 Canvas context
       distance = 2 * parseInt font, 10
       textWidth = context.measureText(text).width
       height = context.canvas.height
-      for x in [0...context.canvas.width] by textWidth
+      for x in [0...2 * context.canvas.width] by textWidth
         for y in [-height...height] by distance
           context.fillText text, x, y
       context.restore()
@@ -55,22 +74,8 @@ draw = (ctx) -> # ctx is an HTML5 Canvas context
       return
     context.createPattern ctxBrush.canvas, 'repeat'
 
-  # Slight obfuscation. The ... converts an array to arguments
-  decode = (nums) -> String.fromCharCode nums...
-  [smallFont, bigFont] = ['12px sans-serif','52px sans-serif']
-  surfaceText = 'CoffeeScript   ✵   Scratch Card  ✵  '
-  hidden = [{x:15, y:100, font: bigFont, text: decode \
-              [67,111,102,102,101,101,83,99,114,105,112,116]}
-            {x:80, y:180, font: bigFont, text: decode \
-              [73,116,39,115,32,106,117,115,116]}
-            {x:30, y:260, font: bigFont, text: decode \
-              [74,97,118,97,83,99,114,105,112,116,33]}
-            {x:190, y:310, font: smallFont, text: decode \
-              [68,79,85,66,76,69,80,76,85,83,71,79,79,68]}]
-  brush = drawPreciousBrush ctx, hidden,
-    back:'darkgrey', front:'grey'
-  drawDrabSurface ctx, smallFont, surfaceText,
-    back:'silver', front:'#663300'
+  brush = drawPreciousBrush ctx, hidden, hiddenStyle
+  drawDrabSurface ctx, smallFont, surfaceText, surfaceStyle
 
   # Hook the brush up to mouse and touch events
   ctx.canvas.onmousemove = onmove = (evt) ->
@@ -2039,8 +2044,8 @@ renderRoute = (routes...) ->
         div class: 'map', ->
           img src: 'http://autotelicum.github.com/' +
                    'Smooth-CoffeeScript/img/height-small.png'
-          img class: 'map', src: "#{ostrich}",  width: size, height: size, \
-              style: "left: #{x*size}px; top: #{y*size}px" for {x, y} in points
+          img class: 'map', src: "#{ostrich}", width: size, height: size, \
+              style: "left:#{x*size}px; top:#{y*size}px" for {x, y} in points
 
   points = []
   traverseRoute routes..., (point) -> points.push point
@@ -2052,8 +2057,10 @@ renderRoute = (routes...) ->
   return
 
 runOnDemand ->
+  show 'Scenic'
   renderRoute findRoute(point( 0,  0), point(11, 17)),
               findRoute(point(11, 17), point(19, 19))
+  show 'Excursion'
   renderRoute findRoute(point( 0,  0), point(15,  3)),
               findRoute(point(15,  3), point(19, 19))
 rabbit = {}

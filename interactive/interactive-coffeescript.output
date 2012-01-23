@@ -7,7 +7,7 @@
 header, nav, section, footer {display: block}</style>
     <script>var __slice = Array.prototype.slice;var __hasProp = Object.prototype.hasOwnProperty;var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };var __extends = function(child, parent) {  for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }  function ctor() { this.constructor = child; }  ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype;  return child; };var __indexOf = Array.prototype.indexOf || function(item) {  for (var i = 0, l = this.length; i < l; i++) {    if (this[i] === item) return i;  } return -1; };(function () {
           draw = function(ctx, x, y) {
-            var angle, circle, _ref, _ref2, _results;
+            var angle, circle, _ref2, _ref3, _results;
             circle = function(ctx, x, y) {
               ctx.beginPath();
               ctx.arc(x, y, 100, 0, 2 * Math.PI, false);
@@ -16,7 +16,7 @@ header, nav, section, footer {display: block}</style>
             ctx.strokeStyle = 'rgba(255,40,20,0.7)';
             circle(ctx, x, y);
             _results = [];
-            for (angle = 0, _ref = 2 * Math.PI, _ref2 = 1 / 3 * Math.PI; 0 <= _ref ? angle < _ref : angle > _ref; angle += _ref2) {
+            for (angle = 0, _ref2 = 2 * Math.PI, _ref3 = 1 / 3 * Math.PI; 0 <= _ref2 ? angle < _ref2 : angle > _ref2; angle += _ref3) {
               _results.push(circle(ctx, x + 100 * Math.cos(angle), y + 100 * Math.sin(angle)));
             }
             return _results;
@@ -193,8 +193,17 @@ Your lucky number is 5
 Luck took 1 roll(s)
 Your lucky number is 3
 1
+6
+6
+5
+6
+4
+5
+1
+5
+5
 3
-You are lucky 50% of the time
+You are lucky 9% of the time
 undefined
 I am a side effect.
 undefined
@@ -388,13 +397,13 @@ Rabbitface
   Rabbitface: true } true
 There are 20 cats.
 Thu, 31 Jan 1980 17:00:00 GMT
-Fri, 20 Jan 2012 12:20:19 GMT
+Mon, 23 Jan 2012 20:33:02 GMT
 Thu, 31 Jan 1980 17:00:00 GMT
 Fri, 30 Mar 2007 01:20:30 GMT
-Year: 2012 month: 0 day: 20
-Hour: 19 minutes: 20 seconds: 19
-Day of week: 5
-1327062019445
+Year: 2012 month: 0 day: 24
+Hour: 3 minutes: 33 seconds: 2
+Day of week: 2
+1327350782196
 true
 true
 false
@@ -571,19 +580,7 @@ Roads from the Airport:
   { to: 'Point Kiukiu', distance: 19 },
   { to: 'Airport', distance: 6 } ]
 Oops Error: No place named 'Hanalapa' found.
-[ 'Hanaiapa',
-  'Airport',
-  'Hanaiapa',
-  'Airport',
-  'Hanaiapa',
-  'Point Kiukiu',
-  'Hanaiapa',
-  'Airport',
-  'Hanaiapa',
-  'Point Kiukiu',
-  'Taaoa',
-  'Mt Temetiu',
-  'Mt Feani' ]
+[ 'Hanaiapa', 'Point Kiukiu', 'Mt Feani' ]
 true
 [ 1, 4, 9 ]
 [ 1, 4, 9 ]

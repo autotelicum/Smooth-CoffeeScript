@@ -1,5 +1,5 @@
 (function() {
-  var Account, AccountWithFee, BinaryHeap, CoffeeKup, CoffeeScript, Container, Dictionary, FoundSeven, HTML, LimitedAccount, Point, Rabbit, WeightyRabbit, Widget, a, absolute, abyss, add, addCats, addFive, addPoints, addToSet, addTwo, andHere, argumentCounter, array, asteriskOrBrace, b, badWords, between, bits, blackRabbit, body, cartoonCrying, cat, catData, catInfo, catNames, catRecord, caught, chicken, child, chimera, chineseBox, colours, compose, confirm, count, countZeroes, counter, current, currentNumber, currentThing, dal, datePattern, deadCats, decorate, defaultTo, digitSurroundedBySpace, digits, dino, doSomething, doc, doh, draw, eatOne, echoEchoEcho, egg, element, email, empty, equals, equals10, escapeHTML, escapeHTML2, estimatedDistance, evens, extractDate, extractFootnotes, extractMother, f, fa, fatRabbit, findCats, findLivingCats, findReached, findRoute, findSequence, firstName, footnote, forEach, forEachIn, forEachOf, formatDate, fun, g, gamblerPath, getProperty, globalize, greaterThan, greaterThanTen, gulfWarOne, hasSevenTruths, hazelRabbit, heap, heightAt, holyCow, howMany, htmlDoc, i, image, imageSource, info, intensify, isAcceptable, isDefined, isHere, isNotNaN, isOdd, isUndefined, jumboRabbit, key, killerRabbit, kup, la, lacc, lastElement, lastElementPlusTen, lastName, lessthan, line, link, linkObject, linkOstrich, linkText, livingCats, luckyNumber, luigiDebt, mack, mailAddress, mailArchive, makeAddFunction, makeRabbit, makeReachedList, makeRoad, makeRoads, map, mapSquared, meteor, mi, mim, minimise, moonGravity, morethan, mysteryVariable, n, nQueen, name, names, negate, newBalance, noCatsAtAll, notABC, nothing, now, number, numbers, obj, object1, object2, object3, oldBalance, oldestCat, op, ostrich, paragraph, paragraphs, parentFunction, parenthesized, parenthesizedText, partial, partialReverse, pattern, permute, pi, point, pointID, possibleDirections, possibleRoutes, post, power, powerRec, pre, print, printArray, printBoard, processParagraph, processThing, prompt, property, propertyName, pt, quote, ra, rabbit, radius, range, re, recluseFile, reduce, removeFromSet, renderFile, renderFootnote, renderFragment, renderHTML, renderParagraph, renderRoute, rep, reptile, result, retrieveMails, roads, roadsFrom, roll, route, runOnDemand, salary, samePoint, set, shortestRoute, shortestRouteAbstract, show, showDocument, showRoute, showSortedRoute, showVariable, simpleObject, slash, sol, solve, speak, sphereSurfaceArea, splitParagraph, splitStringAt, square, startsWith, steppenwolf, stipulations, stock, storeReached, story, sum, tag, takeNormalAlternative, tautounlogical, test, testIt, testdata, text, thing, ti, timeIt, tinyRabbit, today, total, traverseRoute, ultimatum, url, value, varWhich, variable, view, wallFall, wallFall1, wallFall2, weatherAdvice, webdesign, webpage, weightedDistance, whenWasIt, whiteRabbit, word, words, x, y, yell, yourAccount, π, _, _any, _break, _every, _filter, _flatten, _forEach, _i, _j, _k, _l, _len, _len10, _len11, _len2, _len3, _len4, _len5, _len6, _len7, _len8, _len9, _m, _member, _n, _o, _p, _q, _r, _ref, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var Account, AccountWithFee, BinaryHeap, CoffeeKup, CoffeeScript, Container, Dictionary, FoundSeven, HTML, LimitedAccount, Point, Rabbit, WeightyRabbit, Widget, a, absolute, abyss, add, addCats, addFive, addPoints, addToSet, addTwo, andHere, argumentCounter, array, asteriskOrBrace, b, badWords, between, bigFont, bits, blackRabbit, body, cartoonCrying, cat, catData, catInfo, catNames, catRecord, caught, chicken, child, chimera, chineseBox, colours, compose, confirm, count, countZeroes, counter, current, currentNumber, currentThing, dal, datePattern, deadCats, decode, decorate, defaultTo, digitSurroundedBySpace, digits, dino, doSomething, doc, doh, draw, eatOne, echoEchoEcho, egg, element, email, empty, equals, equals10, escapeHTML, escapeHTML2, estimatedDistance, evens, extractDate, extractFootnotes, extractMother, f, fa, fatRabbit, findCats, findLivingCats, findReached, findRoute, findSequence, firstName, footnote, forEach, forEachIn, forEachOf, formatDate, fun, g, gamblerPath, getProperty, globalize, greaterThan, greaterThanTen, gulfWarOne, hasSevenTruths, hazelRabbit, heap, heightAt, hidden, hiddenStyle, holyCow, howMany, htmlDoc, i, image, imageSource, info, intensify, isAcceptable, isDefined, isHere, isNotNaN, isOdd, isUndefined, jumboRabbit, key, killerRabbit, kup, la, lacc, lastElement, lastElementPlusTen, lastName, lessthan, line, link, linkObject, linkOstrich, linkText, livingCats, luckyNumber, luigiDebt, mack, mailAddress, mailArchive, makeAddFunction, makeRabbit, makeReachedList, makeRoad, makeRoads, map, mapSquared, meteor, mi, mim, minimise, moonGravity, morethan, mysteryVariable, n, nQueen, name, names, negate, newBalance, noCatsAtAll, notABC, nothing, now, number, numbers, obj, object1, object2, object3, oldBalance, oldestCat, op, ostrich, paragraph, paragraphs, parentFunction, parenthesized, parenthesizedText, partial, partialReverse, pattern, permute, pi, point, pointID, possibleDirections, possibleRoutes, post, power, powerRec, pre, print, printArray, printBoard, processParagraph, processThing, prompt, property, propertyName, pt, quote, ra, rabbit, radius, range, re, recluseFile, reduce, removeFromSet, renderFile, renderFootnote, renderFragment, renderHTML, renderParagraph, renderRoute, rep, reptile, result, retrieveMails, roads, roadsFrom, roll, route, runOnDemand, salary, samePoint, set, shortestRoute, shortestRouteAbstract, show, showDocument, showRoute, showSortedRoute, showVariable, simpleObject, slash, smallFont, sol, solve, speak, sphereSurfaceArea, splitParagraph, splitStringAt, square, startsWith, steppenwolf, stipulations, stock, storeReached, story, sum, surfaceStyle, surfaceText, tag, takeNormalAlternative, tautounlogical, test, testIt, testdata, text, thing, ti, timeIt, tinyRabbit, today, total, traverseRoute, ultimatum, url, value, varWhich, variable, view, wallFall, wallFall1, wallFall2, weatherAdvice, webdesign, webpage, weightedDistance, whenWasIt, whiteRabbit, word, words, x, y, yell, yourAccount, π, _, _any, _break, _every, _filter, _flatten, _forEach, _i, _j, _k, _l, _len, _len10, _len11, _len2, _len3, _len4, _len5, _len6, _len7, _len8, _len9, _m, _member, _n, _o, _p, _q, _r, _ref, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __indexOf = Array.prototype.indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = Array.prototype.slice,
     __hasProp = Object.prototype.hasOwnProperty,
@@ -18,8 +18,50 @@
     return show(doc);
   };
 
+  surfaceStyle = {
+    back: 'silver',
+    front: '#663300'
+  };
+
+  hiddenStyle = {
+    back: 'darkgrey',
+    front: 'grey'
+  };
+
+  _ref = ['12px sans-serif', '52px sans-serif'], smallFont = _ref[0], bigFont = _ref[1];
+
+  surfaceText = 'CoffeeScript   ✵   Scratch Card  ✵  ';
+
+  decode = function(nums) {
+    return String.fromCharCode.apply(String, nums);
+  };
+
+  hidden = [
+    {
+      x: 15,
+      y: 100,
+      font: bigFont,
+      text: decode([67, 111, 102, 102, 101, 101, 83, 99, 114, 105, 112, 116])
+    }, {
+      x: 80,
+      y: 180,
+      font: bigFont,
+      text: decode([73, 116, 39, 115, 32, 106, 117, 115, 116])
+    }, {
+      x: 30,
+      y: 260,
+      font: bigFont,
+      text: decode([74, 97, 118, 97, 83, 99, 114, 105, 112, 116, 33])
+    }, {
+      x: 190,
+      y: 310,
+      font: smallFont,
+      text: decode([68, 79, 85, 66, 76, 69, 80, 76, 85, 83, 71, 79, 79, 68])
+    }
+  ];
+
   draw = function(ctx) {
-    var Point, bigFont, brush, decode, drawDrabSurface, drawPreciousBrush, hidden, onmove, ontouch, renderInStyle, smallFont, surfaceText, _ref;
+    var Point, brush, drawDrabSurface, drawPreciousBrush, onmove, ontouch, renderInStyle;
     Point = (function() {
 
       function Point(x, y) {
@@ -54,7 +96,7 @@
     drawDrabSurface = function(context, font, text, style) {
       var drawRepeatRotated;
       drawRepeatRotated = function(angle) {
-        var distance, height, textWidth, x, y, _ref;
+        var distance, height, textWidth, x, y, _ref2;
         if (angle == null) angle = 0.2;
         context.save();
         context.rotate(angle);
@@ -62,7 +104,7 @@
         distance = 2 * parseInt(font, 10);
         textWidth = context.measureText(text).width;
         height = context.canvas.height;
-        for (x = 0, _ref = context.canvas.width; 0 <= _ref ? x < _ref : x > _ref; x += textWidth) {
+        for (x = 0, _ref2 = 2 * context.canvas.width; 0 <= _ref2 ? x < _ref2 : x > _ref2; x += textWidth) {
           for (y = -height; -height <= height ? y < height : y > height; y += distance) {
             context.fillText(text, x, y);
           }
@@ -74,59 +116,25 @@
     drawPreciousBrush = function(context, lines, style) {
       var createCanvasContext, ctxBrush;
       createCanvasContext = function(_arg) {
-        var canvas, height, width, _ref;
+        var canvas, height, width, _ref2;
         width = _arg.width, height = _arg.height;
         canvas = document.createElement('canvas');
-        _ref = [width, height], canvas.width = _ref[0], canvas.height = _ref[1];
+        _ref2 = [width, height], canvas.width = _ref2[0], canvas.height = _ref2[1];
         return canvas.getContext('2d');
       };
       ctxBrush = createCanvasContext(context.canvas);
       renderInStyle(ctxBrush, style, function() {
-        var font, text, x, y, _i, _len, _ref;
+        var font, text, x, y, _i, _len, _ref2;
         for (_i = 0, _len = lines.length; _i < _len; _i++) {
-          _ref = lines[_i], text = _ref.text, font = _ref.font, x = _ref.x, y = _ref.y;
+          _ref2 = lines[_i], text = _ref2.text, font = _ref2.font, x = _ref2.x, y = _ref2.y;
           ctxBrush.font = font;
           ctxBrush.fillText(text, x, y);
         }
       });
       return context.createPattern(ctxBrush.canvas, 'repeat');
     };
-    decode = function(nums) {
-      return String.fromCharCode.apply(String, nums);
-    };
-    _ref = ['12px sans-serif', '52px sans-serif'], smallFont = _ref[0], bigFont = _ref[1];
-    surfaceText = 'CoffeeScript   ✵   Scratch Card  ✵  ';
-    hidden = [
-      {
-        x: 15,
-        y: 100,
-        font: bigFont,
-        text: decode([67, 111, 102, 102, 101, 101, 83, 99, 114, 105, 112, 116])
-      }, {
-        x: 80,
-        y: 180,
-        font: bigFont,
-        text: decode([73, 116, 39, 115, 32, 106, 117, 115, 116])
-      }, {
-        x: 30,
-        y: 260,
-        font: bigFont,
-        text: decode([74, 97, 118, 97, 83, 99, 114, 105, 112, 116, 33])
-      }, {
-        x: 190,
-        y: 310,
-        font: smallFont,
-        text: decode([68, 79, 85, 66, 76, 69, 80, 76, 85, 83, 71, 79, 79, 68])
-      }
-    ];
-    brush = drawPreciousBrush(ctx, hidden, {
-      back: 'darkgrey',
-      front: 'grey'
-    });
-    drawDrabSurface(ctx, smallFont, surfaceText, {
-      back: 'silver',
-      front: '#663300'
-    });
+    brush = drawPreciousBrush(ctx, hidden, hiddenStyle);
+    drawDrabSurface(ctx, smallFont, surfaceText, surfaceStyle);
     ctx.canvas.onmousemove = onmove = function(evt) {
       var pos;
       pos = new Point(evt.pageX - ctx.canvas.offsetLeft, evt.pageY - ctx.canvas.offsetTop);
@@ -154,7 +162,7 @@
         style('body {font-family: sans-serif}\nheader, nav, section, footer {display: block}');
         return coffeescript(function() {
           draw = function(ctx, x, y) {
-            var angle, circle, _ref, _ref2, _results;
+            var angle, circle, _ref2, _ref3, _results;
             circle = function(ctx, x, y) {
               ctx.beginPath();
               ctx.arc(x, y, 100, 0, 2 * Math.PI, false);
@@ -163,7 +171,7 @@
             ctx.strokeStyle = 'rgba(255,40,20,0.7)';
             circle(ctx, x, y);
             _results = [];
-            for (angle = 0, _ref = 2 * Math.PI, _ref2 = 1 / 3 * Math.PI; 0 <= _ref ? angle < _ref : angle > _ref; angle += _ref2) {
+            for (angle = 0, _ref2 = 2 * Math.PI, _ref3 = 1 / 3 * Math.PI; 0 <= _ref2 ? angle < _ref2 : angle > _ref2; angle += _ref3) {
               _results.push(circle(ctx, x + 100 * Math.cos(angle), y + 100 * Math.sin(angle)));
             }
             return _results;
@@ -846,13 +854,13 @@
   findSequence = function(goal) {
     var find;
     find = function(start, history) {
-      var _ref;
+      var _ref2;
       if (start === goal) {
         return history;
       } else if (start > goal) {
         return null;
       } else {
-        return (_ref = find(start + 5, '(' + history + ' + 5)')) != null ? _ref : find(start * 3, '(' + history + ' * 3)');
+        return (_ref2 = find(start + 5, '(' + history + ' + 5)')) != null ? _ref2 : find(start * 3, '(' + history + ' * 3)');
       }
     };
     return find(1, '1');
@@ -1019,7 +1027,7 @@
 
   mailArchive = ['mail one', 'mail two', 'mail three'];
 
-  for (current = 0, _ref = mailArchive.length; 0 <= _ref ? current < _ref : current > _ref; 0 <= _ref ? current++ : current--) {
+  for (current = 0, _ref2 = mailArchive.length; 0 <= _ref2 ? current < _ref2 : current > _ref2; 0 <= _ref2 ? current++ : current--) {
     show('Processing e-mail #' + current + ': ' + mailArchive[current]);
   }
 
@@ -1180,18 +1188,18 @@
   }
 
   addToSet = function(set, values) {
-    var i, _ref2, _results;
+    var i, _ref3, _results;
     _results = [];
-    for (i = 0, _ref2 = values.length; 0 <= _ref2 ? i <= _ref2 : i >= _ref2; 0 <= _ref2 ? i++ : i--) {
+    for (i = 0, _ref3 = values.length; 0 <= _ref3 ? i <= _ref3 : i >= _ref3; 0 <= _ref3 ? i++ : i--) {
       _results.push(set[values[i]] = true);
     }
     return _results;
   };
 
   removeFromSet = function(set, values) {
-    var i, _ref2, _results;
+    var i, _ref3, _results;
     _results = [];
-    for (i = 0, _ref2 = values.length; 0 <= _ref2 ? i <= _ref2 : i >= _ref2; 0 <= _ref2 ? i++ : i--) {
+    for (i = 0, _ref3 = values.length; 0 <= _ref3 ? i <= _ref3 : i >= _ref3; 0 <= _ref3 ? i++ : i--) {
       _results.push(delete set[values[i]]);
     }
     return _results;
@@ -1664,7 +1672,7 @@
 
   doSomething = show;
 
-  for (i = 0, _ref2 = thing.length; 0 <= _ref2 ? i < _ref2 : i > _ref2; 0 <= _ref2 ? i++ : i--) {
+  for (i = 0, _ref3 = thing.length; 0 <= _ref3 ? i < _ref3 : i > _ref3; 0 <= _ref3 ? i++ : i--) {
     doSomething(thing[i]);
   }
 
@@ -1855,9 +1863,9 @@
 
   paragraphs = map(recluseFile.split('\n\n'), processParagraph);
 
-  _ref3 = paragraphs.slice(0, 3);
-  for (_o = 0, _len9 = _ref3.length; _o < _len9; _o++) {
-    paragraph = _ref3[_o];
+  _ref4 = paragraphs.slice(0, 3);
+  for (_o = 0, _len9 = _ref4.length; _o < _len9; _o++) {
+    paragraph = _ref4[_o];
     show(paragraph);
   }
 
@@ -1936,9 +1944,9 @@
 
   paragraphs = map(recluseFile.split('\n\n'), processParagraph);
 
-  _ref4 = paragraphs.slice(0, 3);
-  for (_p = 0, _len10 = _ref4.length; _p < _len10; _p++) {
-    paragraph = _ref4[_p];
+  _ref5 = paragraphs.slice(0, 3);
+  for (_p = 0, _len10 = _ref5.length; _p < _len10; _p++) {
+    paragraph = _ref5[_p];
     show(paragraph);
   }
 
@@ -2264,9 +2272,9 @@
   show(roads);
 
   makeRoads = function(start) {
-    var i, _ref5, _results;
+    var i, _ref6, _results;
     _results = [];
-    for (i = 1, _ref5 = arguments.length; i < _ref5; i += 2) {
+    for (i = 1, _ref6 = arguments.length; i < _ref6; i += 2) {
       _results.push(makeRoad(start, arguments[i], arguments[i + 1]));
     }
     return _results;
@@ -2506,8 +2514,8 @@
     findRoutes = function(route) {
       var continueRoute, end, notVisited;
       notVisited = function(road) {
-        var _ref5;
-        return !(_ref5 = road.to, __indexOf.call(route.places, _ref5) >= 0);
+        var _ref6;
+        return !(_ref6 = road.to, __indexOf.call(route.places, _ref6) >= 0);
       };
       continueRoute = function(road) {
         return findRoutes({
@@ -2927,19 +2935,19 @@
           return div({
             "class": 'map'
           }, function() {
-            var x, y, _len11, _q, _ref5, _results;
+            var x, y, _len11, _q, _ref6, _results;
             img({
               src: 'http://autotelicum.github.com/' + 'Smooth-CoffeeScript/img/height-small.png'
             });
             _results = [];
             for (_q = 0, _len11 = points.length; _q < _len11; _q++) {
-              _ref5 = points[_q], x = _ref5.x, y = _ref5.y;
+              _ref6 = points[_q], x = _ref6.x, y = _ref6.y;
               _results.push(img({
                 "class": 'map',
                 src: "" + ostrich,
                 width: size,
                 height: size,
-                style: "left: " + (x * size) + "px; top: " + (y * size) + "px"
+                style: "left:" + (x * size) + "px; top:" + (y * size) + "px"
               }));
             }
             return _results;
@@ -2961,7 +2969,9 @@
   };
 
   runOnDemand(function() {
+    show('Scenic');
     renderRoute(findRoute(point(0, 0), point(11, 17)), findRoute(point(11, 17), point(19, 19)));
+    show('Excursion');
     return renderRoute(findRoute(point(0, 0), point(15, 3)), findRoute(point(15, 3), point(19, 19)));
   });
 
@@ -3411,12 +3421,12 @@
     };
 
     Dictionary.prototype.each = function(action) {
-      var property, value, _ref5, _results;
-      _ref5 = this.values;
+      var property, value, _ref6, _results;
+      _ref6 = this.values;
       _results = [];
-      for (property in _ref5) {
-        if (!__hasProp.call(_ref5, property)) continue;
-        value = _ref5[property];
+      for (property in _ref6) {
+        if (!__hasProp.call(_ref6, property)) continue;
+        value = _ref6[property];
         _results.push(action(property, value));
       }
       return _results;
@@ -3553,8 +3563,8 @@
       "\"": "&quot;"
     };
     return text.replace(/[<>&"]/g, function(character) {
-      var _ref5;
-      return (_ref5 = replacements[character]) != null ? _ref5 : character;
+      var _ref6;
+      return (_ref6 = replacements[character]) != null ? _ref6 : character;
     });
   };
 
@@ -3779,19 +3789,19 @@
     return [str.substring(0, n), str.substring(n)];
   };
 
-  _ref5 = splitStringAt(tautounlogical, 14), pre = _ref5[0], post = _ref5[1];
+  _ref6 = splitStringAt(tautounlogical, 14), pre = _ref6[0], post = _ref6[1];
 
-  _ref6 = [post, pre], pre = _ref6[0], post = _ref6[1];
+  _ref7 = [post, pre], pre = _ref7[0], post = _ref7[1];
 
   show("" + pre + " " + post);
 
-  _ref7 = [1, 2, 3, 4, 5, 6], re = _ref7[0], mi = _ref7[1], fa = _ref7[2], sol = _ref7[3], la = _ref7[4], ti = _ref7[5];
+  _ref8 = [1, 2, 3, 4, 5, 6], re = _ref8[0], mi = _ref8[1], fa = _ref8[2], sol = _ref8[3], la = _ref8[4], ti = _ref8[5];
 
-  _ref8 = [ti, re, fa, sol, la, mi], dal = _ref8[0], ra = 3 <= _ref8.length ? __slice.call(_ref8, 1, _r = _ref8.length - 1) : (_r = 1, []), mim = _ref8[_r++];
+  _ref9 = [ti, re, fa, sol, la, mi], dal = _ref9[0], ra = 3 <= _ref9.length ? __slice.call(_ref9, 1, _r = _ref9.length - 1) : (_r = 1, []), mim = _ref9[_r++];
 
   show("" + dal + ", " + ra + " and " + mim);
 
-  _ref9 = re > ti ? [mi, fa] : [fa, mi], key = _ref9[0], word = _ref9[1];
+  _ref10 = re > ti ? [mi, fa] : [fa, mi], key = _ref10[0], word = _ref10[1];
 
   show("" + key + " and " + word);
 
@@ -4006,11 +4016,11 @@
       return c.assert(_.isEqual(sortByValue(a), sortByValue(heap.content)));
     });
     declare('heap pops elements in sorted order', [arbArray(arbInt)], function(c, a) {
-      var n, _len12, _ref10, _s;
+      var n, _len12, _ref11, _s;
       heap = buildHeap(c, a);
-      _ref10 = sortByValue(a);
-      for (_s = 0, _len12 = _ref10.length; _s < _len12; _s++) {
-        n = _ref10[_s];
+      _ref11 = sortByValue(a);
+      for (_s = 0, _len12 = _ref11.length; _s < _len12; _s++) {
+        n = _ref11[_s];
         c.assert(n === heap.pop());
       }
       return c.assert(heap.size() === 0);
@@ -4063,7 +4073,7 @@
   });
 
   permute = function(L) {
-    var elem, i, p, _len12, _ref10, _ref11, _s;
+    var elem, i, p, _len12, _ref11, _ref12, _s;
     n = L.length;
     if (n === 1) {
       return (function() {
@@ -4076,11 +4086,11 @@
         return _results;
       })();
     }
-    _ref10 = [[L[0]], L.slice(1)], a = _ref10[0], L = _ref10[1];
+    _ref11 = [[L[0]], L.slice(1)], a = _ref11[0], L = _ref11[1];
     result = [];
-    _ref11 = permute(L);
-    for (_s = 0, _len12 = _ref11.length; _s < _len12; _s++) {
-      p = _ref11[_s];
+    _ref12 = permute(L);
+    for (_s = 0, _len12 = _ref12.length; _s < _len12; _s++) {
+      p = _ref12[_s];
       for (i = 0; 0 <= n ? i < n : i > n; 0 <= n ? i++ : i--) {
         result.push(p.slice(0, i).concat(a, p.slice(i)));
       }
@@ -4089,9 +4099,9 @@
   };
 
   test = function(p, n) {
-    var d, i, j, _ref10, _ref11;
-    for (i = 0, _ref10 = n - 1; 0 <= _ref10 ? i < _ref10 : i > _ref10; 0 <= _ref10 ? i++ : i--) {
-      for (j = _ref11 = i + 1; _ref11 <= n ? j < n : j > n; _ref11 <= n ? j++ : j--) {
+    var d, i, j, _ref11, _ref12;
+    for (i = 0, _ref11 = n - 1; 0 <= _ref11 ? i < _ref11 : i > _ref11; 0 <= _ref11 ? i++ : i--) {
+      for (j = _ref12 = i + 1; _ref12 <= n ? j < n : j > n; _ref12 <= n ? j++ : j--) {
         d = p[i] - p[j];
         if (j - i === d || i - j === d) return true;
       }
@@ -4100,15 +4110,15 @@
   };
 
   nQueen = function(n) {
-    var p, _len12, _ref10, _results, _s, _t;
+    var p, _len12, _ref11, _results, _s, _t;
     result = [];
-    _ref10 = permute((function() {
+    _ref11 = permute((function() {
       _results = [];
       for (var _t = 0; 0 <= n ? _t < n : _t > n; 0 <= n ? _t++ : _t--){ _results.push(_t); }
       return _results;
     }).apply(this));
-    for (_s = 0, _len12 = _ref10.length; _s < _len12; _s++) {
-      p = _ref10[_s];
+    for (_s = 0, _len12 = _ref11.length; _s < _len12; _s++) {
+      p = _ref11[_s];
       if (!test(p, n)) result.push(p);
     }
     return result;
@@ -4145,10 +4155,10 @@
   };
 
   solve = function(n) {
-    var count, solution, _len12, _ref10;
-    _ref10 = nQueen(n);
-    for (count = 0, _len12 = _ref10.length; count < _len12; count++) {
-      solution = _ref10[count];
+    var count, solution, _len12, _ref11;
+    _ref11 = nQueen(n);
+    for (count = 0, _len12 = _ref11.length; count < _len12; count++) {
+      solution = _ref11[count];
       show("Solution " + (count + 1) + ":");
       show(printBoard(solution));
     }
