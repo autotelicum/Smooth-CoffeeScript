@@ -1147,7 +1147,7 @@ Output 'total'
 <p>Use the techniques shown so far to write a program that calculates and shows the value of 2<sup>10</sup> (2 to the 10th power). You are, obviously, not allowed to use a cheap trick like just writing <code>2 * 2 * ...</code></p>
 <p>If you are having trouble with this, try to see it in terms of the even-numbers example. The program must perform an action a certain amount of times. A counter variable with a <code>while</code> loop can be used for that. Instead of printing the counter, the program must multiply something by 2. This something should be another variable, in which the result value is built up.</p>
 <p>Do not worry if you do not quite see how this would work yet. Even if you perfectly understand all the techniques this chapter covers, it can be hard to apply them to a specific problem. Reading and writing code will help develop a feeling for this, so study the solution, and try the next exercise.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="co"># Compose a solution here</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="co"># Compose a solution here</span><br />runOnDemand <span class="fu">-&gt;</span><br />  <span class="co"># Start lines below with at least 2 spaces</span></code></pre>
 <section id="view-solution-6" onclick="reveal(this)" >
 <h5>View Solution</h5>
 <section id="section-41" style="display:none" >
@@ -1160,13 +1160,19 @@ Output 'total'
 </section>
 <section id="section-42">
 <h4></h4>
+<blockquote>
+<p><code class="sourceCode"><span class="er">NOTE</span></code> When solving the exercises beware of never ending loops (loops where the condition does not change). A problem loop can look like this: <code>while counter then counter</code>. Since the <code>counter</code> is not changed the loop will go on forever. If one is present then your browser will become unresponsive and you will have to reload the page or restart the browser.</p>
+</blockquote>
+<blockquote>
+<p>Such a loop can occur accidentally while entering a solution. To make the problem less likely, write your code after the line <code>runOnDemand -&gt;</code>. Start each line with two spaces (or more). When your solution is ready, press the <code>Run</code> button.</p>
+</blockquote>
 </section>
 <section id="exercise-3">
 <h4><em>Exercise 3</em></h4>
 <p>With some slight modifications, the solution to the previous exercise can be made to draw a triangle. And when I say ‘draw a triangle’ I mean ‘print out some text that almost looks like a triangle when you squint’.</p>
 <p>Print out ten lines. On the first line there is one ‘#’ character. On the second there are two. And so on.</p>
 <p>How does one get a string with X ‘#’ characters in it? One way is to build it every time it is needed with an ‘inner loop’ — a loop inside a loop. A simpler way is to reuse the string that the previous iteration of the loop used, and add one character to it.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="co"># Compose a solution here</span></code></pre>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="co"># Compose a solution here</span><br />runOnDemand <span class="fu">-&gt;</span><br />  <span class="co"># Start lines below with at least 2 spaces</span></code></pre>
 <section id="view-solution-7" onclick="reveal(this)" >
 <h5>View Solution</h5>
 <section id="section-43" style="display:none" >

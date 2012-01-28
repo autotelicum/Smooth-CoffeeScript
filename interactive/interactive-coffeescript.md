@@ -1678,6 +1678,8 @@ solution, and try the next exercise.
 
 ~~~~ {.coffeescript}
 # Compose a solution here
+runOnDemand ->
+  # Start lines below with at least 2 spaces
 ~~~~
 
 ##### View Solution
@@ -1702,6 +1704,21 @@ make sure you also understand my solution.
 
 ####
 
+
+> <code class="sourceCode"><span class="er">NOTE</span></code>
+When solving the exercises beware of never ending loops (loops where
+the condition does not change). A problem loop can look like this:
+`while counter then counter`. Since the `counter` is not changed
+the loop will go on forever. If one is present then your browser
+will become unresponsive and you will have to reload the page or
+restart the browser.
+
+> Such a loop can occur accidentally while entering a solution.
+To make the problem less likely, write your code after the line
+`runOnDemand ->`. Start each line with two spaces (or more). When
+your solution is ready, press the `Run` button.
+
+
 #### *Exercise 3*
 
 With some slight modifications, the solution to the previous exercise
@@ -1719,6 +1736,8 @@ iteration of the loop used, and add one character to it.
 
 ~~~~ {.coffeescript}
 # Compose a solution here
+runOnDemand ->
+  # Start lines below with at least 2 spaces
 ~~~~
 
 ##### View Solution
