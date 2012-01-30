@@ -16,7 +16,10 @@ else
 
 view = (obj) ->
   show if typeof obj is 'object'
-    """{#{"\n  #{k}: #{v}" for own k,v of obj}\n}"""
+    try
+      JSON.stringify obj
+    catch error
+      """{#{"\n  #{k}: #{v}" for own k,v of obj}\n}"""
   else obj
 
 tryIt = ->
@@ -83,7 +86,7 @@ _.each {one : 1, two : 2, three : 3}, (num, key) -> show num
 
 #### map
 
-`_.map list, iterator, [context]` 
+`_.map list, iterator, [context]` Alias: **collect**
 
  Produces a new array of values by mapping each value in **list**
 through a transformation function (**iterator**). If the native **map**
@@ -214,7 +217,7 @@ Any extra arguments passed to **invoke** will be forwarded on to the
 method invocation.
 
 ~~~~ {.coffeescript}
-show _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
+view _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
 ~~~~
 
 #### pluck
@@ -267,8 +270,7 @@ show _.min numbers
 
 `_.sortBy list, iterator, [context]` 
 
- Returns a sorted copy of **list**, ranked by the results of running
-each value through **iterator**.
+ Returns a sorted copy of **list**, ranked in ascending order by the results of running each value through **iterator**.
 
 ~~~~ {.coffeescript}
 show _.sortBy [1..6], (num) -> Math.sin num
@@ -362,7 +364,7 @@ on the arguments object. Pass **n** to exclude the last **n** elements
 from the result.
 
 ~~~~ {.coffeescript}
-show _.initial [5, 4, 3, 2, 1]
+view _.initial [5, 4, 3, 2, 1]
 ~~~~
 
 #### last
@@ -384,7 +386,7 @@ show _.last [5, 4, 3, 2, 1]
 return the values of the array from that index onward.
 
 ~~~~ {.coffeescript}
-show _.rest [5, 4, 3, 2, 1]
+view _.rest [5, 4, 3, 2, 1]
 ~~~~
 
 #### compact
@@ -396,17 +398,18 @@ JavaScript, *false*, *null*, *0*, *""*, *undefined* and *NaN* are all
 falsy.
 
 ~~~~ {.coffeescript}
-show _.compact [0, 1, false, 2, '', 3]
+view _.compact [0, 1, false, 2, '', 3]
 ~~~~
 
 #### flatten
 
-`_.flatten array` 
+`_.flatten array, [shallow]` 
 
- Flattens a nested **array** (the nesting can be to any depth).
+ Flattens a nested **array** (the nesting can be to any depth). If you pass **shallow**, the array will only be flattened a single level.
 
 ~~~~ {.coffeescript}
-show _.flatten [1, [2], [3, [[[4]]]]]
+view _.flatten [1, [2], [3, [[4]]]]
+view _.flatten [1, [2], [3, [[4]]]], true
 ~~~~
 
 #### without
@@ -417,7 +420,7 @@ show _.flatten [1, [2], [3, [[[4]]]]]
 removed. *===* is used for the equality test.
 
 ~~~~ {.coffeescript}
-show _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
+view _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
 ~~~~
 
 #### union
@@ -428,7 +431,7 @@ show _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
 items, in order, that are present in one or more of the **arrays**.
 
 ~~~~ {.coffeescript}
-show _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
+view _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
 ~~~~
 
 #### intersection
@@ -440,7 +443,7 @@ show _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
 **arrays**.
 
 ~~~~ {.coffeescript}
-show _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
+view _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
 ~~~~
 
 #### difference
@@ -451,7 +454,7 @@ show _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
 not present in the **other** arrays.
 
 ~~~~ {.coffeescript}
-show _.difference [1, 2, 3, 4, 5], [5, 2, 10]
+view _.difference [1, 2, 3, 4, 5], [5, 2, 10]
 ~~~~
 
 #### uniq
@@ -465,7 +468,7 @@ want to compute unique items based on a transformation, pass an
 **iterator** function.
 
 ~~~~ {.coffeescript}
-show _.uniq [1, 2, 1, 3, 1, 4]
+view _.uniq [1, 2, 1, 3, 1, 4]
 ~~~~
 
 #### zip
@@ -479,7 +482,7 @@ with a matrix of nested arrays, **zip.apply** can transpose the matrix
 in a similar fashion.
 
 ~~~~ {.coffeescript}
-show _.zip ['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]
+view _.zip ['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]
 ~~~~
 
 #### indexOf
@@ -518,11 +521,11 @@ defaults to *1*. Returns a list of integers from **start** to **stop**,
 incremented (or decremented) by **step**, exclusive.
 
 ~~~~ {.coffeescript}
-show _.range 10
-show _.range 1, 11
-show _.range 0, 30, 5
-show _.range 0, -10, -1
-show _.range 0
+view _.range 10
+view _.range 1, 11
+view _.range 0, 30, 5
+view _.range 0, -10, -1
+view _.range 0
 ~~~~
 
 ## Function (uh, ahem) Functions
@@ -805,6 +808,15 @@ show _.chain([1,2,3,200])
   .tap(show)
   .map((num) -> num * num)
   .value()
+~~~~
+
+#### has
+`_.has object, key`
+
+ Does the object contain the given key? Identical to `object.hasOwnProperty key`, but uses a safe reference to the `hasOwnProperty` function, in case it's been [overridden accidentally](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/).
+
+~~~~ {.coffeescript}
+show _.has a: 1, b: 2, c: 3, 'b'
 ~~~~
 
 #### isEqual
@@ -1193,8 +1205,8 @@ Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee underscore.coffee | coffee -cs >underscore.js; coffee underscore.coffee >underscore.output; plumb underscore.output
-Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Example<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >underscore.html; open underscore.html; plumb underscore.html
-Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o underscore.pdf; open underscore.pdf
+Edit ,>pandoc -f markdown -t html -S -5 --toc --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Example<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >underscore.html; open underscore.html; plumb underscore.html
+Edit ,>markdown2pdf --toc --listings --xetex '--template=pandoc-template.tex' -o underscore.pdf; open underscore.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.

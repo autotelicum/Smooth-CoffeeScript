@@ -381,14 +381,110 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <h1 class="title">Underscore Reference — <em><a href="http://autotelicum.github.com/Smooth-CoffeeScript/">Smooth CoffeeScript</a></em></h1>
 <h4 class="date">☕</h4>
 </header>
+<nav id="TOC">
+<ul>
+<li><a href="#underscore">Underscore</a><ul>
+<li><a href="#downloads">Downloads</a></li>
+</ul></li>
+<li><a href="#collection-functions-arrays-or-objects">Collection Functions (Arrays or Objects)</a><ul>
+<li><a href="#each">each</a></li>
+<li><a href="#map">map</a></li>
+<li><a href="#reduce">reduce</a></li>
+<li><a href="#reduceright">reduceRight</a></li>
+<li><a href="#find">find</a></li>
+<li><a href="#filter">filter</a></li>
+<li><a href="#reject">reject</a></li>
+<li><a href="#all">all</a></li>
+<li><a href="#any">any</a></li>
+<li><a href="#include">include</a></li>
+<li><a href="#invoke">invoke</a></li>
+<li><a href="#pluck">pluck</a></li>
+<li><a href="#max">max</a></li>
+<li><a href="#min">min</a></li>
+<li><a href="#sortby">sortBy</a></li>
+<li><a href="#groupby">groupBy</a></li>
+<li><a href="#sortedindex">sortedIndex</a></li>
+<li><a href="#shuffle">shuffle</a></li>
+<li><a href="#toarray">toArray</a></li>
+<li><a href="#size">size</a></li>
+</ul></li>
+<li><a href="#array-functions">Array Functions</a><ul>
+<li><a href="#first">first</a></li>
+<li><a href="#initial">initial</a></li>
+<li><a href="#last">last</a></li>
+<li><a href="#rest">rest</a></li>
+<li><a href="#compact">compact</a></li>
+<li><a href="#flatten">flatten</a></li>
+<li><a href="#without">without</a></li>
+<li><a href="#union">union</a></li>
+<li><a href="#intersection">intersection</a></li>
+<li><a href="#difference">difference</a></li>
+<li><a href="#uniq">uniq</a></li>
+<li><a href="#zip">zip</a></li>
+<li><a href="#indexof">indexOf</a></li>
+<li><a href="#lastindexof">lastIndexOf</a></li>
+<li><a href="#range">range</a></li>
+</ul></li>
+<li><a href="#function-uh-ahem-functions">Function (uh, ahem) Functions</a><ul>
+<li><a href="#bind">bind</a></li>
+<li><a href="#bindall">bindAll</a></li>
+<li><a href="#memoize">memoize</a></li>
+<li><a href="#delay">delay</a></li>
+<li><a href="#defer">defer</a></li>
+<li><a href="#throttle">throttle</a></li>
+<li><a href="#debounce">debounce</a></li>
+<li><a href="#once">once</a></li>
+<li><a href="#after">after</a></li>
+<li><a href="#wrap">wrap</a></li>
+<li><a href="#compose">compose</a></li>
+</ul></li>
+<li><a href="#object-functions">Object Functions</a><ul>
+<li><a href="#keys">keys</a></li>
+<li><a href="#values">values</a></li>
+<li><a href="#functions">functions</a></li>
+<li><a href="#extend">extend</a></li>
+<li><a href="#defaults">defaults</a></li>
+<li><a href="#clone">clone</a></li>
+<li><a href="#tap">tap</a></li>
+<li><a href="#has">has</a></li>
+<li><a href="#isequal">isEqual</a></li>
+<li><a href="#isempty">isEmpty</a></li>
+<li><a href="#iselement">isElement</a></li>
+<li><a href="#isarray">isArray</a></li>
+<li><a href="#isarguments">isArguments</a></li>
+<li><a href="#isfunction">isFunction</a></li>
+<li><a href="#isstring">isString</a></li>
+<li><a href="#isnumber">isNumber</a></li>
+<li><a href="#isboolean">isBoolean</a></li>
+<li><a href="#isdate">isDate</a></li>
+<li><a href="#isregexp">isRegExp</a></li>
+<li><a href="#isnan">isNaN</a></li>
+<li><a href="#isnull">isNull</a></li>
+<li><a href="#isundefined">isUndefined</a></li>
+</ul></li>
+<li><a href="#utility-functions">Utility Functions</a><ul>
+<li><a href="#noconflict">noConflict</a></li>
+<li><a href="#identity">identity</a></li>
+<li><a href="#times">times</a></li>
+<li><a href="#mixin">mixin</a></li>
+<li><a href="#uniqueid">uniqueId</a></li>
+<li><a href="#escape">escape</a></li>
+<li><a href="#template">template</a></li>
+</ul></li>
+<li><a href="#chaining">Chaining</a><ul>
+<li><a href="#chain">chain</a></li>
+<li><a href="#value">value</a></li>
+</ul></li>
+</ul>
+</nav>
 <blockquote>
 <p>This reference is an adaptation of the documentation at <a href="http://documentcloud.github.com/underscore">Underscore.js</a>. It is <em>interactive</em> in its HTML<sub>5</sub> form. Edit a CoffeeScript segment to try it. You can see the generated JavaScript when you write a CoffeeScript function by typing ‘show name’ after its definition.</p>
 </blockquote>
-<pre class="sourceCode" onclick="reveal(this)" ><b><u>Example</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" "><span class="kw">if</span> exports<span class="kw">?</span><br />  _ <span class="kw">=</span> require <span class="st">'underscore'</span><br /><span class="kw">else</span><br />  _ <span class="kw">=</span> window<span class="kw">.</span>_ <span class="co"># Workaround for interactive environment quirk.</span><br /><br />view <span class="kw">=</span> <span class="fu">(obj) -&gt;</span><br />  show <span class="kw">if</span> <span class="kw">typeof</span> obj <span class="kw">is</span> <span class="st">'object'</span><br />    <span class="st">&quot;&quot;&quot;{</span><span class="ch">#{</span>&quot;\n  #{k<span class="ch">}</span><span class="st">: </span><span class="ch">#{</span>v<span class="ch">}</span><span class="st">&quot; for own k,v of obj}\n}&quot;&quot;&quot;</span><br />  <span class="kw">else</span> obj<br /><br />tryIt <span class="kw">=</span> <span class="fu">-&gt;</span><br />  show view <span class="co"># Show equivalent JavaScript</span><br />  view <span class="kw">{</span><br />    <span class="st">'JavaScript'</span> <span class="kw">:</span> <span class="st">&quot;we could have been the closest of friends&quot;</span><br />    <span class="st">'EcmaScript'</span> <span class="kw">:</span> <span class="st">&quot;we might have been the world's greatest lovers&quot;</span><br />    <span class="st">'But'</span>        <span class="kw">:</span> <span class="st">&quot;now we're just without each other&quot;</span><br />  <span class="kw">}</span><br /><span class="co"># Uncomment the next line to try it</span><br /><span class="co"># tryIt()</span><br /><span class="co"># show -&gt; 'all' in _.functions _ # To see code for an expression</span></code></pre>
-<h2 id="underscore">Underscore</h2>
+<pre class="sourceCode" onclick="reveal(this)" ><b><u>Example</u></b><br/><code class="sourceCode CoffeeScript" contenteditable="true" spellcheck="false" style="display:none" "><span class="kw">if</span> exports<span class="kw">?</span><br />  _ <span class="kw">=</span> require <span class="st">'underscore'</span><br /><span class="kw">else</span><br />  _ <span class="kw">=</span> window<span class="kw">.</span>_ <span class="co"># Workaround for interactive environment quirk.</span><br /><br />view <span class="kw">=</span> <span class="fu">(obj) -&gt;</span><br />  show <span class="kw">if</span> <span class="kw">typeof</span> obj <span class="kw">is</span> <span class="st">'object'</span><br />    <span class="kw">try</span><br />      JSON<span class="kw">.</span>stringify obj<br />    <span class="kw">catch</span> error<br />      <span class="st">&quot;&quot;&quot;{</span><span class="ch">#{</span>&quot;\n  #{k<span class="ch">}</span><span class="st">: </span><span class="ch">#{</span>v<span class="ch">}</span><span class="st">&quot; for own k,v of obj}\n}&quot;&quot;&quot;</span><br />  <span class="kw">else</span> obj<br /><br />tryIt <span class="kw">=</span> <span class="fu">-&gt;</span><br />  show view <span class="co"># Show equivalent JavaScript</span><br />  view <span class="kw">{</span><br />    <span class="st">'JavaScript'</span> <span class="kw">:</span> <span class="st">&quot;we could have been the closest of friends&quot;</span><br />    <span class="st">'EcmaScript'</span> <span class="kw">:</span> <span class="st">&quot;we might have been the world's greatest lovers&quot;</span><br />    <span class="st">'But'</span>        <span class="kw">:</span> <span class="st">&quot;now we're just without each other&quot;</span><br />  <span class="kw">}</span><br /><span class="co"># Uncomment the next line to try it</span><br /><span class="co"># tryIt()</span><br /><span class="co"># show -&gt; 'all' in _.functions _ # To see code for an expression</span></code></pre>
+<h2 id="underscore"><a href="#TOC">Underscore</a></h2>
 <p><a href="http://github.com/documentcloud/underscore/">Underscore</a> is a library for functional style programming. It provides 60-odd functions that support both the usual functional suspects: <strong>map</strong>, <strong>select</strong>, <strong>invoke</strong> — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of <strong>forEach</strong>, <strong>map</strong>, <strong>reduce</strong>, <strong>filter</strong>, <strong>every</strong>, <strong>some</strong> and <strong>indexOf</strong>.</p>
 <p>You can find more information and updates at <a href="http://documentcloud.github.com/underscore">Underscore.js</a>. Extensions to Underscore are listed in the <a href="https://github.com/documentcloud/underscore/wiki/Mixin-Catalog">Mixin Catalog Wiki</a>. <em>Underscore is an open-source component of <a href="http://documentcloud.org/">DocumentCloud</a>.</em></p>
-<h3 id="downloads">Downloads</h3>
+<h3 id="downloads"><a href="#TOC">Downloads</a></h3>
 <p><em>Right-click, and use “Save As”</em></p>
 <ul>
 <li><a href="http://documentcloud.github.com/underscore/underscore.js">Latest Development Version</a>
@@ -401,311 +497,315 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 </ul></li>
 </ul>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show <span class="st">&quot;Underscore version </span><span class="ch">#{</span>_.VERSION<span class="ch">}</span><span class="st"> is used in this documentation&quot;</span></code></pre>
-<h2 id="collection-functions-arrays-or-objects">Collection Functions (Arrays or Objects)</h2>
-<h4 id="each">each</h4>
+<h2 id="collection-functions-arrays-or-objects"><a href="#TOC">Collection Functions (Arrays or Objects)</a></h2>
+<h4 id="each"><a href="#TOC">each</a></h4>
 <p><code>_.each list, iterator, [context]</code> Alias: <strong>forEach</strong></p>
 <p>Iterates over a <strong>list</strong> of elements, yielding each in turn to an <strong>iterator</strong> function. The <strong>iterator</strong> is bound to the <strong>context</strong> object, if one is passed. Each invocation of <strong>iterator</strong> is called with three arguments: <code>element, index, list</code>. If <strong>list</strong> is a JavaScript object, <strong>iterator</strong>’s arguments will be <code>value, key, list</code>. Delegates to the native <strong>forEach</strong> function if it exists.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">_<span class="kw">.</span>each <span class="kw">[</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span> <span class="kw">],</span> <span class="fu">(num) -&gt;</span> show num</code></pre>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">_<span class="kw">.</span>each <span class="kw">{</span>one <span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> two <span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> three <span class="kw">:</span> <span class="dv">3</span><span class="kw">},</span> <span class="fu">(num, key) -&gt;</span> show num</code></pre>
-<h4 id="map">map</h4>
-<p><code>_.map list, iterator, [context]</code></p>
+<h4 id="map"><a href="#TOC">map</a></h4>
+<p><code>_.map list, iterator, [context]</code> Alias: <strong>collect</strong></p>
 <p>Produces a new array of values by mapping each value in <strong>list</strong> through a transformation function (<strong>iterator</strong>). If the native <strong>map</strong> method exists, it will be used instead. If <strong>list</strong> is a JavaScript object, <strong>iterator</strong>’s arguments will be <code>value, key, list</code>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>map <span class="kw">[</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span> <span class="kw">],</span> <span class="fu">(num) -&gt;</span> num <span class="kw">*</span> <span class="dv">3</span></code></pre>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>map<br />  one<span class="kw">:</span> <span class="dv">1</span><br />  two<span class="kw">:</span> <span class="dv">2</span><br />  three<span class="kw">:</span> <span class="dv">3</span><br /><span class="kw">,</span> <span class="fu">(num, key) -&gt;</span><br />  num <span class="kw">*</span> <span class="dv">3</span></code></pre>
-<h4 id="reduce">reduce</h4>
+<h4 id="reduce"><a href="#TOC">reduce</a></h4>
 <p><code>_.reduce list, iterator, memo, [context]</code> Aliases: <strong>inject, foldl</strong></p>
 <p>Also known as <strong>inject</strong> and <strong>foldl</strong>, <strong>reduce</strong> boils down a <strong>list</strong> of values into a single value. <strong>Memo</strong> is the initial state of the reduction, and each successive step of it should be returned by <strong>iterator</strong>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show sum <span class="kw">=</span> _<span class="kw">.</span>reduce <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="kw">(</span><span class="fu">(memo, num) -&gt;</span> memo <span class="kw">+</span> num<span class="kw">),</span> <span class="dv">0</span></code></pre>
-<h4 id="reduceright">reduceRight</h4>
+<h4 id="reduceright"><a href="#TOC">reduceRight</a></h4>
 <p><code>_.reduceRight list, iterator, memo, [context]</code> Alias: <strong>foldr</strong></p>
 <p>The right-associative version of <strong>reduce</strong>. Delegates to the JavaScript 1.8 version of <strong>reduceRight</strong>, if it exists. <strong>Foldr</strong> is not as useful in JavaScript as it would be in a language with lazy evaluation.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">list <span class="kw">=</span> <span class="kw">[</span> <span class="kw">[</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span> <span class="kw">],</span> <span class="kw">[</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span> <span class="kw">],</span> <span class="kw">[</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">5</span> <span class="kw">]</span> <span class="kw">]</span><br />flat <span class="kw">=</span> _<span class="kw">.</span>reduceRight list<span class="kw">,</span> <span class="fu">(a, b) -&gt;</span><br />  a<span class="kw">.</span>concat b<br /><span class="kw">,</span> <span class="kw">[]</span><br />show flat</code></pre>
-<h4 id="find">find</h4>
+<h4 id="find"><a href="#TOC">find</a></h4>
 <p><code>_.find list, iterator, [context]</code> Alias: <strong>detect</strong></p>
 <p>Looks through each value in the <strong>list</strong>, returning the first one that passes a truth test (<strong>iterator</strong>). The function returns as soon as it finds an acceptable element, and doesn’t traverse the entire list.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show even <span class="kw">=</span> _<span class="kw">.</span>find <span class="kw">[</span><span class="dv">1</span><span class="kw">..</span><span class="dv">6</span><span class="kw">],</span> <span class="fu">(num) -&gt;</span> num <span class="kw">%</span> <span class="dv">2</span> <span class="kw">is</span> <span class="dv">0</span></code></pre>
-<h4 id="filter">filter</h4>
+<h4 id="filter"><a href="#TOC">filter</a></h4>
 <p><code>_.filter list, iterator, [context]</code> Alias: <strong>select</strong></p>
 <p>Looks through each value in the <strong>list</strong>, returning an array of all the values that pass a truth test (<strong>iterator</strong>). Delegates to the native <strong>filter</strong> method, if it exists.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show evens <span class="kw">=</span> _<span class="kw">.</span>filter <span class="kw">[</span><span class="dv">1</span><span class="kw">..</span><span class="dv">6</span><span class="kw">],</span> <span class="fu">(num) -&gt;</span> num <span class="kw">%</span> <span class="dv">2</span> <span class="kw">is</span> <span class="dv">0</span></code></pre>
-<h4 id="reject">reject</h4>
+<h4 id="reject"><a href="#TOC">reject</a></h4>
 <p><code>_.reject list, iterator, [context]</code></p>
 <p>Returns the values in <strong>list</strong> without the elements that the truth test (<strong>iterator</strong>) passes. The opposite of <strong>filter</strong>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show odds <span class="kw">=</span> _<span class="kw">.</span>reject <span class="kw">[</span><span class="dv">1</span><span class="kw">..</span><span class="dv">6</span><span class="kw">],</span> <span class="fu">(num) -&gt;</span> num <span class="kw">%</span> <span class="dv">2</span> <span class="kw">is</span> <span class="dv">0</span></code></pre>
-<h4 id="all">all</h4>
+<h4 id="all"><a href="#TOC">all</a></h4>
 <p><code>_.all list, iterator, [context]</code> Alias: <strong>every</strong></p>
 <p>Returns <em>true</em> if all of the values in the <strong>list</strong> pass the <strong>iterator</strong> truth test. Delegates to the native method <strong>every</strong>, if present.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>all <span class="kw">[</span><span class="ot">true</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="ot">null</span><span class="kw">,</span> <span class="st">'yes'</span><span class="kw">],</span> _<span class="kw">.</span>identity</code></pre>
-<h4 id="any">any</h4>
+<h4 id="any"><a href="#TOC">any</a></h4>
 <p><code>_.any list, [iterator], [context]</code> Alias: <strong>some</strong></p>
 <p>Returns <em>true</em> if any of the values in the <strong>list</strong> pass the <strong>iterator</strong> truth test. Short-circuits and stops traversing the list if a true element is found. Delegates to the native method <strong>some</strong>, if present.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>any <span class="kw">[</span><span class="ot">null</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="st">'yes'</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">]</span></code></pre>
-<h4 id="include">include</h4>
+<h4 id="include"><a href="#TOC">include</a></h4>
 <p><code>_.include list, value</code> Alias: <strong>contains</strong></p>
 <p>Returns <em>true</em> if the <strong>value</strong> is present in the <strong>list</strong>, using <em>===</em> to test equality. Uses <strong>indexOf</strong> internally, if <strong>list</strong> is an Array.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>include <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="dv">3</span></code></pre>
-<h4 id="invoke">invoke</h4>
+<h4 id="invoke"><a href="#TOC">invoke</a></h4>
 <p><code>_.invoke list, methodName, [*arguments]</code></p>
 <p>Calls the method named by <strong>methodName</strong> on each value in the <strong>list</strong>. Any extra arguments passed to <strong>invoke</strong> will be forwarded on to the method invocation.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>invoke <span class="kw">[[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">7</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]],</span> <span class="st">'sort'</span></code></pre>
-<h4 id="pluck">pluck</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>invoke <span class="kw">[[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">7</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]],</span> <span class="st">'sort'</span></code></pre>
+<h4 id="pluck"><a href="#TOC">pluck</a></h4>
 <p><code>_.pluck list, propertyName</code></p>
 <p>A convenient version of what is perhaps the most common use-case for <strong>map</strong>: extracting a list of property values.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}</span><br /><span class="kw">]</span><br />show _<span class="kw">.</span>pluck stooges<span class="kw">,</span> <span class="st">'name'</span></code></pre>
-<h4 id="max">max</h4>
+<h4 id="max"><a href="#TOC">max</a></h4>
 <p><code>_.max list, [iterator], [context]</code></p>
 <p>Returns the maximum value in <strong>list</strong>. If <strong>iterator</strong> is passed, it will be used on each value to generate the criterion by which the value is ranked.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">40</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">50</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">60</span><span class="kw">}</span><br /><span class="kw">]</span><br />view _<span class="kw">.</span>max stooges<span class="kw">,</span> <span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>age</code></pre>
-<h4 id="min">min</h4>
+<h4 id="min"><a href="#TOC">min</a></h4>
 <p><code>_.min list, [iterator], [context]</code></p>
 <p>Returns the minimum value in <strong>list</strong>. If <strong>iterator</strong> is passed, it will be used on each value to generate the criterion by which the value is ranked.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">numbers <span class="kw">=</span> <span class="kw">[</span><span class="dv">10</span><span class="kw">,</span> <span class="dv">5</span><span class="kw">,</span> <span class="dv">100</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1000</span><span class="kw">]</span><br />show _<span class="kw">.</span>min numbers</code></pre>
-<h4 id="sortby">sortBy</h4>
+<h4 id="sortby"><a href="#TOC">sortBy</a></h4>
 <p><code>_.sortBy list, iterator, [context]</code></p>
-<p>Returns a sorted copy of <strong>list</strong>, ranked by the results of running each value through <strong>iterator</strong>.</p>
+<p>Returns a sorted copy of <strong>list</strong>, ranked in ascending order by the results of running each value through <strong>iterator</strong>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>sortBy <span class="kw">[</span><span class="dv">1</span><span class="kw">..</span><span class="dv">6</span><span class="kw">],</span> <span class="fu">(num) -&gt;</span> <span class="ot">Math</span><span class="kw">.</span>sin num</code></pre>
-<h4 id="groupby">groupBy</h4>
+<h4 id="groupby"><a href="#TOC">groupBy</a></h4>
 <p><code>_.groupBy list, iterator</code></p>
 <p>Splits a collection into sets, grouped by the result of running each value through <strong>iterator</strong>. If <strong>iterator</strong> is a string instead of a function, groups by the property named by <strong>iterator</strong> on each of the values.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>groupBy <span class="kw">[</span><span class="fl">1.3</span><span class="kw">,</span> <span class="fl">2.1</span><span class="kw">,</span> <span class="fl">2.4</span><span class="kw">],</span> <span class="fu">(num) -&gt;</span> <span class="ot">Math</span><span class="kw">.</span>floor num</code></pre>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>groupBy <span class="kw">[</span><span class="st">'one'</span><span class="kw">,</span> <span class="st">'two'</span><span class="kw">,</span> <span class="st">'three'</span><span class="kw">],</span> <span class="st">'length'</span></code></pre>
-<h4 id="sortedindex">sortedIndex</h4>
+<h4 id="sortedindex"><a href="#TOC">sortedIndex</a></h4>
 <p><code>_.sortedIndex list, value, [iterator]</code></p>
 <p>Uses a binary search to determine the index at which the <strong>value</strong> <em>should</em> be inserted into the <strong>list</strong> in order to maintain the <strong>list</strong>’s sorted order. If an <strong>iterator</strong> is passed, it will be used to compute the sort ranking of each value.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>sortedIndex <span class="kw">[</span><span class="dv">10</span><span class="kw">,</span> <span class="dv">20</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">40</span><span class="kw">,</span> <span class="dv">50</span><span class="kw">],</span> <span class="dv">35</span></code></pre>
-<h4 id="shuffle">shuffle</h4>
+<h4 id="shuffle"><a href="#TOC">shuffle</a></h4>
 <p><code>_.shuffle list</code></p>
 <p>Returns a shuffled copy of the <strong>list</strong>, using a version of the <a href="http://en.wikipedia.org/wiki/Fisher-Yates_shuffle">Fisher-Yates shuffle</a>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>shuffle <span class="kw">[</span><span class="dv">1</span><span class="kw">..</span><span class="dv">6</span><span class="kw">]</span></code></pre>
-<h4 id="toarray">toArray</h4>
+<h4 id="toarray"><a href="#TOC">toArray</a></h4>
 <p><code>_.toArray list</code></p>
 <p>Converts the <strong>list</strong> (anything that can be iterated over), into a real Array. Useful for transmuting the <strong>arguments</strong> object.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="kw">(</span><span class="fu">-&gt;</span> show _<span class="kw">.</span>toArray<span class="kw">(</span>arguments<span class="kw">).</span>slice<span class="kw">(</span><span class="dv">0</span><span class="kw">))(</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">)</span></code></pre>
-<h4 id="size">size</h4>
+<h4 id="size"><a href="#TOC">size</a></h4>
 <p><code>_.size list</code></p>
 <p>Return the number of values in the <strong>list</strong>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>size <span class="kw">{</span>one <span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> two <span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> three <span class="kw">:</span> <span class="dv">3</span><span class="kw">}</span></code></pre>
-<h2 id="array-functions">Array Functions</h2>
+<h2 id="array-functions"><a href="#TOC">Array Functions</a></h2>
 <p><em>Note: All array functions will also work on the <strong>arguments</strong> object.</em></p>
-<h4 id="first">first</h4>
+<h4 id="first"><a href="#TOC">first</a></h4>
 <p><code>_.first array, [n]</code> Alias: <strong>head</strong></p>
 <p>Returns the first element of an <strong>array</strong>. Passing <strong>n</strong> will return the first <strong>n</strong> elements of the array.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>first <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="initial">initial</h4>
+<h4 id="initial"><a href="#TOC">initial</a></h4>
 <p><code>_.initial array, [n]</code></p>
 <p>Returns everything but the last entry of the array. Especially useful on the arguments object. Pass <strong>n</strong> to exclude the last <strong>n</strong> elements from the result.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>initial <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="last">last</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>initial <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
+<h4 id="last"><a href="#TOC">last</a></h4>
 <p><code>_.last array, [n]</code></p>
 <p>Returns the last element of an <strong>array</strong>. Passing <strong>n</strong> will return the last <strong>n</strong> elements of the array.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>last <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="rest">rest</h4>
+<h4 id="rest"><a href="#TOC">rest</a></h4>
 <p><code>_.rest array, [index]</code> Alias: <strong>tail</strong></p>
 <p>Returns the <strong>rest</strong> of the elements in an array. Pass an <strong>index</strong> to return the values of the array from that index onward.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>rest <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="compact">compact</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>rest <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
+<h4 id="compact"><a href="#TOC">compact</a></h4>
 <p><code>_.compact array</code></p>
 <p>Returns a copy of the <strong>array</strong> with all falsy values removed. In JavaScript, <em>false</em>, <em>null</em>, <em>0</em>, <em>“”</em>, <em>undefined</em> and <em>NaN</em> are all falsy.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>compact <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="st">''</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">]</span></code></pre>
-<h4 id="flatten">flatten</h4>
-<p><code>_.flatten array</code></p>
-<p>Flattens a nested <strong>array</strong> (the nesting can be to any depth).</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>flatten <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> <span class="kw">[[[</span><span class="dv">4</span><span class="kw">]]]]]</span></code></pre>
-<h4 id="without">without</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>compact <span class="kw">[</span><span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="st">''</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">]</span></code></pre>
+<h4 id="flatten"><a href="#TOC">flatten</a></h4>
+<p><code>_.flatten array, [shallow]</code></p>
+<p>Flattens a nested <strong>array</strong> (the nesting can be to any depth). If you pass <strong>shallow</strong>, the array will only be flattened a single level.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>flatten <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> <span class="kw">[[</span><span class="dv">4</span><span class="kw">]]]]</span><br />view _<span class="kw">.</span>flatten <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">3</span><span class="kw">,</span> <span class="kw">[[</span><span class="dv">4</span><span class="kw">]]]],</span> <span class="ot">true</span></code></pre>
+<h4 id="without"><a href="#TOC">without</a></h4>
 <p><code>_.without array, [*values]</code></p>
 <p>Returns a copy of the <strong>array</strong> with all instances of the <strong>values</strong> removed. <em>===</em> is used for the equality test.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>without <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">],</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span></code></pre>
-<h4 id="union">union</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>without <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">],</span> <span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span></code></pre>
+<h4 id="union"><a href="#TOC">union</a></h4>
 <p><code>_.union *arrays</code></p>
 <p>Computes the union of the passed-in <strong>arrays</strong>: the list of unique items, in order, that are present in one or more of the <strong>arrays</strong>.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>union <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">101</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="intersection">intersection</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>union <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">101</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
+<h4 id="intersection"><a href="#TOC">intersection</a></h4>
 <p><code>_.intersection *arrays</code></p>
 <p>Computes the list of values that are the intersection of all the <strong>arrays</strong>. Each value in the result is present in each of the <strong>arrays</strong>.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>intersection <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">101</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
-<h4 id="difference">difference</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>intersection <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">101</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">]</span></code></pre>
+<h4 id="difference"><a href="#TOC">difference</a></h4>
 <p><code>_.difference array, *others</code></p>
 <p>Similar to <strong>without</strong>, but returns the values from <strong>array</strong> that are not present in the <strong>other</strong> arrays.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>difference <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">5</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">]</span></code></pre>
-<h4 id="uniq">uniq</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>difference <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">,</span> <span class="dv">5</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">5</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">10</span><span class="kw">]</span></code></pre>
+<h4 id="uniq"><a href="#TOC">uniq</a></h4>
 <p><code>_.uniq array, [isSorted], [iterator]</code> Alias: <strong>unique</strong></p>
 <p>Produces a duplicate-free version of the <strong>array</strong>, using <em>===</em> to test object equality. If you know in advance that the <strong>array</strong> is sorted, passing <em>true</em> for <strong>isSorted</strong> will run a much faster algorithm. If you want to compute unique items based on a transformation, pass an <strong>iterator</strong> function.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>uniq <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">]</span></code></pre>
-<h4 id="zip">zip</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>uniq <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">4</span><span class="kw">]</span></code></pre>
+<h4 id="zip"><a href="#TOC">zip</a></h4>
 <p><code>_.zip *arrays</code></p>
 <p>Merges together the values of each of the <strong>arrays</strong> with the values at the corresponding position. Useful when you have separate data sources that are coordinated through matching array indexes. If you’re working with a matrix of nested arrays, <strong>zip.apply</strong> can transpose the matrix in a similar fashion.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>zip <span class="kw">[</span><span class="st">'moe'</span><span class="kw">,</span> <span class="st">'larry'</span><span class="kw">,</span> <span class="st">'curly'</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">30</span><span class="kw">,</span> <span class="dv">40</span><span class="kw">,</span> <span class="dv">50</span><span class="kw">],</span> <span class="kw">[</span><span class="ot">true</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">]</span></code></pre>
-<h4 id="indexof">indexOf</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>zip <span class="kw">[</span><span class="st">'moe'</span><span class="kw">,</span> <span class="st">'larry'</span><span class="kw">,</span> <span class="st">'curly'</span><span class="kw">],</span> <span class="kw">[</span><span class="dv">30</span><span class="kw">,</span> <span class="dv">40</span><span class="kw">,</span> <span class="dv">50</span><span class="kw">],</span> <span class="kw">[</span><span class="ot">true</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">,</span> <span class="ot">false</span><span class="kw">]</span></code></pre>
+<h4 id="indexof"><a href="#TOC">indexOf</a></h4>
 <p><code>_.indexOf array, value, [isSorted]</code></p>
 <p>Returns the index at which <strong>value</strong> can be found in the <strong>array</strong>, or <em>–1</em> if value is not present in the <strong>array</strong>. Uses the native <strong>indexOf</strong> function unless it’s missing. If you’re working with a large array, and you know that the array is already sorted, pass <code>true</code> for <strong>isSorted</strong> to use a faster binary search.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>indexOf <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="dv">2</span></code></pre>
-<h4 id="lastindexof">lastIndexOf</h4>
+<h4 id="lastindexof"><a href="#TOC">lastIndexOf</a></h4>
 <p><code>_.lastIndexOf array, value</code></p>
 <p>Returns the index of the last occurrence of <strong>value</strong> in the <strong>array</strong>, or <em>–1</em> if value is not present. Uses the native <strong>lastIndexOf</strong> function if possible.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>lastIndexOf <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">],</span> <span class="dv">2</span></code></pre>
-<h4 id="range">range</h4>
+<h4 id="range"><a href="#TOC">range</a></h4>
 <p><code>_.range [start], stop, [step]</code></p>
 <p>A function to create flexibly-numbered lists of integers, handy for <code>each</code> and <code>map</code> loops. <strong>start</strong>, if omitted, defaults to <em>0</em>; <strong>step</strong> defaults to <em>1</em>. Returns a list of integers from <strong>start</strong> to <strong>stop</strong>, incremented (or decremented) by <strong>step</strong>, exclusive.</p>
-<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>range <span class="dv">10</span><br />show _<span class="kw">.</span>range <span class="dv">1</span><span class="kw">,</span> <span class="dv">11</span><br />show _<span class="kw">.</span>range <span class="dv">0</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">5</span><br />show _<span class="kw">.</span>range <span class="dv">0</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">10</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">1</span><br />show _<span class="kw">.</span>range <span class="dv">0</span></code></pre>
-<h2 id="function-uh-ahem-functions">Function (uh, ahem) Functions</h2>
-<h4 id="bind">bind</h4>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>range <span class="dv">10</span><br />view _<span class="kw">.</span>range <span class="dv">1</span><span class="kw">,</span> <span class="dv">11</span><br />view _<span class="kw">.</span>range <span class="dv">0</span><span class="kw">,</span> <span class="dv">30</span><span class="kw">,</span> <span class="dv">5</span><br />view _<span class="kw">.</span>range <span class="dv">0</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">10</span><span class="kw">,</span> <span class="kw">-</span><span class="dv">1</span><br />view _<span class="kw">.</span>range <span class="dv">0</span></code></pre>
+<h2 id="function-uh-ahem-functions"><a href="#TOC">Function (uh, ahem) Functions</a></h2>
+<h4 id="bind"><a href="#TOC">bind</a></h4>
 <p><code>_.bind function, object, [*arguments]</code></p>
 <p>Bind a <strong>function</strong> to an <strong>object</strong>, meaning that whenever the function is called, the value of <em>this</em> will be the <strong>object</strong>. Optionally, bind <strong>arguments</strong> to the <strong>function</strong> to pre-fill them, also known as <strong>partial application</strong>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">func <span class="kw">=</span> <span class="fu">(greeting) -&gt;</span> greeting <span class="kw">+</span> <span class="st">': '</span> <span class="kw">+</span> <span class="dt">this</span><span class="kw">.</span>name<br />func <span class="kw">=</span> _<span class="kw">.</span>bind func<span class="kw">,</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">},</span> <span class="st">'hi'</span><br />show func<span class="kw">()</span></code></pre>
-<h4 id="bindall">bindAll</h4>
+<h4 id="bindall"><a href="#TOC">bindAll</a></h4>
 <p><code>_.bindAll object, [*methodNames]</code></p>
 <p>Binds a number of methods on the <strong>object</strong>, specified by <strong>methodNames</strong>, to be run in the context of that object whenever they are invoked. Very handy for binding functions that are going to be used as event handlers, which would otherwise be invoked with a fairly useless <em>this</em>. If no <strong>methodNames</strong> are provided, all of the object’s function properties will be bound to it.</p>
 <pre class="sourceCode"><code class="sourceCode COFFEESCRIPT">buttonView <span class="kw">=</span> <span class="kw">{</span><br />  label   <span class="kw">:</span> <span class="st">'underscore'</span><br />  onClick <span class="kw">:</span> <span class="fu">-&gt;</span> show <span class="st">'clicked: '</span> <span class="kw">+</span> <span class="dt">this</span><span class="kw">.</span>label<br />  onHover <span class="kw">:</span> <span class="fu">-&gt;</span> show <span class="st">'hovering: '</span> <span class="kw">+</span> <span class="dt">this</span><span class="kw">.</span>label<br /><span class="kw">}</span><br />_<span class="kw">.</span>bindAll buttonView<br />jQuery<span class="kw">(</span><span class="st">'#underscore_button'</span><span class="kw">).</span>bind <span class="st">'click'</span><span class="kw">,</span> buttonView<span class="kw">.</span>onClick</code></pre>
-<h4 id="memoize">memoize</h4>
+<h4 id="memoize"><a href="#TOC">memoize</a></h4>
 <p><code>_.memoize function, [hashFunction]</code></p>
 <p>Memoizes a given <strong>function</strong> by caching the computed result. Useful for speeding up slow-running computations. If passed an optional <strong>hashFunction</strong>, it will be used to compute the hash key for storing the result, based on the arguments to the original function. The default <strong>hashFunction</strong> just uses the first argument to the memoized function as the key.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">timeIt <span class="kw">=</span> <span class="fu">(func, a...) -&gt;</span><br />  before <span class="kw">=</span> <span class="kw">new</span> <span class="dt">Date</span><br />  result <span class="kw">=</span> func a<span class="kw">...</span><br />  show <span class="st">&quot;Elapsed: </span><span class="ch">#{</span>new Date - before<span class="ch">}</span><span class="st">ms&quot;</span><br />  result<br /><br />fibonacci <span class="kw">=</span> _<span class="kw">.</span>memoize <span class="fu">(n) -&gt;</span><br />  <span class="kw">if</span> n <span class="kw">&lt;</span> <span class="dv">2</span> <span class="kw">then</span> n <span class="kw">else</span> fibonacci<span class="kw">(</span>n <span class="kw">-</span> <span class="dv">1</span><span class="kw">)</span> <span class="kw">+</span> fibonacci<span class="kw">(</span>n <span class="kw">-</span> <span class="dv">2</span><span class="kw">)</span><br /><br />show timeIt fibonacci<span class="kw">,</span> <span class="dv">1000</span><br />show timeIt fibonacci<span class="kw">,</span> <span class="dv">1000</span></code></pre>
-<h4 id="delay">delay</h4>
+<h4 id="delay"><a href="#TOC">delay</a></h4>
 <p><code>_.delay function, wait, [*arguments]</code></p>
 <p>Much like <strong>setTimeout</strong>, invokes <strong>function</strong> after <strong>wait</strong> milliseconds. If you pass the optional <strong>arguments</strong>, they will be forwarded on to the <strong>function</strong> when it is invoked.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">log <span class="kw">=</span> _<span class="kw">.</span>bind show<span class="kw">,</span> <span class="ot">console</span> <span class="kw">?</span> window<br />_<span class="kw">.</span>delay log<span class="kw">,</span> <span class="dv">1</span><span class="kw">,</span> <span class="st">'logged later'</span><br /><span class="co"># See the end of this document for the output</span></code></pre>
-<h4 id="defer">defer</h4>
+<h4 id="defer"><a href="#TOC">defer</a></h4>
 <p><code>_.defer function</code></p>
 <p>Defers invoking the <strong>function</strong> until the current call stack has cleared, similar to using <strong>setTimeout</strong> with a delay of 0. Useful for performing expensive computations or HTML rendering in chunks without blocking the UI thread from updating.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">_<span class="kw">.</span>defer <span class="fu">-&gt;</span> show <span class="st">'deferred'</span><br /><span class="co"># See the end of this document for the output</span></code></pre>
-<h4 id="throttle">throttle</h4>
+<h4 id="throttle"><a href="#TOC">throttle</a></h4>
 <p><code>_.throttle function, wait</code></p>
 <p>Creates and returns a new, throttled version of the passed function, that, when invoked repeatedly, will only actually call the original function at most once per every <strong>wait</strong> milliseconds. Useful for rate-limiting events that occur faster than you can keep up with.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">updatePosition <span class="kw">=</span> <span class="fu">(evt) -&gt;</span> show <span class="st">&quot;Position </span><span class="ch">#{</span>evt<span class="ch">}</span><span class="st">&quot;</span><br />throttled <span class="kw">=</span> _<span class="kw">.</span>throttle updatePosition<span class="kw">,</span> <span class="dv">100</span><br /><span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">..</span><span class="dv">10</span><span class="kw">]</span><br />  throttled i<br /><span class="co"># $(window).scroll throttled</span></code></pre>
-<h4 id="debounce">debounce</h4>
+<h4 id="debounce"><a href="#TOC">debounce</a></h4>
 <p><code>_.debounce function, wait</code></p>
 <p>Creates and returns a new debounced version of the passed function that will postpone its execution until after <strong>wait</strong> milliseconds have elapsed since the last time it was invoked. Useful for implementing behavior that should only happen after the input has stopped arriving. For example: rendering a preview of a Markdown comment, recalculating a layout after the window has stopped being resized, and so on.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">calculateLayout <span class="kw">=</span> <span class="fu">-&gt;</span> show <span class="st">&quot;It's quiet now&quot;</span><br />lazyLayout <span class="kw">=</span> _<span class="kw">.</span>debounce calculateLayout<span class="kw">,</span> <span class="dv">100</span><br />lazyLayout<span class="kw">()</span><br /><span class="co"># $(window).resize lazyLayout</span></code></pre>
-<h4 id="once">once</h4>
+<h4 id="once"><a href="#TOC">once</a></h4>
 <p><code>_.once function</code></p>
 <p>Creates a version of the function that can only be called one time. Repeated calls to the modified function will have no effect, returning the value from the original call. Useful for initialization functions, instead of having to set a boolean flag and then check it later.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">createApplication <span class="kw">=</span> <span class="fu">-&gt;</span> show <span class="st">&quot;Created&quot;</span><br />initialize <span class="kw">=</span> _<span class="kw">.</span>once createApplication<br />initialize<span class="kw">()</span><br />initialize<span class="kw">()</span><br /><span class="co"># Application is only created once.</span></code></pre>
-<h4 id="after">after</h4>
+<h4 id="after"><a href="#TOC">after</a></h4>
 <p><code>_.after count, function</code></p>
 <p>Creates a version of the function that will only be run after first being called <strong>count</strong> times. Useful for grouping asynchronous responses, where you want to be sure that all the async calls have finished, before proceeding.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">skipFirst <span class="kw">=</span> _<span class="kw">.</span>after <span class="dv">3</span><span class="kw">,</span> show<br /><span class="kw">for</span> i <span class="kw">in</span> <span class="kw">[</span><span class="dv">0</span><span class="kw">..</span><span class="dv">3</span><span class="kw">]</span><br />  skipFirst i</code></pre>
 <pre class="sourceCode"><code class="sourceCode COFFEESCRIPT"><span class="co"># renderNotes is run once, after all notes have saved.</span><br />renderNotes <span class="kw">=</span> _<span class="kw">.</span>after notes<span class="kw">.</span>length<span class="kw">,</span> render<br />_<span class="kw">.</span>each notes<span class="kw">,</span> <span class="fu">(note) -&gt;</span><br />  note<span class="kw">.</span>asyncSave <span class="kw">{</span>success<span class="kw">:</span> renderNotes<span class="kw">}</span> </code></pre>
-<h4 id="wrap">wrap</h4>
+<h4 id="wrap"><a href="#TOC">wrap</a></h4>
 <p><code>_.wrap function, wrapper</code></p>
 <p>Wraps the first <strong>function</strong> inside of the <strong>wrapper</strong> function, passing it as the first argument. This allows the <strong>wrapper</strong> to execute code before and after the <strong>function</strong> runs, adjust the arguments, and execute it conditionally.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">hello <span class="kw">=</span> <span class="fu">(name) -&gt;</span> <span class="st">&quot;hello: &quot;</span> <span class="kw">+</span> name<br />hello <span class="kw">=</span> _<span class="kw">.</span>wrap hello<span class="kw">,</span> <span class="fu">(func) -&gt;</span><br />  <span class="st">&quot;before, </span><span class="ch">#{</span>func &quot;moe&quot;<span class="ch">}</span><span class="st">, after&quot;</span><br />show hello<span class="kw">()</span></code></pre>
-<h4 id="compose">compose</h4>
+<h4 id="compose"><a href="#TOC">compose</a></h4>
 <p><code>_.compose *functions</code></p>
 <p>Returns the composition of a list of <strong>functions</strong>, where each function consumes the return value of the function that follows. In math terms, composing the functions <em>f()</em>, <em>g()</em>, and <em>h()</em> produces <em>f(g(h()))</em>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">greet    <span class="kw">=</span> <span class="fu">(name) -&gt;</span> <span class="st">&quot;hi: &quot;</span> <span class="kw">+</span> name<br />exclaim  <span class="kw">=</span> <span class="fu">(statement) -&gt;</span> statement <span class="kw">+</span> <span class="st">&quot;!&quot;</span><br />welcome <span class="kw">=</span> _<span class="kw">.</span>compose exclaim<span class="kw">,</span> greet<br />show welcome <span class="st">'moe'</span></code></pre>
-<h2 id="object-functions">Object Functions</h2>
-<h4 id="keys">keys</h4>
+<h2 id="object-functions"><a href="#TOC">Object Functions</a></h2>
+<h4 id="keys"><a href="#TOC">keys</a></h4>
 <p><code>_.keys object</code></p>
 <p>Retrieve all the names of the <strong>object</strong>’s properties.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>keys <span class="kw">{</span>one <span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> two <span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> three <span class="kw">:</span> <span class="dv">3</span><span class="kw">}</span></code></pre>
-<h4 id="values">values</h4>
+<h4 id="values"><a href="#TOC">values</a></h4>
 <p><code>_.values object</code></p>
 <p>Return all of the values of the <strong>object</strong>’s properties.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>values <span class="kw">{</span>one <span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> two <span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> three <span class="kw">:</span> <span class="dv">3</span><span class="kw">}</span></code></pre>
-<h4 id="functions">functions</h4>
+<h4 id="functions"><a href="#TOC">functions</a></h4>
 <p><code>_.functions object</code> Alias: <strong>methods</strong></p>
 <p>Returns a sorted list of the names of every method in an object — that is to say, the name of every function property of the object.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>functions _</code></pre>
-<h4 id="extend">extend</h4>
+<h4 id="extend"><a href="#TOC">extend</a></h4>
 <p><code>_.extend destination, *sources</code></p>
 <p>Copy all of the properties in the <strong>source</strong> objects over to the <strong>destination</strong> object. It’s in-order, so the last source will override properties of the same name in previous arguments.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>extend <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">},</span> <span class="kw">{</span>age <span class="kw">:</span> <span class="dv">50</span><span class="kw">}</span></code></pre>
-<h4 id="defaults">defaults</h4>
+<h4 id="defaults"><a href="#TOC">defaults</a></h4>
 <p><code>_.defaults object, *defaults</code></p>
 <p>Fill in missing properties in <strong>object</strong> with default values from the <strong>defaults</strong> objects. As soon as the property is filled, further defaults will have no effect.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">iceCream <span class="kw">=</span> <span class="kw">{</span>flavor <span class="kw">:</span> <span class="st">&quot;chocolate&quot;</span><span class="kw">}</span><br />view _<span class="kw">.</span>defaults iceCream<span class="kw">,</span> <span class="kw">{</span>flavor <span class="kw">:</span> <span class="st">&quot;vanilla&quot;</span><span class="kw">,</span> sprinkles <span class="kw">:</span> <span class="st">&quot;lots&quot;</span><span class="kw">}</span></code></pre>
-<h4 id="clone">clone</h4>
+<h4 id="clone"><a href="#TOC">clone</a></h4>
 <p><code>_.clone object</code></p>
 <p>Create a shallow-copied clone of the <strong>object</strong>. Any nested objects or arrays will be copied by reference, not duplicated.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">view _<span class="kw">.</span>clone <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">}</span></code></pre>
-<h4 id="tap">tap</h4>
+<h4 id="tap"><a href="#TOC">tap</a></h4>
 <p><code>_.tap object, interceptor</code></p>
 <p>Invokes <strong>interceptor</strong> with the <strong>object</strong>, and then returns <strong>object</strong>. The primary purpose of this method is to “tap into” a method chain, in order to perform operations on intermediate results within the chain.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>chain<span class="kw">([</span><span class="dv">1</span><span class="kw">,</span><span class="dv">2</span><span class="kw">,</span><span class="dv">3</span><span class="kw">,</span><span class="dv">200</span><span class="kw">])</span><br />  <span class="kw">.</span>filter<span class="kw">(</span><span class="fu">(num) -&gt;</span> num <span class="kw">%</span> <span class="dv">2</span> <span class="kw">is</span> <span class="dv">0</span><span class="kw">)</span><br />  <span class="kw">.</span>tap<span class="kw">(</span>show<span class="kw">)</span><br />  <span class="kw">.</span>map<span class="kw">(</span><span class="fu">(num) -&gt;</span> num <span class="kw">*</span> num<span class="kw">)</span><br />  <span class="kw">.</span>value<span class="kw">()</span></code></pre>
-<h4 id="isequal">isEqual</h4>
+<h4 id="has"><a href="#TOC">has</a></h4>
+<p><code>_.has object, key</code></p>
+<p>Does the object contain the given key? Identical to <code>object.hasOwnProperty key</code>, but uses a safe reference to the <code>hasOwnProperty</code> function, in case it’s been <a href="http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/">overridden accidentally</a>.</p>
+<pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>has a<span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> b<span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> c<span class="kw">:</span> <span class="dv">3</span><span class="kw">,</span> <span class="st">'b'</span></code></pre>
+<h4 id="isequal"><a href="#TOC">isEqual</a></h4>
 <p><code>_.isEqual object, other</code></p>
 <p>Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">moe   <span class="kw">=</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> luckyNumbers <span class="kw">:</span> <span class="kw">[</span><span class="dv">13</span><span class="kw">,</span> <span class="dv">27</span><span class="kw">,</span> <span class="dv">34</span><span class="kw">]}</span><br />clone <span class="kw">=</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> luckyNumbers <span class="kw">:</span> <span class="kw">[</span><span class="dv">13</span><span class="kw">,</span> <span class="dv">27</span><span class="kw">,</span> <span class="dv">34</span><span class="kw">]}</span><br />moe <span class="kw">is</span> clone<br />show _<span class="kw">.</span>isEqual<span class="kw">(</span>moe<span class="kw">,</span> clone<span class="kw">)</span></code></pre>
-<h4 id="isempty">isEmpty</h4>
+<h4 id="isempty"><a href="#TOC">isEmpty</a></h4>
 <p><code>_.isEmpty object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> contains no values.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isEmpty<span class="kw">([</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">])</span><br />show _<span class="kw">.</span>isEmpty<span class="kw">({})</span></code></pre>
-<h4 id="iselement">isElement</h4>
+<h4 id="iselement"><a href="#TOC">isElement</a></h4>
 <p><code>_.isElement object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a DOM element.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isElement document<span class="kw">?.</span>getElementById <span class="st">'page'</span></code></pre>
-<h4 id="isarray">isArray</h4>
+<h4 id="isarray"><a href="#TOC">isArray</a></h4>
 <p><code>_.isArray object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is an Array.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show <span class="kw">(</span><span class="fu">-&gt;</span> _<span class="kw">.</span>isArray arguments<span class="kw">)()</span><br />show _<span class="kw">.</span>isArray <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span><span class="dv">2</span><span class="kw">,</span><span class="dv">3</span><span class="kw">]</span></code></pre>
-<h4 id="isarguments">isArguments</h4>
+<h4 id="isarguments"><a href="#TOC">isArguments</a></h4>
 <p><code>_.isArguments object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is an Arguments object.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show <span class="kw">(</span><span class="fu">-&gt;</span> _<span class="kw">.</span>isArguments arguments<span class="kw">)(</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">)</span><br />show _<span class="kw">.</span>isArguments <span class="kw">[</span><span class="dv">1</span><span class="kw">,</span><span class="dv">2</span><span class="kw">,</span><span class="dv">3</span><span class="kw">]</span></code></pre>
-<h4 id="isfunction">isFunction</h4>
+<h4 id="isfunction"><a href="#TOC">isFunction</a></h4>
 <p><code>_.isFunction object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a Function.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isFunction <span class="ot">console</span><span class="kw">?.</span>debug</code></pre>
-<h4 id="isstring">isString</h4>
+<h4 id="isstring"><a href="#TOC">isString</a></h4>
 <p><code>_.isString object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a String.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isString <span class="st">&quot;moe&quot;</span></code></pre>
-<h4 id="isnumber">isNumber</h4>
+<h4 id="isnumber"><a href="#TOC">isNumber</a></h4>
 <p><code>_.isNumber object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a Number (including <code>NaN</code>).</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isNumber <span class="fl">8.4</span> <span class="kw">*</span> <span class="dv">5</span></code></pre>
-<h4 id="isboolean">isBoolean</h4>
+<h4 id="isboolean"><a href="#TOC">isBoolean</a></h4>
 <p><code>_.isBoolean object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is either <em>true</em> or <em>false</em>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isBoolean <span class="ot">null</span></code></pre>
-<h4 id="isdate">isDate</h4>
+<h4 id="isdate"><a href="#TOC">isDate</a></h4>
 <p><code>_.isDate object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a Date.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isDate <span class="kw">new</span> <span class="dt">Date</span><span class="kw">()</span></code></pre>
-<h4 id="isregexp">isRegExp</h4>
+<h4 id="isregexp"><a href="#TOC">isRegExp</a></h4>
 <p><code>_.isRegExp object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is a RegExp.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isRegExp <span class="st">/moe/</span></code></pre>
-<h4 id="isnan">isNaN</h4>
+<h4 id="isnan"><a href="#TOC">isNaN</a></h4>
 <p><code>_.isNaN object</code></p>
 <p>Returns <em>true</em> if <strong>object</strong> is <em>NaN</em>.</p>
 <p>Note: this is not the same as the native <strong>isNaN</strong> function, which will also return true if the variable is <em>undefined</em>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span><span class="ot">isNaN</span> <span class="ot">NaN</span><br />show <span class="ot">isNaN</span> <span class="ot">undefined</span><br />show _<span class="kw">.</span><span class="ot">isNaN</span> <span class="ot">undefined</span></code></pre>
-<h4 id="isnull">isNull</h4>
+<h4 id="isnull"><a href="#TOC">isNull</a></h4>
 <p><code>_.isNull object</code></p>
 <p>Returns <em>true</em> if the value of <strong>object</strong> is <em>null</em>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isNull <span class="ot">null</span><br />show _<span class="kw">.</span>isNull <span class="ot">undefined</span></code></pre>
-<h4 id="isundefined">isUndefined</h4>
+<h4 id="isundefined"><a href="#TOC">isUndefined</a></h4>
 <p><code>_.isUndefined variable</code></p>
 <p>Returns <em>true</em> if <strong>variable</strong> is <em>undefined</em>.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>isUndefined window<span class="kw">?.</span>missingVariable</code></pre>
-<h2 id="utility-functions">Utility Functions</h2>
-<h4 id="noconflict">noConflict</h4>
+<h2 id="utility-functions"><a href="#TOC">Utility Functions</a></h2>
+<h4 id="noconflict"><a href="#TOC">noConflict</a></h4>
 <p><code>_.noConflict</code></p>
 <p>Give control of the “_” variable back to its previous owner. Returns a reference to the <strong>Underscore</strong> object.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="co"># The examples will stop working if this is enabled</span><br /><span class="co"># underscore = _.noConflict()</span></code></pre>
-<h4 id="identity">identity</h4>
+<h4 id="identity"><a href="#TOC">identity</a></h4>
 <p><code>_.identity value</code></p>
 <p>Returns the same value that is used as the argument. In math: <code>f x = x</code></p>
 <p>This function looks useless, but is used throughout Underscore as a default iterator.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">moe <span class="kw">=</span> <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">}</span><br />show moe <span class="kw">is</span> _<span class="kw">.</span>identity<span class="kw">(</span>moe<span class="kw">)</span></code></pre>
-<h4 id="times">times</h4>
+<h4 id="times"><a href="#TOC">times</a></h4>
 <p><code>_.times n, iterator</code></p>
 <p>Invokes the given iterator function <strong>n</strong> times.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false"><span class="kw">(</span>genie <span class="kw">=</span> <span class="kw">{}).</span>grantWish <span class="kw">=</span> <span class="fu">-&gt;</span> show <span class="st">'Served'</span><br />_<span class="kw">(</span><span class="dv">3</span><span class="kw">).</span>times <span class="fu">-&gt;</span> genie<span class="kw">.</span>grantWish<span class="kw">()</span></code></pre>
-<h4 id="mixin">mixin</h4>
+<h4 id="mixin"><a href="#TOC">mixin</a></h4>
 <p><code>_.mixin object</code></p>
 <p>Allows you to extend Underscore with your own utility functions. Pass a hash of <code>{name: function}</code> definitions to have your functions added to the Underscore object, as well as the OOP wrapper.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">_<span class="kw">.</span>mixin<br />  capitalize <span class="kw">:</span> <span class="fu">(string) -&gt;</span><br />    string<span class="kw">.</span>charAt<span class="kw">(</span><span class="dv">0</span><span class="kw">).</span>toUpperCase<span class="kw">()</span> <span class="kw">+</span><br />    string<span class="kw">.</span>substring<span class="kw">(</span><span class="dv">1</span><span class="kw">).</span>toLowerCase<span class="kw">()</span><br />show _<span class="kw">(</span><span class="st">&quot;fabio&quot;</span><span class="kw">).</span>capitalize<span class="kw">()</span></code></pre>
-<h4 id="uniqueid">uniqueId</h4>
+<h4 id="uniqueid"><a href="#TOC">uniqueId</a></h4>
 <p><code>_.uniqueId [prefix]</code></p>
 <p>Generate a globally-unique id for client-side models or DOM elements that need one. If <strong>prefix</strong> is passed, the id will be appended to it.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>uniqueId <span class="st">'contact_'</span><br />show _<span class="kw">.</span>uniqueId <span class="st">'contact_'</span></code></pre>
-<h4 id="escape">escape</h4>
+<h4 id="escape"><a href="#TOC">escape</a></h4>
 <p><code>_.escape string</code></p>
 <p>Escapes a string for insertion into HTML, replacing <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&quot;</code>, <code>'</code>, and <code>/</code> characters.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span><span class="ot">escape</span> <span class="st">'Curly, Larry &amp; Moe'</span></code></pre>
-<h4 id="template">template</h4>
+<h4 id="template"><a href="#TOC">template</a></h4>
 <p><code>_.template templateString, [context]</code></p>
 <p>Compiles JavaScript templates into functions that can be evaluated for rendering. Useful for rendering complicated bits of HTML from JSON data sources. Template functions can both interpolate variables, using <code>&lt;%= ... %&gt;</code>, as well as execute arbitrary JavaScript code, with <code>&lt;% ... %&gt;</code>. If you wish to interpolate a value, and have it be HTML-escaped, use <code>&lt;%- ... %&gt;</code> When you evaluate a template function, pass in a <strong>context</strong> object that has properties corresponding to the template’s free variables. If you’re writing a one-off, you can pass the <strong>context</strong> object as the second parameter to <strong>template</strong> in order to render immediately instead of returning a template function.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">compiled <span class="kw">=</span> _<span class="kw">.</span>template <span class="st">&quot;hello: &lt;%= name %&gt;&quot;</span><br />show compiled name <span class="kw">:</span> <span class="st">'moe'</span></code></pre>
@@ -715,17 +815,17 @@ No ContentEditable &rarr; CoffeeScript sections can not be changed.  </div>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">compiled <span class="kw">=</span> _<span class="kw">.</span>template <span class="st">&quot;&lt;% print('Hello ' + epithet) %&gt;&quot;</span><br />show compiled <span class="kw">{</span>epithet<span class="kw">:</span> <span class="st">&quot;stooge&quot;</span><span class="kw">}</span></code></pre>
 <p>If ERB-style delimiters aren’t your cup of tea, you can change Underscore’s template settings to use different symbols to set off interpolated code. Define an <strong>interpolate</strong> regex to match expressions that should be interpolated verbatim, an <strong>escape</strong> regex to match expressions that should be inserted after being HTML escaped, and an <strong>evaluate</strong> regex to match expressions that should be evaluated without insertion into the resulting string. You may define or omit any combination of the three. For example, to perform <a href="http://github.com/janl/mustache.js#readme">Mustache.js</a> style templating:</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">saveSettings <span class="kw">=</span> _<span class="kw">.</span>templateSettings<br />_<span class="kw">.</span>templateSettings <span class="kw">=</span> interpolate <span class="kw">:</span> <span class="st">/\{\{(.+?)\}\}/g</span><br /><br />template <span class="kw">=</span> _<span class="kw">.</span>template <span class="st">&quot;Hello {{ name }}!&quot;</span><br />show template name <span class="kw">:</span> <span class="st">&quot;Mustache&quot;</span><br /><br />_<span class="kw">.</span>templateSettings <span class="kw">=</span> saveSettings</code></pre>
-<h2 id="chaining">Chaining</h2>
+<h2 id="chaining"><a href="#TOC">Chaining</a></h2>
 <p>You can use Underscore in either an object-oriented or a functional style, depending on your preference. The following two lines of code are identical ways to double a list of numbers.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">.</span>map <span class="kw">[</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span> <span class="kw">],</span> <span class="fu">(n) -&gt;</span> n <span class="kw">*</span> <span class="dv">2</span><br />show _<span class="kw">([</span> <span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span> <span class="kw">]).</span>map <span class="fu">(n) -&gt;</span> n <span class="kw">*</span> <span class="dv">2</span></code></pre>
 <p>Using the object-oriented style allows you to chain together methods. Calling <code>chain</code> on a wrapped object will cause all future method calls to return wrapped objects as well. When you’ve finished the computation, use <code>value</code> to retrieve the final value. Here’s an example of chaining together a <strong>map/flatten/reduce</strong>, in order to get the word count of every word in a song.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">lyrics <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>line <span class="kw">:</span> <span class="dv">1</span><span class="kw">,</span> words <span class="kw">:</span> <span class="st">&quot;I'm a lumberjack and I'm okay&quot;</span><span class="kw">}</span><br />  <span class="kw">{</span>line <span class="kw">:</span> <span class="dv">2</span><span class="kw">,</span> words <span class="kw">:</span> <span class="st">&quot;I sleep all night and I work all day&quot;</span><span class="kw">}</span><br />  <span class="kw">{</span>line <span class="kw">:</span> <span class="dv">3</span><span class="kw">,</span> words <span class="kw">:</span> <span class="st">&quot;He's a lumberjack and he's okay&quot;</span><span class="kw">}</span><br />  <span class="kw">{</span>line <span class="kw">:</span> <span class="dv">4</span><span class="kw">,</span> words <span class="kw">:</span> <span class="st">&quot;He sleeps all night and he works all day&quot;</span><span class="kw">}</span><br /><span class="kw">]</span><br />view _<span class="kw">.</span>chain<span class="kw">(</span>lyrics<span class="kw">)</span><br />  <span class="kw">.</span>map<span class="kw">(</span><span class="fu">(line) -&gt;</span> line<span class="kw">.</span>words<span class="kw">.</span>split <span class="st">&quot; &quot;</span><span class="kw">)</span><br />  <span class="kw">.</span>flatten<span class="kw">()</span><br />  <span class="kw">.</span>reduce<span class="kw">((</span><span class="fu">(counts, word) -&gt;</span><br />    counts<span class="kw">[</span>word<span class="kw">]</span> <span class="kw">=</span> <span class="kw">(</span>counts<span class="kw">[</span>word<span class="kw">]</span> <span class="kw">or</span> <span class="dv">0</span><span class="kw">)</span> <span class="kw">+</span> <span class="dv">1</span><br />    counts<span class="kw">),</span> <span class="kw">{}).</span>value<span class="kw">()</span></code></pre>
 <p>In addition, the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/prototype">Array prototype’s methods</a> are proxied through the chained Underscore object, so you can slip a <code>reverse</code> or a <code>push</code> into your chain, and continue to modify the array.</p>
-<h4 id="chain">chain</h4>
+<h4 id="chain"><a href="#TOC">chain</a></h4>
 <p><code>_.chain(obj)</code></p>
 <p>Returns a wrapped object. Calling methods on this object will continue to return wrapped objects until <code>value</code> is used.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">stooges <span class="kw">=</span> <span class="kw">[</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'curly'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">25</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'moe'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">21</span><span class="kw">}</span><br />  <span class="kw">{</span>name <span class="kw">:</span> <span class="st">'larry'</span><span class="kw">,</span> age <span class="kw">:</span> <span class="dv">23</span><span class="kw">}</span><br /><span class="kw">]</span><br />youngest <span class="kw">=</span> _<span class="kw">.</span>chain<span class="kw">(</span>stooges<span class="kw">)</span><br />  <span class="kw">.</span>sortBy<span class="kw">(</span><span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>age<span class="kw">)</span><br />  <span class="kw">.</span>map<span class="kw">(</span><span class="fu">(stooge) -&gt;</span> stooge<span class="kw">.</span>name <span class="kw">+</span> <span class="st">' is '</span> <span class="kw">+</span> stooge<span class="kw">.</span>age<span class="kw">)</span><br />  <span class="kw">.</span>first<span class="kw">()</span><br />  <span class="kw">.</span>value<span class="kw">()</span><br />show youngest</code></pre>
-<h4 id="value">value</h4>
+<h4 id="value"><a href="#TOC">value</a></h4>
 <p><code>_(obj).value</code></p>
 <p>Extracts the value of a wrapped object.</p>
 <pre class="sourceCode"><code class="sourceCode coffeescript" contenteditable="true" spellcheck="false">show _<span class="kw">([</span><span class="dv">1</span><span class="kw">,</span> <span class="dv">2</span><span class="kw">,</span> <span class="dv">3</span><span class="kw">]).</span>value<span class="kw">()</span></code></pre>
@@ -742,8 +842,8 @@ Commands used to extract code, execute it, and to format this document:
 
 Edit ,x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-p
 Edit ,>ssam -n 'x/^~~+[   ]*{\.[cC]offee[sS]cript.*}$/+,/^~~+$/-' |cat embed-standalone.coffee - |tee underscore.coffee | coffee -cs >underscore.js; coffee underscore.coffee >underscore.output; plumb underscore.output
-Edit ,>pandoc -f markdown -t html -S -5 --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Example<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >underscore.html; open underscore.html; plumb underscore.html
-Edit ,>markdown2pdf --listings --xetex '--template=pandoc-template.tex' -o underscore.pdf; open underscore.pdf
+Edit ,>pandoc -f markdown -t html -S -5 --toc --mathml --css pandoc-template.css --template pandoc-template.html -B embed-readability.html -B embed-literate.html | ssam 's/(<code class="sourceCode coffeescript" contenteditable="true" spellcheck="false")/\1 contenteditable=\"true\" spellcheck=\"false\"/g' | ssam 's/(<pre class="sourceCode")><(code class="sourceCode CoffeeScript")/\1 onclick=\"reveal(this)\" ><b><u>Example<\/u><\/b><br\/><\2 contenteditable=\"true\" spellcheck=\"false\" style=\"display:none\" \"/g' | ssam 's/<img src=\"[^\"]+\" alt=\"[^\"]+\" \/>/<canvas id=\"drawCanvas\" width=\"0\" height=\"0\"><\/canvas>/' >underscore.html; open underscore.html; plumb underscore.html
+Edit ,>markdown2pdf --toc --listings --xetex '--template=pandoc-template.tex' -o underscore.pdf; open underscore.pdf
 
 To execute these commands; middle-button select them in the acme environment.
 acme and ssam are part of the plan9 OS and can run on *nix variants via plan9port.

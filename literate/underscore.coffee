@@ -9,7 +9,10 @@ else
 
 view = (obj) ->
   show if typeof obj is 'object'
-    """{#{"\n  #{k}: #{v}" for own k,v of obj}\n}"""
+    try
+      JSON.stringify obj
+    catch error
+      """{#{"\n  #{k}: #{v}" for own k,v of obj}\n}"""
   else obj
 
 tryIt = ->
@@ -44,7 +47,7 @@ show odds = _.reject [1..6], (num) -> num % 2 is 0
 show _.all [true, 1, null, 'yes'], _.identity
 show _.any [null, 0, 'yes', false]
 show _.include [1, 2, 3], 3
-show _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
+view _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
 stooges = [
   {name : 'moe', age : 40}
   {name : 'larry', age : 50}
@@ -67,24 +70,25 @@ show _.shuffle [1..6]
 (-> show _.toArray(arguments).slice(0))(1, 2, 3)
 show _.size {one : 1, two : 2, three : 3}
 show _.first [5, 4, 3, 2, 1]
-show _.initial [5, 4, 3, 2, 1]
+view _.initial [5, 4, 3, 2, 1]
 show _.last [5, 4, 3, 2, 1]
-show _.rest [5, 4, 3, 2, 1]
-show _.compact [0, 1, false, 2, '', 3]
-show _.flatten [1, [2], [3, [[[4]]]]]
-show _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
-show _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
-show _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
-show _.difference [1, 2, 3, 4, 5], [5, 2, 10]
-show _.uniq [1, 2, 1, 3, 1, 4]
-show _.zip ['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]
+view _.rest [5, 4, 3, 2, 1]
+view _.compact [0, 1, false, 2, '', 3]
+view _.flatten [1, [2], [3, [[4]]]]
+view _.flatten [1, [2], [3, [[4]]]], true
+view _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
+view _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
+view _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
+view _.difference [1, 2, 3, 4, 5], [5, 2, 10]
+view _.uniq [1, 2, 1, 3, 1, 4]
+view _.zip ['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]
 show _.indexOf [1, 2, 3], 2
 show _.lastIndexOf [1, 2, 3, 1, 2, 3], 2
-show _.range 10
-show _.range 1, 11
-show _.range 0, 30, 5
-show _.range 0, -10, -1
-show _.range 0
+view _.range 10
+view _.range 1, 11
+view _.range 0, 30, 5
+view _.range 0, -10, -1
+view _.range 0
 func = (greeting) -> greeting + ': ' + this.name
 func = _.bind func, {name : 'moe'}, 'hi'
 show func()
@@ -141,6 +145,7 @@ show _.chain([1,2,3,200])
   .tap(show)
   .map((num) -> num * num)
   .value()
+show _.has a: 1, b: 2, c: 3, 'b'
 moe   = {name : 'moe', luckyNumbers : [13, 27, 34]}
 clone = {name : 'moe', luckyNumbers : [13, 27, 34]}
 moe is clone
