@@ -129,3 +129,16 @@ section  {
     padding-right: 5px;
 }
 */
+nav#TOC {
+    column-count:3;
+    column-gap: 1em;
+    column-rule: 1px solid lightgrey;
+
+    -webkit-column-count:3;
+    -webkit-column-gap: 1em;
+    -webkit-column-rule: 1px solid lightgrey;
+
+    -moz-column-count:3;
+    -moz-column-gap: 1em;
+    -moz-column-rule: 1px solid lightgrey;
+}

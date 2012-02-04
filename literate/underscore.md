@@ -2,7 +2,7 @@
 % 
 % ☕
 
-> This reference is an adaptation of the documentation at
+This reference is an adaptation of the documentation at
 [Underscore.js](http://documentcloud.github.com/underscore).
 It is _interactive_ in its HTML~5~ form. Edit a CoffeeScript segment to try it.
 You can see the generated JavaScript when you write a CoffeeScript
@@ -63,9 +63,9 @@ show "Underscore version #{_.VERSION} is used in this documentation"
 ~~~~
 
 
-## Collection Functions (Arrays or Objects)
+## Collection Functions
 
-#### each
+### each
 
 `_.each list, iterator, [context]` Alias: **forEach**
 
@@ -84,7 +84,7 @@ _.each [ 1, 2, 3 ], (num) -> show num
 _.each {one : 1, two : 2, three : 3}, (num, key) -> show num
 ~~~~
 
-#### map
+### map
 
 `_.map list, iterator, [context]` Alias: **collect**
 
@@ -106,7 +106,7 @@ show _.map
   num * 3
 ~~~~
 
-#### reduce
+### reduce
 
 `_.reduce list, iterator, memo, [context]` Aliases: **inject,
 foldl**
@@ -120,7 +120,7 @@ the reduction, and each successive step of it should be returned by
 show sum = _.reduce [1, 2, 3], ((memo, num) -> memo + num), 0
 ~~~~
 
-#### reduceRight
+### reduceRight
 
 `_.reduceRight list, iterator, memo, [context]` Alias: **foldr**
 
@@ -137,7 +137,7 @@ flat = _.reduceRight list, (a, b) ->
 show flat
 ~~~~
 
-#### find
+### find
 
 `_.find list, iterator, [context]` Alias: **detect**
 
@@ -149,7 +149,7 @@ finds an acceptable element, and doesn't traverse the entire list.
 show even = _.find [1..6], (num) -> num % 2 is 0
 ~~~~
 
-#### filter 
+### filter 
 
 `_.filter list, iterator, [context]` Alias: **select**
 
@@ -161,7 +161,7 @@ values that pass a truth test (**iterator**). Delegates to the native
 show evens = _.filter [1..6], (num) -> num % 2 is 0
 ~~~~
 
-#### reject
+### reject
 
 `_.reject list, iterator, [context]` 
 
@@ -172,7 +172,7 @@ show evens = _.filter [1..6], (num) -> num % 2 is 0
 show odds = _.reject [1..6], (num) -> num % 2 is 0
 ~~~~
 
-#### all
+### all
 
 `_.all list, iterator, [context]` Alias: **every**
 
@@ -184,7 +184,7 @@ present.
 show _.all [true, 1, null, 'yes'], _.identity
 ~~~~
 
-#### any
+### any
 
 `_.any list, [iterator], [context]` Alias: **some**
 
@@ -197,7 +197,7 @@ present.
 show _.any [null, 0, 'yes', false]
 ~~~~
 
-#### include
+### include
 
 `_.include list, value` Alias: **contains**
 
@@ -208,7 +208,7 @@ to test equality. Uses **indexOf** internally, if **list** is an Array.
 show _.include [1, 2, 3], 3
 ~~~~
 
-#### invoke
+### invoke
 
 `_.invoke list, methodName, [*arguments]` 
 
@@ -220,7 +220,7 @@ method invocation.
 view _.invoke [[5, 1, 7], [3, 2, 1]], 'sort'
 ~~~~
 
-#### pluck
+### pluck
 
 `_.pluck list, propertyName` 
 
@@ -236,7 +236,7 @@ stooges = [
 show _.pluck stooges, 'name'
 ~~~~
 
-#### max
+### max
 
 `_.max list, [iterator], [context]` 
 
@@ -253,7 +253,7 @@ stooges = [
 view _.max stooges, (stooge) -> stooge.age
 ~~~~
 
-#### min
+### min
 
 `_.min list, [iterator], [context]` 
 
@@ -266,7 +266,7 @@ numbers = [10, 5, 100, 2, 1000]
 show _.min numbers
 ~~~~
 
-#### sortBy
+### sortBy
 
 `_.sortBy list, iterator, [context]` 
 
@@ -276,7 +276,7 @@ show _.min numbers
 show _.sortBy [1..6], (num) -> Math.sin num
 ~~~~
 
-#### groupBy
+### groupBy
 
 `_.groupBy list, iterator` 
 
@@ -293,7 +293,7 @@ view _.groupBy [1.3, 2.1, 2.4], (num) -> Math.floor num
 view _.groupBy ['one', 'two', 'three'], 'length'
 ~~~~
 
-#### sortedIndex
+### sortedIndex
 
 `_.sortedIndex list, value, [iterator]` 
 
@@ -306,7 +306,7 @@ to compute the sort ranking of each value.
 show _.sortedIndex [10, 20, 30, 40, 50], 35
 ~~~~
 
-#### shuffle
+### shuffle
 
 `_.shuffle list` 
 
@@ -318,7 +318,7 @@ shuffle](http://en.wikipedia.org/wiki/Fisher-Yates_shuffle).
 show _.shuffle [1..6]
 ~~~~
 
-#### toArray
+### toArray
 
 `_.toArray list` 
 
@@ -329,7 +329,7 @@ Array. Useful for transmuting the **arguments** object.
 (-> show _.toArray(arguments).slice(0))(1, 2, 3)
 ~~~~
 
-#### size
+### size
 
 `_.size list` 
 
@@ -344,7 +344,7 @@ show _.size {one : 1, two : 2, three : 3}
 
 *Note: All array functions will also work on the **arguments** object.*
 
-#### first
+### first
 
 `_.first array, [n]` Alias: **head**
 
@@ -355,7 +355,7 @@ the first **n** elements of the array.
 show _.first [5, 4, 3, 2, 1]
 ~~~~
 
-#### initial
+### initial
 
 `_.initial array, [n]` 
 
@@ -367,7 +367,7 @@ from the result.
 view _.initial [5, 4, 3, 2, 1]
 ~~~~
 
-#### last
+### last
 
 `_.last array, [n]` 
 
@@ -378,7 +378,7 @@ last **n** elements of the array.
 show _.last [5, 4, 3, 2, 1]
 ~~~~
 
-#### rest
+### rest
 
 `_.rest array, [index]` Alias: **tail**
 
@@ -389,7 +389,7 @@ return the values of the array from that index onward.
 view _.rest [5, 4, 3, 2, 1]
 ~~~~
 
-#### compact
+### compact
 
 `_.compact array` 
 
@@ -401,7 +401,7 @@ falsy.
 view _.compact [0, 1, false, 2, '', 3]
 ~~~~
 
-#### flatten
+### flatten
 
 `_.flatten array, [shallow]` 
 
@@ -412,7 +412,7 @@ view _.flatten [1, [2], [3, [[4]]]]
 view _.flatten [1, [2], [3, [[4]]]], true
 ~~~~
 
-#### without
+### without
 
 `_.without array, [*values]` 
 
@@ -423,7 +423,7 @@ removed. *===* is used for the equality test.
 view _.without [1, 2, 1, 0, 3, 1, 4], 0, 1
 ~~~~
 
-#### union
+### union
 
 `_.union *arrays` 
 
@@ -434,7 +434,7 @@ items, in order, that are present in one or more of the **arrays**.
 view _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
 ~~~~
 
-#### intersection
+### intersection
 
 `_.intersection *arrays` 
 
@@ -446,7 +446,7 @@ view _.union [1, 2, 3], [101, 2, 1, 10], [2, 1]
 view _.intersection [1, 2, 3], [101, 2, 1, 10], [2, 1]
 ~~~~
 
-#### difference
+### difference
 
 `_.difference array, *others` 
 
@@ -457,7 +457,7 @@ not present in the **other** arrays.
 view _.difference [1, 2, 3, 4, 5], [5, 2, 10]
 ~~~~
 
-#### uniq
+### uniq
 
 `_.uniq array, [isSorted], [iterator]` Alias: **unique**
 
@@ -471,7 +471,7 @@ want to compute unique items based on a transformation, pass an
 view _.uniq [1, 2, 1, 3, 1, 4]
 ~~~~
 
-#### zip
+### zip
 
 `_.zip *arrays` 
 
@@ -485,7 +485,7 @@ in a similar fashion.
 view _.zip ['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]
 ~~~~
 
-#### indexOf
+### indexOf
 
 `_.indexOf array, value, [isSorted]` 
 
@@ -499,7 +499,7 @@ array, and you know that the array is already sorted, pass `true` for
 show _.indexOf [1, 2, 3], 2
 ~~~~
 
-#### lastIndexOf
+### lastIndexOf
 
 `_.lastIndexOf array, value` 
 
@@ -511,7 +511,7 @@ function if possible.
 show _.lastIndexOf [1, 2, 3, 1, 2, 3], 2
 ~~~~
 
-#### range
+### range
 
 `_.range [start], stop, [step]` 
 
@@ -528,9 +528,9 @@ view _.range 0, -10, -1
 view _.range 0
 ~~~~
 
-## Function (uh, ahem) Functions
+## Function Functions
 
-#### bind
+### bind
 
 `_.bind function, object, [*arguments]` 
 
@@ -545,7 +545,7 @@ func = _.bind func, {name : 'moe'}, 'hi'
 show func()
 ~~~~
 
-#### bindAll
+### bindAll
 
 `_.bindAll object, [*methodNames]` 
 
@@ -566,7 +566,7 @@ _.bindAll buttonView
 jQuery('#underscore_button').bind 'click', buttonView.onClick
 ~~~~
 
-#### memoize
+### memoize
 
 `_.memoize function, [hashFunction]` 
 
@@ -591,7 +591,7 @@ show timeIt fibonacci, 1000
 show timeIt fibonacci, 1000
 ~~~~
 
-#### delay
+### delay
 
 `_.delay function, wait, [*arguments]` 
 
@@ -605,7 +605,7 @@ _.delay log, 1, 'logged later'
 # See the end of this document for the output
 ~~~~
 
-#### defer
+### defer
 
 `_.defer function` 
 
@@ -619,7 +619,7 @@ _.defer -> show 'deferred'
 # See the end of this document for the output
 ~~~~
 
-#### throttle
+### throttle
 
 `_.throttle function, wait` 
 
@@ -636,7 +636,7 @@ for i in [0..10]
 # $(window).scroll throttled
 ~~~~
 
-#### debounce
+### debounce
 
 `_.debounce function, wait` 
 
@@ -654,7 +654,7 @@ lazyLayout()
 # $(window).resize lazyLayout
 ~~~~
 
-#### once
+### once
 
 `_.once function` 
 
@@ -671,7 +671,7 @@ initialize()
 # Application is only created once.
 ~~~~
 
-#### after
+### after
 
 `_.after count, function` 
 
@@ -693,7 +693,7 @@ _.each notes, (note) ->
   note.asyncSave {success: renderNotes} 
 ~~~~
 
-#### wrap
+### wrap
 
 `_.wrap function, wrapper` 
 
@@ -709,7 +709,7 @@ hello = _.wrap hello, (func) ->
 show hello()
 ~~~~
 
-#### compose
+### compose
 
 `_.compose *functions` 
 
@@ -726,7 +726,7 @@ show welcome 'moe'
 
 ## Object Functions
 
-#### keys
+### keys
 
 `_.keys object` 
 
@@ -736,7 +736,7 @@ show welcome 'moe'
 show _.keys {one : 1, two : 2, three : 3}
 ~~~~
 
-#### values
+### values
 
 `_.values object` 
 
@@ -746,7 +746,7 @@ show _.keys {one : 1, two : 2, three : 3}
 show _.values {one : 1, two : 2, three : 3}
 ~~~~
 
-#### functions
+### functions
 
 `_.functions object` Alias: **methods**
 
@@ -757,7 +757,7 @@ is to say, the name of every function property of the object.
 show _.functions _
 ~~~~
 
-#### extend
+### extend
 
 `_.extend destination, *sources` 
 
@@ -769,7 +769,7 @@ properties of the same name in previous arguments.
 view _.extend {name : 'moe'}, {age : 50}
 ~~~~
 
-#### defaults
+### defaults
 
 `_.defaults object, *defaults` 
 
@@ -782,7 +782,7 @@ iceCream = {flavor : "chocolate"}
 view _.defaults iceCream, {flavor : "vanilla", sprinkles : "lots"}
 ~~~~
 
-#### clone
+### clone
 
 `_.clone object` 
 
@@ -793,7 +793,7 @@ arrays will be copied by reference, not duplicated.
 view _.clone {name : 'moe'}
 ~~~~
 
-#### tap
+### tap
 
 `_.tap object, interceptor` 
 
@@ -810,7 +810,7 @@ show _.chain([1,2,3,200])
   .value()
 ~~~~
 
-#### has
+### has
 `_.has object, key`
 
  Does the object contain the given key? Identical to `object.hasOwnProperty key`, but uses a safe reference to the `hasOwnProperty` function, in case it's been [overridden accidentally](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/).
@@ -819,7 +819,7 @@ show _.chain([1,2,3,200])
 show _.has a: 1, b: 2, c: 3, 'b'
 ~~~~
 
-#### isEqual
+### isEqual
 
 `_.isEqual object, other` 
 
@@ -833,7 +833,7 @@ moe is clone
 show _.isEqual(moe, clone)
 ~~~~
 
-#### isEmpty
+### isEmpty
 
 `_.isEmpty object` 
 
@@ -844,7 +844,7 @@ show _.isEmpty([1, 2, 3])
 show _.isEmpty({})
 ~~~~
 
-#### isElement
+### isElement
 
 `_.isElement object` 
 
@@ -854,7 +854,7 @@ show _.isEmpty({})
 show _.isElement document?.getElementById 'page'
 ~~~~
 
-#### isArray
+### isArray
 
 `_.isArray object` 
 
@@ -865,7 +865,7 @@ show (-> _.isArray arguments)()
 show _.isArray [1,2,3]
 ~~~~
 
-#### isArguments
+### isArguments
 
 `_.isArguments object` 
 
@@ -876,7 +876,7 @@ show (-> _.isArguments arguments)(1, 2, 3)
 show _.isArguments [1,2,3]
 ~~~~
 
-#### isFunction
+### isFunction
 
 `_.isFunction object` 
 
@@ -886,7 +886,7 @@ show _.isArguments [1,2,3]
 show _.isFunction console?.debug
 ~~~~
 
-#### isString
+### isString
 
 `_.isString object` 
 
@@ -896,7 +896,7 @@ show _.isFunction console?.debug
 show _.isString "moe"
 ~~~~
 
-#### isNumber
+### isNumber
 
 `_.isNumber object` 
 
@@ -906,7 +906,7 @@ show _.isString "moe"
 show _.isNumber 8.4 * 5
 ~~~~
 
-#### isBoolean
+### isBoolean
 
 `_.isBoolean object` 
 
@@ -916,7 +916,7 @@ show _.isNumber 8.4 * 5
 show _.isBoolean null
 ~~~~
 
-#### isDate
+### isDate
 
 `_.isDate object` 
 
@@ -926,7 +926,7 @@ show _.isBoolean null
 show _.isDate new Date()
 ~~~~
 
-#### isRegExp
+### isRegExp
 
 `_.isRegExp object` 
 
@@ -936,7 +936,7 @@ show _.isDate new Date()
 show _.isRegExp /moe/
 ~~~~
 
-#### isNaN
+### isNaN
 
 `_.isNaN object` 
 
@@ -951,7 +951,7 @@ show isNaN undefined
 show _.isNaN undefined
 ~~~~
 
-#### isNull
+### isNull
 
 `_.isNull object` 
 
@@ -962,7 +962,7 @@ show _.isNull null
 show _.isNull undefined
 ~~~~
 
-#### isUndefined
+### isUndefined
 
 `_.isUndefined variable` 
 
@@ -974,7 +974,7 @@ show _.isUndefined window?.missingVariable
 
 ## Utility Functions
 
-#### noConflict
+### noConflict
 
 `_.noConflict ` 
 
@@ -986,7 +986,7 @@ reference to the **Underscore** object.
 # underscore = _.noConflict()
 ~~~~
 
-#### identity
+### identity
 
 `_.identity value` 
 
@@ -1001,7 +1001,7 @@ moe = {name : 'moe'}
 show moe is _.identity(moe)
 ~~~~
 
-#### times
+### times
 
 `_.times n, iterator` 
 
@@ -1012,7 +1012,7 @@ show moe is _.identity(moe)
 _(3).times -> genie.grantWish()
 ~~~~
 
-#### mixin
+### mixin
 
 `_.mixin object` 
 
@@ -1028,7 +1028,7 @@ _.mixin
 show _("fabio").capitalize()
 ~~~~
 
-#### uniqueId
+### uniqueId
 
 `_.uniqueId [prefix]` 
 
@@ -1040,7 +1040,7 @@ show _.uniqueId 'contact_'
 show _.uniqueId 'contact_'
 ~~~~
 
-#### escape
+### escape
 
 `_.escape string` 
 
@@ -1051,7 +1051,7 @@ show _.uniqueId 'contact_'
 show _.escape 'Curly, Larry & Moe'
 ~~~~
 
-#### template
+### template
 
 `_.template templateString, [context]` 
 
@@ -1148,7 +1148,7 @@ methods](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Ar
 are proxied through the chained Underscore object, so you can slip a
 `reverse` or a `push` into your chain, and continue to modify the array.
 
-#### chain
+### chain
 
 `_.chain(obj) ` 
 
@@ -1169,7 +1169,7 @@ youngest = _.chain(stooges)
 show youngest
 ~~~~
 
-#### value
+### value
 
 `_(obj).value ` 
 
