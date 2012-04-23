@@ -18,7 +18,7 @@ webpage = kup.render ->
             ctx.stroke()
           ctx.strokeStyle = 'rgba(255,40,20,0.7)'
           circle ctx, x, y
-          for angle in [0...2*Math.PI] by 1/3*Math.PI
+          for angle in [0...5/3*Math.PI] by 1/3*Math.PI
             circle ctx, x+100*Math.cos(angle),
                         y+100*Math.sin(angle)
         window.onload = ->
